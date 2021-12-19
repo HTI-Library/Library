@@ -38,7 +38,7 @@ const String blueGrey = '#5E5F61';
 const String black_e = '#282828';
 const String white = '#FFFFFF';
 const String greyWhite = '#EFEFEF';
-const String starColor = '005C89';
+const String starColor = '#370665';
 
 //dark theme
 const String secondBackground = '393d40';
