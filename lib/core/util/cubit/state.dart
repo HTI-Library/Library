@@ -71,8 +71,6 @@ class ChangeGridToList extends MainState {}
 
 // change grid to list ----------------end
 
-
-
 class SelectSize extends MainState {}
 
 class SelectColor extends MainState {}
@@ -333,21 +331,20 @@ class UsedProductErrorState extends MainState {
   UsedProductErrorState(this.error);
 }
 
-class AddReviewLoadingState extends MainState {
-}
+class AddReviewLoadingState extends MainState {}
 
-class ClearSearchState extends MainState {
-}
+class ClearSearchState extends MainState {}
+
 class SelectBrand extends MainState {}
 
 class AddBrandSelected extends MainState {}
+
 class AddCategoriesSelected extends MainState {}
 
 class AddReviewSuccessState extends MainState {
   final String message;
 
   AddReviewSuccessState(this.message);
-
 }
 
 class AddReviewErrorState extends MainState {
@@ -369,20 +366,16 @@ class GetUsedMarketLoadingState extends MainState {}
 class GetUsedMarketSuccessState extends MainState {}
 // news letter end -------------------------
 
-
-
 // GetUsedMarketDetails ---------------------------- start
 class GetUsedMarketDetailsLoading extends MainState {}
 
 class GetUsedMarketDetailsSuccess extends MainState {}
-
 
 // GetUsedMarketDetails ---------------------------- end
 
 class ChangeShippingAddressIndex extends MainState {}
 
 class ChangePaymentMethodIndex extends MainState {}
-
 
 // getCheckout ---------------------------- start
 class GetCheckoutLoading extends MainState {}
@@ -404,7 +397,6 @@ class SelectProfileImage extends MainState {}
 
 class ClearProfileImage extends MainState {}
 
-
 // ReadNotification ---------------------------- start
 class ReadNotificationLoading extends MainState {}
 
@@ -425,10 +417,14 @@ class ChangePasswordSuccess extends MainState {
 
 // ChangePassword ---------------------------- end
 
-
 // createCheckout ---------------------------- start
 class CreateCheckoutLoading extends MainState {}
 
 class CreateCheckoutSuccess extends MainState {}
 
 // createCheckout ---------------------------- end
+///--------------------------------------------------------------------------------------------- HTI
+// enableLoginButton ---------------------------- start
+class EnableLoginButtonState extends MainState {}
+
+// enableLoginButton ---------------------------- end

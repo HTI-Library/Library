@@ -7,7 +7,7 @@ import '../constants.dart';
 
 class AppButton extends StatelessWidget {
   final String label;
-  final Function onPress;
+  final VoidCallback? onPress;
   final double width;
   Color? color;
 
@@ -23,20 +23,20 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      height: 56.0,
+      height: 40.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
-          4.0,
+          30.0,
         ),
       ),
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: MaterialButton(
+        enableFeedback: true,
         elevation: 50.0,
         hoverElevation: 150.0,
         color: color ?? Theme.of(context).primaryColor,
-        onPressed: () {
-          onPress();
-        },
+        onPressed: onPress,
+        disabledColor: HexColor(disableButton),
         child: Text(
           label,
           style: Theme.of(context).textTheme.button!.copyWith(

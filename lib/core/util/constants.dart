@@ -7,14 +7,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/models/cart_model.dart';
-import 'package:hti_library/core/models/product_details_model.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
-import 'package:hti_library/core/util/translation.dart';
 import 'package:hti_library/features/categories/presentation/pages/categories_demo.dart';
 import 'package:hti_library/features/home/presentation/pages/home_page.dart';
 import 'package:hti_library/features/profile/presentation/page/sign_in_page.dart';
 import 'package:hti_library/features/wishlist/presentation/pages/wishlist_page.dart';
-
 import 'package:url_launcher/url_launcher.dart';
 
 import 'cubit/cubit.dart';
@@ -22,23 +19,22 @@ import 'cubit/cubit.dart';
 const String serverFailureMessage = 'Server Failure';
 const String cacheFailureMessage = 'Cache Failure';
 
-const String mainColor = '005C89';
+const String mainColor = '00439c';
 const String secondary = '005C89';
-const String secondColor = 'da7339';
-const String thirdColor = '1da1f2';
-const String darkWhite = 'e0e0e0';
+// const String secondColor = 'da7339';
+// const String thirdColor = '1da1f2';
+// const String darkWhite = 'e0e0e0';
 const String black = '#5E5F61';
 const Color secondaryVariant = Color.fromRGBO(33, 36, 36, 0.7);
-const String productBackground = '#F8F8F8';
-const String surface = '#FFFFFF';
-const String green = '#1fcd6c';
+// const String productBackground = '#F8F8F8';
+// const String green = '#1fcd6c';
 const String red = '#F21A0E';
 const String grey = '#898989';
-const String blueGrey = '#5E5F61';
-const String black_e = '#282828';
-const String white = '#FFFFFF';
-const String greyWhite = '#EFEFEF';
-const String starColor = '#370665';
+// const String blueGrey = '#e1e7f0';
+// const String black_e = '#282828';
+const String surface = '#FFFFFF';
+const String greyWhite = '#8fe1e7f0';
+const String disableButton = '#A7B1D7';
 
 //dark theme
 const String secondBackground = '393d40';
@@ -161,15 +157,11 @@ void launchURL({required String url}) async {
   launch(url).then((value) {
     showToast(message: 'Could not launch $url', toastStates: ToastStates.ERROR);
     print('url oppend success');
-  }).catchError((error){
+  }).catchError((error) {
     print('url oppend error');
     print(error.toString());
   });
 }
-
-
-
-
 
 String displayTranslatedText({
   required BuildContext context,
@@ -229,8 +221,6 @@ Widget bigDivider(context) => Container(
       height: 4.0,
       color: HexColor(grey),
     );
-
-
 
 const space3Vertical = SizedBox(
   height: 3.0,

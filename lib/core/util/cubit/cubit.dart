@@ -42,8 +42,8 @@ class MainCubit extends Cubit<MainState> {
   // dark colors
   String scaffoldBackground = '333739';
 
-  String secondaryDark = 'ffffff';
-  String secondaryVariantDark = '8a8a89';
+  String mainColorDark = 'ffffff';
+  String mainColorVariantDark = '8a8a89';
 
   late ThemeData lightTheme;
   late ThemeData darkTheme;
@@ -105,56 +105,56 @@ class MainCubit extends Cubit<MainState> {
         headline5: TextStyle(
           fontSize: 24.0,
           fontFamily: family,
-          fontWeight: FontWeight.w400,
-          color: HexColor(secondary),
+          fontWeight: FontWeight.w600,
+          color: HexColor(mainColor),
           height: 1.4,
         ),
         headline6: TextStyle(
           fontSize: 20.0,
           fontFamily: family,
-          fontWeight: FontWeight.w700,
-          color: HexColor(secondary),
+          fontWeight: FontWeight.w600,
+          color: HexColor(mainColor),
           height: 1.4,
         ),
         bodyText1: TextStyle(
           fontSize: 16.0,
           fontFamily: family,
-          fontWeight: FontWeight.w400,
-          color: secondaryVariant,
+          fontWeight: FontWeight.w600,
+          color: HexColor(mainColor),
           height: 1.4,
         ),
         bodyText2: TextStyle(
           fontSize: 14.0,
           fontFamily: family,
-          fontWeight: FontWeight.w700,
-          color: secondaryVariant,
+          fontWeight: FontWeight.w600,
+          color: HexColor(mainColor),
           height: 1.4,
         ),
         subtitle1: TextStyle(
           fontSize: 15.0,
           fontFamily: family,
-          fontWeight: FontWeight.w700,
-          color: HexColor(secondary),
+          fontWeight: FontWeight.w600,
+          color: HexColor(mainColor),
           height: 1.4,
         ),
         subtitle2: TextStyle(
           fontSize: 15.0,
           fontFamily: family,
-          fontWeight: FontWeight.w400,
-          color: HexColor(secondary),
+          fontWeight: FontWeight.w600,
+          color: HexColor(mainColor),
           height: 1.4,
         ),
         caption: TextStyle(
           fontSize: 11.0,
           fontFamily: family,
-          fontWeight: FontWeight.w400,
-          color: HexColor(secondary),
+          fontWeight: FontWeight.w600,
+          color: HexColor(mainColor),
           height: 1.4,
         ),
         button: TextStyle(
           fontSize: 16.0,
           fontFamily: family,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w600,
           color: Colors.white,
           height: 1.4,
         ),
@@ -198,56 +198,56 @@ class MainCubit extends Cubit<MainState> {
           fontSize: 24.0,
           fontFamily: family,
           fontWeight: FontWeight.w400,
-          color: HexColor(secondaryDark),
+          color: HexColor(mainColor),
           height: 1.4,
         ),
         headline6: TextStyle(
           fontSize: 20.0,
           fontFamily: family,
           fontWeight: FontWeight.w700,
-          color: HexColor(secondaryDark),
+          color: HexColor(mainColor),
           height: 1.4,
         ),
         bodyText1: TextStyle(
           fontSize: 16.0,
           fontFamily: family,
           fontWeight: FontWeight.w400,
-          color: HexColor(secondaryVariantDark),
+          color: HexColor(mainColor),
           height: 1.4,
         ),
         bodyText2: TextStyle(
           fontSize: 14.0,
           fontFamily: family,
           fontWeight: FontWeight.w700,
-          color: HexColor(secondaryVariantDark),
+          color: HexColor(mainColor),
           height: 1.4,
         ),
         subtitle1: TextStyle(
-          fontSize: 15.0,
+          fontSize: 18.0,
           fontFamily: family,
           fontWeight: FontWeight.w700,
-          color: HexColor(secondaryDark),
+          color: HexColor(mainColor),
           height: 1.4,
         ),
         subtitle2: TextStyle(
           fontSize: 15.0,
           fontFamily: family,
           fontWeight: FontWeight.w400,
-          color: HexColor(secondaryDark),
+          color: HexColor(mainColor),
           height: 1.4,
         ),
         caption: TextStyle(
           fontSize: 11.0,
           fontFamily: family,
           fontWeight: FontWeight.w400,
-          color: HexColor(secondaryDark),
+          color: HexColor(mainColor),
           height: 1.4,
         ),
         button: TextStyle(
           fontSize: 16.0,
           fontFamily: family,
           fontWeight: FontWeight.w700,
-          color: Colors.white,
+          color: HexColor(surface),
           height: 1.4,
         ),
       ),
@@ -260,6 +260,37 @@ class MainCubit extends Cubit<MainState> {
     sl<CacheHelper>().put('isDark', isDark);
 
     emit(ChangeModeState());
+  }
+
+  bool noInternetConnection = false;
+
+  void checkConnectivity() {
+    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      print('Internet Connection ------------------------');
+      print(result.index);
+      print(result.toString());
+      if (result.index == 0 || result.index == 1) {
+        noInternetConnection = false;
+      } else if (result.index == 2) {
+        noInternetConnection = true;
+      }
+
+      emit(InternetState());
+    });
+  }
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool isDisabled = true;
+
+  void enableLoginButton() {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      isDisabled = false;
+      emit(EnableLoginButtonState());
+    }else{
+      isDisabled = true;
+      emit(EnableLoginButtonState());
+    }
   }
 
 //   CategoriesModel? categoriesModel;
@@ -708,22 +739,7 @@ class MainCubit extends Cubit<MainState> {
 //     }
 //   }
 //
-  bool noInternetConnection = false;
 
-  void checkConnectivity() {
-    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      print('Internet Connection ------------------------');
-      print(result.index);
-      print(result.toString());
-      if (result.index == 0 || result.index == 1) {
-        noInternetConnection = false;
-      } else if (result.index == 2) {
-        noInternetConnection = true;
-      }
-
-      emit(InternetState());
-    });
-  }
 //
 //   void checkInternet() async {
 //     var connectivityResult = await (Connectivity().checkConnectivity());

@@ -10,6 +10,7 @@ import 'core/util/constants.dart';
 import 'core/util/cubit/cubit.dart';
 import 'core/util/cubit/state.dart';
 import 'features/main/presentation/pages/main_page.dart';
+import 'features/on_boarding/presentation/pages/on_boarding_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,13 +36,6 @@ void main() async {
     }
   });
 
-  sl<CacheHelper>().get('cart').then((value) {
-    print('cart ---------------------------- $value');
-
-    if (value != null) {
-      cartListData = MainCartModel.fromJson(value).data;
-    }
-  });
 
   print('dark mode ------------- $isDark');
 
@@ -94,7 +88,7 @@ class _MyAppState extends State<MyApp> {
                 : ThemeMode.light,
             theme: MainCubit.get(context).lightTheme,
             darkTheme: MainCubit.get(context).darkTheme,
-            home: MainPage(),
+            home: OnBoardingPage(),
           );
         },
       ),

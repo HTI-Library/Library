@@ -6,22 +6,23 @@ import 'package:hti_library/core/util/cubit/state.dart';
 
 import '../constants.dart';
 
-
 class AppTextFormField extends StatefulWidget {
   final String label;
+  final Widget? icon;
   final String hint;
-  final String error;
   final bool isPassword;
   final Function callbackHandle;
+  final ValueChanged<String>? onChanged;
   final TextInputType type;
 
   const AppTextFormField({
     Key? key,
     this.label = '',
+    this.icon,
     required this.hint,
     this.type = TextInputType.text,
-    required this.error,
     this.isPassword = false,
+    this.onChanged,
     required this.callbackHandle,
   }) : super(key: key);
 
@@ -39,50 +40,60 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
 
     return BlocBuilder<MainCubit, MainState>(
       builder: (BuildContext context, state) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if(widget.label.isNotEmpty)
-              Text(
-                widget.label,
-                style: Theme.of(context).textTheme.subtitle1,
-              ),
-            if(widget.label.isNotEmpty)
-              space10Vertical,
-            TextFormField(
-              keyboardType: widget.type,
-              controller: textEditingController,
-              obscureText: widget.isPassword ? isShown : false,
-              validator: (String? value) {
-                if(value!.isEmpty) {
-                  return widget.error;
-                }
-
-                return null;
-              },
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                enabledBorder:   OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: MainCubit.get(context).isDark? HexColor(grey) : secondaryVariant,
-                  ),
+        return Container(
+          height: 55.0,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            color: HexColor(greyWhite),
+          ),
+          child: TextFormField(
+            keyboardType: widget.type,
+            controller: textEditingController,
+            obscureText: widget.isPassword ? isShown : false,
+            onChanged: widget.onChanged,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: MainCubit.get(context).isDark
+                      ? HexColor(grey)
+                      : secondaryVariant,
                 ),
-                hintStyle: Theme.of(context).textTheme.bodyText1,
-                hintText: widget.hint,
-                suffixIcon: widget.isPassword ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      isShown = !isShown;
-                    });
-                  },
-                  icon: Icon(
-                    isShown ? Icons.visibility_off : Icons.visibility,
-                    color: MainCubit.get(context).isDark? HexColor(grey) : secondaryVariant,
-                  ),
-                ) : null,
+                borderRadius: BorderRadius.circular(10.0),
               ),
+              enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide.none,
+              ),
+              errorBorder: const OutlineInputBorder(
+                borderSide: BorderSide.none,
+              ),
+              focusedErrorBorder: const OutlineInputBorder(
+                borderSide: BorderSide.none,
+              ),
+              hintStyle: Theme.of(context).textTheme.bodyText1,
+              hintText: widget.hint,
+              contentPadding: const EdgeInsetsDirectional.only(
+                start: 15.0,
+              ),
+              suffixIcon: widget.isPassword
+                  ? IconButton(
+                      padding: const EdgeInsets.all(15.0),
+                      onPressed: () {
+                        setState(() {
+                          isShown = !isShown;
+                        });
+                      },
+                      icon: Image(
+                        image: isShown
+                            ? const AssetImage('assets/images/eye_slash.png')
+                            : const AssetImage('assets/images/eye.png'),
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsetsDirectional.all(15.0),
+                      child: widget.icon,
+                    ),
             ),
-          ],
+          ),
         );
       },
     );
