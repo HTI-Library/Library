@@ -41,10 +41,11 @@ class MyBtnAccount extends StatelessWidget {
         color: HexColor(greyWhite),
       ),
       child: Material(
+        color: HexColor(greyWhite),
         child: InkWell(
           onTap: voidCallback,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Row(
               children: [
                 Text(
@@ -54,8 +55,8 @@ class MyBtnAccount extends StatelessWidget {
                     fontSize: fontsize,
                   ),
                 ),
-                Spacer(),
-                AssetSvg(imagePath: imagePath! , color: HexColor(mainColor))
+                const Spacer(),
+                AssetSvg(imagePath: imagePath! , color: HexColor(mainColor) , size: 23,)
               ],
             ),
           ),
