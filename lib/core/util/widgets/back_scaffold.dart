@@ -54,8 +54,8 @@ class BackScaffold extends StatelessWidget {
                 Navigator.pop(context);
               },
               icon: Icon(
-                Icons.arrow_back_ios,
-                color: HexColor(grey),
+                Icons.arrow_back,
+                color: HexColor(mainColor),
                 size: 20.0,
               ),
             ),
@@ -77,8 +77,8 @@ class BackScaffold extends StatelessWidget {
             ],
             title: Text(
               title,
-              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                color: HexColor(grey),
+              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                color: HexColor(mainColor),
               ),
             ),
           ),

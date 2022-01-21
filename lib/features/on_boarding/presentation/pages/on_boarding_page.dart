@@ -19,15 +19,15 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   bool isLast = false;
   List<OnBoardingDataModel> onBoardingData = [
     OnBoardingDataModel(
-      'assets/images/hti_logo.png',
+      'assets/images/on_boarding_1.png',
       'It’s a library, \na place to learn something new',
     ),
     OnBoardingDataModel(
-      'assets/images/hti_logo.png',
+      'assets/images/test.png',
       'Learn something about everything &\neverything about something',
     ),
     OnBoardingDataModel(
-      'assets/images/hti_logo.png',
+      'assets/images/on_boarding_1.png',
       'Keep evolving,\nThe world is in your hands',
     ),
   ];
@@ -130,10 +130,7 @@ class OnBoardingItem extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: Image.asset(
-            boardingModel.image,
-            fit: BoxFit.cover,
-          ),
+          child: Image(image: AssetImage('${boardingModel.image}'),),
         ),
         space60Vertical,
         Column(

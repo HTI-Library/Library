@@ -6,6 +6,7 @@ import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/core/util/widgets/app_button.dart';
 import 'package:hti_library/core/util/widgets/app_text_form_field.dart';
+import 'package:hti_library/core/util/widgets/asset_svg.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
 
 class LoginPage extends StatelessWidget {
@@ -41,8 +42,9 @@ class LoginPage extends StatelessWidget {
                         ),
                         space60Vertical,
                         AppTextFormField(
-                          icon: const Image(
-                            image: AssetImage('assets/images/sms.png'),
+                          icon: AssetSvg(
+                            imagePath: 'sms',
+                            color: HexColor(mainColor),
                           ),
                           hint: 'Email',
                           callbackHandle: (controller) {
@@ -54,9 +56,6 @@ class LoginPage extends StatelessWidget {
                         ),
                         space20Vertical,
                         AppTextFormField(
-                          icon: const Image(
-                            image: AssetImage('assets/images/sms.png'),
-                          ),
                           isPassword: true,
                           hint: 'Password',
                           callbackHandle: (controller) {
@@ -69,7 +68,7 @@ class LoginPage extends StatelessWidget {
                         ),
                         space40Vertical,
                         AppButton(
-                          width: MediaQuery.of(context).size.width/2,
+                          width: MediaQuery.of(context).size.width / 2,
                           onPress: !MainCubit.get(context).isDisabled
                               ? () {
                                   print('test');
