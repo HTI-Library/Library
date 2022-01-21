@@ -10,6 +10,7 @@ class MyButton extends StatelessWidget {
   double radius;
   Color textColor;
   bool stroke;
+  double height;
   FontWeight fontWeight;
   double fontsize;
 
@@ -18,7 +19,8 @@ class MyButton extends StatelessWidget {
     required this.voidCallback,
     required this.text,
     required this.color,
-    this.radius = 5.0,
+    this.radius = 10.0,
+    this.height = 55.0,
     this.textColor = Colors.white,
     this.stroke = false,
     this.fontWeight = FontWeight.bold,
@@ -28,8 +30,7 @@ class MyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 54.0,
-      width: double.infinity,
+      height: height,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: MaterialButton(
         onPressed: voidCallback,
@@ -42,7 +43,7 @@ class MyButton extends StatelessWidget {
         ),
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(radius ),
+        borderRadius: BorderRadius.circular(radius),
         border:stroke? Border.all(color: HexColor(mainColor)) : null,
         color: color,
       ),
