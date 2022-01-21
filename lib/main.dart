@@ -11,6 +11,7 @@ import 'core/util/cubit/cubit.dart';
 import 'core/util/cubit/state.dart';
 import 'features/main/presentation/pages/main_page.dart';
 import 'features/on_boarding/presentation/pages/on_boarding_page.dart';
+import 'features/search/presentation/search.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
