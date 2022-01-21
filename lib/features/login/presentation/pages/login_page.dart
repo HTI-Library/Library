@@ -50,9 +50,9 @@ class LoginPage extends StatelessWidget {
                           callbackHandle: (controller) {
                             MainCubit.get(context).emailController = controller;
                           },
-                          onChanged: (value) {
-                            MainCubit.get(context).enableLoginButton();
-                          },
+                          // onChanged: (value) {
+                          //   MainCubit.get(context).enableLoginButton();
+                          // },
                         ),
                         space20Vertical,
                         AppTextFormField(

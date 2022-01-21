@@ -152,10 +152,10 @@ class MainCubit extends Cubit<MainState> {
           height: 1.4,
         ),
         button: TextStyle(
-          fontSize: 16.0,
+          fontSize: 14.0,
           fontFamily: family,
           fontWeight: FontWeight.w600,
-          color: Colors.white,
+          color: HexColor(mainColor),
           height: 1.4,
         ),
       ),

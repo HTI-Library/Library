@@ -8,6 +8,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/models/cart_model.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
+import 'package:hti_library/features/account/presntation/pages/account.dart';
 import 'package:hti_library/features/categories/presentation/pages/categories_demo.dart';
 import 'package:hti_library/features/home/presentation/pages/home_page.dart';
 import 'package:hti_library/features/profile/presentation/page/sign_in_page.dart';
@@ -26,6 +27,7 @@ const String secondary = '005C89';
 // const String darkWhite = 'e0e0e0';
 const String black = '#5E5F61';
 const Color secondaryVariant = Color.fromRGBO(33, 36, 36, 0.7);
+const Color starColor = Colors.amber;
 // const String productBackground = '#F8F8F8';
 // const String green = '#1fcd6c';
 const String red = '#F21A0E';
@@ -126,7 +128,7 @@ List<Widget> bottomPages = [
   const HomePage(),
   const SectionsScreen(),
   const WishlistPage(),
-  ProfilePage(),
+  AccountPage(),
 ];
 
 String? token = '';

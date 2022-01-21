@@ -14,9 +14,7 @@ class SettingPages extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainScaffold(
       scaffold: BackScaffold(
-        scaffoldBackgroundColor: Theme
-            .of(context)
-            .scaffoldBackgroundColor,
+        scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: 'Setting',
         body: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -24,21 +22,29 @@ class SettingPages extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               space20Vertical,
-              MyBtnAccount(voidCallback: () {
-                navigateTo(context, NotificatioPage());
-              },
+              MyBtnAccount(
+                voidCallback: () {
+                  navigateTo(context, NotificatioPage());
+                },
                 text: 'Notification',
-                imagePath: 'notification_notification_outline',),
+                imagePath: 'notification_notification_outline',
+              ),
               space10Vertical,
-              MyBtnAccount(voidCallback: () {
-                navigateTo(context, LanguagePage());
-              },
-                text: 'Language', imagePath: "",),
+              MyBtnAccount(
+                voidCallback: () {
+                  navigateTo(context, LanguagePage());
+                },
+                text: 'Language',
+                imagePath: "",
+              ),
               space10Vertical,
-              MyBtnAccount(voidCallback: () {
-                navigateTo(context, ThemesPage());
-              },
-                text: 'Themes', imagePath: "",),
+              MyBtnAccount(
+                voidCallback: () {
+                  navigateTo(context, ThemesPage());
+                },
+                text: 'Themes',
+                imagePath: "",
+              ),
             ],
           ),
         ),

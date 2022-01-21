@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/widgets/asset_svg.dart';
 
 import '../../../core/util/constants.dart';
@@ -14,7 +13,7 @@ class MyBtnAccount extends StatelessWidget {
   double height;
   double width;
   FontWeight fontWeight;
-  double fontsize;
+  double fontSize;
 
   MyBtnAccount({
     Key? key,
@@ -26,7 +25,7 @@ class MyBtnAccount extends StatelessWidget {
     this.width = double.infinity,
     this.stroke = false,
     this.fontWeight = FontWeight.bold,
-    this.fontsize = 14.0,
+    this.fontSize = 14.0,
   }) : super(key: key);
 
   @override
@@ -38,7 +37,7 @@ class MyBtnAccount extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
         border: stroke ? Border.all(color: HexColor(mainColor)) : null,
-        color: HexColor(greyWhite),
+        // color: HexColor(greyWhite),
       ),
       child: Material(
         color: HexColor(greyWhite),
@@ -51,18 +50,21 @@ class MyBtnAccount extends StatelessWidget {
                 Text(
                   text,
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    color: HexColor(mainColor),
-                    fontSize: fontsize,
-                  ),
+                        color: HexColor(mainColor),
+                        fontSize: fontSize,
+                      ),
                 ),
                 const Spacer(),
-                AssetSvg(imagePath: imagePath! , color: HexColor(mainColor) , size: 23,)
+                AssetSvg(
+                  imagePath: imagePath!,
+                  color: HexColor(mainColor),
+                  size: 23,
+                )
               ],
             ),
           ),
         ),
       ),
-
     );
   }
 }
