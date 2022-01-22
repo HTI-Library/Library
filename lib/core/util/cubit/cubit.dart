@@ -279,19 +279,9 @@ class MainCubit extends Cubit<MainState> {
     });
   }
 
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  bool isDisabled = true;
 
-  void enableLoginButton() {
-    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      isDisabled = false;
-      emit(EnableLoginButtonState());
-    }else{
-      isDisabled = true;
-      emit(EnableLoginButtonState());
-    }
-  }
+
+
 
 //   CategoriesModel? categoriesModel;
 //

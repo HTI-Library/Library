@@ -9,10 +9,31 @@ import 'package:hti_library/core/util/widgets/app_text_form_field.dart';
 import 'package:hti_library/core/util/widgets/asset_svg.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool isDisabled = true;
+
+  void enableLoginButton() {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      isDisabled = false;
+      setState(() {
+      });
+
+    }else{
+      isDisabled = true;
+      setState(() {
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,28 +69,28 @@ class LoginPage extends StatelessWidget {
                           ),
                           hint: 'Email',
                           callbackHandle: (controller) {
-                            MainCubit.get(context).emailController = controller;
+                            emailController = controller;
                           },
-                          // onChanged: (value) {
-                          //   MainCubit.get(context).enableLoginButton();
-                          // },
+                          onChanged: (value) {
+                            enableLoginButton();
+                          },
                         ),
                         space20Vertical,
                         AppTextFormField(
                           isPassword: true,
                           hint: 'Password',
                           callbackHandle: (controller) {
-                            MainCubit.get(context).passwordController =
+                            passwordController =
                                 controller;
                           },
                           onChanged: (value) {
-                            MainCubit.get(context).enableLoginButton();
+                            enableLoginButton();
                           },
                         ),
                         space40Vertical,
                         AppButton(
                           width: MediaQuery.of(context).size.width / 2,
-                          onPress: !MainCubit.get(context).isDisabled
+                          onPress: !isDisabled
                               ? () {
                                   print('test');
                                 }
