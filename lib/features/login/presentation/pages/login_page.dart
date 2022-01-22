@@ -8,6 +8,7 @@ import 'package:hti_library/core/util/widgets/app_button.dart';
 import 'package:hti_library/core/util/widgets/app_text_form_field.dart';
 import 'package:hti_library/core/util/widgets/asset_svg.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
+import 'package:hti_library/features/main/presentation/pages/main_page.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -93,6 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                           onPress: !isDisabled
                               ? () {
                                   print('test');
+                                  navigateTo(context, MainPage());
                                 }
                               : null,
                           label: 'SUBMIT',
