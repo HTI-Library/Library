@@ -112,14 +112,14 @@ class MainCubit extends Cubit<MainState> {
         headline6: TextStyle(
           fontSize: 20.0,
           fontFamily: family,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.normal,
           color: HexColor(mainColor),
           height: 1.4,
         ),
         bodyText1: TextStyle(
-          fontSize: 16.0,
+          fontSize: 14.0,
           fontFamily: family,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.normal,
           color: HexColor(mainColor),
           height: 1.4,
         ),
@@ -131,31 +131,31 @@ class MainCubit extends Cubit<MainState> {
           height: 1.4,
         ),
         subtitle1: TextStyle(
-          fontSize: 15.0,
+          fontSize: 16.0,
           fontFamily: family,
           fontWeight: FontWeight.w600,
           color: HexColor(mainColor),
           height: 1.4,
         ),
         subtitle2: TextStyle(
-          fontSize: 15.0,
+          fontSize: 16.0,
           fontFamily: family,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.normal,
           color: HexColor(mainColor),
           height: 1.4,
         ),
         caption: TextStyle(
-          fontSize: 11.0,
+          fontSize: 12.0,
           fontFamily: family,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.normal,
           color: HexColor(mainColor),
           height: 1.4,
         ),
         button: TextStyle(
-          fontSize: 16.0,
+          fontSize: 14.0,
           fontFamily: family,
           fontWeight: FontWeight.w600,
-          color: Colors.white,
+          color: HexColor(mainColor),
           height: 1.4,
         ),
       ),
@@ -279,19 +279,9 @@ class MainCubit extends Cubit<MainState> {
     });
   }
 
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  bool isDisabled = true;
 
-  void enableLoginButton() {
-    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      isDisabled = false;
-      emit(EnableLoginButtonState());
-    }else{
-      isDisabled = true;
-      emit(EnableLoginButtonState());
-    }
-  }
+
+
 
 //   CategoriesModel? categoriesModel;
 //

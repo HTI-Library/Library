@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hti_library/borrowing.dart';
 import 'package:hti_library/core/di/injection.dart' as di;
+import 'package:hti_library/features/account/pages/themes/themes.dart';
 
 import 'core/di/injection.dart';
 import 'core/models/cart_model.dart';
@@ -10,8 +11,11 @@ import 'core/util/bloc_observer.dart';
 import 'core/util/constants.dart';
 import 'core/util/cubit/cubit.dart';
 import 'core/util/cubit/state.dart';
+import 'features/account/presntation/pages/account.dart';
+import 'features/login/presentation/pages/login_page.dart';
 import 'features/main/presentation/pages/main_page.dart';
 import 'features/on_boarding/presentation/pages/on_boarding_page.dart';
+import 'features/search/presentation/search.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +41,13 @@ void main() async {
     }
   });
 
+  sl<CacheHelper>().get('cart').then((value) {
+    print('cart ---------------------------- $value');
+
+    if (value != null) {
+      cartListData = MainCartModel.fromJson(value).data;
+    }
+  });
 
   print('dark mode ------------- $isDark');
 

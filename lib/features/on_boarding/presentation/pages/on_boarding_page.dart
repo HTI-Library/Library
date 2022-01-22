@@ -19,15 +19,15 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   bool isLast = false;
   List<OnBoardingDataModel> onBoardingData = [
     OnBoardingDataModel(
-      'assets/images/hti_logo.png',
+      'assets/images/on_boarding_1.png',
       'It’s a library, \na place to learn something new',
     ),
     OnBoardingDataModel(
-      'assets/images/hti_logo.png',
+      'assets/images/test.png',
       'Learn something about everything &\neverything about something',
     ),
     OnBoardingDataModel(
-      'assets/images/hti_logo.png',
+      'assets/images/on_boarding_1.png',
       'Keep evolving,\nThe world is in your hands',
     ),
   ];
@@ -39,6 +39,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         actions: [
           AppTextButton(
               label: 'SKIP',
+              style: Theme.of(context).textTheme.subtitle1,
               onPress: () {
                 navigateAndFinish(context, LoginPage());
               }),
@@ -130,20 +131,14 @@ class OnBoardingItem extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: Image.asset(
-            boardingModel.image,
-            fit: BoxFit.cover,
-          ),
+          child: Image(image: AssetImage('${boardingModel.image}'),),
         ),
         space60Vertical,
         Column(
           children: [
             Text(
               boardingModel.description,
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    color: HexColor(mainColor),
-                    fontWeight: FontWeight.w600,
-                  ),
+              style: Theme.of(context).textTheme.subtitle2,
               textAlign: TextAlign.center,
             ),
           ],

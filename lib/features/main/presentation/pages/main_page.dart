@@ -7,10 +7,10 @@ import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/core/util/widgets/asset_svg.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
+import 'package:hti_library/features/account/presntation/pages/account.dart';
 import 'package:hti_library/features/categories/presentation/pages/categories_demo.dart';
 import 'package:hti_library/features/home/presentation/pages/home_page.dart';
 import 'package:hti_library/features/internet_connection/page/internet_connection_page.dart';
-import 'package:hti_library/features/profile/presentation/page/sign_in_page.dart';
 import 'package:hti_library/features/wishlist/presentation/pages/wishlist_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -80,15 +80,11 @@ class _MainPageState extends State<MainPage> {
                 //       )),
                 // ],
                 centerTitle: false,
-                titleSpacing: 20.0,
-                // title: Image(
-                //   height: 60.0,
-                //   width: 60.0,
-                //   color: MainCubit.get(context).isDark ? HexColor(white) : null,
-                //   image: const AssetImage(
-                //     'assets/images/logo.png',
-                //   ),
-                // ),
+                titleSpacing: 15.0,
+                title: Text(
+                  'LIBRARY',
+                  style: Theme.of(context).textTheme.headline5,
+                ),
               ),
               body: BlocBuilder<MainCubit, MainState>(
                 builder: (context, state) {
@@ -102,7 +98,7 @@ class _MainPageState extends State<MainPage> {
                             const HomePage(),
                             const SectionsScreen(),
                             const WishlistPage(),
-                            ProfilePage(),
+                            AccountPage(),
                           ],
                           // onPageChanged: (index) {
                           //   MainCubit.get(context).bottomChanged(index);
@@ -358,13 +354,13 @@ class _MainPageState extends State<MainPage> {
                             top: 10.0,
                           ),
                           child: AssetSvg(
-                            color: MainCubit.get(context).currentIndex == 0
-                                ? HexColor(mainColor)
-                                : HexColor(grey),
-                            imagePath: 'home',
+                            color: HexColor(mainColor),
+                            imagePath: MainCubit.get(context).currentIndex == 0
+                                ? 'home_soled'
+                                : 'home',
                           ),
                         ),
-                        label: '',
+                        label: 'Home',
                       ),
                       BottomNavigationBarItem(
                         icon: Padding(
@@ -372,13 +368,13 @@ class _MainPageState extends State<MainPage> {
                             top: 10.0,
                           ),
                           child: AssetSvg(
-                            color: MainCubit.get(context).currentIndex == 1
-                                ? HexColor(mainColor)
-                                : HexColor(grey),
-                            imagePath: 'categories',
+                            color: HexColor(mainColor),
+                            imagePath: MainCubit.get(context).currentIndex == 1
+                                ? 'category_soled'
+                                : 'category',
                           ),
                         ),
-                        label: '',
+                        label: 'Categories',
                       ),
                       BottomNavigationBarItem(
                         icon: Padding(
@@ -386,13 +382,13 @@ class _MainPageState extends State<MainPage> {
                             top: 10.0,
                           ),
                           child: AssetSvg(
-                            color: MainCubit.get(context).currentIndex == 2
-                                ? HexColor(mainColor)
-                                : HexColor(grey),
-                            imagePath: 'heart',
+                            color: HexColor(mainColor),
+                            imagePath: MainCubit.get(context).currentIndex == 2
+                                ? 'save_soled'
+                                : 'save',
                           ),
                         ),
-                        label: '',
+                        label: 'Saved',
                       ),
                       BottomNavigationBarItem(
                         icon: Padding(
@@ -400,13 +396,13 @@ class _MainPageState extends State<MainPage> {
                             top: 10.0,
                           ),
                           child: AssetSvg(
-                            color: MainCubit.get(context).currentIndex == 3
-                                ? HexColor(mainColor)
-                                : HexColor(grey),
-                            imagePath: 'user',
+                            color: HexColor(mainColor),
+                            imagePath: MainCubit.get(context).currentIndex == 3
+                                ? 'user_soled'
+                                : 'user',
                           ),
                         ),
-                        label: '',
+                        label: 'User',
                       ),
                     ],
                   );
