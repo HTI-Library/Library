@@ -5,7 +5,6 @@ import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
 
 import '../constants.dart';
-import 'asset_svg.dart';
 
 class AppTextFormField extends StatefulWidget {
   final String label;
@@ -78,26 +77,22 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
               ),
               suffixIcon: widget.isPassword
                   ? IconButton(
-                      padding: const EdgeInsets.all(15.0),
-                      onPressed: () {
-                        setState(() {
-                          isShown = !isShown;
-                        });
-                      },
-                      icon: isShown
-                          ? AssetSvg(
-                              imagePath: 'eye',
-                              color: HexColor(mainColor),
-                            )
-                          : AssetSvg(
-                              imagePath: 'eye_slash',
-                              color: HexColor(mainColor),
-                            ),
-                    )
+                padding: const EdgeInsets.all(15.0),
+                onPressed: () {
+                  setState(() {
+                    isShown = !isShown;
+                  });
+                },
+                icon: Image(
+                  image: isShown
+                      ? const AssetImage('assets/images/eye_slash.png')
+                      : const AssetImage('assets/images/eye.png'),
+                ),
+              )
                   : Padding(
-                      padding: const EdgeInsetsDirectional.all(15.0),
-                      child: widget.icon,
-                    ),
+                padding: const EdgeInsetsDirectional.all(15.0),
+                child: widget.icon,
+              ),
             ),
           ),
         );

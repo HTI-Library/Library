@@ -8,7 +8,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/models/cart_model.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
-import 'package:hti_library/features/account/presntation/pages/account.dart';
+import 'package:hti_library/features/account/pages/account/account.dart';
 import 'package:hti_library/features/categories/presentation/pages/categories_demo.dart';
 import 'package:hti_library/features/home/presentation/pages/home_page.dart';
 import 'package:hti_library/features/profile/presentation/page/sign_in_page.dart';
