@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hti_library/borrowing.dart';
 import 'package:hti_library/core/di/injection.dart' as di;
 
 import 'core/di/injection.dart';
@@ -88,7 +89,7 @@ class _MyAppState extends State<MyApp> {
                 : ThemeMode.light,
             theme: MainCubit.get(context).lightTheme,
             darkTheme: MainCubit.get(context).darkTheme,
-            home: OnBoardingPage(),
+            home: Borrowing(),
           );
         },
       ),
