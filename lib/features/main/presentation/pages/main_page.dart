@@ -7,7 +7,7 @@ import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/core/util/widgets/asset_svg.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
-import 'package:hti_library/features/account/presntation/pages/account.dart';
+import 'package:hti_library/features/account/pages/account/account.dart';
 import 'package:hti_library/features/categories/presentation/pages/categories_demo.dart';
 import 'package:hti_library/features/home/presentation/pages/home_page.dart';
 import 'package:hti_library/features/internet_connection/page/internet_connection_page.dart';

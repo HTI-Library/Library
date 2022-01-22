@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
+import 'package:hti_library/features/account/pages/profile/profile.dart';
 import 'package:hti_library/features/account/pages/setting/presntation/setting.dart';
 import 'package:hti_library/features/account/widget/btn_my_account.dart';
 
@@ -38,7 +39,9 @@ class AccountPage extends StatelessWidget {
                       )),
               space20Vertical,
               MyBtnAccount(
-                voidCallback: () {},
+                voidCallback: () {
+                  navigateTo(context, ProfilePage());
+                },
                 text: 'My Profile',
                 imagePath: 'user_user_circle',
               ),
