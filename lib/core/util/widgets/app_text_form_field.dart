@@ -48,6 +48,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
             color: HexColor(greyWhite),
           ),
           child: TextFormField(
+            style: Theme.of(context).textTheme.subtitle2,
             keyboardType: widget.type,
             controller: textEditingController,
             obscureText: widget.isPassword ? isShown : false,

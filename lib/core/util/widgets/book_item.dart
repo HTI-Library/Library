@@ -16,7 +16,7 @@ class BookItem extends StatelessWidget {
       margin: const EdgeInsetsDirectional.only(
         start: 15.0,
       ),
-      height: 314.0,
+      height: 315.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         color: HexColor(greyWhite),

@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
                       text: 'Top Borrow Books',
                     ),
                     SizedBox(
-                      height: 314.0,
+                      height: 315.0,
                       child: ListView.builder(
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
                       text: 'Recently Returned',
                     ),
                     SizedBox(
-                      height: 314.0,
+                      height: 315.0,
                       child: ListView.builder(
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,

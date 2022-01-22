@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         space40Vertical,
                         AppButton(
-                          width: MediaQuery.of(context).size.width / 2,
+                          // width: MediaQuery.of(context).size.width / 2,
                           onPress: !isDisabled
                               ? () {
                                   print('test');

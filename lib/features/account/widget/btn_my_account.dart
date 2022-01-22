@@ -49,7 +49,7 @@ class MyBtnAccount extends StatelessWidget {
               children: [
                 Text(
                   text,
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
                         color: HexColor(mainColor),
                         fontSize: fontSize,
                       ),

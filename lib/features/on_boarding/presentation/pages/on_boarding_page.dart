@@ -39,6 +39,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         actions: [
           AppTextButton(
               label: 'SKIP',
+              style: Theme.of(context).textTheme.subtitle1,
               onPress: () {
                 navigateAndFinish(context, LoginPage());
               }),
@@ -137,10 +138,7 @@ class OnBoardingItem extends StatelessWidget {
           children: [
             Text(
               boardingModel.description,
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    color: HexColor(mainColor),
-                    fontWeight: FontWeight.w600,
-                  ),
+              style: Theme.of(context).textTheme.subtitle2,
               textAlign: TextAlign.center,
             ),
           ],
