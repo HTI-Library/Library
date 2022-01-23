@@ -385,7 +385,7 @@ class _MainPageState extends State<MainPage> {
                             color: HexColor(mainColor),
                             imagePath: MainCubit.get(context).currentIndex == 2
                                 ? 'save_soled'
-                                : 'save',
+                                : 'no_save',
                           ),
                         ),
                         label: 'Saved',
