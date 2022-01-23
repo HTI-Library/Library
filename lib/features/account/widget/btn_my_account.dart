@@ -13,6 +13,7 @@ class MyBtnAccount extends StatelessWidget {
   double height;
   double width;
   FontWeight fontWeight;
+  TextAlign textAlign;
   double fontSize;
 
   MyBtnAccount({
@@ -22,6 +23,7 @@ class MyBtnAccount extends StatelessWidget {
     required this.text,
     this.radius = 10.0,
     this.height = 55.0,
+    this.textAlign = TextAlign.start,
     this.width = double.infinity,
     this.stroke = false,
     this.fontWeight = FontWeight.bold,
@@ -49,9 +51,11 @@ class MyBtnAccount extends StatelessWidget {
               children: [
                 Text(
                   text,
+                  textAlign: TextAlign.end,
                   style: Theme.of(context).textTheme.subtitle2!.copyWith(
                         color: HexColor(mainColor),
                         fontSize: fontSize,
+
                       ),
                 ),
                 const Spacer(),
