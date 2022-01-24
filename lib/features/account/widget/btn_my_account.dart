@@ -35,11 +35,10 @@ class MyBtnAccount extends StatelessWidget {
     return Container(
       clipBehavior: Clip.antiAliasWithSaveLayer,
       height: height,
-      width: double.infinity,
+      width: width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
         border: stroke ? Border.all(color: HexColor(mainColor)) : null,
-        // color: HexColor(greyWhite),
       ),
       child: Material(
         color: HexColor(greyWhite),
