@@ -6,6 +6,8 @@ import 'package:hti_library/core/util/widgets/app_text_form_field.dart';
 import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
 
+import 'features/account/widget/btn_my_account.dart';
+
 class BorrowingPage extends StatelessWidget {
    BorrowingPage({Key? key}) : super(key: key);
 
@@ -42,11 +44,21 @@ class BorrowingPage extends StatelessWidget {
               AppTextFormField(hint: 'Date of Return',   callbackHandle: (controller) {
                 dataOfBorrowController = controller;
               },),
-              
-              
-              
-              
 
+
+
+              space20Vertical,
+
+
+
+
+
+              AppButton(
+                // width: MediaQuery.of(context).size.width / 2,
+                onPress: (){},
+
+                label: 'SUBMIT',
+              ),
               
               
               

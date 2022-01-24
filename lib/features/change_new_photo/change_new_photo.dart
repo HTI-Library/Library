@@ -12,9 +12,7 @@ class ChangeNewPhoto extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainScaffold(
       scaffold: BackScaffold(
-        scaffoldBackgroundColor: Theme
-            .of(context)
-            .scaffoldBackgroundColor,
+        scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: 'Picture',
         body: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -22,11 +20,16 @@ class ChangeNewPhoto extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-          Image.asset("assets/images/test.png"),
-          space20Vertical,
-          Text('Choose new image' ,
-              style: Theme.of(context).textTheme .bodyText2!,),
-
+              CircleAvatar(
+                child: Image.network(
+                    'http://prod-upp-image-read.ft.com/a4e8f394-313b-11ea-a329-0bcf87a328f2'),
+                radius: 75,
+              ),
+              space20Vertical,
+              Text(
+                'Choose new image',
+                style: Theme.of(context).textTheme.bodyText2!,
+              ),
             ],
           ),
         ),
