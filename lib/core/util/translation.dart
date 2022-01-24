@@ -214,7 +214,7 @@ class TranslationModel {
     street_name = json['street_name'];
     building_number_address = json['building_number_address'];
     special_marker = json['special_marker'];
-    save = json['save'];
+    save = json['no_save'];
 
     comparisons = json['comparisons'];
     product_details = json['product_details'];
