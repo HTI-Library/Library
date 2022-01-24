@@ -10,6 +10,7 @@ class AppButton extends StatelessWidget {
   final VoidCallback? onPress;
   final double width;
   Color? color;
+  Color? textColor;
 
   AppButton({
     Key? key,
@@ -17,6 +18,7 @@ class AppButton extends StatelessWidget {
     required this.onPress,
     this.width = double.infinity,
     this.color,
+    this.textColor,
   }) : super(key: key);
 
   @override
@@ -40,7 +42,7 @@ class AppButton extends StatelessWidget {
         child: Text(
           label,
           style: Theme.of(context).textTheme.button!.copyWith(
-            color: HexColor(surface),
+            color: textColor == null ? HexColor(surface) : textColor,
           ),
         ),
       ),

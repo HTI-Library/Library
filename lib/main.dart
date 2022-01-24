@@ -107,7 +107,7 @@ class _MyAppState extends State<MyApp> {
                 : ThemeMode.light,
             theme: MainCubit.get(context).lightTheme,
             darkTheme: MainCubit.get(context).darkTheme,
-            home: MainPage(),
+            home: AccountPage(),
           );
         },
       ),

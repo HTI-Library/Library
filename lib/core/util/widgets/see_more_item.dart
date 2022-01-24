@@ -9,10 +9,13 @@ class SeeMoreItem extends StatelessWidget {
     Key? key,
     required this.gestureTapCallback,
     required this.text,
+    this.padding = 30,
+
 
   }) : super(key: key);
   final GestureTapCallback gestureTapCallback;
   final String text;
+  final double padding ;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,7 @@ class SeeMoreItem extends StatelessWidget {
       child: InkWell(
         onTap: gestureTapCallback,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+          padding: EdgeInsets.symmetric(horizontal: padding),
           child: Row(
             children: [
               Text(

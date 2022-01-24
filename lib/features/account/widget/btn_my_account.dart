@@ -15,10 +15,12 @@ class MyBtnAccount extends StatelessWidget {
   FontWeight fontWeight;
   TextAlign textAlign;
   double fontSize;
+  bool isCenter;
 
   MyBtnAccount({
     Key? key,
     this.imagePath,
+    this.isCenter = false,
     required this.voidCallback,
     required this.text,
     this.radius = 10.0,
@@ -47,6 +49,7 @@ class MyBtnAccount extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   text,
@@ -57,6 +60,8 @@ class MyBtnAccount extends StatelessWidget {
 
                       ),
                 ),
+                space10Horizontal,
+                if(!isCenter)
                 const Spacer(),
                 AssetSvg(
                   imagePath: imagePath!,
