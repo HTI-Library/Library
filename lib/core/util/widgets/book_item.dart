@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/features/book/view_book.dart';
 
 import '../constants.dart';
 import 'asset_svg.dart';
@@ -14,7 +15,7 @@ class BookItem extends StatelessWidget {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       width: MediaQuery.of(context).size.width / 3.2+ 1.8,
       margin: const EdgeInsetsDirectional.only(
-        start: 5.0,
+        start: 10.0,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
@@ -23,7 +24,9 @@ class BookItem extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            navigateTo(context, ViewBookPage());
+          },
           child: Padding(
             padding: const EdgeInsets.all(
               5.0,

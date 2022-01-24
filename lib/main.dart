@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hti_library/features/borrowing/presentation/pages/borrowing_page.dart';
 import 'package:hti_library/core/di/injection.dart' as di;
 import 'package:hti_library/features/account/pages/themes/themes.dart';
+import 'package:hti_library/features/home/presentation/pages/home_page.dart';
 
 import 'core/di/injection.dart';
 import 'core/models/cart_model.dart';
