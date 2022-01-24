@@ -8,6 +8,7 @@ import 'package:hti_library/features/account/pages/message/message.dart';
 import 'package:hti_library/features/account/pages/profile/profile.dart';
 import 'package:hti_library/features/account/pages/setting/presntation/setting.dart';
 import 'package:hti_library/features/account/widget/btn_my_account.dart';
+import 'package:hti_library/features/no_bookmark/presentation/pages/no_bookmark_page.dart';
 
 class AccountPage extends StatelessWidget {
   AccountPage({Key? key}) : super(key: key);
@@ -59,6 +60,7 @@ class AccountPage extends StatelessWidget {
               space10Vertical,
               MyBtnAccount(
                 voidCallback: () {
+                  navigateTo(context, NoBookmarkPage());
                 },
                 text: 'My Bookmark',
                 imagePath: 'pop_mark',
