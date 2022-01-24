@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/util/constants.dart';
+import 'package:hti_library/core/util/widgets/app_button.dart';
 import 'package:hti_library/core/util/widgets/asset_svg.dart';
 import 'package:hti_library/core/util/widgets/available_item.dart';
 import 'package:hti_library/core/util/widgets/back_scaffold.dart';
@@ -30,13 +31,13 @@ class ViewBookPage extends StatelessWidget {
             ],
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                Column(
+        body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
@@ -80,6 +81,7 @@ class ViewBookPage extends StatelessWidget {
                             direction: Axis.horizontal,
                             allowHalfRating: true,
                             itemCount: 5,
+                            itemSize: 25,
                             itemBuilder: (context, _) => Icon(
                               Icons.star_rounded,
                               color: Colors.amber,
@@ -90,28 +92,41 @@ class ViewBookPage extends StatelessWidget {
                         ),
                       ],
                     ),
+                    space10Vertical,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        MyBtnAccount(
-                          voidCallback: () {
-                            navigateTo(context, BorrowingPage());
-                          },
-                          width: MediaQuery.of(context).size.width / 2.2,
-                          text: 'Borrow',
-                          imagePath: "",
+                        Expanded(
+                          child: AppButton(label: 'Borrow',
+                              onPress: (){}),
                         ),
-                        Spacer(),
-                        MyBtnAccount(
-                          voidCallback: () {
-
-                          },
-                          width: MediaQuery.of(context).size.width / 2.2,
-                          text: 'read',
-                          textAlign: TextAlign.center,
-                          imagePath: "",
+                        space10Horizontal,
+                        Expanded(
+                          child: AppButton(
+                              color: HexColor(greyWhite),
+                              label: 'Read',
+                              textColor: HexColor(mainColor),
+                              onPress: (){}),
                         ),
+                        // MyBtnAccount(
+                        //   voidCallback: () {
+                        //     navigateTo(context, BorrowingPage());
+                        //   },
+                        //   width: MediaQuery.of(context).size.width / 2.2,
+                        //   text: 'Borrow',
+                        //   imagePath: "",
+                        // ),
+                        // Spacer(),
+                        // MyBtnAccount(
+                        //   voidCallback: () {
+                        //
+                        //   },
+                        //   width: MediaQuery.of(context).size.width / 2.2,
+                        //   text: 'read',
+                        //   textAlign: TextAlign.center,
+                        //   imagePath: "",
+                        // ),
                       ],
                     ),
                     space15Vertical,
@@ -119,10 +134,10 @@ class ViewBookPage extends StatelessWidget {
                       'Overview.',
                       style: Theme.of(context).textTheme.headline6!,
                     ),
-                    Card(
-                      color: Colors.transparent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: HexColor(greyWhite),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
@@ -130,34 +145,30 @@ class ViewBookPage extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodyText1,),
                       ),
                     ),
-                    InkWell(
-                      onTap: (){
-                        navigateTo(context, Categories());
-                      },
-                      child: SeeMoreItem(
-                        gestureTapCallback: () {},
-                        text: 'More Edition of this book',
-                      ),
-                    ),
 
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsetsDirectional.only(
-                    top: 5.0,
-                    bottom: 5.0,
-                  ),
-                  color: HexColor(greyWhite),
-                  height: MediaQuery.of(context).size.width / 3.2 *2.2,
-                  child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => BookItem(),
-                      itemCount: 10),
+              ),
+              SeeMoreItem(
+                padding: 15,
+                gestureTapCallback: () {},
+                text: 'More Edition of this book',
+              ),
+              Container(
+                padding: const EdgeInsetsDirectional.only(
+                  top: 5.0,
+                  bottom: 5.0,
                 ),
-              ],
-            )
-          ),
+                color: HexColor(greyWhite),
+                height: MediaQuery.of(context).size.width / 3.2 *2.2,
+                child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) => BookItem(),
+                    itemCount: 10),
+              ),
+            ],
+          )
         ),
       ),
     );
