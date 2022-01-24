@@ -12,22 +12,21 @@ class BookItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      width: 171.0,
+      width: 151.0,
       margin: const EdgeInsetsDirectional.only(
-        start: 15.0,
+        start: 5.0,
       ),
-      height: 315.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        color: HexColor(greyWhite),
+        color: Colors.transparent,
       ),
       child: Material(
-        color: HexColor(greyWhite),
+        color: Colors.transparent,
         child: InkWell(
           onTap: (){},
           child: Padding(
             padding: const EdgeInsets.all(
-              15.0,
+              5.0,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -36,7 +35,7 @@ class BookItem extends StatelessWidget {
                 Container(
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.0),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: const Image(
                     image: NetworkImage(
@@ -52,12 +51,11 @@ class BookItem extends StatelessWidget {
                   maxLines: 1,
                   style: Theme.of(context).textTheme.caption,
                 ),
-                Text(
-                  'My Book Author',
-                  maxLines: 1,
-                  style: Theme.of(context).textTheme.caption,
-                ),
-                space5Vertical,
+                // Text(
+                //   'My Book Author',
+                //   maxLines: 1,
+                //   style: Theme.of(context).textTheme.caption,
+                // ),
                 Row(
                   children: [
                     Text(
@@ -74,7 +72,7 @@ class BookItem extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
                       child: CircleAvatar(
-                        radius: 2.0,
+                        radius: 1.5,
                         backgroundColor: HexColor(mainColor),
                       ),
                     ),

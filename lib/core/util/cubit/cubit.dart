@@ -140,7 +140,7 @@ class MainCubit extends Cubit<MainState> {
         subtitle2: TextStyle(
           fontSize: 16.0,
           fontFamily: family,
-          fontWeight: FontWeight.normal,
+          fontWeight: FontWeight.w500,
           color: HexColor(mainColor),
           height: 1.4,
         ),
