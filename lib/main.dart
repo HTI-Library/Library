@@ -13,6 +13,7 @@ import 'core/util/cubit/cubit.dart';
 import 'core/util/cubit/state.dart';
 import 'features/account/pages/account/account.dart';
 import 'features/account/pages/profile/profile.dart';
+import 'features/categories/presentation/pages/category_details.dart';
 import 'features/main/presentation/pages/main_page.dart';
 import 'features/on_boarding/presentation/pages/on_boarding_page.dart';
 import 'features/search/presentation/search.dart';
@@ -100,7 +101,7 @@ class _MyAppState extends State<MyApp> {
                 : ThemeMode.light,
             theme: MainCubit.get(context).lightTheme,
             darkTheme: MainCubit.get(context).darkTheme,
-            home: MainPage(),
+            home: CategoryDetails(),
           );
         },
       ),
