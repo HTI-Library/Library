@@ -8,7 +8,7 @@ import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/core/util/widgets/asset_svg.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
 import 'package:hti_library/features/account/pages/account/account.dart';
-import 'package:hti_library/features/categories/presentation/pages/categories_demo.dart';
+import 'package:hti_library/features/categories/presentation/pages/categories.dart';
 import 'package:hti_library/features/home/presentation/pages/home_page.dart';
 import 'package:hti_library/features/internet_connection/page/internet_connection_page.dart';
 import 'package:hti_library/features/wishlist/presentation/pages/wishlist_page.dart';
@@ -96,7 +96,7 @@ class _MainPageState extends State<MainPage> {
                           physics: const NeverScrollableScrollPhysics(),
                           children: [
                             const HomePage(),
-                            const SectionsScreen(),
+                            const Categories(),
                             const WishlistPage(),
                             AccountPage(),
                           ],

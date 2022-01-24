@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
+import 'package:hti_library/features/account/pages/calender/calender.dart';
+import 'package:hti_library/features/account/pages/info/info.dart';
+import 'package:hti_library/features/account/pages/message/message.dart';
 import 'package:hti_library/features/account/pages/profile/profile.dart';
 import 'package:hti_library/features/account/pages/setting/presntation/setting.dart';
 import 'package:hti_library/features/account/widget/btn_my_account.dart';
@@ -47,20 +50,25 @@ class AccountPage extends StatelessWidget {
               ),
               space10Vertical,
               MyBtnAccount(
-                voidCallback: () {},
+                voidCallback: () {
+                  navigateTo(context, MessagePage());
+                },
                 text: 'My Message',
                 imagePath: 'message_account',
               ),
               space10Vertical,
               MyBtnAccount(
-                voidCallback: () {},
+                voidCallback: () {
+                },
                 text: 'My Bookmark',
                 imagePath: 'pop_mark',
               ),
               space10Vertical,
               MyBtnAccount(
-                voidCallback: () {},
-                text: 'Calender',
+                voidCallback: () {
+                  navigateTo(context, CalenderPage());
+                },
+                text: 'calender',
                 imagePath: 'calendar',
               ),
               space10Vertical,
@@ -73,7 +81,9 @@ class AccountPage extends StatelessWidget {
               ),
               space10Vertical,
               MyBtnAccount(
-                voidCallback: () {},
+                voidCallback: () {
+                  navigateTo(context, InfoPage());
+                },
                 text: 'Info',
                 imagePath: 'info',
               ),

@@ -18,8 +18,8 @@ class AvailableItem extends StatelessWidget {
         vertical: 4.0,
       ),
       decoration: BoxDecoration(
-        color: HexColor(mainColor),
-        borderRadius: BorderRadius.circular(4.0),
+        color: HexColor(green),
+        borderRadius: BorderRadius.circular(6.0),
       ),
       child: Text(
         label,
