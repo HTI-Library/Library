@@ -12,7 +12,7 @@ class BookItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      width: 151.0,
+      width: MediaQuery.of(context).size.width / 3.2+ 1.8,
       margin: const EdgeInsetsDirectional.only(
         start: 5.0,
       ),
@@ -23,7 +23,7 @@ class BookItem extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: (){},
+          onTap: () {},
           child: Padding(
             padding: const EdgeInsets.all(
               5.0,
@@ -37,11 +37,11 @@ class BookItem extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: const Image(
-                    image: NetworkImage(
+                  child: Image(
+                    image: const NetworkImage(
                         'https://edit.org/images/cat/book-covers-big-2019101610.jpg'),
-                    height: 225.0,
-                    width: 141.0,
+                    height: MediaQuery.of(context).size.width / 3.2 * 1.6,
+                    width: MediaQuery.of(context).size.width / 3.2,
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -49,13 +49,14 @@ class BookItem extends StatelessWidget {
                 Text(
                   'My Book Name',
                   maxLines: 1,
-                  style: Theme.of(context).textTheme.caption,
+                  style: Theme.of(context).textTheme.bodyText1,
                 ),
                 // Text(
                 //   'My Book Author',
                 //   maxLines: 1,
                 //   style: Theme.of(context).textTheme.caption,
                 // ),
+                space5Vertical,
                 Row(
                   children: [
                     Text(
@@ -76,7 +77,9 @@ class BookItem extends StatelessWidget {
                         backgroundColor: HexColor(mainColor),
                       ),
                     ),
-                    const AvailableItem(label: 'Available',),
+                    const AvailableItem(
+                      label: 'Available',
+                    ),
                   ],
                 ),
               ],

@@ -42,7 +42,7 @@ class Categories extends StatelessWidget {
                       crossAxisCount: 2,
                       // mainAxisSpacing: 10.0,
                       crossAxisSpacing: 5.0,
-                      height: MediaQuery.of(context).size.width / 2,
+                      height: MediaQuery.of(context).size.width / 1.8,
                     ),
                     itemCount: 10,
                     itemBuilder: (context, index) => CatItem(),

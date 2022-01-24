@@ -8,7 +8,6 @@ import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/core/util/keep_alive_widget.dart';
 import 'package:hti_library/core/util/widgets/book_item.dart';
-import 'package:hti_library/core/util/widgets/main_scaffold.dart';
 import 'package:hti_library/core/util/widgets/see_more_item.dart';
 import 'package:hti_library/features/account/widget/btn_my_account.dart';
 import 'package:hti_library/features/search/presentation/search.dart';
@@ -41,9 +40,12 @@ class HomePage extends StatelessWidget {
                   text: 'Top Borrow Books',
                 ),
                 Container(
-                  padding: const EdgeInsetsDirectional.only(top: 5.0,bottom: 5.0,),
+                  padding: const EdgeInsetsDirectional.only(
+                    top: 5.0,
+                    bottom: 5.0,
+                  ),
                   color: HexColor(greyWhite),
-                  height: 286.0,
+                    height: MediaQuery.of(context).size.width / 3.2 * 1.6 + 63,
                   child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
@@ -55,9 +57,12 @@ class HomePage extends StatelessWidget {
                   text: 'Recently Returned',
                 ),
                 Container(
-                  padding: const EdgeInsetsDirectional.only(top: 5.0,bottom: 5.0,),
+                  padding: const EdgeInsetsDirectional.only(
+                    top: 5.0,
+                    bottom: 5.0,
+                  ),
                   color: HexColor(greyWhite),
-                  height: 286.0,
+                  height: MediaQuery.of(context).size.width / 3.2 * 1.6 + 63,
                   child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
@@ -69,9 +74,12 @@ class HomePage extends StatelessWidget {
                   text: 'HTI Material',
                 ),
                 Container(
-                  padding: const EdgeInsetsDirectional.only(top: 5.0,bottom: 5.0,),
+                  padding: const EdgeInsetsDirectional.only(
+                    top: 5.0,
+                    bottom: 5.0,
+                  ),
                   color: HexColor(greyWhite),
-                  height: 286.0,
+                  height: MediaQuery.of(context).size.width / 3.2 * 1.6 + 63,
                   child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
@@ -83,9 +91,12 @@ class HomePage extends StatelessWidget {
                   text: 'Graduation Projects',
                 ),
                 Container(
-                  padding: const EdgeInsetsDirectional.only(top: 5.0,bottom: 5.0,),
+                  padding: const EdgeInsetsDirectional.only(
+                    top: 5.0,
+                    bottom: 5.0,
+                  ),
                   color: HexColor(greyWhite),
-                  height: 286.0,
+                  height: MediaQuery.of(context).size.width / 3.2 * 1.6 + 63,
                   child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,

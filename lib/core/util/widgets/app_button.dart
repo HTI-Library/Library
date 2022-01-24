@@ -23,7 +23,7 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      height: 50.0,
+      height: 45.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
           10.0,

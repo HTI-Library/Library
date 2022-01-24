@@ -14,17 +14,18 @@ class AvailableItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: 8.0,
-        vertical: 4.0,
+        horizontal: 6.0,
+        vertical: 3.0,
       ),
       decoration: BoxDecoration(
         color: HexColor(green),
-        borderRadius: BorderRadius.circular(6.0),
+        borderRadius: BorderRadius.circular(4.0),
       ),
       child: Text(
         label,
         style: Theme.of(context).textTheme.caption!.copyWith(
               color: HexColor(surface),
+          fontSize: 10.0,
             ),
       ),
     );

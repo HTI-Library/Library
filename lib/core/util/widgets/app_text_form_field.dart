@@ -41,7 +41,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
     return BlocBuilder<MainCubit, MainState>(
       builder: (BuildContext context, state) {
         return Container(
-          height: 55.0,
+          // height: 49.0,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
             color: HexColor(greyWhite),
@@ -77,22 +77,24 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
               ),
               suffixIcon: widget.isPassword
                   ? IconButton(
-                padding: const EdgeInsets.all(15.0),
-                onPressed: () {
-                  setState(() {
-                    isShown = !isShown;
-                  });
-                },
-                icon: Image(
-                  image: isShown
-                      ? const AssetImage('assets/images/eye_slash.png')
-                      : const AssetImage('assets/images/eye.png'),
-                ),
-              )
-                  : Padding(
-                padding: const EdgeInsetsDirectional.all(15.0),
-                child: widget.icon,
-              ),
+                      padding: const EdgeInsets.all(12.0),
+                      onPressed: () {
+                        setState(() {
+                          isShown = !isShown;
+                        });
+                      },
+                      icon: Image(
+                        image: isShown
+                            ? const AssetImage('assets/images/eye_slash.png')
+                            : const AssetImage('assets/images/eye.png'),
+                      ),
+                    )
+                  : widget.icon == null
+                      ? null
+                      : Padding(
+                          padding: const EdgeInsetsDirectional.all(12.0),
+                          child: widget.icon,
+                        ),
             ),
           ),
         );

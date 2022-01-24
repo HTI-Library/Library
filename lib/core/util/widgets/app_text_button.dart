@@ -20,8 +20,8 @@ class AppTextButton extends StatelessWidget {
       onPressed: onPress,
       style: buttonStyle,
       child: Text(
-        label,
-        style: style,
+        label.toUpperCase(),
+        style: style == null ? Theme.of(context).textTheme.subtitle2 : null,
       ),
     );
   }

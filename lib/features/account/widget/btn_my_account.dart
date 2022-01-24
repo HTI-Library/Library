@@ -22,7 +22,7 @@ class MyBtnAccount extends StatelessWidget {
     required this.voidCallback,
     required this.text,
     this.radius = 10.0,
-    this.height = 55.0,
+    this.height = 50.0,
     this.textAlign = TextAlign.start,
     this.width = double.infinity,
     this.stroke = false,

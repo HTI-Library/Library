@@ -16,7 +16,7 @@ class SeeMoreItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 55.0,
+      height: 45.0,
       child: InkWell(
         onTap: gestureTapCallback,
         child: Padding(
@@ -25,9 +25,9 @@ class SeeMoreItem extends StatelessWidget {
             children: [
               Text(
                 text,
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                style: Theme.of(context).textTheme.headline6!.copyWith(
                       color: HexColor(mainColor),
-                      fontSize: 16.0,
+                      fontSize: 18.0,
                     ),
               ),
               const Spacer(),
