@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/core/util/constants.dart';
 
 class CatItem extends StatelessWidget {
   const CatItem({Key? key}) : super(key: key);
@@ -10,6 +12,7 @@ class CatItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
       ),
       elevation: 5.0,
+      shadowColor: HexColor(greyWhite),
       margin: const EdgeInsetsDirectional.only(
           bottom: 15.0, start: 5.0, end: 5.0),
       clipBehavior: Clip.antiAliasWithSaveLayer,
