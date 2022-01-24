@@ -9,7 +9,7 @@ import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/models/cart_model.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/features/account/pages/account/account.dart';
-import 'package:hti_library/features/categories/presentation/pages/categories_demo.dart';
+import 'package:hti_library/features/categories/presentation/pages/categories.dart';
 import 'package:hti_library/features/home/presentation/pages/home_page.dart';
 import 'package:hti_library/features/profile/presentation/page/sign_in_page.dart';
 import 'package:hti_library/features/wishlist/presentation/pages/wishlist_page.dart';
@@ -32,9 +32,10 @@ const Color starColor = Colors.amber;
 // const String green = '#1fcd6c';
 const String red = '#F21A0E';
 const String grey = '#898989';
+const String green = '#125c03';
 // const String blueGrey = '#e1e7f0';
 // const String black_e = '#282828';
-const String surface = '#FFFFFF';
+const String surface = '#f5f5f5';
 const String greyWhite = '#8fe1e7f0';
 const String disableButton = '#A7B1D7';
 
@@ -126,7 +127,7 @@ dynamic parseMapFromServer(String text) => jsonDecode(
 
 List<Widget> bottomPages = [
   const HomePage(),
-  const SectionsScreen(),
+  const Categories(),
   const WishlistPage(),
   AccountPage(),
 ];
