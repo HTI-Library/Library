@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/util/constants.dart';
@@ -12,6 +13,7 @@ import 'package:hti_library/features/no_bookmark/presentation/pages/no_bookmark_
 
 class AccountPage extends StatelessWidget {
   AccountPage({Key? key}) : super(key: key);
+  var _width = 230.0;
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +93,28 @@ class AccountPage extends StatelessWidget {
               ),
               space10Vertical,
               MyBtnAccount(
-                voidCallback: () {},
+                voidCallback: () {
+                  AwesomeDialog(
+                    context: context,
+                    keyboardAware: false,
+                    headerAnimationLoop: false,
+                    dismissOnBackKeyPress: true,
+                    dialogType: DialogType.WARNING,
+                    animType: AnimType.BOTTOMSLIDE,
+                    btnCancelText: "Cancel",
+                    btnOkText: "Yes, I will",
+                    title: 'log out ',
+                    // padding: const EdgeInsets.all(5.0),
+                    desc:
+                    'Are you sure of the process of logging out of your account ?.',
+                    btnCancelOnPress: () {
+                      print('Yes');
+                    },
+                    btnOkOnPress: () {
+                      print('No');
+                    },
+                  )..show();
+                },
                 text: 'Log Out',
                 imagePath: 'sign_out',
               ),

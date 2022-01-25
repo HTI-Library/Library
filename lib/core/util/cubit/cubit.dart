@@ -10,6 +10,7 @@ import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/network/repository.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../constants.dart';
 
@@ -1637,5 +1638,37 @@ class MainCubit extends Cubit<MainState> {
 //   }
 //
 // // createCheckout ----------------------end
+  PickedFile? imageFile = null;
+
+  void openGallery(BuildContext context) async{
+    final pickedFile = await ImagePicker().getImage
+      (
+      source: ImageSource.gallery ,
+    ).then((value){
+      imageFile = value;
+      emit(ChangeImageSuccessState());
+
+    }).catchError((onError){
+      print(onError.toString());
+      emit(ChangeImageLoadingState());
+    });
+    Navigator.pop(context);
+  }
+
+  void openCamera(BuildContext context) async{
+    final pickedFile = await ImagePicker().getImage
+      (
+      source: ImageSource.camera ,
+    ).then((value){
+      imageFile = value;
+      emit(ChangeImageSuccessState());
+
+    }).catchError((onError){
+      print(onError.toString());
+      emit(ChangeImageLoadingState());
+      });
+    Navigator.pop(context);
+  }
+
 
 }

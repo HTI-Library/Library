@@ -428,3 +428,16 @@ class CreateCheckoutSuccess extends MainState {}
 class EnableLoginButtonState extends MainState {}
 
 // enableLoginButton ---------------------------- end
+
+
+// ------------ change photo ------------ //
+class ChangeImageLoadingState extends MainState {}
+
+class ChangeImageSuccessState extends MainState {}
+
+class ChangeImageErrorState extends MainState {
+  final String? error;
+  ChangeImageErrorState(this.error);
+}
+
+
