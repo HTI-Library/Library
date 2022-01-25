@@ -15,6 +15,8 @@ class MyBtnAccount extends StatelessWidget {
   FontWeight fontWeight;
   TextAlign textAlign;
   double fontSize;
+  Color? color;
+  Color? textColor;
   bool isCenter;
 
   MyBtnAccount({
@@ -25,6 +27,8 @@ class MyBtnAccount extends StatelessWidget {
     required this.text,
     this.radius = 10.0,
     this.height = 50.0,
+    this.color,
+    this.textColor,
     this.textAlign = TextAlign.start,
     this.width = double.infinity,
     this.stroke = false,
@@ -43,7 +47,7 @@ class MyBtnAccount extends StatelessWidget {
         border: stroke ? Border.all(color: HexColor(mainColor)) : null,
       ),
       child: Material(
-        color: HexColor(greyWhite),
+        color: color  == null ? HexColor(greyWhite) : color,
         child: InkWell(
           onTap: voidCallback,
           child: Padding(
@@ -55,7 +59,7 @@ class MyBtnAccount extends StatelessWidget {
                   text,
                   textAlign: TextAlign.end,
                   style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                        color: HexColor(mainColor),
+                        color: textColor == null ? HexColor(mainColor) : textColor,
                         fontSize: fontSize,
 
                       ),

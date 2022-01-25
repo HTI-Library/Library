@@ -53,6 +53,7 @@ dependencies:
   lottie: ^1.2.1
   image_picker: ^0.8.4+4
   smooth_page_indicator: ^1.0.0+2
+  awesome_dialog: ^2.1.2
 
 #  firebase_core: ^1.8.0
 #  firebase_messaging: ^11.1.0

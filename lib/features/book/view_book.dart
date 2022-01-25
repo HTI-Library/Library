@@ -109,24 +109,6 @@ class ViewBookPage extends StatelessWidget {
                               textColor: HexColor(mainColor),
                               onPress: (){}),
                         ),
-                        // MyBtnAccount(
-                        //   voidCallback: () {
-                        //     navigateTo(context, BorrowingPage());
-                        //   },
-                        //   width: MediaQuery.of(context).size.width / 2.2,
-                        //   text: 'Borrow',
-                        //   imagePath: "",
-                        // ),
-                        // Spacer(),
-                        // MyBtnAccount(
-                        //   voidCallback: () {
-                        //
-                        //   },
-                        //   width: MediaQuery.of(context).size.width / 2.2,
-                        //   text: 'read',
-                        //   textAlign: TextAlign.center,
-                        //   imagePath: "",
-                        // ),
                       ],
                     ),
                     space15Vertical,
