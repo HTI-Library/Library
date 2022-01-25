@@ -13,7 +13,7 @@ import 'core/util/constants.dart';
 import 'core/util/cubit/cubit.dart';
 import 'core/util/cubit/state.dart';
 import 'features/account/presntation/pages/account.dart';
-import 'features/change_new_photo/change_new_photo.dart';
+import 'features/change_new_photo/presintation/page/change_new_photo.dart';
 import 'features/login/presentation/pages/login_page.dart';
 import 'features/account/pages/account/account.dart';
 import 'features/account/pages/profile/profile.dart';
@@ -107,7 +107,7 @@ class _MyAppState extends State<MyApp> {
                 : ThemeMode.light,
             theme: MainCubit.get(context).lightTheme,
             darkTheme: MainCubit.get(context).darkTheme,
-            home: AccountPage(),
+            home: MainPage(),
           );
         },
       ),

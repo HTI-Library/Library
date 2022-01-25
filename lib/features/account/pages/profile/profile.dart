@@ -3,7 +3,7 @@ import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
 import 'package:hti_library/features/account/widget/btn_my_account.dart';
-import 'package:hti_library/features/change_new_photo/change_new_photo.dart';
+import 'package:hti_library/features/change_new_photo/presintation/page/change_new_photo.dart';
 import 'package:hti_library/features/no_save/no_save.dart';
 
 class ProfilePage extends StatelessWidget {
