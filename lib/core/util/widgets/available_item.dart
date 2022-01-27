@@ -4,11 +4,13 @@ import 'package:hexcolor/hexcolor.dart';
 import '../constants.dart';
 
 class AvailableItem extends StatelessWidget {
-  const AvailableItem({
+  AvailableItem({
     Key? key,
     required this.label,
+    this.fontSize = 10.0,
   }) : super(key: key);
   final String label;
+  double fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class AvailableItem extends StatelessWidget {
         label,
         style: Theme.of(context).textTheme.caption!.copyWith(
               color: HexColor(surface),
-          fontSize: 10.0,
+              fontSize: fontSize,
             ),
       ),
     );

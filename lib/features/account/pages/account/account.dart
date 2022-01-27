@@ -6,9 +6,10 @@ import 'package:hti_library/core/util/widgets/main_scaffold.dart';
 import 'package:hti_library/features/account/pages/calender/calender.dart';
 import 'package:hti_library/features/account/pages/info/info.dart';
 import 'package:hti_library/features/account/pages/message/message.dart';
-import 'package:hti_library/features/account/pages/profile/profile.dart';
+import 'package:hti_library/features/account/pages/notificatio/notificatio.dart';
 import 'package:hti_library/features/account/pages/setting/presntation/setting.dart';
 import 'package:hti_library/features/account/widget/btn_my_account.dart';
+import 'package:hti_library/features/change_new_photo/presintation/page/change_new_photo.dart';
 import 'package:hti_library/features/no_bookmark/presentation/pages/no_bookmark_page.dart';
 
 class AccountPage extends StatelessWidget {
@@ -46,10 +47,19 @@ class AccountPage extends StatelessWidget {
               space20Vertical,
               MyBtnAccount(
                 voidCallback: () {
-                  navigateTo(context, ProfilePage());
+                  navigateTo(context, ChangeNewPhoto());
                 },
                 text: 'My Profile',
                 imagePath: 'user_user_circle',
+              ),
+
+              space10Vertical,
+              MyBtnAccount(
+                voidCallback: () {
+                  navigateTo(context, NotificatioPage());
+                },
+                text: 'Notification',
+                imagePath: 'notification_notification_outline',
               ),
               space10Vertical,
               MyBtnAccount(
@@ -59,14 +69,14 @@ class AccountPage extends StatelessWidget {
                 text: 'My Message',
                 imagePath: 'message_account',
               ),
-              space10Vertical,
-              MyBtnAccount(
-                voidCallback: () {
-                  navigateTo(context, NoBookmarkPage());
-                },
-                text: 'My Bookmark',
-                imagePath: 'pop_mark',
-              ),
+              // space10Vertical,
+              // MyBtnAccount(
+              //   voidCallback: () {
+              //     navigateTo(context, NoBookmarkPage());
+              //   },
+              //   text: 'My Bookmark',
+              //   imagePath: 'pop_mark',
+              // ),
               space10Vertical,
               MyBtnAccount(
                 voidCallback: () {
@@ -84,6 +94,7 @@ class AccountPage extends StatelessWidget {
                 imagePath: 'settings',
               ),
               space10Vertical,
+
               MyBtnAccount(
                 voidCallback: () {
                   navigateTo(context, InfoPage());

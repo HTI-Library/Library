@@ -20,7 +20,7 @@ class SavedPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset("assets/images/test.png"),
+              Image.asset("assets/images/saved.png"),
               space30Vertical,
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

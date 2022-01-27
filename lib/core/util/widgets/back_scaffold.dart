@@ -6,7 +6,6 @@ import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/features/internet_connection/page/internet_connection_page.dart';
 
-
 import '../constants.dart';
 
 class BackScaffold extends StatelessWidget {
@@ -16,7 +15,7 @@ class BackScaffold extends StatelessWidget {
   String iconColor;
   String actionText;
   Widget actionIcon;
-   bool titleImage;
+  bool titleImage;
   Widget? floatingButton;
   final Color scaffoldBackgroundColor;
 
@@ -30,65 +29,66 @@ class BackScaffold extends StatelessWidget {
     this.actionText = '',
     this.actionIcon = const SizedBox(),
     this.titleImage = false,
-    this.floatingButton ,
+    this.floatingButton,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit, MainState>(
-  builder: (context, state) {
-    return Directionality(
-      textDirection: MainCubit.get(context).isRtl
-          ? TextDirection.rtl
-          : TextDirection.ltr,
-      child: Conditional.single(
-        context: context,
-        conditionBuilder: (context) => !MainCubit.get(context).noInternetConnection,
-        widgetBuilder: (context) => Scaffold(
-          backgroundColor: scaffoldBackgroundColor,
-          appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: scaffoldBackgroundColor,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.arrow_back,
-                color: HexColor(mainColor),
-                size: 20.0,
-              ),
-            ),
-            titleSpacing: 20.0,
-            actions: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Center(
-                  child: Text(
-                    actionText,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText2!
-                        .copyWith(color: HexColor(color)),
+      builder: (context, state) {
+        return Directionality(
+          textDirection: MainCubit.get(context).isRtl
+              ? TextDirection.rtl
+              : TextDirection.ltr,
+          child: Conditional.single(
+            context: context,
+            conditionBuilder: (context) =>
+                !MainCubit.get(context).noInternetConnection,
+            widgetBuilder: (context) => Scaffold(
+              backgroundColor: scaffoldBackgroundColor,
+              appBar: AppBar(
+                centerTitle: true,
+                backgroundColor: scaffoldBackgroundColor,
+                leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: HexColor(mainColor),
+                    size: 20.0,
                   ),
                 ),
+                titleSpacing: 20.0,
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Center(
+                      child: Text(
+                        actionText,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText2!
+                            .copyWith(color: HexColor(color)),
+                      ),
+                    ),
+                  ),
+                  actionIcon,
+                ],
+                title: Text(
+                  title,
+                  style: Theme.of(context).textTheme.headline6!.copyWith(
+                        color: HexColor(mainColor),
+                      ),
+                ),
               ),
-              actionIcon,
-            ],
-            title: Text(
-              title,
-              style: Theme.of(context).textTheme.headline6!.copyWith(
-                color: HexColor(mainColor),
-              ),
+              body: body,
+              floatingActionButton: floatingButton,
             ),
+            fallbackBuilder: (context) => const InternetConnectionPage(),
           ),
-          body: body,
-          floatingActionButton: floatingButton,
-        ),
-        fallbackBuilder:(context) => const InternetConnectionPage(),
-      ),
+        );
+      },
     );
-  },
-);
   }
 }

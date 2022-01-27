@@ -21,7 +21,7 @@ class MessagePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset("assets/images/test.png"),
+                Image.asset("assets/images/message.png"),
                 space20Vertical,
                 Text("you don't have message" ,
                   style: Theme.of(context).textTheme .bodyText2!,),

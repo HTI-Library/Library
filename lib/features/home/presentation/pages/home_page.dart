@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
                     bottom: 5.0,
                   ),
                   color: HexColor(greyWhite),
-                    height: MediaQuery.of(context).size.width / 3.2 * 2.2,
+                  height: MediaQuery.of(context).size.width / 3.2 * 2.2,
                   child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
@@ -62,7 +62,7 @@ class HomePage extends StatelessWidget {
                     bottom: 5.0,
                   ),
                   color: HexColor(greyWhite),
-                  height: MediaQuery.of(context).size.width / 3.2 *2.2,
+                  height: MediaQuery.of(context).size.width / 3.2 * 2.2,
                   child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
@@ -79,7 +79,7 @@ class HomePage extends StatelessWidget {
                     bottom: 5.0,
                   ),
                   color: HexColor(greyWhite),
-                  height: MediaQuery.of(context).size.width / 3.2 *2.2,
+                  height: MediaQuery.of(context).size.width / 3.2 * 2.2,
                   child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
@@ -96,7 +96,7 @@ class HomePage extends StatelessWidget {
                     bottom: 5.0,
                   ),
                   color: HexColor(greyWhite),
-                  height: MediaQuery.of(context).size.width / 3.2 *2.2,
+                  height: MediaQuery.of(context).size.width / 3.2 * 2.2,
                   child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,

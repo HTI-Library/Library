@@ -20,7 +20,7 @@ class NoBookmarkPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset("assets/images/test.png"),
+              Image.asset("assets/images/bookmark.png"),
               space30Vertical,
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

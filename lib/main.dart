@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hti_library/features/borrowing/presentation/pages/borrowing_page.dart';
 import 'package:hti_library/core/di/injection.dart' as di;
-import 'package:hti_library/features/account/pages/themes/themes.dart';
-import 'package:hti_library/features/home/presentation/pages/home_page.dart';
+import 'package:hti_library/features/login/presentation/pages/login_page.dart';
 
 import 'core/di/injection.dart';
 import 'core/models/cart_model.dart';
@@ -12,17 +10,7 @@ import 'core/util/bloc_observer.dart';
 import 'core/util/constants.dart';
 import 'core/util/cubit/cubit.dart';
 import 'core/util/cubit/state.dart';
-import 'features/account/presntation/pages/account.dart';
-import 'features/change_new_photo/presintation/page/change_new_photo.dart';
 import 'features/login/presentation/pages/login_page.dart';
-import 'features/account/pages/account/account.dart';
-import 'features/account/pages/profile/profile.dart';
-import 'features/categories/presentation/pages/category_details.dart';
-import 'features/main/presentation/pages/main_page.dart';
-import 'features/no_bookmark/presentation/pages/no_bookmark_page.dart';
-import 'features/on_boarding/presentation/pages/on_boarding_page.dart';
-import 'features/no_save/no_save.dart';
-import 'features/search/presentation/search.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,14 +21,14 @@ void main() async {
   bool isDark = false;
 
   await sl<CacheHelper>().get('isDark').then((value) {
-    print('dark mode ------------- $value');
+    debugPrint('dark mode ------------- $value');
     if (value != null) {
       isDark = value;
     }
   });
 
   sl<CacheHelper>().get('token').then((value) {
-    print('token_---------------------------- $value');
+    debugPrint('token_---------------------------- $value');
     if (value == null) {
       token = '';
     } else {
@@ -49,14 +37,14 @@ void main() async {
   });
 
   sl<CacheHelper>().get('cart').then((value) {
-    print('cart ---------------------------- $value');
+    debugPrint('cart ---------------------------- $value');
 
     if (value != null) {
       cartListData = MainCartModel.fromJson(value).data;
     }
   });
 
-  print('dark mode ------------- $isDark');
+  debugPrint('dark mode ------------- $isDark');
 
   runApp(MyApp(
     isDark: isDark,
@@ -107,7 +95,7 @@ class _MyAppState extends State<MyApp> {
                 : ThemeMode.light,
             theme: MainCubit.get(context).lightTheme,
             darkTheme: MainCubit.get(context).darkTheme,
-            home: MainPage(),
+            home: LoginPage(),
           );
         },
       ),

@@ -80,7 +80,7 @@ class BookItem extends StatelessWidget {
                         backgroundColor: HexColor(mainColor),
                       ),
                     ),
-                    const AvailableItem(
+                    AvailableItem(
                       label: 'Available',
                     ),
                   ],

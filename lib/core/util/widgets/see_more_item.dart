@@ -9,7 +9,7 @@ class SeeMoreItem extends StatelessWidget {
     Key? key,
     required this.gestureTapCallback,
     required this.text,
-    this.padding = 30,
+    this.padding = 15,
 
 
   }) : super(key: key);

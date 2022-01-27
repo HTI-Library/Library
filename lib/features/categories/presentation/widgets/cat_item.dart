@@ -7,14 +7,14 @@ class CatItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Card(
+    return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
       elevation: 5.0,
       shadowColor: HexColor(greyWhite),
-      margin: const EdgeInsetsDirectional.only(
-          bottom: 15.0, start: 5.0, end: 5.0),
+      margin:
+          const EdgeInsetsDirectional.only(bottom: 15.0, start: 5.0, end: 5.0),
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: InkWell(
         onTap: () {},
@@ -29,8 +29,7 @@ class CatItem extends StatelessWidget {
               ),
             ),
             Padding(
-              padding:
-              const EdgeInsets.symmetric(vertical: 4.0),
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Text(
                 'Python',
                 style: Theme.of(context).textTheme.subtitle2,

@@ -3,7 +3,6 @@ import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
 import 'package:hti_library/features/account/pages/language/presentation/language.dart';
-import 'package:hti_library/features/account/pages/notificatio/notificatio.dart';
 import 'package:hti_library/features/account/pages/themes/themes.dart';
 import 'package:hti_library/features/account/widget/btn_my_account.dart';
 
@@ -22,14 +21,14 @@ class SettingPages extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               space20Vertical,
-              MyBtnAccount(
-                voidCallback: () {
-                  navigateTo(context, NotificatioPage());
-                },
-                text: 'Notification',
-                imagePath: 'notification_notification_outline',
-              ),
-              space10Vertical,
+              // MyBtnAccount(
+              //   voidCallback: () {
+              //     navigateTo(context, NotificatioPage());
+              //   },
+              //   text: 'Notification',
+              //   imagePath: 'notification_notification_outline',
+              // ),
+              // space10Vertical,
               MyBtnAccount(
                 voidCallback: () {
                   navigateTo(context, LanguagePage());

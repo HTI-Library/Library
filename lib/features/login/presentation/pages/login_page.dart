@@ -26,13 +26,10 @@ class _LoginPageState extends State<LoginPage> {
   void enableLoginButton() {
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
       isDisabled = false;
-      setState(() {
-      });
-
-    }else{
+      setState(() {});
+    } else {
       isDisabled = true;
-      setState(() {
-      });
+      setState(() {});
     }
   }
 
@@ -42,64 +39,74 @@ class _LoginPageState extends State<LoginPage> {
       scaffold: BlocBuilder<MainCubit, MainState>(
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(),
-            body: Center(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Form(
-                    key: formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Login to library',
-                          style:
-                              Theme.of(context).textTheme.headline4!.copyWith(
-                                    color: HexColor(mainColor),
-                                    fontWeight: FontWeight.w700,
-                                  ),
+            body: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/frame.png'),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                child: Center(
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Form(
+                        key: formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Login to library',
+                              style:
+                                  Theme.of(context).textTheme.headline4!.copyWith(
+                                        color: HexColor(mainColor),
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                            ),
+                            space60Vertical,
+                            AppTextFormField(
+                              icon: AssetSvg(
+                                imagePath: 'sms',
+                                color: HexColor(mainColor),
+                              ),
+                              hint: 'Email',
+                              callbackHandle: (controller) {
+                                emailController = controller;
+                              },
+                              onChanged: (value) {
+                                enableLoginButton();
+                              },
+                            ),
+                            space20Vertical,
+                            AppTextFormField(
+                              isPassword: true,
+                              hint: 'Password',
+                              callbackHandle: (controller) {
+                                passwordController = controller;
+                              },
+                              onChanged: (value) {
+                                enableLoginButton();
+                              },
+                            ),
+                            space40Vertical,
+                            AppButton(
+                              // width: MediaQuery.of(context).size.width / 2,
+                              onPress: !isDisabled
+                                  ? () {
+                                      print('test');
+                                      navigateAndFinish(context, MainPage());
+                                    }
+                                  : null,
+                              label: 'SUBMIT',
+                            ),
+                          ],
                         ),
-                        space60Vertical,
-                        AppTextFormField(
-                          icon: AssetSvg(
-                            imagePath: 'sms',
-                            color: HexColor(mainColor),
-                          ),
-                          hint: 'Email',
-                          callbackHandle: (controller) {
-                            emailController = controller;
-                          },
-                          onChanged: (value) {
-                            enableLoginButton();
-                          },
-                        ),
-                        space20Vertical,
-                        AppTextFormField(
-                          isPassword: true,
-                          hint: 'Password',
-                          callbackHandle: (controller) {
-                            passwordController =
-                                controller;
-                          },
-                          onChanged: (value) {
-                            enableLoginButton();
-                          },
-                        ),
-                        space40Vertical,
-                        AppButton(
-                          // width: MediaQuery.of(context).size.width / 2,
-                          onPress: !isDisabled
-                              ? () {
-                                  print('test');
-                                  navigateTo(context, MainPage());
-                                }
-                              : null,
-                          label: 'SUBMIT',
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ),

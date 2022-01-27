@@ -31,14 +31,14 @@ class DialogChangePhoto extends StatelessWidget {
                     padding: const EdgeInsets.all(10.0),
                     child: Column(
                       children: [
-                        AssetSvg(imagePath: 'ic_camera' , size: 60,),
-                        Text("Camera"),
+                        AssetSvg(imagePath: 'ic_camera' , size: 60,color: HexColor(mainColor),),
+                        const Text("Camera"),
                       ],
                     ),
                   ),
                 ),
               ),
-              Divider(height: 10,),
+              const Divider(height: 10,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: InkWell(
@@ -50,7 +50,7 @@ class DialogChangePhoto extends StatelessWidget {
                     child: Column(
                       children: [
                         AssetSvg(imagePath: 'ic_gallery' , size: 60,),
-                        Text("gallery"),
+                        const Text("gallery"),
                       ],
                     ),
                   ),
