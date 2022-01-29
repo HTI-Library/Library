@@ -6,7 +6,6 @@ import 'package:hti_library/core/util/widgets/app_button.dart';
 import 'package:hti_library/core/util/widgets/available_item.dart';
 import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/core/util/widgets/book_item.dart';
-import 'package:hti_library/core/util/widgets/main_scaffold.dart';
 import 'package:hti_library/core/util/widgets/see_more_item.dart';
 
 class ViewBookPage extends StatelessWidget {
@@ -14,188 +13,193 @@ class ViewBookPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MainScaffold(
-      scaffold: BackScaffold(
-        scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        actionIcon: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Row(
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.bookmark_border_rounded,
-                  color: HexColor(mainColor),
-                ),
-                constraints: BoxConstraints(),
+    return BackScaffold(
+      scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      actionIcon: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Row(
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.bookmark_border_rounded,
+                color: HexColor(mainColor),
               ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.share_rounded,
-                  color: HexColor(mainColor),
-                ),
-                constraints: BoxConstraints(),
-              )
-            ],
-          ),
+              constraints: BoxConstraints(),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.share_rounded,
+                color: HexColor(mainColor),
+              ),
+              constraints: BoxConstraints(),
+            )
+          ],
         ),
-        body: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                        child: Image(
-                          image: const NetworkImage(
-                              'https://edit.org/images/cat/book-covers-big-2019101610.jpg'),
-                          height: MediaQuery.of(context).size.width / 2.7 * 1.6,
-                          width: MediaQuery.of(context).size.width / 2.7,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      space20Vertical,
-                      Text(
-                        'python code.',
-                        style: Theme.of(context).textTheme.subtitle2!,
-                      ),
-                      space3Vertical,
-                      Text(
-                        'Fankoo.',
-                        style: Theme.of(context).textTheme.subtitle2!,
-                      ),
-                      space3Vertical,
-                      Text(
-                        '10th Ramadan.',
-                        style: Theme.of(context).textTheme.subtitle2!,
-                      ),
-                      space8Vertical,
-                      Row(
-                        children: [
-                          AvailableItem(
-                            label: 'Available',
-                            fontSize: 14.0,
-                          ),
-                          const Spacer(),
-                          RatingBar.builder(
-                              initialRating: 2,
-                              minRating: 1,
-                              direction: Axis.horizontal,
-                              allowHalfRating: true,
-                              itemCount: 5,
-                              itemSize: 25,
-                              itemBuilder: (context, _) => const Icon(
-                                    Icons.star_rounded,
-                                    color: Colors.amber,
-                                  ),
-                              onRatingUpdate: (rating) {
-                                print(rating);
-                              }),
-                        ],
-                      ),
-                      space10Vertical,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: AppButton(label: 'Borrow', onPress: () {}),
-                          ),
-                          space10Horizontal,
-                          Expanded(
-                            child: AppButton(
-                                color: HexColor(greyWhite),
-                                label: 'Read',
-                                textColor: HexColor(mainColor),
-                                onPress: () {}),
-                          ),
-                        ],
-                      ),
-                      space15Vertical,
-                      Text(
-                        'Overview.',
-                        style: Theme.of(context).textTheme.headline6!,
-                      ),
-                      space5Vertical,
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: HexColor(greyWhite),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            "File tabs have been enhanced to make split views effortless, with support throughout the interface and built-in commands. The side bar, tab bar, Goto Anything, Goto Definition, auto complete and more have all been tweaked to make code navigation easier and more intuitive than ever.",
-                            maxLines: 8,
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SeeMoreItem(
-                  padding: 15,
-                  gestureTapCallback: () {},
-                  text: 'More Edition of this book',
-                ),
-                Container(
-                  padding: const EdgeInsetsDirectional.only(
-                    top: 5.0,
-                    bottom: 5.0,
-                  ),
-                  color: HexColor(greyWhite),
-                  height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                  child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => BookItem(),
-                      itemCount: 10),
-                ),
-                SeeMoreItem(
-                  padding: 15,
-                  gestureTapCallback: () {},
-                  text: 'More books from the same category',
-                ),
-                Container(
-                  padding: const EdgeInsetsDirectional.only(
-                    top: 5.0,
-                    bottom: 5.0,
-                  ),
-                  color: HexColor(greyWhite),
-                  height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                  child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => BookItem(),
-                      itemCount: 10),
-                ),
-                SeeMoreItem(
-                  padding: 15,
-                  gestureTapCallback: () {},
-                  text: 'More books from the same auther',
-                ),
-                Container(
-                  padding: const EdgeInsetsDirectional.only(
-                    top: 5.0,
-                    bottom: 5.0,
-                  ),
-                  color: HexColor(greyWhite),
-                  height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                  child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => BookItem(),
-                      itemCount: 10),
-                ),
-              ],
-            )),
       ),
+      body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Container(
+                        height: MediaQuery.of(context).size.width / 2.7 * 1.6,
+                        width: MediaQuery.of(context).size.width / 2.7,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          image: const DecorationImage(
+                            fit: BoxFit.fill,
+                            image: NetworkImage(
+                                'https://edit.org/images/cat/book-covers-big-2019101610.jpg'),
+                          ),
+                        ),
+                      ),
+                    ),
+                    space20Vertical,
+                    Text(
+                      'python code.',
+                      style: Theme.of(context).textTheme.subtitle2!,
+                    ),
+                    space3Vertical,
+                    Text(
+                      'Fankoo.',
+                      style: Theme.of(context).textTheme.subtitle2!,
+                    ),
+                    space3Vertical,
+                    Text(
+                      '10th Ramadan.',
+                      style: Theme.of(context).textTheme.subtitle2!,
+                    ),
+                    space8Vertical,
+                    Row(
+                      children: [
+                        AvailableItem(
+                          label: 'Available',
+                          fontSize: 14.0,
+                        ),
+                        const Spacer(),
+                        RatingBar.builder(
+                            ignoreGestures: true,
+                            initialRating: 2,
+                            minRating: 1,
+                            direction: Axis.horizontal,
+                            allowHalfRating: true,
+                            itemCount: 5,
+                            itemSize: 25,
+                            itemBuilder: (context, _) => const Icon(
+                                  Icons.star_rounded,
+                                  color: Colors.amber,
+                                ),
+                            onRatingUpdate: (rating) {
+                              print(rating);
+                            }),
+                      ],
+                    ),
+                    space10Vertical,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: AppButton(
+                              height: 36.0, label: 'Borrow', onPress: () {}),
+                        ),
+                        space10Horizontal,
+                        Expanded(
+                          child: AppButton(
+                              height: 36.0,
+                              color: HexColor(greyWhite),
+                              label: 'Read',
+                              textColor: HexColor(mainColor),
+                              onPress: () {}),
+                        ),
+                      ],
+                    ),
+                    space15Vertical,
+                    Text(
+                      'Overview.',
+                      style: Theme.of(context).textTheme.headline6!,
+                    ),
+                    space5Vertical,
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: HexColor(greyWhite),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "File tabs have been enhanced to make split views effortless, with support throughout the interface and built-in commands. The side bar, tab bar, Goto Anything, Goto Definition, auto complete and more have all been tweaked to make code navigation easier and more intuitive than ever.",
+                          maxLines: 8,
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SeeMoreItem(
+                padding: 15,
+                gestureTapCallback: () {},
+                text: 'More Edition of this book',
+              ),
+              Container(
+                padding: const EdgeInsetsDirectional.only(
+                  top: 5.0,
+                  bottom: 5.0,
+                ),
+                color: HexColor(greyWhite),
+                height: MediaQuery.of(context).size.width / 3.2 * 2.2,
+                child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) => BookItem(),
+                    itemCount: 10),
+              ),
+              SeeMoreItem(
+                padding: 15,
+                gestureTapCallback: () {},
+                text: 'More books from the same category',
+              ),
+              Container(
+                padding: const EdgeInsetsDirectional.only(
+                  top: 5.0,
+                  bottom: 5.0,
+                ),
+                color: HexColor(greyWhite),
+                height: MediaQuery.of(context).size.width / 3.2 * 2.2,
+                child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) => BookItem(),
+                    itemCount: 10),
+              ),
+              SeeMoreItem(
+                padding: 15,
+                gestureTapCallback: () {},
+                text: 'More books from the same auther',
+              ),
+              Container(
+                padding: const EdgeInsetsDirectional.only(
+                  top: 5.0,
+                  bottom: 5.0,
+                ),
+                color: HexColor(greyWhite),
+                height: MediaQuery.of(context).size.width / 3.2 * 2.2,
+                child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) => BookItem(),
+                    itemCount: 10),
+              ),
+            ],
+          )),
     );
   }
 }

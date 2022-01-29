@@ -280,6 +280,18 @@ class MainCubit extends Cubit<MainState> {
     });
   }
 
+  void checkInternet() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile) {
+      noInternetConnection = false;
+    } else if (connectivityResult == ConnectivityResult.wifi) {
+      noInternetConnection = false;
+    } else {
+      noInternetConnection = true;
+    }
+    emit(InternetState());
+  }
+
 
 
 

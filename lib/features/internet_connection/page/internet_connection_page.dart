@@ -12,11 +12,11 @@ class InternetConnectionPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Lottie.asset('assets/images/no_internet.json'),
-            Text(
-              'No Internet Connection',
-              style: Theme.of(context).textTheme.headline6,
-            ),
+            Lottie.asset('assets/images/no_internet_2.json'),
+            // Text(
+            //   'No Internet Connection',
+            //   style: Theme.of(context).textTheme.headline6,
+            // ),
           ],
         ),
       ),

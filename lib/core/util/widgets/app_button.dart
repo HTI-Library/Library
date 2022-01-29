@@ -1,4 +1,4 @@
-  import 'dart:ui';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -9,6 +9,7 @@ class AppButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPress;
   final double width;
+  double height;
   Color? color;
   Color? textColor;
 
@@ -17,6 +18,7 @@ class AppButton extends StatelessWidget {
     required this.label,
     required this.onPress,
     this.width = double.infinity,
+    this.height = 45.0,
     this.color,
     this.textColor,
   }) : super(key: key);
@@ -25,7 +27,7 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      height: 45.0,
+      height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
           10.0,
@@ -42,8 +44,8 @@ class AppButton extends StatelessWidget {
         child: Text(
           label,
           style: Theme.of(context).textTheme.button!.copyWith(
-            color: textColor == null ? HexColor(surface) : textColor,
-          ),
+                color: textColor == null ? HexColor(surface) : textColor,
+              ),
         ),
       ),
     );

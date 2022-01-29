@@ -2,15 +2,14 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/util/constants.dart';
+import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
-import 'package:hti_library/features/account/pages/calender/calender.dart';
 import 'package:hti_library/features/account/pages/info/info.dart';
 import 'package:hti_library/features/account/pages/message/message.dart';
 import 'package:hti_library/features/account/pages/notificatio/notificatio.dart';
 import 'package:hti_library/features/account/pages/setting/presntation/setting.dart';
 import 'package:hti_library/features/account/widget/btn_my_account.dart';
 import 'package:hti_library/features/change_new_photo/presintation/page/change_new_photo.dart';
-import 'package:hti_library/features/no_bookmark/presentation/pages/no_bookmark_page.dart';
 
 class AccountPage extends StatelessWidget {
   AccountPage({Key? key}) : super(key: key);
@@ -80,7 +79,40 @@ class AccountPage extends StatelessWidget {
               space10Vertical,
               MyBtnAccount(
                 voidCallback: () {
-                  navigateTo(context, CalenderPage());
+                  // navigateTo(context, CalenderPage());
+                  showModalBottomSheet<void>(
+                      context: context,
+                      isScrollControlled: true,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                      builder: (context) {
+                        return Container(
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          height: MediaQuery.of(context).size.height / 1.3,
+                          padding: const EdgeInsets.all(15.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: MainCubit.get(context).isDark
+                                ? HexColor(secondBackground)
+                                : HexColor(surface),
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width/4,
+                                height: 5.0,
+                                margin: const EdgeInsetsDirectional.only(bottom: 10.0,),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4.0),
+                                  color: HexColor(mainColor),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      });
                 },
                 text: 'calender',
                 imagePath: 'calendar',
@@ -106,6 +138,8 @@ class AccountPage extends StatelessWidget {
               MyBtnAccount(
                 voidCallback: () {
                   AwesomeDialog(
+                    dialogBorderRadius: BorderRadius.circular(10.0),
+                    buttonsBorderRadius: BorderRadius.circular(10.0),
                     context: context,
                     keyboardAware: false,
                     headerAnimationLoop: false,
@@ -113,18 +147,17 @@ class AccountPage extends StatelessWidget {
                     dialogType: DialogType.WARNING,
                     animType: AnimType.BOTTOMSLIDE,
                     btnCancelText: "Cancel",
-                    btnOkText: "Yes, I will",
+                    btnOkText: "Yes",
                     title: 'log out ',
                     // padding: const EdgeInsets.all(5.0),
-                    desc:
-                    'Are you sure of the process of logging out of your account ?.',
+                    desc: 'Do you want to log out ?',
                     btnCancelOnPress: () {
                       print('Yes');
                     },
                     btnOkOnPress: () {
                       print('No');
                     },
-                  )..show();
+                  ).show();
                 },
                 text: 'Log Out',
                 imagePath: 'sign_out',

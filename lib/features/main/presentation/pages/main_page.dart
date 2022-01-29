@@ -327,8 +327,8 @@ class _MainPageState extends State<MainPage> {
               bottomNavigationBar: BlocBuilder<MainCubit, MainState>(
                 builder: (context, state) {
                   return BottomNavigationBar(
-                    showSelectedLabels: true,
-                    showUnselectedLabels: true,
+                    showSelectedLabels: false,
+                    showUnselectedLabels: false,
                     onTap: (int index) {
                       _pageController.jumpToPage(
                         index,

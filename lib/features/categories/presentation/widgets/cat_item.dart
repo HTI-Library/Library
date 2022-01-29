@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/util/constants.dart';
+import 'package:hti_library/features/category_details/presentation/pages/category_details_page.dart';
 
 class CatItem extends StatelessWidget {
   const CatItem({Key? key}) : super(key: key);
@@ -17,7 +18,9 @@ class CatItem extends StatelessWidget {
           const EdgeInsetsDirectional.only(bottom: 15.0, start: 5.0, end: 5.0),
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          navigateTo(context, CategoryDetailsPage());
+        },
         child: Column(
           children: [
             Expanded(

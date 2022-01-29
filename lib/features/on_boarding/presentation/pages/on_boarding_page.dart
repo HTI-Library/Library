@@ -19,7 +19,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   bool isLast = false;
   List<OnBoardingDataModel> onBoardingData = [
     OnBoardingDataModel(
-      'assets/images/Onboarding_1.png',
+      'assets/images/onboarding_1.png',
       'It’s a library, \na place to learn something new',
     ),
     OnBoardingDataModel(

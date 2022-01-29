@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
         builder: (context, state) {
           return Scaffold(
             body: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               child: Container(
                 height: MediaQuery.of(context).size.height,
                 decoration: const BoxDecoration(
@@ -62,11 +62,13 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             Text(
                               'Login to library',
-                              style:
-                                  Theme.of(context).textTheme.headline4!.copyWith(
-                                        color: HexColor(mainColor),
-                                        fontWeight: FontWeight.w700,
-                                      ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline4!
+                                  .copyWith(
+                                    color: HexColor(mainColor),
+                                    fontWeight: FontWeight.w700,
+                                  ),
                             ),
                             space60Vertical,
                             AppTextFormField(
