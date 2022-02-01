@@ -36,7 +36,15 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
-      scaffold: BlocBuilder<MainCubit, MainState>(
+      scaffold: BlocConsumer<MainCubit, MainState>(
+        listener: (context, state) {
+          if (state is LoginSuccess) {
+            navigateAndFinish(context, MainPage());
+            showToast(message: state.message, toastStates: ToastStates.SUCCESS);
+          } else if (state is Error) {
+            showToast(message: state.error, toastStates: ToastStates.SUCCESS);
+          }
+        },
         builder: (context, state) {
           return Scaffold(
             body: SingleChildScrollView(
@@ -101,7 +109,9 @@ class _LoginPageState extends State<LoginPage> {
                               onPress: !isDisabled
                                   ? () {
                                       print('test');
-                                      navigateAndFinish(context, MainPage());
+                                      MainCubit.get(context).login(
+                                          email: emailController.text,
+                                          password: passwordController.text);
                                     }
                                   : null,
                               label: 'SUBMIT',

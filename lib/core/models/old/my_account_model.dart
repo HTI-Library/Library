@@ -1,5 +1,6 @@
 
-import 'package:hti_library/core/models/user_model.dart';
+
+import 'package:hti_library/core/models/old/user_model.dart';
 
 class MyAccountModel{
   final UserModel data;

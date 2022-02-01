@@ -1,4 +1,4 @@
-import 'package:hti_library/core/models/product_details_model.dart';
+import 'package:hti_library/core/models/old/product_details_model.dart';
 
 class SearchFeedsModel {
   final SearchDataModel data;

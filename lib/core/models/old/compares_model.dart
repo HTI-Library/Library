@@ -1,5 +1,5 @@
 
-import 'package:hti_library/core/models/product_details_model.dart';
+import 'package:hti_library/core/models/old/product_details_model.dart';
 
 import 'home_feed_model.dart';
 

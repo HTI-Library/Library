@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/di/injection.dart';
-import 'package:hti_library/core/models/cart_model.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/features/account/pages/account/account.dart';
 import 'package:hti_library/features/categories/presentation/pages/categories.dart';
@@ -133,7 +132,6 @@ List<Widget> bottomPages = [
 ];
 
 String? token = '';
-List<CartModel>? cartListData;
 
 void navigateTo(context, widget) => Navigator.push(
       context,

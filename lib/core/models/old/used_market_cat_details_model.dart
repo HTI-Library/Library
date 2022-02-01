@@ -1,5 +1,6 @@
 
-import 'package:hti_library/core/models/used_market_model.dart';
+
+import 'package:hti_library/core/models/old/used_market_model.dart';
 
 class UsedMarketCatDetailsModel {
   final UsedMarketDataModel data;

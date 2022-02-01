@@ -41,7 +41,7 @@ class DioImpl extends DioHelper {
     String? token,
   }) async {
     dio.options.headers = {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
       if (token != null) 'Authorization': 'Bearer $token'
     };
 
@@ -59,7 +59,7 @@ class DioImpl extends DioHelper {
   @override
   Future get({required String url, query, String? token}) async {
     dio.options.headers = {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
       if (token != null) 'Authorization': 'Bearer $token'
     };
 
@@ -77,7 +77,7 @@ class DioImpl extends DioHelper {
   @override
   Future delete({required String url, data, String? token}) async {
     dio.options.headers = {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
       if (token != null) 'Authorization': 'Bearer $token'
     };
 

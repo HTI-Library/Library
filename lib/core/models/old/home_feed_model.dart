@@ -1,5 +1,5 @@
 
-import 'package:hti_library/core/models/product_details_model.dart';
+import 'package:hti_library/core/models/old/product_details_model.dart';
 import 'package:hti_library/core/network/end_points.dart';
 import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/language_model.dart';

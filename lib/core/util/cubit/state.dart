@@ -27,7 +27,11 @@ class ChangeModeState extends MainState {}
 
 class ChangeLanguageState extends MainState {}
 
-class Error extends MainState {}
+class Error extends MainState {
+  final String error;
+
+  Error(this.error);
+}
 
 // home page ---------------------------- start
 
@@ -429,7 +433,6 @@ class EnableLoginButtonState extends MainState {}
 
 // enableLoginButton ---------------------------- end
 
-
 // ------------ change photo ------------ //
 class ChangeImageLoadingState extends MainState {}
 
@@ -437,7 +440,14 @@ class ChangeImageSuccessState extends MainState {}
 
 class ChangeImageErrorState extends MainState {
   final String? error;
+
   ChangeImageErrorState(this.error);
 }
 
+class LoginLoading extends MainState {}
 
+class LoginSuccess extends MainState {
+  final String message;
+
+  LoginSuccess(this.message);
+}

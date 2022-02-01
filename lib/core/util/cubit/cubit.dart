@@ -292,10 +292,6 @@ class MainCubit extends Cubit<MainState> {
     emit(InternetState());
   }
 
-
-
-
-
 //   CategoriesModel? categoriesModel;
 //
 //   void getCategories() async {
@@ -1652,35 +1648,53 @@ class MainCubit extends Cubit<MainState> {
 // // createCheckout ----------------------end
   PickedFile? imageFile = null;
 
-  void openGallery(BuildContext context) async{
-    final pickedFile = await ImagePicker().getImage
-      (
-      source: ImageSource.gallery ,
-    ).then((value){
+  void openGallery(BuildContext context) async {
+    final pickedFile = await ImagePicker()
+        .getImage(
+      source: ImageSource.gallery,
+    )
+        .then((value) {
       imageFile = value;
       emit(ChangeImageSuccessState());
-
-    }).catchError((onError){
+    }).catchError((onError) {
       print(onError.toString());
       emit(ChangeImageLoadingState());
     });
     Navigator.pop(context);
   }
 
-  void openCamera(BuildContext context) async{
-    final pickedFile = await ImagePicker().getImage
-      (
-      source: ImageSource.camera ,
-    ).then((value){
+  void openCamera(BuildContext context) async {
+    final pickedFile = await ImagePicker()
+        .getImage(
+      source: ImageSource.camera,
+    )
+        .then((value) {
       imageFile = value;
       emit(ChangeImageSuccessState());
-
-    }).catchError((onError){
+    }).catchError((onError) {
       print(onError.toString());
       emit(ChangeImageLoadingState());
-      });
+    });
     Navigator.pop(context);
   }
 
+  // login ------------------- start
+  void login({
+    required String email,
+    required String password,
+  }) async {
+    await _repository.login(email: email, password: password).then((value) {
+      // success
+      print(value.data['message']);
+      print('success');
+      emit(LoginSuccess(value.data['message']));
+    }).catchError((error) {
+      // error
+      print(error.toString());
+      print('error');
+      emit(Error(error.toString()));
+    });
+  }
+// login ------------------- end
 
 }
