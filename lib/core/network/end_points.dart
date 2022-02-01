@@ -1,4 +1,4 @@
-const baseUrl = 'https://empire.medicalempire.com/';
+const baseUrl = 'https://grad-library.herokuapp.com/';
 const homeData = 'api/home';
 const categories = 'api/categories';
 const category = 'api/category';
