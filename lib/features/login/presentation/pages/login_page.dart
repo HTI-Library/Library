@@ -1,4 +1,7 @@
+import 'package:buildcondition/buildcondition.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/di/injection.dart';
@@ -116,18 +119,34 @@ class _LoginPageState extends State<LoginPage> {
                               },
                             ),
                             space40Vertical,
-                            AppButton(
-                              // width: MediaQuery.of(context).size.width / 2,
-                              onPress: !isDisabled
-                                  ? () {
-                                      print('test');
-                                      MainCubit.get(context).login(
-                                          email: emailController.text,
-                                          password: passwordController.text);
-                                    }
-                                  : null,
-                              label: 'SUBMIT',
+                            BuildCondition(
+                              condition: state is LoginLoading,
+                              builder: (context) => Container(
+                                width: double.infinity,
+                                height: 45.0,
+                                decoration: BoxDecoration(
+                                  color: HexColor(greyWhite),
+                                  borderRadius: BorderRadius.circular(
+                                    10.0,
+                                  ),
+                                ),
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                child: const CupertinoActivityIndicator(),
+                              ),
+                              fallback: (context) => AppButton(
+                                // width: MediaQuery.of(context).size.width / 2,
+                                onPress: !isDisabled
+                                    ? () {
+                                  print('test');
+                                  MainCubit.get(context).login(
+                                      email: emailController.text,
+                                      password: passwordController.text);
+                                }
+                                    : null,
+                                label: 'SUBMIT',
+                              ),
                             ),
+
                           ],
                         ),
                       ),
