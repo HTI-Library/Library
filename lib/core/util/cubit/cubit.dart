@@ -294,6 +294,117 @@ class MainCubit extends Cubit<MainState> {
     emit(InternetState());
   }
 
+  PickedFile? imageFile = null;
+
+  void openGallery(BuildContext context) async {
+    await ImagePicker()
+        .getImage(
+      source: ImageSource.gallery,
+    )
+        .then((value) {
+      imageFile = value;
+      emit(ChangeImageSuccessState());
+    }).catchError((onError) {
+      debugPrint(onError.toString());
+      emit(ChangeImageLoadingState());
+    });
+    Navigator.pop(context);
+  }
+
+  void openCamera(BuildContext context) async {
+    await ImagePicker()
+        .getImage(
+      source: ImageSource.camera,
+    )
+        .then((value) {
+      imageFile = value;
+      emit(ChangeImageSuccessState());
+    }).catchError((onError) {
+      debugPrint(onError.toString());
+      emit(ChangeImageLoadingState());
+    });
+    Navigator.pop(context);
+  }
+
+  ///TODO pick photo ------------ start
+  // final ImagePicker _picker = ImagePicker();
+  // File? imageFile;
+  //
+  // void selectImage() async {
+  //   _picker.pickImage(source: ImageSource.gallery).then((value) {
+  //     imageFile = File(value!.path);
+  //   });
+  //
+  //   emit(PickImageSuccessState());
+  // }
+  //
+  // File? cameraFile;
+  //
+  // void selectCamera() async {
+  //   _picker.pickImage(source: ImageSource.camera).then((value) {
+  //     cameraFile = File(value!.path);
+  //   });
+  //
+  //   emit(PickImageSuccessState());
+  // }
+  ///TODO pick photo ------------ end
+
+  // login ------------------- start
+
+  bool userSigned = false;
+
+  void changeUser(bool user) {
+    userSigned = user;
+    emit(SignInState());
+  }
+
+  LoginModel? loginModel;
+
+  void login({
+    required String email,
+    required String password,
+  }) async {
+    emit(LoginLoading());
+    await _repository.login(email: email, password: password).then((value) {
+      // success
+      debugPrint(value.data['message']);
+      debugPrint('success');
+      loginModel = LoginModel.fromJson(value.data);
+      changeUser(true);
+      currentIndex = 0;
+      emit(LoginSuccess(loginModel: loginModel!));
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('error');
+      ServerException exception = error as ServerException;
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// login ------------------- end
+
+  // logOut ------------------- start
+
+  void logOut({required BuildContext context}) async {
+    emit(LogoutLoading());
+    await _repository.logOut().then((value) {
+      // success
+      signOut(context);
+      changeUser(false);
+      currentIndex = 0;
+      emit(LogoutSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+// logOut ------------------- end
+
+}
+
 //   CategoriesModel? categoriesModel;
 //
 //   void getCategories() async {
@@ -1643,90 +1754,3 @@ class MainCubit extends Cubit<MainState> {
 //   }
 //
 // // createCheckout ----------------------end
-  PickedFile? imageFile = null;
-
-  void openGallery(BuildContext context) async {
-    final pickedFile = await ImagePicker()
-        .getImage(
-      source: ImageSource.gallery,
-    )
-        .then((value) {
-      imageFile = value;
-      emit(ChangeImageSuccessState());
-    }).catchError((onError) {
-      debugPrint(onError.toString());
-      emit(ChangeImageLoadingState());
-    });
-    Navigator.pop(context);
-  }
-
-  void openCamera(BuildContext context) async {
-    final pickedFile = await ImagePicker()
-        .getImage(
-      source: ImageSource.camera,
-    )
-        .then((value) {
-      imageFile = value;
-      emit(ChangeImageSuccessState());
-    }).catchError((onError) {
-      debugPrint(onError.toString());
-      emit(ChangeImageLoadingState());
-    });
-    Navigator.pop(context);
-  }
-
-  // login ------------------- start
-
-  bool userSigned = false;
-
-  void changeUser(bool user) {
-    userSigned = user;
-    emit(SignInState());
-  }
-
-  LoginModel? loginModel;
-
-  void login({
-    required String email,
-    required String password,
-  }) async {
-    emit(LoginLoading());
-    await _repository.login(email: email, password: password).then((value) {
-      // success
-      debugPrint(value.data['message']);
-      debugPrint('success');
-      loginModel = LoginModel.fromJson(value.data);
-      changeUser(true);
-      currentIndex = 0;
-      emit(LoginSuccess(loginModel: loginModel!));
-    }).catchError((error) {
-      // error
-      debugPrint(error.toString());
-      debugPrint('error');
-      ServerException exception = error as ServerException;
-      debugPrint(exception.error);
-      emit(Error(error.toString()));
-    });
-  }
-
-// login ------------------- end
-
-  // logOut ------------------- start
-
-  void logOut({required BuildContext context}) async {
-    emit(LogoutLoading());
-    await _repository.logOut().then((value) {
-      // success
-      signOut(context);
-      changeUser(false);
-      currentIndex = 0;
-      emit(LogoutSuccess());
-    }).catchError((error) {
-      // error
-      debugPrint(error.toString());
-      emit(Error(error.toString()));
-    });
-  }
-// logOut ------------------- end
-
-}
