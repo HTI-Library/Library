@@ -393,7 +393,6 @@ class MainCubit extends Cubit<MainState> {
       // success
       signOut(context);
       changeUser(false);
-      currentIndex = 0;
       emit(LogoutSuccess());
     }).catchError((error) {
       // error
