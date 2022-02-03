@@ -1690,11 +1690,14 @@ class MainCubit extends Cubit<MainState> {
     required String email,
     required String password,
   }) async {
+    emit(LoginLoading());
     await _repository.login(email: email, password: password).then((value) {
       // success
       debugPrint(value.data['message']);
       debugPrint('success');
       loginModel = LoginModel.fromJson(value.data);
+      changeUser(true);
+      currentIndex = 0;
       emit(LoginSuccess(loginModel: loginModel!));
     }).catchError((error) {
       // error
@@ -1705,6 +1708,25 @@ class MainCubit extends Cubit<MainState> {
       emit(Error(error.toString()));
     });
   }
+
 // login ------------------- end
+
+  // logOut ------------------- start
+
+  void logOut({required BuildContext context}) async {
+    emit(LogoutLoading());
+    await _repository.logOut().then((value) {
+      // success
+      signOut(context);
+      changeUser(false);
+      currentIndex = 0;
+      emit(LogoutSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+// logOut ------------------- end
 
 }

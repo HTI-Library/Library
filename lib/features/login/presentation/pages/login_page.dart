@@ -46,7 +46,6 @@ class _LoginPageState extends State<LoginPage> {
                   .put('token', state.loginModel.token)
                   .then((value) {
                 token = state.loginModel.token;
-                MainCubit.get(context).changeUser(true);
                 navigateAndFinish(context, MainPage());
               });
             }
