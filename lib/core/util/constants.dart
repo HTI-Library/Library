@@ -10,7 +10,6 @@ import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/features/account/pages/account/account.dart';
 import 'package:hti_library/features/categories/presentation/pages/categories.dart';
 import 'package:hti_library/features/home/presentation/pages/home_page.dart';
-import 'package:hti_library/features/profile/presentation/page/sign_in_page.dart';
 import 'package:hti_library/features/wishlist/presentation/pages/wishlist_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -205,6 +204,7 @@ Color choseToastColor(ToastStates toastStates) {
 void signOut(context) {
   sl<CacheHelper>().clear('token').then((value) {
     if (value) {
+      token = null;
       showToast(
           message: 'Sign out Successfully', toastStates: ToastStates.SUCCESS);
       // MainCubit.get(context).changeUser(false);

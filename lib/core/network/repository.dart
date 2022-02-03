@@ -1,6 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:hti_library/core/network/remote/dio_helper.dart';
+import 'package:hti_library/core/util/constants.dart';
 
 import 'end_points.dart';
 import 'local/cache_helper.dart';
@@ -161,6 +162,8 @@ abstract class Repository {
     required String email,
     required String password,
   });
+
+  Future<Response> logOut();
 
 
 
@@ -587,6 +590,14 @@ class RepoImplementation extends Repository {
         'email': email,
         'password': password,
       },
+
+    );
+  }
+  @override
+  Future<Response> logOut() async {
+    return await dioHelper.get(
+      url: logOutUrl,
+      token: token,
 
     );
   }

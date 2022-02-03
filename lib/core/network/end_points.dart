@@ -36,7 +36,7 @@ const baseUrl = 'https://grad-library.herokuapp.com/';
 // const changePasswordApi = 'api/change-password';
 // const compareDelete = 'api/compare/delete/';
 const loginUrl = 'login';
-
+const logOutUrl = 'logout';
 
 const slidersUrl = '${baseUrl}admin/uploads/sliders/';
 const productsUrl = '${baseUrl}admin/uploads/products/products_images/';

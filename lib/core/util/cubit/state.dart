@@ -452,3 +452,7 @@ class LoginSuccess extends MainState {
 
   LoginSuccess({required this.loginModel});
 }
+
+class LogoutLoading extends MainState {}
+
+class LogoutSuccess extends MainState {}
