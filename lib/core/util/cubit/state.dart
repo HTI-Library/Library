@@ -1,3 +1,4 @@
+import 'package:hti_library/core/models/login_model.dart';
 import 'package:meta/meta.dart';
 
 @immutable
@@ -447,8 +448,7 @@ class ChangeImageErrorState extends MainState {
 class LoginLoading extends MainState {}
 
 class LoginSuccess extends MainState {
-  final String message;
-  final String token;
+  LoginModel loginModel;
 
-  LoginSuccess(this.message,this.token);
+  LoginSuccess({required this.loginModel});
 }
