@@ -41,15 +41,19 @@ class _LoginPageState extends State<LoginPage> {
       scaffold: BlocConsumer<MainCubit, MainState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
-            if (state.token != null) {
-              sl<CacheHelper>().put('token', state.token).then((value) {
-                token = state.token;
+            if (state.loginModel.token != null) {
+              sl<CacheHelper>()
+                  .put('token', state.loginModel.token)
+                  .then((value) {
+                token = state.loginModel.token;
                 MainCubit.get(context).changeUser(true);
                 navigateAndFinish(context, MainPage());
               });
             }
             navigateAndFinish(context, MainPage());
-            showToast(message: state.message, toastStates: ToastStates.SUCCESS);
+            showToast(
+                message: state.loginModel.message!,
+                toastStates: ToastStates.SUCCESS);
           } else if (state is Error) {
             showToast(message: state.error, toastStates: ToastStates.SUCCESS);
           }

@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/error/exceptions.dart';
+import 'package:hti_library/core/models/login_model.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/network/repository.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
@@ -1683,6 +1684,8 @@ class MainCubit extends Cubit<MainState> {
     emit(SignInState());
   }
 
+  LoginModel? loginModel;
+
   void login({
     required String email,
     required String password,
@@ -1691,7 +1694,8 @@ class MainCubit extends Cubit<MainState> {
       // success
       debugPrint(value.data['message']);
       debugPrint('success');
-      emit(LoginSuccess(value.data['message'],value.data['token']));
+      loginModel = LoginModel.fromJson(value.data);
+      emit(LoginSuccess(loginModel: loginModel!));
     }).catchError((error) {
       // error
       debugPrint(error.toString());
