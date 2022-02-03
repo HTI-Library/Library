@@ -587,6 +587,7 @@ class RepoImplementation extends Repository {
         'email': email,
         'password': password,
       },
+
     );
   }
 
