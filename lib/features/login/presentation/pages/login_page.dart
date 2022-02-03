@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/core/di/injection.dart';
+import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
@@ -39,6 +41,13 @@ class _LoginPageState extends State<LoginPage> {
       scaffold: BlocConsumer<MainCubit, MainState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
+            if (state.token != null) {
+              sl<CacheHelper>().put('token', state.token).then((value) {
+                token = state.token;
+                MainCubit.get(context).changeUser(true);
+                navigateAndFinish(context, MainPage());
+              });
+            }
             navigateAndFinish(context, MainPage());
             showToast(message: state.message, toastStates: ToastStates.SUCCESS);
           } else if (state is Error) {

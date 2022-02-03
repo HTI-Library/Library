@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/di/injection.dart';
+import 'package:hti_library/core/error/exceptions.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/network/repository.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
@@ -59,7 +60,7 @@ class MainCubit extends Cubit<MainState> {
   }) {
     isDark = dark;
 
-    print('dark mode ------------- $isDark');
+    debugPrint('dark mode ------------- $isDark');
 
     changeTheme();
 
@@ -267,9 +268,9 @@ class MainCubit extends Cubit<MainState> {
 
   void checkConnectivity() {
     Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      print('Internet Connection ------------------------');
-      print(result.index);
-      print(result.toString());
+      debugPrint('Internet Connection ------------------------');
+      debugPrint('${result.index}');
+      debugPrint(result.toString());
       if (result.index == 0 || result.index == 1) {
         noInternetConnection = false;
       } else if (result.index == 2) {
@@ -303,8 +304,8 @@ class MainCubit extends Cubit<MainState> {
 //         CategoriesSuccessState(),
 //       );
 //     }).catchError((error) {
-//       print('can not get categories');
-//       print(error.toString());
+//       debugPrint('can not get categories');
+//       debugPrint(error.toString());
 //       emit(Error());
 //     });
 //   }
@@ -314,8 +315,8 @@ class MainCubit extends Cubit<MainState> {
 //   void getBrands() async {
 //     await _repository.getBrands().then((value) {
 //       brandsModel = BrandsModel.fromJson(value.data);
-//       print('brands ------------------------------------------------------');
-//       print(brandsModel!.brands.brands[0].image);
+//       debugPrint('brands ------------------------------------------------------');
+//       debugPrint(brandsModel!.brands.brands[0].image);
 //       emit(
 //         HomeSuccessState(),
 //       );
@@ -330,8 +331,8 @@ class MainCubit extends Cubit<MainState> {
 //     emit(BlogsLoadingState());
 //     await _repository.getBlogs().then((value) {
 //       bLogModel = BlogModel.fromJson(value.data);
-//       print('blogs ------------------------------------------------------');
-//       print(bLogModel!.data.blog[0].title);
+//       debugPrint('blogs ------------------------------------------------------');
+//       debugPrint(bLogModel!.data.blog[0].title);
 //       emit(BlogsSuccessState());
 //     }).catchError((error) {
 //       emit(Error());
@@ -344,8 +345,8 @@ class MainCubit extends Cubit<MainState> {
 //     emit(HomeLoadingState());
 //
 //     await _repository.getHome().then((value) {
-//       print('home --------');
-//       print(value.data);
+//       debugPrint('home --------');
+//       debugPrint(value.data);
 //       homeFeedModel = HomeFeedModel.fromJson(value.data);
 //       emit(
 //         HomeSuccessState(),
@@ -365,8 +366,8 @@ class MainCubit extends Cubit<MainState> {
 //     if (userSigned) {
 //       emit(WishlistLoadingState());
 //       await _repository.getWishList().then((value) {
-//         print('wishlis --------');
-//         print(value.data);
+//         debugPrint('wishlis --------');
+//         debugPrint(value.data);
 //         wishlistModel = WishlistModel.fromJson(value.data);
 //         for (var element in wishlistModel!.products) {
 //           if(!wishlistId.contains(element.id)) {
@@ -377,7 +378,7 @@ class MainCubit extends Cubit<MainState> {
 //           WishlistSuccessState(),
 //         );
 //       }).catchError((error) {
-//         print('Wishlist Error -------- ${error.toString()}');
+//         debugPrint('Wishlist Error -------- ${error.toString()}');
 //         emit(WishlistErrorState());
 //       });
 //     }
@@ -391,11 +392,11 @@ class MainCubit extends Cubit<MainState> {
 //           builder: (BuildContext context) {
 //             return TwoOptionsDialog(
 //               pushButtonVoidCallback: () {
-//                 print(wishlistId.toString());
+//                 debugPrint(wishlistId.toString());
 //
 //                 wishlistId.remove(productId);
 //
-//                 print(wishlistId.toString());
+//                 debugPrint(wishlistId.toString());
 //
 //                 removeFromWishList(productId: productId);
 //                 Navigator.pop(context);
@@ -413,8 +414,8 @@ class MainCubit extends Cubit<MainState> {
 //       wishlistId.add(productId);
 //       emit(WishlistLoadingState());
 //       await _repository.addToWishList(productId: productId).then((value) {
-//         print('wishlis --------');
-//         print(value.data);
+//         debugPrint('wishlis --------');
+//         debugPrint(value.data);
 //         getWishListModel();
 //       }).catchError((error) {
 //         emit(WishlistErrorState());
@@ -426,8 +427,8 @@ class MainCubit extends Cubit<MainState> {
 //     emit(WishlistLoadingState());
 //
 //     await _repository.deleteFromWishList(productId: productId).then((value) {
-//       print('wishlis --------');
-//       print(value.data);
+//       debugPrint('wishlis --------');
+//       debugPrint(value.data);
 //       getWishListModel();
 //     }).catchError((error) {
 //       emit(WishlistErrorState());
@@ -457,19 +458,19 @@ class MainCubit extends Cubit<MainState> {
 //     emit(LoginLoading());
 //     await _repository.login(email: email, password: password).then((value) {
 //       simpleModelLogin = SimpleModel.fromJson(value.data);
-//       // print('login ------------------------------------------------------');
-//       // print(simpleModelLogin!.token);
-//       // print(simpleModelLogin!.status);
+//       // debugPrint('login ------------------------------------------------------');
+//       // debugPrint(simpleModelLogin!.token);
+//       // debugPrint(simpleModelLogin!.status);
 //       token = simpleModelLogin!.token;
 //       userSigned = true;
 //       getWishListModel();
 //       getAccount();
 //       emit(LoginSuccess(simpleModelLogin!));
 //     }).catchError((error) {
-//       print(
+//       debugPrint(
 //           'login error ------------------------------------------------------');
-//       print(error.toString());
-//       print(
+//       debugPrint(error.toString());
+//       debugPrint(
 //           'login error ------------------------------------------------------');
 //       emit(Error());
 //     });
@@ -499,12 +500,12 @@ class MainCubit extends Cubit<MainState> {
 //     )
 //         .then((value) {
 //       simpleModelRegister = SimpleModel.fromJson(value.data);
-//       print('register ------------------------------------------------------');
-//       print(simpleModelRegister!.status);
+//       debugPrint('register ------------------------------------------------------');
+//       debugPrint(simpleModelRegister!.status);
 //       emit(RegisterSuccess(simpleModelRegister!));
 //     }).catchError((error) {
-//       print(error.toString());
-//       print(
+//       debugPrint(error.toString());
+//       debugPrint(
 //           'error is here ------------------------------------------------------');
 //       emit(Error());
 //     });
@@ -580,12 +581,12 @@ class MainCubit extends Cubit<MainState> {
 //     }
 //
 //     if (productFeedModel!.data.product.gallery != null) {
-//       print('has a gallery');
+//       debugPrint('has a gallery');
 //
 //       productFeedModel!.data.product.gallery!.clear();
 //       productFeedModel!.data.product.gallery!.add(colorImage);
 //     } else {
-//       print('has an image');
+//       debugPrint('has an image');
 //
 //       productFeedModel!.data.product.image = colorImage;
 //     }
@@ -602,8 +603,8 @@ class MainCubit extends Cubit<MainState> {
 //     productFeedModel!.data.product.price = storedPrice;
 //     productMainPrice = storedPrice;
 //
-//     print(storedImage);
-//     print(storedGallery);
+//     debugPrint(storedImage);
+//     debugPrint(storedGallery);
 //
 //     productFeedModel!.data.product.image = storedImage;
 //     productFeedModel!.data.product.gallery = storedGallery;
@@ -670,7 +671,7 @@ class MainCubit extends Cubit<MainState> {
 //         model.toJson(),
 //       )
 //           .then((value) {
-//         print('cart inserted !!!');
+//         debugPrint('cart inserted !!!');
 //       });
 //     }
 //
@@ -701,7 +702,7 @@ class MainCubit extends Cubit<MainState> {
 //         model.toJson(),
 //       )
 //           .then((value) {
-//         print('cart inserted !!!');
+//         debugPrint('cart inserted !!!');
 //       });
 //     }
 //
@@ -789,9 +790,9 @@ class MainCubit extends Cubit<MainState> {
 //       slug: slug,
 //     )
 //         .then((value) {
-//       print('------------ ProductDetails --------');
-//       print(slug);
-//       // print(value.data);
+//       debugPrint('------------ ProductDetails --------');
+//       debugPrint(slug);
+//       // debugPrint(value.data);
 //       productFeedModel = ProductFeedModel.fromJson(value.data);
 //       productMainPrice = productFeedModel!.data.product.price;
 //       storedGallery = productFeedModel!.data.product.gallery!;
@@ -803,13 +804,13 @@ class MainCubit extends Cubit<MainState> {
 //       //   }
 //       // }
 //
-//       // print(productFeedModel!.data.product.gallery[0]);
-//       // print(productFeedModel!.data.product.gallery[1]);
+//       // debugPrint(productFeedModel!.data.product.gallery[0]);
+//       // debugPrint(productFeedModel!.data.product.gallery[1]);
 //       emit(
 //         ProductDetailsSuccess(),
 //       );
 //     }).catchError((error) {
-//       print('ProductDetailsError --------$error');
+//       debugPrint('ProductDetailsError --------$error');
 //       emit(ProductDetailsError());
 //     });
 //   }
@@ -857,8 +858,8 @@ class MainCubit extends Cubit<MainState> {
 //
 //       emit(CategoryProductsSuccessState());
 //     }).catchError((error) {
-//       print('getCategoryProduct error');
-//       print(error.toString());
+//       debugPrint('getCategoryProduct error');
+//       debugPrint(error.toString());
 //       emit(CategoryProductsErrorState(error.toString()));
 //     });
 //   }
@@ -871,12 +872,7 @@ class MainCubit extends Cubit<MainState> {
 //     emit(ChangeHasEndState());
 //   }
 //
-//   bool userSigned = false;
-//
-//   void changeUser(bool user) {
-//     userSigned = user;
-//     emit(SignInState());
-//   }
+
 //
 // //my Address----------------------start
 //   AddressFeedModel? addressFeedModel;
@@ -903,8 +899,8 @@ class MainCubit extends Cubit<MainState> {
 //       selectedCity = selectedGovernment!.cities[0];
 //       emit(MyAddressSuccessState());
 //     }).catchError((error) {
-//       print('my Address Error------------------------');
-//       print(error.toString());
+//       debugPrint('my Address Error------------------------');
+//       debugPrint(error.toString());
 //       emit(MyAddressErrorState(error.toString()));
 //     });
 //   }
@@ -930,8 +926,8 @@ class MainCubit extends Cubit<MainState> {
 //       emit(AddAddressSuccessState(model.message!));
 //       getMyAddress();
 //     }).catchError((error) {
-//       print('Add Address Error------------------------');
-//       print(error.toString());
+//       debugPrint('Add Address Error------------------------');
+//       debugPrint(error.toString());
 //       emit(AddAddressErrorState(error.toString()));
 //     });
 //   }
@@ -945,8 +941,8 @@ class MainCubit extends Cubit<MainState> {
 //       emit(DeleteAddressSuccessState(model.message!));
 //       getMyAddress();
 //     }).catchError((error) {
-//       print('Delete Address Error------------------------');
-//       print(error.toString());
+//       debugPrint('Delete Address Error------------------------');
+//       debugPrint(error.toString());
 //       emit(DeleteAddressErrorState(error.toString()));
 //     });
 //   }
@@ -960,12 +956,12 @@ class MainCubit extends Cubit<MainState> {
 // //     emit(GetAllBrandsLoading());
 // //     await _repository.getAllBrands().then((value) {
 // //       allBrands = BrandsModel.fromJson(value.data);
-// //       print(' --------------------------------------------all brands');
-// //       //print(allBrands!.brands.brands[0].name);
+// //       debugPrint(' --------------------------------------------all brands');
+// //       //debugPrint(allBrands!.brands.brands[0].name);
 // //       emit(GetAllBrandsSuccess());
 // //     }).catchError((error) {
-// //       print(error.toString());
-// //       print(' --------------------------------------------all brands error');
+// //       debugPrint(error.toString());
+// //       debugPrint(' --------------------------------------------all brands error');
 // //       emit(Error());
 // //     });
 // //   }
@@ -985,12 +981,12 @@ class MainCubit extends Cubit<MainState> {
 //       brandDetails = BrandsDetailsModel.fromJson(value.data);
 //       productsList =
 //           brandDetails!.brandsDetailsDataModel.productsDataModel.productsList;
-//       print(' --------------------------------------------brand details');
-//       //print(allBrands!.brands.brands[0].name);
+//       debugPrint(' --------------------------------------------brand details');
+//       //debugPrint(allBrands!.brands.brands[0].name);
 //       emit(GetBrandDetailsSuccess());
 //     }).catchError((error) {
-//       print(error.toString());
-//       print(' --------------------------------------------brand details error');
+//       debugPrint(error.toString());
+//       debugPrint(' --------------------------------------------brand details error');
 //       emit(Error());
 //     });
 //   }
@@ -1007,12 +1003,12 @@ class MainCubit extends Cubit<MainState> {
 //     emit(GetBlogDetailsLoading());
 //     await _repository.getBlogDetails(id: id).then((value) {
 //       bLogDetailsModel = BLogDetailsModel.fromJson(value.data);
-//       print(
+//       debugPrint(
 //           ' --------------------------------------------blog details success');
 //       emit(GetBlogDetailsSuccess());
 //     }).catchError((error) {
-//       print(error.toString());
-//       print(' --------------------------------------------blog details error');
+//       debugPrint(error.toString());
+//       debugPrint(' --------------------------------------------blog details error');
 //       emit(Error());
 //     });
 //   }
@@ -1027,13 +1023,13 @@ class MainCubit extends Cubit<MainState> {
 //      int? categoryId,
 //      int? brandId,
 //   }) async {
-//     print('----------------search------------------');
+//     debugPrint('----------------search------------------');
 //     emit(SearchLoadingState());
 //     await _repository.getSearch(productName: productName, categoryId: categoryId, brandId: brandId).then((value) {
 //       searchFeedsModel = SearchFeedsModel.fromJson(value.data);
 //       emit(SearchSuccessState());
 //     }).catchError((error) {
-//       print(error.toString());
+//       debugPrint(error.toString());
 //       emit(SearchErrorState(error.toString()));
 //     });
 //   }
@@ -1084,15 +1080,15 @@ class MainCubit extends Cubit<MainState> {
 //
 //   void getAccount() async {
 //     if (userSigned) {
-//       print('----------------My Account------------------');
+//       debugPrint('----------------My Account------------------');
 //       emit(MyAccountLoadingState());
 //       await _repository.getMyAccount().then((value) {
 //         myAccountModel = MyAccountModel.fromJson(value.data);
 //         emit(MyAccountSuccessState());
-//         print('----------------My Account------------------ Success');
+//         debugPrint('----------------My Account------------------ Success');
 //       }).catchError((error) {
 //         emit(MyAccountErrorState(error.toString()));
-//         print(
+//         debugPrint(
 //             '----------------My Account------------------ Error${error.toString()}');
 //       });
 //     }
@@ -1103,7 +1099,7 @@ class MainCubit extends Cubit<MainState> {
 //     required String email,
 //     required String phone,
 //   }) async {
-//     print('----------------update Account------------------');
+//     debugPrint('----------------update Account------------------');
 //     emit(UpdateAccountLoadingState());
 //     await _repository
 //         .updateAccount(
@@ -1116,10 +1112,10 @@ class MainCubit extends Cubit<MainState> {
 //       SimpleModel model = SimpleModel.fromJson(value.data);
 //       emit(UpdateAccountSuccessState(model.message!));
 //       getAccount();
-//       print('----------------update Account------------------ Success');
+//       debugPrint('----------------update Account------------------ Success');
 //     }).catchError((error) {
 //       emit(UpdateAccountErrorState(error.toString()));
-//       print(
+//       debugPrint(
 //           '----------------update Account------------------ Error${error.toString()}');
 //     });
 //   }
@@ -1132,15 +1128,15 @@ class MainCubit extends Cubit<MainState> {
 //
 //   void getNotification() async {
 //     notificationFeedModel = null;
-//     print('----------------Notification------------------');
+//     debugPrint('----------------Notification------------------');
 //     emit(NotificationLoadingState());
 //     await _repository.getNotification().then((value) {
 //       notificationFeedModel = NotificationFeedModel.fromJson(value.data);
 //       emit(NotificationSuccessState());
-//       print('----------------Notification------------------ Success');
+//       debugPrint('----------------Notification------------------ Success');
 //     }).catchError((error) {
 //       emit(NotificationErrorState(error.toString()));
-//       print(
+//       debugPrint(
 //           '----------------Notification------------------ Error ${error.toString()}');
 //     });
 //   }
@@ -1152,18 +1148,18 @@ class MainCubit extends Cubit<MainState> {
 //   AboutUsModel? aboutUsModel;
 //
 //   void getAboutUs() async {
-//     print('----------------About Us loading------------------');
+//     debugPrint('----------------About Us loading------------------');
 //     emit(AboutUsLoadingState());
 //     await _repository.getAboutUs().then((value) {
 //       aboutUsModel = AboutUsModel.fromJson(value.data);
-//       print(aboutUsModel!.data.name);
-//       print('----------------About Us success ------------------ Success');
+//       debugPrint(aboutUsModel!.data.name);
+//       debugPrint('----------------About Us success ------------------ Success');
 //       emit(AboutUsSuccessState());
 //     }).catchError((error) {
 //       emit(AboutUsErrorState(error.toString()));
-//       print(
+//       debugPrint(
 //           '----------------About Us error------------------ Error ${error.toString()}');
-//       print(
+//       debugPrint(
 //           '----------------About Us error------------------ Error ${error.toString()}');
 //     });
 //   }
@@ -1175,13 +1171,13 @@ class MainCubit extends Cubit<MainState> {
 //   ComparesModel? comparesModel;
 //
 //   void getCompares() async {
-//     print('----------------Compares------------------');
+//     debugPrint('----------------Compares------------------');
 //     emit(ComparesLoadingState());
 //     await _repository.getCompares().then((value) {
 //       comparesModel = ComparesModel.fromJson(value.data);
 //       emit(ComparesSuccessState());
 //     }).catchError((error) {
-//       print(error.toString());
+//       debugPrint(error.toString());
 //       emit(ComparesErrorState(error.toString()));
 //     });
 //   }
@@ -1189,14 +1185,14 @@ class MainCubit extends Cubit<MainState> {
 //   void addCompares({
 //     required int productId,
 //   }) async {
-//     print('----------------Add Compares------------------');
+//     debugPrint('----------------Add Compares------------------');
 //     emit(AddComparesLoadingState());
 //     await _repository.addCompares(productId: productId).then((value) {
 //       SimpleModel model = SimpleModel.fromJson(value.data);
 //       emit(AddComparesSuccessState(model.message!));
 //       getCompares();
 //     }).catchError((error) {
-//       print(error.toString());
+//       debugPrint(error.toString());
 //       emit(AddComparesErrorState(error.toString()));
 //     });
 //   }
@@ -1205,16 +1201,16 @@ class MainCubit extends Cubit<MainState> {
 //   void removeFromCompares({
 //     required int compareId,
 //   }) async {
-//     print('----------------RemoveCompare------------------');
+//     debugPrint('----------------RemoveCompare------------------');
 //     emit(RemoveComparesLoadingState());
 //     await _repository.removeCompare(compareId: compareId).then((value) {
 //       SimpleModel model = SimpleModel.fromJson(value.data);
-//       print('----------------RemoveCompare------------------ success');
+//       debugPrint('----------------RemoveCompare------------------ success');
 //       emit(RemoveComparesSuccessState(model.message!));
 //       getCompares();
 //     }).catchError((error) {
-//       print(error.toString());
-//       print('----------------RemoveCompare------------------ error');
+//       debugPrint(error.toString());
+//       debugPrint('----------------RemoveCompare------------------ error');
 //       emit(RemoveComparesErrorState(error.toString()));
 //     });
 //   }
@@ -1245,13 +1241,13 @@ class MainCubit extends Cubit<MainState> {
 //         .then((value) {
 //       // responseMessage = value.data['message'];
 //       // responseState = value.data['state'];
-//       print(
+//       debugPrint(
 //           'contact us ------------------------------------------------------');
-//       print(value.data['message']);
+//       debugPrint(value.data['message']);
 //       emit(ContactUsSuccessState(value.data['message']));
 //     }).catchError((error) {
-//       print(error.toString());
-//       print(
+//       debugPrint(error.toString());
+//       debugPrint(
 //           'error is here ------------------------------------------------------');
 //       emit(Error());
 //     });
@@ -1263,14 +1259,14 @@ class MainCubit extends Cubit<MainState> {
 //   FAQsModel? faqsModel;
 //
 //   void getFAQs() async {
-//     print('----------------Compares------------------');
+//     debugPrint('----------------Compares------------------');
 //     emit(FAQsLoadingState());
 //     await _repository.getFAQs().then((value) {
 //       faqsModel = FAQsModel.fromJson(value.data);
-//       print(faqsModel!.faqs[0].question);
+//       debugPrint(faqsModel!.faqs[0].question);
 //       emit(FAQsSuccessState());
 //     }).catchError((error) {
-//       print(error.toString());
+//       debugPrint(error.toString());
 //       emit(Error());
 //     });
 //   }
@@ -1282,13 +1278,13 @@ class MainCubit extends Cubit<MainState> {
 //   void newsLetter({
 //     required String email,
 //   }) async {
-//     print('----------------news letter------------------');
+//     debugPrint('----------------news letter------------------');
 //     emit(NewsLetterLoadingState());
 //     await _repository.newsLetter(email: email).then((value) {
-//       print('----------------news letter success------------------');
+//       debugPrint('----------------news letter success------------------');
 //       emit(NewsLetterSuccessState(value.data['message']));
 //     }).catchError((error) {
-//       print(error.toString());
+//       debugPrint(error.toString());
 //       emit(Error());
 //     });
 //   }
@@ -1302,14 +1298,14 @@ class MainCubit extends Cubit<MainState> {
 //   void getUsedProduct({
 //     required int productId,
 //   }) async {
-//     print('----------------Used Product------------------');
+//     debugPrint('----------------Used Product------------------');
 //     emit(UsedProductLoadingState());
 //     await _repository.usedMarketProduct(productId: productId).then((value) {
-//       print('----------------Used Product- no parsing -----------------');
+//       debugPrint('----------------Used Product- no parsing -----------------');
 //       usedProductFeedModel = UsedProductFeedModel.fromJson(value.data);
 //       emit(UsedProductSuccessState());
 //     }).catchError((error) {
-//       print(error.toString());
+//       debugPrint(error.toString());
 //       emit(UsedProductErrorState(error.toString()));
 //     });
 //   }
@@ -1321,15 +1317,15 @@ class MainCubit extends Cubit<MainState> {
 //   UsedMarketModel? usedMarketModel;
 //
 //   void getUsedMarket() async {
-//     print('---------------------------------- Used Product Loading');
+//     debugPrint('---------------------------------- Used Product Loading');
 //     emit(GetUsedMarketLoadingState());
 //     await _repository.getUsedMarket().then((value) {
 //       usedMarketModel = UsedMarketModel.fromJson(value.data);
-//       print('---------------------------------- Used Product Success');
+//       debugPrint('---------------------------------- Used Product Success');
 //       emit(GetUsedMarketSuccessState());
 //     }).catchError((error) {
-//       print('---------------------------------- Used Product Error');
-//       print(error.toString());
+//       debugPrint('---------------------------------- Used Product Error');
+//       debugPrint(error.toString());
 //       emit(Error());
 //     });
 //   }
@@ -1343,19 +1339,19 @@ class MainCubit extends Cubit<MainState> {
 //     required int id,
 //   }) async {
 //     usedMarketCatDetailsModel = null;
-//     print(
+//     debugPrint(
 //         ' --------------------------------------------getUsedMarketCatDetails loading');
 //     emit(GetUsedMarketDetailsLoading());
 //     await _repository.getUsedMarketCatDetails(id: id).then((value) {
 //       usedMarketCatDetailsModel =
 //           UsedMarketCatDetailsModel.fromJson(value.data);
-//       print(
+//       debugPrint(
 //           ' --------------------------------------------getUsedMarketCatDetails success');
-//       //print(allBrands!.brands.brands[0].name);
+//       //debugPrint(allBrands!.brands.brands[0].name);
 //       emit(GetUsedMarketDetailsSuccess());
 //     }).catchError((error) {
-//       print(error.toString());
-//       print(
+//       debugPrint(error.toString());
+//       debugPrint(
 //           ' --------------------------------------------getUsedMarketCatDetails error');
 //       emit(Error());
 //     });
@@ -1370,7 +1366,7 @@ class MainCubit extends Cubit<MainState> {
 //     required double rating,
 //     required String review,
 //   }) async {
-//     print('----------------Add Review------------------');
+//     debugPrint('----------------Add Review------------------');
 //     emit(AddReviewLoadingState());
 //     await _repository
 //         .addReview(
@@ -1382,7 +1378,7 @@ class MainCubit extends Cubit<MainState> {
 //       SimpleModel model = SimpleModel.fromJson(value.data);
 //       emit(AddReviewSuccessState(model.message!));
 //     }).catchError((error) {
-//       print(error.toString());
+//       debugPrint(error.toString());
 //       emit(AddReviewErrorState(error.toString()));
 //     });
 //   }
@@ -1393,15 +1389,15 @@ class MainCubit extends Cubit<MainState> {
 //   OrdersModel? ordersModel;
 //
 //   void getOrders() async {
-//     print(' --------------------------------------------get orders loading');
+//     debugPrint(' --------------------------------------------get orders loading');
 //     emit(GetOrdersLoading());
 //     await _repository.getOrders().then((value) {
 //       ordersModel = OrdersModel.fromJson(value.data);
-//       print(' --------------------------------------------get orders success');
+//       debugPrint(' --------------------------------------------get orders success');
 //       emit(GetOrdersSuccess());
 //     }).catchError((error) {
-//       print(error.toString());
-//       print(' --------------------------------------------get orders error');
+//       debugPrint(error.toString());
+//       debugPrint(' --------------------------------------------get orders error');
 //       emit(Error());
 //     });
 //   }
@@ -1430,16 +1426,16 @@ class MainCubit extends Cubit<MainState> {
 //   AddressFeedModel? checkoutModel;
 //
 //   void getCheckout() async {
-//     print(' -------------------------------------------getCheckout loading');
+//     debugPrint(' -------------------------------------------getCheckout loading');
 //     emit(GetCheckoutLoading());
 //     await _repository.getCheckout().then((value) {
 //       checkoutModel = AddressFeedModel.fromJson(value.data);
-//       print(checkoutModel!.data.addresses[0].street_name);
-//       print(' -------------------------------------------getCheckout success');
+//       debugPrint(checkoutModel!.data.addresses[0].street_name);
+//       debugPrint(' -------------------------------------------getCheckout success');
 //       emit(GetCheckoutSuccess());
 //     }).catchError((error) {
-//       print(error.toString());
-//       print(' -------------------------------------------getCheckout error');
+//       debugPrint(error.toString());
+//       debugPrint(' -------------------------------------------getCheckout error');
 //       emit(Error());
 //     });
 //   }
@@ -1453,17 +1449,17 @@ class MainCubit extends Cubit<MainState> {
 //     required int id,
 //   }) async {
 //     orderDetailsModel = null;
-//     print(' --------------------------------------------getOrderDetails error');
+//     debugPrint(' --------------------------------------------getOrderDetails error');
 //     emit(GetOrderDetailsLoading());
 //     await _repository.getOrderDetails(id: id).then((value) {
 //       orderDetailsModel = OrderDetailsModel.fromJson(value.data);
-//       print(
+//       debugPrint(
 //           ' --------------------------------------------getOrderDetails success');
-//       print(orderDetailsModel!.data.orderItems[0].price);
+//       debugPrint(orderDetailsModel!.data.orderItems[0].price);
 //       emit(GetOrderDetailsSuccess());
 //     }).catchError((error) {
-//       print(error.toString());
-//       print(
+//       debugPrint(error.toString());
+//       debugPrint(
 //           ' --------------------------------------------getOrderDetails error');
 //       emit(Error());
 //     });
@@ -1497,20 +1493,20 @@ class MainCubit extends Cubit<MainState> {
 //     required String notificationId,
 //   }) async {
 //     readNotificationModel = null;
-//     print(
+//     debugPrint(
 //         ' --------------------------------------------readNotification loading');
 //     emit(ReadNotificationLoading());
 //     await _repository
 //         .readNotification(notificationId: notificationId)
 //         .then((value) {
 //       readNotificationModel = ReadNotificationModel.fromJson(value.data);
-//       print(
+//       debugPrint(
 //           ' --------------------------------------------readNotification success');
-//       print(readNotificationModel!.data.order.name);
+//       debugPrint(readNotificationModel!.data.order.name);
 //       emit(ReadNotificationSuccess());
 //     }).catchError((error) {
-//       print(error.toString());
-//       print(
+//       debugPrint(error.toString());
+//       debugPrint(
 //           ' --------------------------------------------readNotification error');
 //       emit(Error());
 //     });
@@ -1527,7 +1523,7 @@ class MainCubit extends Cubit<MainState> {
 //     required String confirmPassword,
 //   }) async {
 //     changePasswordModel = null;
-//     print(
+//     debugPrint(
 //         ' --------------------------------------------changePassword loading');
 //     emit(ChangePasswordLoading());
 //     await _repository
@@ -1537,15 +1533,15 @@ class MainCubit extends Cubit<MainState> {
 //       confirmPassword: confirmPassword,
 //     )
 //         .then((value) {
-//       print('done');
+//       debugPrint('done');
 //       changePasswordModel = SimpleModel.fromJson(value.data);
-//       print(changePasswordModel!.message);
-//       print(
+//       debugPrint(changePasswordModel!.message);
+//       debugPrint(
 //           ' --------------------------------------------changePassword success');
 //       emit(ChangePasswordSuccess(changePasswordModel!.message!));
 //     }).catchError((error) {
-//       print(error.toString());
-//       print(
+//       debugPrint(error.toString());
+//       debugPrint(
 //           ' --------------------------------------------changePassword error');
 //       emit(Error());
 //     });
@@ -1578,7 +1574,7 @@ class MainCubit extends Cubit<MainState> {
 //     required String buildingNumber,
 //     required String paymentMethod,
 //   }) async {
-//     print(' -------------------------------------------createCheckout loading');
+//     debugPrint(' -------------------------------------------createCheckout loading');
 //     emit(CreateCheckoutLoading());
 //     await _repository
 //         .createCheckout(
@@ -1634,13 +1630,13 @@ class MainCubit extends Cubit<MainState> {
 //     )
 //         .then((value) {
 //       // checkoutModel = AddressFeedModel.fromJson(value.data);
-//       // print(checkoutModel!.data.addresses[0].street_name);
-//       print(
+//       // debugPrint(checkoutModel!.data.addresses[0].street_name);
+//       debugPrint(
 //           '-------------------------------------------createCheckout success');
 //       emit(CreateCheckoutSuccess());
 //     }).catchError((error) {
-//       print(error.toString());
-//       print('-------------------------------------------createCheckout error');
+//       debugPrint(error.toString());
+//       debugPrint('-------------------------------------------createCheckout error');
 //       emit(Error());
 //     });
 //   }
@@ -1657,7 +1653,7 @@ class MainCubit extends Cubit<MainState> {
       imageFile = value;
       emit(ChangeImageSuccessState());
     }).catchError((onError) {
-      print(onError.toString());
+      debugPrint(onError.toString());
       emit(ChangeImageLoadingState());
     });
     Navigator.pop(context);
@@ -1672,26 +1668,36 @@ class MainCubit extends Cubit<MainState> {
       imageFile = value;
       emit(ChangeImageSuccessState());
     }).catchError((onError) {
-      print(onError.toString());
+      debugPrint(onError.toString());
       emit(ChangeImageLoadingState());
     });
     Navigator.pop(context);
   }
 
   // login ------------------- start
+
+  bool userSigned = false;
+
+  void changeUser(bool user) {
+    userSigned = user;
+    emit(SignInState());
+  }
+
   void login({
     required String email,
     required String password,
   }) async {
     await _repository.login(email: email, password: password).then((value) {
       // success
-      print(value.data['message']);
-      print('success');
-      emit(LoginSuccess(value.data['message']));
+      debugPrint(value.data['message']);
+      debugPrint('success');
+      emit(LoginSuccess(value.data['message'],value.data['token']));
     }).catchError((error) {
       // error
-      print(error.toString());
-      print('error');
+      debugPrint(error.toString());
+      debugPrint('error');
+      ServerException exception = error as ServerException;
+      debugPrint(exception.error);
       emit(Error(error.toString()));
     });
   }

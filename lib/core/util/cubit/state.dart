@@ -448,6 +448,7 @@ class LoginLoading extends MainState {}
 
 class LoginSuccess extends MainState {
   final String message;
+  final String token;
 
-  LoginSuccess(this.message);
+  LoginSuccess(this.message,this.token);
 }
