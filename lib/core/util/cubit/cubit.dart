@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/error/exceptions.dart';
 import 'package:hti_library/core/models/login_model.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/network/repository.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/core/util/translation.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../constants.dart';
 
@@ -503,6 +503,7 @@ class MainCubit extends Cubit<MainState> {
 //   }
 // // changeLanguage ------------------- end
 
+  num appBarHeight = AppBar().preferredSize.height ;
 }
 
 //   CategoriesModel? categoriesModel;

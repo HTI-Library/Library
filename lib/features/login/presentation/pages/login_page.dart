@@ -12,7 +12,7 @@ import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/core/util/widgets/app_button.dart';
 import 'package:hti_library/core/util/widgets/app_text_form_field.dart';
 import 'package:hti_library/core/util/widgets/asset_svg.dart';
-import 'package:hti_library/core/util/widgets/main_scaffold.dart';
+import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/features/main/presentation/pages/main_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -40,32 +40,33 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MainScaffold(
-      scaffold: BlocConsumer<MainCubit, MainState>(
-        listener: (context, state) {
-          if (state is LoginSuccess) {
-            if (state.loginModel.token != null) {
-              sl<CacheHelper>()
-                  .put('token', state.loginModel.token)
-                  .then((value) {
-                token = state.loginModel.token;
-                navigateAndFinish(context, MainPage());
-              });
-            }
-            navigateAndFinish(context, MainPage());
-            showToast(
-                message: state.loginModel.message!,
-                toastStates: ToastStates.SUCCESS);
-          } else if (state is Error) {
-            showToast(message: state.error, toastStates: ToastStates.SUCCESS);
+    return BlocConsumer<MainCubit, MainState>(
+      listener: (context, state) {
+        if (state is LoginSuccess) {
+          if (state.loginModel.token != null) {
+            sl<CacheHelper>()
+                .put('token', state.loginModel.token)
+                .then((value) {
+              token = state.loginModel.token;
+              navigateAndFinish(context, MainPage());
+            });
           }
-        },
-        builder: (context, state) {
-          return Scaffold(
+          navigateAndFinish(context, MainPage());
+          showToast(
+              message: state.loginModel.message!,
+              toastStates: ToastStates.SUCCESS);
+        } else if (state is Error) {
+          showToast(message: state.error, toastStates: ToastStates.SUCCESS);
+        }
+      },
+      builder: (context, state) {
+        return BackScaffold(
             body: SingleChildScrollView(
               physics: const NeverScrollableScrollPhysics(),
               child: Container(
-                height: MediaQuery.of(context).size.height,
+                height: MediaQuery.of(context).size.height -
+                    MainCubit.get(context).appBarHeight -
+                    MediaQuery.of(context).viewPadding.top,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/images/frame.png'),
@@ -137,16 +138,15 @@ class _LoginPageState extends State<LoginPage> {
                                 // width: MediaQuery.of(context).size.width / 2,
                                 onPress: !isDisabled
                                     ? () {
-                                  print('test');
-                                  MainCubit.get(context).login(
-                                      email: emailController.text,
-                                      password: passwordController.text);
-                                }
+                                        print('test');
+                                        MainCubit.get(context).login(
+                                            email: emailController.text,
+                                            password: passwordController.text);
+                                      }
                                     : null,
                                 label: 'SUBMIT',
                               ),
                             ),
-
                           ],
                         ),
                       ),
@@ -155,9 +155,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-          );
-        },
-      ),
+            scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor);
+      },
     );
   }
 }
