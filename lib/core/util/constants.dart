@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
+import 'package:hti_library/core/util/translation.dart';
 import 'package:hti_library/features/account/pages/account/account.dart';
 import 'package:hti_library/features/categories/presentation/pages/categories.dart';
 import 'package:hti_library/features/home/presentation/pages/home_page.dart';
@@ -163,13 +164,6 @@ void launchURL({required String url}) async {
   });
 }
 
-String displayTranslatedText({
-  required BuildContext context,
-  required String ar,
-  required String en,
-}) =>
-    MainCubit.get(context).isRtl ? ar : en;
-
 void showToast({
   required String message,
   required ToastStates toastStates,
@@ -211,6 +205,16 @@ void signOut(context) {
     }
   });
 }
+
+TranslationModel appTranslation(context) =>
+    MainCubit.get(context).translationModel;
+
+String displayTranslatedText({
+  required BuildContext context,
+  required String ar,
+  required String en,
+}) =>
+    MainCubit.get(context).isRtl ? ar : en;
 
 Widget myDivider(context) => Divider(
       height: 0.0,

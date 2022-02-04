@@ -186,6 +186,14 @@ class AccountPage extends StatelessWidget {
                   imagePath: 'arrow_start',
                 ),
               if (!MainCubit.get(context).userSigned) space10Vertical,
+              space10Vertical,
+              MyBtnAccount(
+                voidCallback: () {
+                  MainCubit.get(context).changeLanguage();
+                },
+                text: appTranslation(context).changeLanguage,
+                imagePath: 'arrow_start',
+              ),
             ],
           ),
         );

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
@@ -6,13 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/error/exceptions.dart';
 import 'package:hti_library/core/models/login_model.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/network/repository.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:hti_library/core/util/translation.dart';
 
 import '../constants.dart';
 
@@ -48,6 +50,19 @@ class MainCubit extends Cubit<MainState> {
   String mainColorDark = 'ffffff';
   String mainColorVariantDark = '8a8a89';
 
+  int currentParentCategorySelected = 0;
+
+  void changeParentCategorySelection(int index) {
+    currentParentCategorySelected = index;
+    emit(CategoriesChangeParentCategoryState(
+      index: currentParentCategorySelected,
+    ));
+  }
+
+  // dark colors
+  String secondaryDark = 'ffffff';
+  String secondaryVariantDark = '8a8a89';
+
   late ThemeData lightTheme;
   late ThemeData darkTheme;
 
@@ -58,10 +73,12 @@ class MainCubit extends Cubit<MainState> {
 
   void setThemes({
     required bool dark,
+    required bool rtl,
   }) {
     isDark = dark;
+    isRtl = rtl;
 
-    debugPrint('dark mode ------------- $isDark');
+    print('dark mode ------------- $isDark');
 
     changeTheme();
 
@@ -108,57 +125,57 @@ class MainCubit extends Cubit<MainState> {
         headline5: TextStyle(
           fontSize: 24.0,
           fontFamily: family,
-          fontWeight: FontWeight.w600,
-          color: HexColor(mainColor),
+          fontWeight: FontWeight.w400,
+          color: HexColor(secondary),
           height: 1.4,
         ),
         headline6: TextStyle(
           fontSize: 20.0,
           fontFamily: family,
-          fontWeight: FontWeight.normal,
-          color: HexColor(mainColor),
+          fontWeight: FontWeight.w700,
+          color: HexColor(secondary),
           height: 1.4,
         ),
         bodyText1: TextStyle(
-          fontSize: 14.0,
+          fontSize: 16.0,
           fontFamily: family,
-          fontWeight: FontWeight.normal,
-          color: HexColor(mainColor),
+          fontWeight: FontWeight.w400,
+          color: secondaryVariant,
           height: 1.4,
         ),
         bodyText2: TextStyle(
           fontSize: 14.0,
           fontFamily: family,
-          fontWeight: FontWeight.w600,
-          color: HexColor(mainColor),
+          fontWeight: FontWeight.w700,
+          color: secondaryVariant,
           height: 1.4,
         ),
         subtitle1: TextStyle(
-          fontSize: 16.0,
+          fontSize: 15.0,
           fontFamily: family,
-          fontWeight: FontWeight.w600,
-          color: HexColor(mainColor),
+          fontWeight: FontWeight.w700,
+          color: HexColor(secondary),
           height: 1.4,
         ),
         subtitle2: TextStyle(
-          fontSize: 16.0,
+          fontSize: 15.0,
           fontFamily: family,
-          fontWeight: FontWeight.w500,
-          color: HexColor(mainColor),
+          fontWeight: FontWeight.w400,
+          color: HexColor(secondary),
           height: 1.4,
         ),
         caption: TextStyle(
-          fontSize: 12.0,
+          fontSize: 11.0,
           fontFamily: family,
-          fontWeight: FontWeight.normal,
-          color: HexColor(mainColor),
+          fontWeight: FontWeight.w400,
+          color: HexColor(secondary),
           height: 1.4,
         ),
         button: TextStyle(
-          fontSize: 14.0,
+          fontSize: 16.0,
           fontFamily: family,
-          fontWeight: FontWeight.w600,
-          color: HexColor(mainColor),
+          fontWeight: FontWeight.w700,
+          color: Colors.white,
           height: 1.4,
         ),
       ),
@@ -201,56 +218,56 @@ class MainCubit extends Cubit<MainState> {
           fontSize: 24.0,
           fontFamily: family,
           fontWeight: FontWeight.w400,
-          color: HexColor(mainColor),
+          color: HexColor(secondaryDark),
           height: 1.4,
         ),
         headline6: TextStyle(
           fontSize: 20.0,
           fontFamily: family,
           fontWeight: FontWeight.w700,
-          color: HexColor(mainColor),
+          color: HexColor(secondaryDark),
           height: 1.4,
         ),
         bodyText1: TextStyle(
           fontSize: 16.0,
           fontFamily: family,
           fontWeight: FontWeight.w400,
-          color: HexColor(mainColor),
+          color: HexColor(secondaryVariantDark),
           height: 1.4,
         ),
         bodyText2: TextStyle(
           fontSize: 14.0,
           fontFamily: family,
           fontWeight: FontWeight.w700,
-          color: HexColor(mainColor),
+          color: HexColor(secondaryVariantDark),
           height: 1.4,
         ),
         subtitle1: TextStyle(
-          fontSize: 18.0,
+          fontSize: 15.0,
           fontFamily: family,
           fontWeight: FontWeight.w700,
-          color: HexColor(mainColor),
+          color: HexColor(secondaryDark),
           height: 1.4,
         ),
         subtitle2: TextStyle(
           fontSize: 15.0,
           fontFamily: family,
           fontWeight: FontWeight.w400,
-          color: HexColor(mainColor),
+          color: HexColor(secondaryDark),
           height: 1.4,
         ),
         caption: TextStyle(
           fontSize: 11.0,
           fontFamily: family,
           fontWeight: FontWeight.w400,
-          color: HexColor(mainColor),
+          color: HexColor(secondaryDark),
           height: 1.4,
         ),
         button: TextStyle(
           fontSize: 16.0,
           fontFamily: family,
           fontWeight: FontWeight.w700,
-          color: HexColor(surface),
+          color: Colors.white,
           height: 1.4,
         ),
       ),
@@ -263,6 +280,45 @@ class MainCubit extends Cubit<MainState> {
     sl<CacheHelper>().put('isDark', isDark);
 
     emit(ChangeModeState());
+  }
+
+  void changeLanguage() async {
+    isRtl = !isRtl;
+
+    sl<CacheHelper>().put('isRtl', isRtl);
+
+    String translation = await rootBundle
+        .loadString('assets/translations/${isRtl ? 'ar' : 'en'}.json');
+
+    setTranslation(
+      translation: translation,
+    );
+
+    changeTheme();
+
+    emit(ChangeLanguageState());
+  }
+
+  late TranslationModel translationModel;
+
+  void setTranslation({
+    required String translation,
+  }) {
+    translationModel = TranslationModel.fromJson(json.decode(
+      translation,
+    ));
+
+    // if(translation == null) {
+    //   translationModel = TranslationModel.fromJson(json.decode(
+    //     _translation,
+    //   ));
+    // } else {
+    //   translationModel = TranslationModel.fromJson(json.decode(
+    //     translation,
+    //   ));
+    // }
+
+    emit(LanguageLoaded());
   }
 
   bool noInternetConnection = false;
@@ -400,7 +456,52 @@ class MainCubit extends Cubit<MainState> {
       emit(Error(error.toString()));
     });
   }
+
 // logOut ------------------- end
+
+// // changeMode ------------------- start
+//
+//   void changeMode() {
+//     isDark = !isDark;
+//
+//     sl<CacheHelper>().put('isDark', isDark);
+//
+//     emit(ChangeModeState());
+//   }
+//
+//   // changeMode ------------------- end
+//
+//   // changeLanguage ------------------- start
+//
+//   late TranslationModel translationModel;
+//
+//   void setTranslation({
+//     required String translation,
+//   }) {
+//     translationModel = TranslationModel.fromJson(json.decode(
+//       translation,
+//     ));
+//
+//     emit(LanguageLoaded());
+//   }
+//
+//   void changeLanguage() async {
+//     isRtl = !isRtl;
+//
+//     sl<CacheHelper>().put('isRtl', isRtl);
+//
+//     String translation = await rootBundle
+//         .loadString('assets/translations/${isRtl ? 'ar' : 'en'}.json');
+//
+//     setTranslation(
+//       translation: translation,
+//     );
+//
+//     changeTheme();
+//
+//     emit(ChangeLanguageState());
+//   }
+// // changeLanguage ------------------- end
 
 }
 
