@@ -27,9 +27,7 @@ class ThemesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainScaffold(
       scaffold: BackScaffold(
-        scaffoldBackgroundColor: Theme
-            .of(context)
-            .scaffoldBackgroundColor,
+        scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: 'Language',
         body: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -37,14 +35,17 @@ class ThemesPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               space20Vertical,
-              MyBtnAccount(voidCallback: () {
-
-              },
+              MyBtnAccount(
+                voidCallback: () {},
                 text: 'Light',
-                imagePath: 'sun_mode',),
+                imagePath: 'sun_mode',
+              ),
               space10Vertical,
-              MyBtnAccount(voidCallback: () {},
-                text: 'Dark', imagePath: "dark_mode",),
+              MyBtnAccount(
+                voidCallback: () {},
+                text: 'Dark',
+                imagePath: "dark_mode",
+              ),
             ],
           ),
         ),

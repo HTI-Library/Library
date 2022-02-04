@@ -53,7 +53,7 @@ class AccountPage extends StatelessWidget {
               if (MainCubit.get(context).userSigned)
                 MyBtnAccount(
                   voidCallback: () {
-                    navigateTo(context, NotificatioPage());
+                    navigateTo(context, NotificationPage());
                   },
                   text: 'Notification',
                   imagePath: 'notification_notification_outline',
@@ -187,13 +187,6 @@ class AccountPage extends StatelessWidget {
                 ),
               if (!MainCubit.get(context).userSigned) space10Vertical,
               space10Vertical,
-              MyBtnAccount(
-                voidCallback: () {
-                  MainCubit.get(context).changeLanguage();
-                },
-                text: appTranslation(context).changeLanguage,
-                imagePath: 'arrow_start',
-              ),
             ],
           ),
         );

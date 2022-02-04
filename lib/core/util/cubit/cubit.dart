@@ -274,16 +274,16 @@ class MainCubit extends Cubit<MainState> {
     );
   }
 
-  void changeMode() {
-    isDark = !isDark;
+  void changeMode({required bool value}) {
+    isDark = value;
 
     sl<CacheHelper>().put('isDark', isDark);
 
     emit(ChangeModeState());
   }
 
-  void changeLanguage() async {
-    isRtl = !isRtl;
+  void changeLanguage({required bool value}) async {
+    isRtl = value;
 
     sl<CacheHelper>().put('isRtl', isRtl);
 
