@@ -182,7 +182,7 @@ class AccountPage extends StatelessWidget {
                   voidCallback: () {
                     navigateTo(context, LoginPage());
                   },
-                  text: 'Log In',
+                  text: appTranslation(context).logIn,
                   imagePath: 'arrow_start',
                 ),
               if (!MainCubit.get(context).userSigned) space10Vertical,
