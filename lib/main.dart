@@ -11,36 +11,6 @@ import 'core/util/cubit/cubit.dart';
 import 'core/util/cubit/state.dart';
 import 'features/main/presentation/pages/main_page.dart';
 
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   Bloc.observer = MyBlocObserver();
-//
-//   await di.init();
-//
-//   bool isDark = false;
-//
-//   await sl<CacheHelper>().get('isDark').then((value) {
-//     debugPrint('dark mode ------------- $value');
-//     if (value != null) {
-//       isDark = value;
-//     }
-//   });
-//
-//   sl<CacheHelper>().get('token').then((value) {
-//     debugPrint('token_---------------------------- $value');
-//     if (value == null) {
-//       token = '';
-//     } else {
-//       token = value;
-//     }
-//   });
-//
-//   debugPrint('dark mode ------------- $isDark');
-//
-//   runApp(MyApp(
-//     isDark: isDark,
-//   ));
-// }
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
@@ -50,27 +20,26 @@ void main() async {
   bool isRtl = false;
 
   await sl<CacheHelper>().get('isRtl').then((value) {
-    print('trl ------------- $value');
+    debugPrint('trl ------------- $value');
     if (value != null) {
       isRtl = value;
     }
   });
 
-  // String translation = await rootBundle
-  //     .loadString('assets/translations/${isRtl ? 'ar' : 'en'}.json');
-  String translation =
-      await rootBundle.loadString('assets/translations/ar.json');
+  String translation = await rootBundle
+      .loadString('assets/translations/${isRtl ? 'ar' : 'en'}.json');
+
   bool isDark = false;
 
   await sl<CacheHelper>().get('isDark').then((value) {
-    print('dark mode ------------- $value');
+    debugPrint('dark mode ------------- $value');
     if (value != null) {
       isDark = value;
     }
   });
 
   sl<CacheHelper>().get('token').then((value) {
-    print('token_---------------------------- $value');
+    debugPrint('token_---------------------------- $value');
     if (value == null) {
       token = '';
     } else {
@@ -78,14 +47,14 @@ void main() async {
     }
   });
 
-  print('dark mode ------------- $isDark');
+  debugPrint('dark mode ------------- $isDark');
 
   runApp(MyApp(
     isDark: isDark,
     isRtl: isRtl,
     translation: translation,
   ));
-  print(translation);
+  debugPrint(translation);
 }
 
 class MyApp extends StatefulWidget {
