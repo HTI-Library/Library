@@ -78,7 +78,7 @@ class MainCubit extends Cubit<MainState> {
     isDark = dark;
     isRtl = rtl;
 
-    print('dark mode ------------- $isDark');
+    debugPrint('dark mode ------------- $isDark');
 
     changeTheme();
 
@@ -340,7 +340,7 @@ class MainCubit extends Cubit<MainState> {
     emit(InternetState());
   }
 
-  PickedFile? imageFile = null;
+  PickedFile? imageFile;
 
   void openGallery(BuildContext context) async {
     await ImagePicker()
