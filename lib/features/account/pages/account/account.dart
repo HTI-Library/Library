@@ -156,16 +156,16 @@ class AccountPage extends StatelessWidget {
                       // padding: const EdgeInsets.all(5.0),
                       desc: 'Do you want to log out ?',
                       btnCancelOnPress: () {
-                        print('Cancel');
+                        debugPrint('Cancel');
                       },
                       btnOkOnPress: () {
                         if (token != null) {
                           MainCubit.get(context).logOut(context: context);
-                          print('Yes--------------------------------');
-                          print('${MainCubit.get(context).userSigned}');
-                          print(token);
+                          debugPrint('Yes--------------------------------');
+                          debugPrint('${MainCubit.get(context).userSigned}');
+                          debugPrint(token);
                         } else {
-                          print('${MainCubit.get(context).userSigned}');
+                          debugPrint('${MainCubit.get(context).userSigned}');
                           showToast(
                               message: 'Please login first',
                               toastStates: ToastStates.WARNING);
