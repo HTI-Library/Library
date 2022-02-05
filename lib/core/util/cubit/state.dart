@@ -456,3 +456,26 @@ class LoginSuccess extends MainState {
 class LogoutLoading extends MainState {}
 
 class LogoutSuccess extends MainState {}
+class SelectMonth extends MainState {
+
+  final int value;
+
+  SelectMonth({
+    required this.value,
+  });
+}
+
+class SelectDay extends MainState {
+
+  final int value;
+
+  SelectDay({
+    required this.value,
+  });
+
+  @override
+  List<Object> get props =>
+      [
+        value,
+      ];
+}

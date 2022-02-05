@@ -12,10 +12,50 @@ import 'package:hti_library/features/account/pages/setting/presntation/setting.d
 import 'package:hti_library/features/account/widget/btn_my_account.dart';
 import 'package:hti_library/features/change_new_photo/presintation/page/change_new_photo.dart';
 import 'package:hti_library/features/login/presentation/pages/login_page.dart';
+import 'package:hti_library/features/s_f_calender/widget/meeting.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class AccountPage extends StatelessWidget {
   AccountPage({Key? key}) : super(key: key);
   var _width = 230.0;
+
+  Widget appointmentBuilder(BuildContext context,
+      CalendarAppointmentDetails calendarAppointmentDetails) {
+    final Meeting appointment = calendarAppointmentDetails.appointments.first;
+    return Container(
+      width: calendarAppointmentDetails.bounds.width,
+      height: calendarAppointmentDetails.bounds.height,
+      // color: appointment.background,
+      decoration: BoxDecoration(
+        color: appointment.background,
+        border: Border.all(
+          color: Colors.grey,
+          width: 0.5,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(2.0, 0, 0, 5.0),
+            child: Text(
+              appointment.eventName,
+              // textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(2.0, 0, 0, 0),
+            child: Text(
+              "Phòng",
+              style: TextStyle(fontSize: 10, fontStyle: FontStyle.italic),
+            ),
+          )
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,19 +107,11 @@ class AccountPage extends StatelessWidget {
                   text: 'My Message',
                   imagePath: 'message_account',
                 ),
-              // space10Vertical,
-              // MyBtnAccount(
-              //   voidCallback: () {
-              //     navigateTo(context, NoBookmarkPage());
-              //   },
-              //   text: 'My Bookmark',
-              //   imagePath: 'pop_mark',
-              // ),
               if (MainCubit.get(context).userSigned) space10Vertical,
               if (MainCubit.get(context).userSigned)
                 MyBtnAccount(
                   voidCallback: () {
-                    // navigateTo(context, CalenderPage());
+                    // navigateTo(context, SFCalenderPage());
                     showModalBottomSheet<void>(
                         context: context,
                         isScrollControlled: true,
@@ -89,30 +121,27 @@ class AccountPage extends StatelessWidget {
                         backgroundColor:
                             Theme.of(context).scaffoldBackgroundColor,
                         builder: (context) {
-                          return Container(
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            height: MediaQuery.of(context).size.height / 1.3,
-                            padding: const EdgeInsets.all(15.0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: MainCubit.get(context).isDark
-                                  ? HexColor(secondBackground)
-                                  : HexColor(surface),
-                            ),
-                            child: Column(
-                              children: [
-                                Container(
-                                  width: MediaQuery.of(context).size.width / 4,
-                                  height: 5.0,
-                                  margin: const EdgeInsetsDirectional.only(
-                                    bottom: 10.0,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4.0),
-                                    color: HexColor(mainColor),
-                                  ),
-                                ),
-                              ],
+                          return SizedBox(
+                            height: MediaQuery.of(context).size.height / 2,
+                            child: SfCalendar(
+                              view: CalendarView.month,
+                              showDatePickerButton: true,
+                              showCurrentTimeIndicator: false,
+                              showNavigationArrow: true,
+
+                              viewNavigationMode: ViewNavigationMode.snap,
+                              appointmentBuilder: appointmentBuilder,
+                              initialDisplayDate: DateTime(
+                                  DateTime.now().year,
+                                  DateTime.now().month,
+                                  DateTime.now().day,
+                                  00,
+                                  45,
+                                  0),
+                              monthViewSettings:
+                                  const MonthViewSettings(showAgenda: true),
+                              // monthViewSettings: const MonthViewSettings(
+                              //     appointmentDisplayMode: MonthAppointmentDisplayMode.indicator),
                             ),
                           );
                         });
@@ -129,7 +158,6 @@ class AccountPage extends StatelessWidget {
                 imagePath: 'settings',
               ),
               space10Vertical,
-
               MyBtnAccount(
                 voidCallback: () {
                   navigateTo(context, InfoPage());

@@ -450,4 +450,18 @@ class MainCubit extends Cubit<MainState> {
 // logOut ------------------- end
 
   num appBarHeight = AppBar().preferredSize.height;
+
+  var currentMonth = DateTime.now().month;
+
+  void setSelectedMonth(int value) {
+    currentMonth = value;
+    emit(SelectMonth(value: currentMonth));
+  }
+
+  int currentDay = 0;
+
+  void setSelectedDay(int value) {
+    currentDay = value;
+    emit(SelectDay(value: currentDay));
+  }
 }
