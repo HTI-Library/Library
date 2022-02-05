@@ -100,10 +100,11 @@ class _LoginPageState extends State<LoginPage> {
                                 imagePath: 'sms',
                                 color: HexColor(mainColor),
                               ),
-                              hint: 'Email',
+                              hint: 'ID',
                               callbackHandle: (controller) {
                                 emailController = controller;
                               },
+                              type: TextInputType.number,
                               onChanged: (value) {
                                 enableLoginButton();
                               },

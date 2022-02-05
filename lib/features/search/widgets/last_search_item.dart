@@ -25,7 +25,7 @@ class LastSearchItem extends StatelessWidget {
           color: HexColor(greyWhite),
           borderRadius: BorderRadius.circular(6.0),
         ),
-        child: Text(label),
+        child: Text(label , style: Theme.of(context).textTheme.caption,),
       ),
     );
   }

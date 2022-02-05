@@ -18,10 +18,12 @@ class MyBtnAccount extends StatelessWidget {
   Color? color;
   Color? textColor;
   bool isCenter;
+  TextStyle? textStyle;
 
   MyBtnAccount({
     Key? key,
     this.imagePath,
+    this.textStyle,
     this.isCenter = false,
     required this.voidCallback,
     required this.text,
@@ -58,11 +60,7 @@ class MyBtnAccount extends StatelessWidget {
                 Text(
                   text,
                   textAlign: TextAlign.end,
-                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                        color:
-                            textColor == null ? HexColor(mainColor) : textColor,
-                        fontSize: fontSize,
-                      ),
+                  style: Theme.of(context).textTheme.subtitle2!.copyWith(color:textColor == null ? HexColor(mainColor) : textColor,fontSize: fontSize,),
                 ),
                 space10Horizontal,
                 if (!isCenter) const Spacer(),
