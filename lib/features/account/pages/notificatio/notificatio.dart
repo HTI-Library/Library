@@ -15,17 +15,19 @@ class NotificationPage extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset("assets/images/notification.png"),
-                space20Vertical,
-                Text(
-                  'Not a part of a component yet.',
-                  style: Theme.of(context).textTheme.bodyText2!,
-                ),
-              ],
+            child: Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset("assets/images/notification.png"),
+                  space20Vertical,
+                  Text(
+                    'Not a part of a component yet.',
+                    style: Theme.of(context).textTheme.headline6!,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

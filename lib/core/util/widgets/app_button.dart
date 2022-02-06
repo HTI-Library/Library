@@ -18,7 +18,7 @@ class AppButton extends StatelessWidget {
     required this.label,
     required this.onPress,
     this.width = double.infinity,
-    this.height = 45.0,
+    this.height = 40.0,
     this.color,
     this.textColor,
   }) : super(key: key);
@@ -43,7 +43,7 @@ class AppButton extends StatelessWidget {
         disabledColor: HexColor(disableButton),
         child: Text(
           label,
-          style: Theme.of(context).textTheme.button!.copyWith(
+          style: Theme.of(context).textTheme.subtitle2!.copyWith(
                 color: textColor == null ? HexColor(surface) : textColor,
               ),
         ),

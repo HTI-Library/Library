@@ -27,14 +27,15 @@ class SeeMoreItem extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: padding),
           child: Row(
             children: [
-              Text(
-                text,
-                style: Theme.of(context).textTheme.headline6!.copyWith(
-                      color: HexColor(mainColor),
-                      fontSize: 18.0,
-                    ),
+              Expanded(
+                child: Text(
+                  text,
+                  maxLines: 1,
+                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        color: HexColor(mainColor),
+                      ),
+                ),
               ),
-              const Spacer(),
               AssetSvg(
                 imagePath: 'arrow_right',
                 color: HexColor(mainColor),

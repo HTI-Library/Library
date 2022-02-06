@@ -63,159 +63,160 @@ class AccountPage extends StatelessWidget {
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.all(15.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              if (state is LogoutLoading) const LinearProgressIndicator(),
-              if (state is LogoutLoading) space15Vertical,
-              CircleAvatar(
-                child: Image.asset('assets/images/hti_logo.png'),
-                radius: 55,
-              ),
-              space20Vertical,
-              Text('Htian Here',
-                  style: Theme.of(context).textTheme.headline4!.copyWith(
-                        color: HexColor(mainColor),
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      )),
-              space20Vertical,
-              if (MainCubit.get(context).userSigned)
-                MyBtnAccount(
-                  voidCallback: () {
-                    navigateTo(context, ChangeNewPhoto());
-                  },
-                  text: 'My Profile',
-                  imagePath: 'user_user_circle',
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                if (state is LogoutLoading) const LinearProgressIndicator(),
+                if (state is LogoutLoading) space15Vertical,
+                CircleAvatar(
+                  child: Image.asset('assets/images/hti_logo.png'),
+                  radius: 55,
                 ),
-              if (MainCubit.get(context).userSigned) space10Vertical,
-              if (MainCubit.get(context).userSigned)
-                MyBtnAccount(
-                  voidCallback: () {
-                    navigateTo(context, NotificationPage());
-                  },
-                  text: 'Notification',
-                  imagePath: 'notification_notification_outline',
-                ),
-              if (MainCubit.get(context).userSigned) space10Vertical,
-              if (MainCubit.get(context).userSigned)
-                MyBtnAccount(
-                  voidCallback: () {
-                    navigateTo(context, MessagePage());
-                  },
-                  text: 'My Message',
-                  imagePath: 'message_account',
-                ),
-              if (MainCubit.get(context).userSigned) space10Vertical,
-              if (MainCubit.get(context).userSigned)
-                MyBtnAccount(
-                  voidCallback: () {
-                    // navigateTo(context, SFCalenderPage());
-                    showModalBottomSheet<void>(
-                        context: context,
-                        isScrollControlled: true,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                        builder: (context) {
-                          return SizedBox(
-                            height: MediaQuery.of(context).size.height / 2,
-                            child: SfCalendar(
-                              view: CalendarView.month,
-                              showDatePickerButton: true,
-                              showCurrentTimeIndicator: false,
-                              showNavigationArrow: true,
+                space20Vertical,
+                Text('Htian Here',
+                    style: Theme.of(context).textTheme.headline6!),
+                space20Vertical,
+                if (MainCubit.get(context).userSigned)
+                  MyBtnAccount(
+                    voidCallback: () {
+                      navigateTo(context, ChangeNewPhoto());
+                    },
+                    text: 'My Profile',
+                    imagePath: 'user_user_circle',
+                  ),
+                if (MainCubit.get(context).userSigned) space10Vertical,
+                if (MainCubit.get(context).userSigned)
+                  MyBtnAccount(
+                    voidCallback: () {
+                      navigateTo(context, NotificationPage());
+                    },
+                    text: 'Notification',
+                    imagePath: 'notification_notification_outline',
+                  ),
+                if (MainCubit.get(context).userSigned) space10Vertical,
+                if (MainCubit.get(context).userSigned)
+                  MyBtnAccount(
+                    voidCallback: () {
+                      navigateTo(context, MessagePage());
+                    },
+                    text: 'My Message',
+                    imagePath: 'message_account',
+                  ),
+                if (MainCubit.get(context).userSigned) space10Vertical,
+                if (MainCubit.get(context).userSigned)
+                  MyBtnAccount(
+                    voidCallback: () {
+                      // navigateTo(context, SFCalenderPage());
+                      showModalBottomSheet<void>(
+                          context: context,
+                          isScrollControlled: true,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          backgroundColor:
+                              Theme.of(context).scaffoldBackgroundColor,
+                          builder: (context) {
+                            return SizedBox(
+                              height: MediaQuery.of(context).size.height / 2,
+                              child: SfCalendar(
+                                view: CalendarView.month,
+                                showDatePickerButton: true,
+                                showCurrentTimeIndicator: false,
+                                showNavigationArrow: true,
 
-                              viewNavigationMode: ViewNavigationMode.snap,
-                              appointmentBuilder: appointmentBuilder,
-                              initialDisplayDate: DateTime(
-                                  DateTime.now().year,
-                                  DateTime.now().month,
-                                  DateTime.now().day,
-                                  00,
-                                  45,
-                                  0),
-                              monthViewSettings:
-                                  const MonthViewSettings(showAgenda: true),
-                              // monthViewSettings: const MonthViewSettings(
-                              //     appointmentDisplayMode: MonthAppointmentDisplayMode.indicator),
-                            ),
-                          );
-                        });
-                  },
-                  text: 'calender',
-                  imagePath: 'calendar',
-                ),
-              if (MainCubit.get(context).userSigned) space10Vertical,
-              MyBtnAccount(
-                voidCallback: () {
-                  navigateTo(context, SettingPages());
-                },
-                text: 'Setting',
-                imagePath: 'settings',
-              ),
-              space10Vertical,
-              MyBtnAccount(
-                voidCallback: () {
-                  navigateTo(context, InfoPage());
-                },
-                text: 'Info',
-                imagePath: 'info',
-              ),
-              space10Vertical,
-              if (MainCubit.get(context).userSigned)
+                                viewNavigationMode: ViewNavigationMode.snap,
+                                appointmentBuilder: appointmentBuilder,
+                                initialDisplayDate: DateTime(
+                                    DateTime.now().year,
+                                    DateTime.now().month,
+                                    DateTime.now().day,
+                                    00,
+                                    45,
+                                    0),
+                                monthViewSettings:
+                                    const MonthViewSettings(showAgenda: true),
+                                // monthViewSettings: const MonthViewSettings(
+                                //     appointmentDisplayMode: MonthAppointmentDisplayMode.indicator),
+                              ),
+                            );
+                          });
+                    },
+                    text: 'calender',
+                    imagePath: 'calendar',
+                  ),
+                if (MainCubit.get(context).userSigned) space10Vertical,
                 MyBtnAccount(
                   voidCallback: () {
-                    AwesomeDialog(
-                      dialogBorderRadius: BorderRadius.circular(10.0),
-                      buttonsBorderRadius: BorderRadius.circular(10.0),
-                      context: context,
-                      keyboardAware: false,
-                      headerAnimationLoop: false,
-                      dismissOnBackKeyPress: true,
-                      dialogType: DialogType.WARNING,
-                      animType: AnimType.BOTTOMSLIDE,
-                      btnCancelText: "Cancel",
-                      btnOkText: "Yes",
-                      title: 'log out ',
-                      // padding: const EdgeInsets.all(5.0),
-                      desc: 'Do you want to log out ?',
-                      btnCancelOnPress: () {
-                        debugPrint('Cancel');
-                      },
-                      btnOkOnPress: () {
-                        if (token != null) {
-                          MainCubit.get(context).logOut(context: context);
-                          debugPrint('Yes--------------------------------');
-                          debugPrint('${MainCubit.get(context).userSigned}');
-                          debugPrint(token);
-                        } else {
-                          debugPrint('${MainCubit.get(context).userSigned}');
-                          showToast(
-                              message: 'Please login first',
-                              toastStates: ToastStates.WARNING);
-                        }
-                      },
-                    ).show();
+                    navigateTo(context, SettingPages());
                   },
-                  text: 'Log Out',
-                  imagePath: 'sign_out',
+                  text: 'Setting',
+                  imagePath: 'settings',
                 ),
-              if (MainCubit.get(context).userSigned) space10Vertical,
-              if (!MainCubit.get(context).userSigned)
+                space10Vertical,
                 MyBtnAccount(
                   voidCallback: () {
-                    navigateTo(context, LoginPage());
+                    navigateTo(context, InfoPage());
                   },
-                  text: appTranslation(context).logIn,
-                  imagePath: 'arrow_start',
+                  text: 'Info',
+                  imagePath: 'info',
                 ),
-              if (!MainCubit.get(context).userSigned) space10Vertical,
-              space10Vertical,
-            ],
+                space10Vertical,
+                if (MainCubit.get(context).userSigned)
+                  MyBtnAccount(
+                    voidCallback: () {
+                      AwesomeDialog(
+                        dialogBorderRadius: BorderRadius.circular(10.0),
+                        buttonsBorderRadius: BorderRadius.circular(10.0),
+                        context: context,
+                        keyboardAware: false,
+                        headerAnimationLoop: false,
+                        dismissOnBackKeyPress: true,
+                        dialogType: DialogType.WARNING,
+                        animType: AnimType.BOTTOMSLIDE,
+                        btnCancelText: "Cancel",
+                        btnCancelColor: HexColor(mainColor),
+                        btnOkColor: HexColor(secondaryVariantDark),
+                        btnOkText: "Yes",
+                        title: 'log out ',
+                        isDense: true,
+                        // padding: const EdgeInsets.all(5.0),
+                        desc: 'Do you want to log out ?',
+                        btnCancelOnPress: () {
+                          debugPrint('Cancel' );
+                        },
+                        btnOkOnPress: () {
+                          if (token != null) {
+                            MainCubit.get(context).logOut(context: context);
+                            debugPrint('Yes--------------------------------');
+                            debugPrint('${MainCubit.get(context).userSigned}');
+                            debugPrint(token);
+                          } else {
+                            debugPrint('${MainCubit.get(context).userSigned}');
+                            showToast(
+                                message: 'Please login first',
+                                toastStates: ToastStates.WARNING);
+                          }
+                        },
+                      ).show();
+                    },
+                    text: 'Log Out',
+                    imagePath: 'sign_out',
+                  ),
+                if (MainCubit.get(context).userSigned) space10Vertical,
+                if (!MainCubit.get(context).userSigned)
+                  MyBtnAccount(
+                    voidCallback: () {
+                      navigateTo(context, LoginPage());
+                    },
+                    text: appTranslation(context).logIn,
+                    imagePath: 'arrow_start',
+                  ),
+                if (!MainCubit.get(context).userSigned) space10Vertical,
+                space10Vertical,
+              ],
+            ),
           ),
         );
       },

@@ -30,23 +30,20 @@ class ChangeNewPhoto extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    InkWell(
-                      onTap: (){
-                        showDialog(context: context,builder: (BuildContext context)=> DialogChangePhoto());
-                      },
-                      child: CircleAvatar(
-                        backgroundImage:
-                        (MainCubit.get(context).imageFile == null) ?
-                        NetworkImage('http://prod-upp-image-read.ft.com/a4e8f394-313b-11ea-a329-0bcf87a328f2') :
-                        NetworkImage('http://prod-upp-image-read.ft.com/a4e8f394-313b-11ea-a329-0bcf87a328f2'),
-                        radius: MediaQuery.of(context).size.width / 4,
-                      ),
+                    CircleAvatar(
+                      backgroundImage:
+                      (MainCubit.get(context).imageFile == null) ?
+                      NetworkImage('http://prod-upp-image-read.ft.com/a4e8f394-313b-11ea-a329-0bcf87a328f2') :
+                      NetworkImage('http://prod-upp-image-read.ft.com/a4e8f394-313b-11ea-a329-0bcf87a328f2'),
+                      radius: MediaQuery.of(context).size.width / 4,
                     ),
 
                     space30Vertical,
                     AppTextButton(
                       label: 'Choose new image',
-                      onPress: () {},
+                      onPress: () {
+                        showDialog(context: context,builder: (BuildContext context)=> DialogChangePhoto());
+                      },
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height / 3,

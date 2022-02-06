@@ -17,7 +17,6 @@ class CategoryDetailsPage extends StatelessWidget {
         icon: AssetSvg(
           imagePath: 'search',
           size: 18.0,
-          color: HexColor(mainColor),
         ),
         onPressed: () {
           navigateTo(context, SearchPage());
