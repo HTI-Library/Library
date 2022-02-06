@@ -5,14 +5,14 @@ import '../constants.dart';
 
 class AssetSvg extends StatelessWidget {
   final String imagePath;
-   Color? color;
-   double? size;
+  Color? color;
+  double? size;
 
-   AssetSvg({
+  AssetSvg({
     Key? key,
     required this.imagePath,
-     this.color = secondaryVariant,
-     this.size ,
+    this.color = secondaryVariant,
+    this.size ,
   }) : super(key: key);
 
   @override

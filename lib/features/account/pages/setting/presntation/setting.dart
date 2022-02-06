@@ -21,14 +21,6 @@ class SettingPages extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               space20Vertical,
-              // MyBtnAccount(
-              //   voidCallback: () {
-              //     navigateTo(context, NotificatioPage());
-              //   },
-              //   text: 'Notification',
-              //   imagePath: 'notification_notification_outline',
-              // ),
-              // space10Vertical,
               MyBtnAccount(
                 voidCallback: () {
                   showModalBottomSheet<void>(
@@ -91,10 +83,6 @@ class SettingPages extends StatelessWidget {
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .subtitle2!
-                                                  .copyWith(
-                                                    color: HexColor(mainColor),
-                                                    fontSize: 14.0,
-                                                  ),
                                             ),
                                             if (!MainCubit.get(context).isRtl)
                                               const Spacer(),
@@ -134,10 +122,6 @@ class SettingPages extends StatelessWidget {
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .subtitle2!
-                                                  .copyWith(
-                                                    color: HexColor(mainColor),
-                                                    fontSize: 14.0,
-                                                  ),
                                             ),
                                             if (!MainCubit.get(context).isRtl)
                                               const Spacer(),

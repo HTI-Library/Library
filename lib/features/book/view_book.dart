@@ -7,6 +7,7 @@ import 'package:hti_library/core/util/widgets/available_item.dart';
 import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/core/util/widgets/book_item.dart';
 import 'package:hti_library/core/util/widgets/see_more_item.dart';
+import 'package:hti_library/features/borrowing/presentation/pages/borrowing_page.dart';
 
 class ViewBookPage extends StatelessWidget {
   const ViewBookPage({Key? key}) : super(key: key);
@@ -81,7 +82,6 @@ class ViewBookPage extends StatelessWidget {
                       children: [
                         AvailableItem(
                           label: 'Available',
-                          fontSize: 14.0,
                         ),
                         const Spacer(),
                         RatingBar.builder(
@@ -108,12 +108,13 @@ class ViewBookPage extends StatelessWidget {
                       children: [
                         Expanded(
                           child: AppButton(
-                              height: 36.0, label: 'Borrow', onPress: () {}),
+                              label: 'Borrow', onPress: () {
+                                navigateTo(context, BorrowingPage());
+                          }),
                         ),
                         space10Horizontal,
                         Expanded(
                           child: AppButton(
-                              height: 36.0,
                               color: HexColor(greyWhite),
                               label: 'Read',
                               textColor: HexColor(mainColor),

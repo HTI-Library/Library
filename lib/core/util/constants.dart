@@ -25,7 +25,7 @@ const String secondary = '005C89';
 // const String thirdColor = '1da1f2';
 // const String darkWhite = 'e0e0e0';
 const String black = '#5E5F61';
-const Color secondaryVariant = Color.fromRGBO(33, 36, 36, 0.7);
+const Color secondaryVariant = Color.fromRGBO(33, 36, 36, 0.7019607843137254);
 const Color starColor = Colors.amber;
 // const String productBackground = '#F8F8F8';
 // const String green = '#1fcd6c';
@@ -41,7 +41,6 @@ const String disableButton = '#A7B1D7';
 //dark theme
 const String secondBackground = '393d40';
 const String secondaryVariantDark = '8a8a89';
-
 // final ThemeData lightTheme = ThemeData(
 //   scaffoldBackgroundColor: Colors.white,
 //   appBarTheme: AppBarTheme(

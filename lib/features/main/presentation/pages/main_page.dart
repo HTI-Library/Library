@@ -45,7 +45,7 @@ class _MainPageState extends State<MainPage> {
         return Conditional.single(
           context: context,
           conditionBuilder: (context) =>
-              !MainCubit.get(context).noInternetConnection,
+          !MainCubit.get(context).noInternetConnection,
           widgetBuilder: (context) => MainScaffold(
             scaffold: Scaffold(
               key: scaffoldKey,

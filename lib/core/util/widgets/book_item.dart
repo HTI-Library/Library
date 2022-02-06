@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/features/book/view_book.dart';
 
 import '../constants.dart';
@@ -52,13 +53,9 @@ class BookItem extends StatelessWidget {
                 Text(
                   'My Book Name',
                   maxLines: 1,
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(color:
+                  MainCubit.get(context).isDark ? HexColor(surface) : HexColor(mainColor)),
                 ),
-                // Text(
-                //   'My Book Author',
-                //   maxLines: 1,
-                //   style: Theme.of(context).textTheme.caption,
-                // ),
                 space5Vertical,
                 Row(
                   children: [

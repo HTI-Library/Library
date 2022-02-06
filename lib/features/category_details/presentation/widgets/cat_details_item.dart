@@ -92,7 +92,7 @@ class CatDetailsItem extends StatelessWidget {
                               }),
                           const Spacer(),
                           AvailableItem(
-                            fontSize: 14.0,
+
                             label: 'Available',
                           ),
                         ],
@@ -104,7 +104,7 @@ class CatDetailsItem extends StatelessWidget {
                         children: [
                           Expanded(
                             child: AppButton(
-                              height: 36.0,
+                              height: 35.0,
                               label: 'Borrow',
                               onPress: () {},
                             ),
@@ -112,7 +112,7 @@ class CatDetailsItem extends StatelessWidget {
                           space10Horizontal,
                           Expanded(
                             child: AppButton(
-                                height: 36.0,
+                                height: 35.0,
                                 color: HexColor(greyWhite),
                                 label: 'Read',
                                 textColor: HexColor(mainColor),

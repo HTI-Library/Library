@@ -15,7 +15,7 @@ class DialogChangePhoto extends StatelessWidget {
         elevation: 10,
         shape:RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15)),
-        title: Text("Choose option",style: TextStyle(color: HexColor(mainColor)),textAlign: TextAlign.center,),
+        title: Center(child: Text("Choose option",style: Theme.of(context) .textTheme.headline6)),
         content: Container(
           height: MediaQuery.of(context).size.height / 7.5,
           child: Row(
@@ -31,8 +31,9 @@ class DialogChangePhoto extends StatelessWidget {
                     padding: const EdgeInsets.all(10.0),
                     child: Column(
                       children: [
-                        AssetSvg(imagePath: 'ic_camera' , size: 60,color: HexColor(mainColor),),
-                        const Text("Camera"),
+                        AssetSvg(imagePath: 'ic_camera' , size: 60,),
+                        Text("Camera" , style: Theme.of(context) .textTheme.headline6),
+
                       ],
                     ),
                   ),
@@ -50,7 +51,7 @@ class DialogChangePhoto extends StatelessWidget {
                     child: Column(
                       children: [
                         AssetSvg(imagePath: 'ic_gallery' , size: 60,),
-                        const Text("gallery"),
+                        Text("gallery" , style: Theme.of(context) .textTheme.headline6),
                       ],
                     ),
                   ),

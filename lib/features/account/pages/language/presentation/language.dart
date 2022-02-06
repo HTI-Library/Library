@@ -7,22 +7,6 @@ import 'package:hti_library/features/account/widget/btn_my_account.dart';
 class LanguagePage extends StatelessWidget {
   const LanguagePage({Key? key}) : super(key: key);
 
-  // bool isDark = false;
-  // void changeMode({bool? fromShared}) {
-  //   if(fromShared != null) {
-  //     isDark = fromShared;
-  //     emit(ChangeModeThemeApp());
-  //   } else {
-  //     isDark = !isDark;
-  //     CashHelper.putBoolean(key: 'dark' , value: isDark ).
-  //     then((value) {
-  //       emit(ChangeModeThemeApp());
-  //
-  //     });
-  //   }
-  // }
-
-
   @override
   Widget build(BuildContext context) {
     return MainScaffold(

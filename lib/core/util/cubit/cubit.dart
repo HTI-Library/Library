@@ -130,14 +130,14 @@ class MainCubit extends Cubit<MainState> {
           height: 1.4,
         ),
         headline6: TextStyle(
-          fontSize: 20.0,
+          fontSize: 18.0,
           fontFamily: family,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w600,
           color: HexColor(secondary),
-          height: 1.4,
+          height: 1.3,
         ),
         appbarTitle: TextStyle(
-          fontSize: 25.0,
+          fontSize: 20.0,
           fontFamily: family,
           fontWeight: FontWeight.w500,
           color: secondaryVariant,
@@ -172,10 +172,10 @@ class MainCubit extends Cubit<MainState> {
           height: 1.4,
         ),
         subtitle2: TextStyle(
-          fontSize: 16.0,
+          fontSize: 15.0,
           fontFamily: family,
           fontWeight: FontWeight.w400,
-          color: HexColor(secondary),
+          color: HexColor(mainColor),
           height: 1.4,
         ),
         caption: TextStyle(
@@ -238,9 +238,9 @@ class MainCubit extends Cubit<MainState> {
         headline6: TextStyle(
           fontSize: 20.0,
           fontFamily: family,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w600,
           color: HexColor(secondaryDark),
-          height: 1.4,
+          height: 1.3,
         ),
         mainTitle: TextStyle(
           fontSize: 35.0,
