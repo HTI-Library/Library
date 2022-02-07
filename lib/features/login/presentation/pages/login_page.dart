@@ -105,6 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                                 emailController = controller;
                               },
                               type: TextInputType.number,
+                              textInputAction: TextInputAction.next,
                               onChanged: (value) {
                                 enableLoginButton();
                               },

@@ -1,4 +1,8 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
@@ -13,11 +17,13 @@ class AppTextFormField extends StatefulWidget {
   final Function callbackHandle;
   final ValueChanged<String>? onChanged;
   final TextInputType type;
+  final TextInputAction? textInputAction;
 
   const AppTextFormField({
     Key? key,
     this.label = '',
     this.icon,
+    this.textInputAction,
     required this.hint,
     this.type = TextInputType.text,
     this.isPassword = false,
@@ -51,6 +57,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
             controller: textEditingController,
             obscureText: widget.isPassword ? isShown : false,
             onChanged: widget.onChanged,
+            textInputAction: widget.textInputAction,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderSide: BorderSide(
