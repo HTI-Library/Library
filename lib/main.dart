@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hti_library/core/di/injection.dart' as di;
+import 'package:hti_library/features/account/pages/account/account.dart';
 import 'package:hti_library/features/on_boarding/presentation/pages/on_boarding_page.dart';
 
 import 'core/di/injection.dart';
@@ -10,7 +11,11 @@ import 'core/util/bloc_observer.dart';
 import 'core/util/constants.dart';
 import 'core/util/cubit/cubit.dart';
 import 'core/util/cubit/state.dart';
+import 'features/book/view_book.dart';
+import 'features/category_details/presentation/pages/category_details_page.dart';
+import 'features/category_details/presentation/widgets/cat_details_item.dart';
 import 'features/main/presentation/pages/main_page.dart';
+import 'features/no_save/no_save.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -114,7 +119,7 @@ class _MyAppState extends State<MyApp> {
             theme: MainCubit.get(context).lightTheme,
             darkTheme: MainCubit.get(context).darkTheme,
             // home: token == '' ? LoginPage() : MainPage(),
-            home: OnBoardingPage(),
+            home: MainPage(),
           );
         },
       ),
