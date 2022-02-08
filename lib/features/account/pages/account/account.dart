@@ -176,15 +176,17 @@ class AccountPage extends StatelessWidget {
                         dialogType: DialogType.WARNING,
                         animType: AnimType.BOTTOMSLIDE,
                         btnCancelText: "Cancel",
-                        btnCancelColor: HexColor(mainColor),
-                        btnOkColor: HexColor(secondaryVariantDark),
+                        btnCancelColor: HexColor(greyWhite),
+                        btnOkColor: HexColor(mainColor),
                         btnOkText: "Yes",
                         title: 'log out ',
                         isDense: true,
+                        buttonsTextStyle:
+                            Theme.of(context).textTheme.button!.copyWith(),
                         // padding: const EdgeInsets.all(5.0),
                         desc: 'Do you want to log out ?',
                         btnCancelOnPress: () {
-                          debugPrint('Cancel' );
+                          debugPrint('Cancel');
                         },
                         btnOkOnPress: () {
                           if (token != null) {

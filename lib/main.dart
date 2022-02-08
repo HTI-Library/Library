@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hti_library/core/di/injection.dart' as di;
+import 'package:hti_library/features/on_boarding/presentation/pages/on_boarding_page.dart';
 
 import 'core/di/injection.dart';
 import 'core/network/local/cache_helper.dart';
@@ -113,7 +114,7 @@ class _MyAppState extends State<MyApp> {
             theme: MainCubit.get(context).lightTheme,
             darkTheme: MainCubit.get(context).darkTheme,
             // home: token == '' ? LoginPage() : MainPage(),
-            home: MainPage(),
+            home: OnBoardingPage(),
           );
         },
       ),

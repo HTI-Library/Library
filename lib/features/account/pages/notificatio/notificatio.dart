@@ -23,7 +23,7 @@ class NotificationPage extends StatelessWidget {
                   Image.asset("assets/images/notification.png"),
                   space20Vertical,
                   Text(
-                    'Not a part of a component yet.',
+                    'You don’t have any notifications',
                     style: Theme.of(context).textTheme.headline6!,
                   ),
                 ],

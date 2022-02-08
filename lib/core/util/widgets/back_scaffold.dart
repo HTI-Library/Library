@@ -77,9 +77,7 @@ class BackScaffold extends StatelessWidget {
                 ],
                 title: Text(
                   title,
-                  style: Theme.of(context).textTheme.appbarTitle!.copyWith(
-                        color: HexColor(mainColor),
-                      ),
+                  style: Theme.of(context).textTheme.headline6,
                 ),
               ),
               body: body,
