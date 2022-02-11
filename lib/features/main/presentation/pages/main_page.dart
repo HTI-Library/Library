@@ -11,6 +11,8 @@ import 'package:hti_library/features/account/pages/account/account.dart';
 import 'package:hti_library/features/categories/presentation/pages/categories.dart';
 import 'package:hti_library/features/home/presentation/pages/home_page.dart';
 import 'package:hti_library/features/internet_connection/page/internet_connection_page.dart';
+import 'package:hti_library/features/no_save/no_save.dart';
+import 'package:hti_library/features/saved/presentation/pages/saved.dart';
 import 'package:hti_library/features/wishlist/presentation/pages/wishlist_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -97,7 +99,7 @@ class _MainPageState extends State<MainPage> {
                           children: [
                             const HomePage(),
                             const Categories(),
-                            const WishlistPage(),
+                            const SavedPage(),
                             AccountPage(),
                           ],
                           // onPageChanged: (index) {

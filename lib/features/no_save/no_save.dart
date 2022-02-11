@@ -5,8 +5,8 @@ import 'package:hti_library/core/util/widgets/asset_svg.dart';
 import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
 
-class SavedPage extends StatelessWidget {
-  const SavedPage({Key? key}) : super(key: key);
+class NoSavedPage extends StatelessWidget {
+  const NoSavedPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
