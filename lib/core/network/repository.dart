@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:hti_library/core/network/remote/dio_helper.dart';
 import 'package:hti_library/core/util/constants.dart';
@@ -163,10 +162,15 @@ abstract class Repository {
     required String password,
   });
 
+  Future<Response> topBorrowRepo({
+    required int page,
+  });
+
+  Future<Response> bookDetailsRepo({
+    required String bookId,
+  });
+
   Future<Response> logOut();
-
-
-
 }
 
 class RepoImplementation extends Repository {
@@ -590,17 +594,40 @@ class RepoImplementation extends Repository {
         'email': email,
         'password': password,
       },
-
     );
   }
+
   @override
   Future<Response> logOut() async {
     return await dioHelper.get(
       url: logOutUrl,
       token: token,
-
     );
   }
 
-}
+  @override
+  Future<Response> topBorrowRepo({
+    required int page,
+  }) async {
+    return await dioHelper.get(
+      url: topBorrowUrl,
+      token: token,
+      query: {
+        'page': page,
+      },
+    );
+  }
 
+  @override
+  Future<Response> bookDetailsRepo({
+    required String bookId,
+  }) async {
+    return await dioHelper.get(
+      url: bookDetailsUrl,
+      token: token,
+      query: {
+        'book_id': bookId,
+      },
+    );
+  }
+}

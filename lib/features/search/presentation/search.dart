@@ -32,9 +32,10 @@ class SearchPage extends StatelessWidget {
           child: Column(
             children: [
               AppTextFormField(
+
                 hint: 'Search',
                 icon: AssetSvg(
-                  imagePath: 'search_normal',
+                  imagePath: 'search',
                   color: HexColor(mainColor),
                 ),
                 callbackHandle: (controller) {

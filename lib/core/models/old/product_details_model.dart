@@ -162,12 +162,12 @@ class ProductModel {
     quantityInStock = json['quantity_in_stock'] ?? 0;
     print('Parsed => quantityInStock');
 
-    image = json['image'] != null ? '$productsUrl${json['image']}' : 'empty';
+    image = json['image'] != null ? '${json['image']}' : 'empty';
     print('Parsed => image');
 
     if (json['gallery'] != null) {
       gallery = List.from(parseMapFromServer(json['gallery']))
-          .map((e) => '$productsUrl${e.toString()}')
+          .map((e) => '${e.toString()}')
           .toList();
 
       print('Parsed => gallery');
@@ -457,7 +457,7 @@ class ColorModel {
       attribute_type_id = json['attribute_type_id'];
     }
     if (json['image'] != null) {
-      image = '$attributesUrl${json['image']}';
+      image = '${json['image']}';
     }
 
     if (json['price'] != null) {
