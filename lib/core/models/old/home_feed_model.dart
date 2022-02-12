@@ -45,13 +45,13 @@ class HomeDataModel {
 
   HomeDataModel.fromJson(Map<String, dynamic> json) {
     if(json['ads_1'] != null) {
-      ads_1 = '$adsUrl${json['ads_1']}';
+      ads_1 = '${json['ads_1']}';
     }
     if(json['ads_2'] != null) {
-      ads_2 = '$adsUrl${json['ads_2']}';
+      ads_2 = '${json['ads_2']}';
     }
     if(json['ads_3'] != null) {
-      ads_3 = '$adsUrl${json['ads_3']}';
+      ads_3 = '${json['ads_3']}';
     }
     if(json['offers_banners'] != null) {
       offersBanners = List.from(json['offers_banners'])
@@ -101,8 +101,8 @@ class OffersBanners {
   OffersBanners.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     categoryId = json['category_id'];
-    imageEn = '$bannersUrl${json['image_en']}';
-    imageAr = '$bannersUrl${json['image_ar']}';
+    imageEn = '${json['image_en']}';
+    imageAr = '${json['image_ar']}';
     status = json['status'];
   }
 
@@ -194,8 +194,8 @@ class Categories {
     imageAr = json['image_ar'];
     imageEn = json['image_en'];
     cover = json['cover'];
-    bannerImageAr = '$categoriesUrl${json['banner_image_ar']}';
-    bannerImageEn = '$categoriesUrl${json['banner_image_en']}';
+    bannerImageAr = '${json['banner_image_ar']}';
+    bannerImageEn = '${json['banner_image_en']}';
     if(json['products'] != null) {
       print('-------------------------------------------------------');
       print((json['products'] as List).length);

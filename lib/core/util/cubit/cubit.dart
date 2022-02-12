@@ -9,7 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/error/exceptions.dart';
+import 'package:hti_library/core/models/book_model.dart';
 import 'package:hti_library/core/models/login_model.dart';
+import 'package:hti_library/core/models/top_borrow_model.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/network/repository.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
@@ -32,6 +34,12 @@ class MainCubit extends Cubit<MainState> {
       PageController(initialPage: 0, keepPage: true);
 
   int currentIndex = 0;
+  List<String> mainPageTitles = [
+    'Home',
+    'Categories',
+    'Saved',
+    'Account',
+  ];
 
   void bottomChanged(int index) {
     if (index == 3) {
@@ -492,4 +500,51 @@ class MainCubit extends Cubit<MainState> {
     currentDay = value;
     emit(SelectDay(value: currentDay));
   }
+
+  // topBorrow ------------------- start
+
+  TopBorrowModel? topBorrowModel;
+
+  void topBorrow({required int page}) async {
+    emit(TopBorrowLoading());
+    await _repository.topBorrowRepo(page: page).then((value) {
+      // success
+      topBorrowModel = TopBorrowModel.fromJson(value.data);
+      debugPrint(topBorrowModel!.books[1].bookImage);
+      debugPrint('topBorrowModel!.books[1].bookImage');
+      emit(TopBorrowSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+
+// topBorrow ------------------- end
+
+  // bookDetails ------------------- start
+
+  Book? bookModel;
+
+  void bookDetails({required String bookId}) async {
+    bookModel = null;
+    emit(BookDetailsLoading());
+    await _repository
+        .bookDetailsRepo(
+      bookId: bookId,
+    )
+        .then((value) {
+      // success
+      bookModel = Book.fromJson(value.data['book']);
+      debugPrint(bookModel!.bookImage);
+      emit(BookDetailsSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+
+// bookDetails ------------------- end
+
 }

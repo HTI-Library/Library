@@ -28,7 +28,7 @@ class UserModel{
     name = json['name'];
     email = json['email'];
     phone = json['phone'];
-    image = json['image'] != null ? '$profileImageUrl${json['image']}' : 'https://cdn-icons-png.flaticon.com/512/149/149071.png';
+    image = json['image'] != null ? '${json['image']}' : 'https://cdn-icons-png.flaticon.com/512/149/149071.png';
 
     if(json['addresses'] != null) {
       addresses = List.from(json['addresses'])

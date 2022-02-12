@@ -1,3 +1,4 @@
+import 'package:buildcondition/buildcondition.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -8,6 +9,7 @@ import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/core/util/keep_alive_widget.dart';
 import 'package:hti_library/core/util/widgets/book_item.dart';
+import 'package:hti_library/core/util/widgets/loading.dart';
 import 'package:hti_library/core/util/widgets/see_more_item.dart';
 import 'package:hti_library/features/account/widget/btn_my_account.dart';
 import 'package:hti_library/features/search/presentation/search.dart';
@@ -46,11 +48,18 @@ class HomePage extends StatelessWidget {
                   ),
                   color: HexColor(greyWhite),
                   height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                  child: ListView.builder(
+                  child:MainCubit.get(context).topBorrowModel != null? ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => BookItem(),
-                      itemCount: 10),
+                      itemBuilder: (context, index) => BookItem(
+                        book: MainCubit.get(context)
+                            .topBorrowModel!
+                            .books[index],
+                      ),
+                      itemCount: MainCubit.get(context)
+                          .topBorrowModel!
+                          .books
+                          .length) : const LoadingWidget(),
                 ),
                 SeeMoreItem(
                   gestureTapCallback: () {},
@@ -63,11 +72,18 @@ class HomePage extends StatelessWidget {
                   ),
                   color: HexColor(greyWhite),
                   height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                  child: ListView.builder(
+                  child:MainCubit.get(context).topBorrowModel != null? ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => BookItem(),
-                      itemCount: 10),
+                      itemBuilder: (context, index) => BookItem(
+                        book: MainCubit.get(context)
+                            .topBorrowModel!
+                            .books[index],
+                      ),
+                      itemCount: MainCubit.get(context)
+                          .topBorrowModel!
+                          .books
+                          .length) : const LoadingWidget(),
                 ),
                 SeeMoreItem(
                   gestureTapCallback: () {},
@@ -80,11 +96,18 @@ class HomePage extends StatelessWidget {
                   ),
                   color: HexColor(greyWhite),
                   height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                  child: ListView.builder(
+                  child:MainCubit.get(context).topBorrowModel != null? ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => BookItem(),
-                      itemCount: 10),
+                      itemBuilder: (context, index) => BookItem(
+                        book: MainCubit.get(context)
+                            .topBorrowModel!
+                            .books[index],
+                      ),
+                      itemCount: MainCubit.get(context)
+                          .topBorrowModel!
+                          .books
+                          .length) : const LoadingWidget(),
                 ),
                 SeeMoreItem(
                   gestureTapCallback: () {},
@@ -97,11 +120,18 @@ class HomePage extends StatelessWidget {
                   ),
                   color: HexColor(greyWhite),
                   height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                  child: ListView.builder(
+                  child:MainCubit.get(context).topBorrowModel != null? ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => BookItem(),
-                      itemCount: 10),
+                      itemBuilder: (context, index) => BookItem(
+                        book: MainCubit.get(context)
+                            .topBorrowModel!
+                            .books[index],
+                      ),
+                      itemCount: MainCubit.get(context)
+                          .topBorrowModel!
+                          .books
+                          .length) : const LoadingWidget(),
                 ),
               ],
             ),

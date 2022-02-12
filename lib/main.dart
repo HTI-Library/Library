@@ -105,7 +105,8 @@ class _MyAppState extends State<MyApp> {
               translation: widget.translation,
             )
             ..checkInternet()
-            ..checkConnectivity(),
+            ..checkConnectivity()
+            ..topBorrow(page: 1),
         ),
       ],
       child: BlocBuilder<MainCubit, MainState>(

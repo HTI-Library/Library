@@ -127,12 +127,12 @@ class UsedProductModel {
     print('Parsed => country_origin');
 
 
-    image = json['image'] != null ? '$usedProductUrl${json['image']}' : 'empty';
+    image = json['image'] != null ? '${json['image']}' : 'empty';
     print('Parsed => image $image');
 
     if(json['gallery'] != null) {
       gallery = List.from(parseMapFromServer(json['gallery']))
-          .map((e) => '$usedProductUrl${e.toString()}')
+          .map((e) => '${e.toString()}')
           .toList();
 
       print('Parsed => gallery');

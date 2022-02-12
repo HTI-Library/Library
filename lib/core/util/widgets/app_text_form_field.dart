@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
+
 import '../constants.dart';
 
 class AppTextFormField extends StatefulWidget {
@@ -52,7 +51,9 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
             color: HexColor(greyWhite),
           ),
           child: TextFormField(
-            style: Theme.of(context).textTheme.subtitle2,
+            style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                  color: HexColor(mainColor),
+                ),
             keyboardType: widget.type,
             controller: textEditingController,
             obscureText: widget.isPassword ? isShown : false,
@@ -76,7 +77,9 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
               focusedErrorBorder: const OutlineInputBorder(
                 borderSide: BorderSide.none,
               ),
-              hintStyle: Theme.of(context).textTheme.bodyText1,
+              hintStyle: Theme.of(context).textTheme.subtitle2!.copyWith(
+                    color: HexColor(mainColor),
+                  ),
               hintText: widget.hint,
               contentPadding: const EdgeInsetsDirectional.only(
                 start: 15.0,

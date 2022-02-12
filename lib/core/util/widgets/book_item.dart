@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/core/models/top_borrow_model.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/features/book/view_book.dart';
 
@@ -8,13 +9,18 @@ import 'asset_svg.dart';
 import 'available_item.dart';
 
 class BookItem extends StatelessWidget {
-  const BookItem({Key? key}) : super(key: key);
+  const BookItem({
+    Key? key,
+    required this.book,
+  }) : super(key: key);
+
+  final SimpleBook book;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      width: MediaQuery.of(context).size.width / 3.2+ 1.8,
+      width: MediaQuery.of(context).size.width / 3.2 + 1.8,
       margin: const EdgeInsetsDirectional.only(
         start: 10.0,
       ),
@@ -26,7 +32,11 @@ class BookItem extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            navigateTo(context, ViewBookPage());
+            navigateTo(
+                context,
+                ViewBookPage(
+                  bookId: book.id,
+                ));
           },
           child: Padding(
             padding: const EdgeInsets.all(
@@ -42,8 +52,9 @@ class BookItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Image(
-                    image: const NetworkImage(
-                        'https://edit.org/images/cat/book-covers-big-2019101610.jpg'),
+                    image: NetworkImage(
+                      'https://${book.bookImage}',
+                    ),
                     height: MediaQuery.of(context).size.width / 3.2 * 1.6,
                     width: MediaQuery.of(context).size.width / 3.2,
                     fit: BoxFit.fill,
@@ -51,16 +62,18 @@ class BookItem extends StatelessWidget {
                 ),
                 space5Vertical,
                 Text(
-                  'My Book Name',
+                  book.name,
                   maxLines: 1,
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(color:
-                  MainCubit.get(context).isDark ? HexColor(surface) : HexColor(mainColor)),
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                      color: MainCubit.get(context).isDark
+                          ? HexColor(surface)
+                          : HexColor(mainColor)),
                 ),
                 space5Vertical,
                 Row(
                   children: [
                     Text(
-                      '4.5',
+                      '${book.rate}',
                       maxLines: 2,
                       style: Theme.of(context).textTheme.caption,
                     ),
@@ -78,7 +91,8 @@ class BookItem extends StatelessWidget {
                       ),
                     ),
                     AvailableItem(
-                      label: 'Available',
+                      label: book.amount != 0 ? 'Available' : 'Not Available',
+                      color: book.amount == 0 ? HexColor(red) : null,
                     ),
                   ],
                 ),
