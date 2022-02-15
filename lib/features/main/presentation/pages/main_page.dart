@@ -11,9 +11,7 @@ import 'package:hti_library/features/account/pages/account/account.dart';
 import 'package:hti_library/features/categories/presentation/pages/categories.dart';
 import 'package:hti_library/features/home/presentation/pages/home_page.dart';
 import 'package:hti_library/features/internet_connection/page/internet_connection_page.dart';
-import 'package:hti_library/features/no_save/no_save.dart';
 import 'package:hti_library/features/saved/presentation/pages/saved.dart';
-import 'package:hti_library/features/wishlist/presentation/pages/wishlist_page.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key? key}) : super(key: key);
@@ -47,45 +45,15 @@ class _MainPageState extends State<MainPage> {
         return Conditional.single(
           context: context,
           conditionBuilder: (context) =>
-          !MainCubit.get(context).noInternetConnection,
+              !MainCubit.get(context).noInternetConnection,
           widgetBuilder: (context) => MainScaffold(
             scaffold: Scaffold(
               key: scaffoldKey,
               appBar: AppBar(
-                // leading: IconButton(
-                //     onPressed: () {
-                //       scaffoldKey.currentState!.openDrawer();
-                //     },
-                //     icon: Icon(FontAwesomeIcons.blog),),
-                // actions: [
-                //   IconButton(
-                //     onPressed: () {
-                //       if(MainCubit.get(context).userSigned){
-                //         MainCubit.get(context).getNotification();
-                //         navigateTo(context, const NotificationScreen());
-                //       }else{
-                //         showToast(toastStates: ToastStates.WARNING, message: appTranslation(context).please_login_to_get_notifications);
-                //         navigateTo(context, LoginPage());
-                //       }
-                //
-                //     },
-                //     icon: const MyThemeIcon(
-                //       path: 'notification',
-                //     ),
-                //   ),
-                //   IconButton(
-                //       onPressed: () {
-                //         navigateTo(context, SearchPage());
-                //       },
-                //       icon: const MyThemeIcon(
-                //         path: 'search',
-                //       )),
-                // ],
-                centerTitle: false,
                 titleSpacing: 15.0,
                 title: Text(
-                  'LIBRARY',
-                  style: Theme.of(context).textTheme.headline5,
+                  MainCubit.get(context).mainPageTitles[MainCubit.get(context).currentIndex],
+                  style: Theme.of(context).textTheme.headline6,
                 ),
               ),
               body: BlocBuilder<MainCubit, MainState>(

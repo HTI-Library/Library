@@ -8,9 +8,11 @@ class AvailableItem extends StatelessWidget {
     Key? key,
     required this.label,
     this.fontSize = 10.0,
+    this.color,
   }) : super(key: key);
   final String label;
   double fontSize;
+  Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class AvailableItem extends StatelessWidget {
         vertical: 3.0,
       ),
       decoration: BoxDecoration(
-        color: HexColor(green),
+        color: color ?? HexColor(green),
         borderRadius: BorderRadius.circular(4.0),
       ),
       child: Text(

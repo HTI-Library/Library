@@ -27,7 +27,7 @@ class CatDetailsItem extends StatelessWidget {
         color: HexColor(greyWhite),
         child: InkWell(
           onTap: () {
-            navigateTo(context, ViewBookPage());
+            // navigateTo(context, ViewBookPage(bookId: '',));
           },
           child: Padding(
             padding: const EdgeInsets.all(10.0),

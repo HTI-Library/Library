@@ -479,3 +479,11 @@ class SelectDay extends MainState {
         value,
       ];
 }
+
+class TopBorrowLoading extends MainState {}
+
+class TopBorrowSuccess extends MainState {}
+
+class BookDetailsLoading extends MainState {}
+
+class BookDetailsSuccess extends MainState {}

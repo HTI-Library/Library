@@ -82,7 +82,7 @@ class UsedMarketCategory {
     //     LanguageModel.fromMap(parseMapFromServer(json['meta_description']));
     special = json['special'];
     status = json['status'];
-    cover = '$usedCategoriesUrl${json['cover']}';
+    cover = '${json['cover']}';
   }
 
   Map<String, dynamic> toJson() {
@@ -165,7 +165,7 @@ class UsedMarketProduct {
     name = LanguageModel.fromMap(parseMapFromServer(json['name']));
     // shortDesc = LanguageModel.fromMap(parseMapFromServer(json['short_desc']));
     price = json['price'] ?? '0';
-    image = json['image'] != null ? '$usedProductUrl${json['image']}' : 'empty';
+    image = json['image'] != null ? '${json['image']}' : 'empty';
     special = json['special'];
     status = json['status'];
     countryOrigin = json['country_origin'] ?? '';
