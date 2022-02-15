@@ -17,11 +17,11 @@ class InfoPage extends StatelessWidget {
           padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
-              MyBtnAccount(text:'Privacy @ Data' ,voidCallback: (){},imagePath: "",),
+              MyBtnAccount(text:'${appTranslation(context).privacyPolicy}' ,voidCallback: (){},imagePath: "",),
               space20Vertical,
-              MyBtnAccount(text:'Get Help' ,voidCallback: (){},imagePath: "",),
+              MyBtnAccount(text:'${appTranslation(context).getHelp}' ,voidCallback: (){},imagePath: "",),
               space20Vertical,
-              MyBtnAccount(text:'About Us' ,voidCallback: (){},imagePath: "",),
+              MyBtnAccount(text:'${appTranslation(context).aboutUs}' ,voidCallback: (){},imagePath: "",),
               space20Vertical,
             ],
           ),

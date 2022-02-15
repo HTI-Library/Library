@@ -14,7 +14,7 @@ class SettingPages extends StatelessWidget {
     return MainScaffold(
       scaffold: BackScaffold(
         scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: 'Setting',
+        title: '${appTranslation(context).setting}',
         body: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
@@ -138,7 +138,7 @@ class SettingPages extends StatelessWidget {
                       });
                   // navigateTo(context, LanguagePage());
                 },
-                text: 'Language',
+                text: '${appTranslation(context).language}',
                 imagePath: "",
               ),
               space10Vertical,
@@ -180,7 +180,7 @@ class SettingPages extends StatelessWidget {
                                     MainCubit.get(context)
                                         .changeMode(value: false);
                                   },
-                                  text: 'Light',
+                                  text: '${appTranslation(context).light}',
                                   imagePath: 'sun_mode',
                                 ),
                                 space10Vertical,
@@ -189,7 +189,7 @@ class SettingPages extends StatelessWidget {
                                     MainCubit.get(context)
                                         .changeMode(value: true);
                                   },
-                                  text: 'Dark',
+                                  text: '${appTranslation(context).dark}',
                                   imagePath: "dark_mode",
                                 ),
                               ],
@@ -199,7 +199,7 @@ class SettingPages extends StatelessWidget {
                       });
                   // navigateTo(context, ThemesPage());
                 },
-                text: 'Themes',
+                text: '${appTranslation(context).themes}',
                 imagePath: "",
               ),
             ],

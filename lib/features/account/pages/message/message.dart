@@ -13,7 +13,7 @@ class MessagePage extends StatelessWidget {
         scaffoldBackgroundColor: Theme
             .of(context)
             .scaffoldBackgroundColor,
-        title: 'Message',
+        title: '${appTranslation(context).myMessage}',
         body: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Center(

@@ -11,7 +11,7 @@ class NotificationPage extends StatelessWidget {
     return MainScaffold(
       scaffold: BackScaffold(
         scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: 'Notification',
+        title: '${appTranslation(context).notification}',
         body: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
