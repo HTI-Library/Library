@@ -55,12 +55,12 @@ class CatDetailsItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Python Programming dddddd ddddddf',
+                        'Python Programming Zero to Hero',
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 1,
                       ),
                       Text(
-                        'Author : Franklin',
+                        '${appTranslation(context).author} : Franklin',
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 1,
                       ),
@@ -69,7 +69,7 @@ class CatDetailsItem extends StatelessWidget {
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                       Text(
-                        '205, Pages',
+                        '${appTranslation(context).pagesNum} : 223',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                       const Divider(),
@@ -93,7 +93,7 @@ class CatDetailsItem extends StatelessWidget {
                           const Spacer(),
                           AvailableItem(
 
-                            label: 'Available',
+                            label: '${appTranslation(context).available}',
                           ),
                         ],
                       ),
@@ -105,7 +105,7 @@ class CatDetailsItem extends StatelessWidget {
                           Expanded(
                             child: AppButton(
                               height: 35.0,
-                              label: 'Borrow',
+                              label: '${appTranslation(context).borrow}',
                               onPress: () {},
                             ),
                           ),
@@ -114,7 +114,7 @@ class CatDetailsItem extends StatelessWidget {
                             child: AppButton(
                                 height: 35.0,
                                 color: HexColor(greyWhite),
-                                label: 'Read',
+                                label: '${appTranslation(context).read}',
                                 textColor: HexColor(mainColor),
                                 onPress: () {}),
                           ),

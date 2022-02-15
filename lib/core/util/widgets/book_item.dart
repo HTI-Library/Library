@@ -51,7 +51,7 @@ class BookItem extends StatelessWidget {
                 ),
                 space5Vertical,
                 Text(
-                  'My Book Name',
+                  '${appTranslation(context).bookName}',
                   maxLines: 1,
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(color:
                   MainCubit.get(context).isDark ? HexColor(surface) : HexColor(mainColor)),
@@ -78,7 +78,7 @@ class BookItem extends StatelessWidget {
                       ),
                     ),
                     AvailableItem(
-                      label: 'Available',
+                      label: '${appTranslation(context).available}',
                     ),
                   ],
                 ),

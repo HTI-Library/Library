@@ -85,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Login to library',
+                              '${appTranslation(context).loginToLibrary}',
                               style: Theme.of(context)
                                   .textTheme
                                   .headline4!
@@ -100,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                                 imagePath: 'sms',
                                 color: HexColor(mainColor),
                               ),
-                              hint: 'ID',
+                              hint: '${appTranslation(context).id}',
                               callbackHandle: (controller) {
                                 emailController = controller;
                               },
@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                             space20Vertical,
                             AppTextFormField(
                               isPassword: true,
-                              hint: 'Password',
+                              hint: '${appTranslation(context).password}',
                               callbackHandle: (controller) {
                                 passwordController = controller;
                               },
@@ -146,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                                             password: passwordController.text);
                                       }
                                     : null,
-                                label: 'SUBMIT',
+                                label: '${appTranslation(context).logIn}',
                               ),
                             ),
                           ],

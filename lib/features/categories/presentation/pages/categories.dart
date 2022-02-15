@@ -29,7 +29,7 @@ class Categories extends StatelessWidget {
                       voidCallback: () {
                         navigateTo(context, SearchPage());
                       },
-                      text: 'Search',
+                      text: '${appTranslation(context).search}',
                       imagePath: 'search',
                     ),
                   ),

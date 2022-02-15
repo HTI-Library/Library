@@ -63,25 +63,51 @@ class ViewBookPage extends StatelessWidget {
                       ),
                     ),
                     space20Vertical,
+
+
+
                     Text(
-                      'python code.',
-                      style: Theme.of(context).textTheme.subtitle2!,
+                      'Python Programming Zero to Hero',
+                      style: Theme.of(context).textTheme.subtitle2,
+                      maxLines: 1,
                     ),
-                    space3Vertical,
                     Text(
-                      'Fankoo.',
-                      style: Theme.of(context).textTheme.subtitle2!,
+                      '${appTranslation(context).author} : Franklin',
+                      style: Theme.of(context).textTheme.subtitle2,
+                      maxLines: 1,
                     ),
-                    space3Vertical,
                     Text(
-                      '10th Ramadan.',
-                      style: Theme.of(context).textTheme.subtitle2!,
+                      '3th Edition',
+                      style: Theme.of(context).textTheme.subtitle2,
                     ),
+                    Text(
+                      '${appTranslation(context).pagesNum} : 223',
+                      style: Theme.of(context).textTheme.subtitle2,
+                    ),
+
+
+                    //
+                    // Text(
+                    //   'python code.',
+                    //   style: Theme.of(context).textTheme.subtitle2!,
+                    // ),
+                    // space3Vertical,
+                    // Text(
+                    //   'Fankoo.',
+                    //   style: Theme.of(context).textTheme.subtitle2!,
+                    // ),
+                    // space3Vertical,
+                    // Text(
+                    //   '10th Ramadan.',
+                    //   style: Theme.of(context).textTheme.subtitle2!,
+                    // ),
+
+
                     space8Vertical,
                     Row(
                       children: [
                         AvailableItem(
-                          label: 'Available',
+                          label: '${appTranslation(context).available}',
                         ),
                         const Spacer(),
                         RatingBar.builder(
@@ -108,7 +134,7 @@ class ViewBookPage extends StatelessWidget {
                       children: [
                         Expanded(
                           child: AppButton(
-                              label: 'Borrow', onPress: () {
+                              label: '${appTranslation(context).borrow}', onPress: () {
                                 navigateTo(context, BorrowingPage());
                           }),
                         ),
@@ -116,7 +142,7 @@ class ViewBookPage extends StatelessWidget {
                         Expanded(
                           child: AppButton(
                               color: HexColor(greyWhite),
-                              label: 'Read',
+                              label: '${appTranslation(context).read}',
                               textColor: HexColor(mainColor),
                               onPress: () {}),
                         ),
@@ -124,7 +150,7 @@ class ViewBookPage extends StatelessWidget {
                     ),
                     space15Vertical,
                     Text(
-                      'Overview.',
+                      '${appTranslation(context).overview}',
                       style: Theme.of(context).textTheme.headline6!,
                     ),
                     space5Vertical,
@@ -148,7 +174,7 @@ class ViewBookPage extends StatelessWidget {
               SeeMoreItem(
                 padding: 15,
                 gestureTapCallback: () {},
-                text: 'More Edition of this book',
+                text: '${appTranslation(context).moreEditionOfThisBook}',
               ),
               Container(
                 padding: const EdgeInsetsDirectional.only(
@@ -166,7 +192,7 @@ class ViewBookPage extends StatelessWidget {
               SeeMoreItem(
                 padding: 15,
                 gestureTapCallback: () {},
-                text: 'More books from the same category',
+                text: '${appTranslation(context).moreBooksFromThisCategory}',
               ),
               Container(
                 padding: const EdgeInsetsDirectional.only(
@@ -184,7 +210,7 @@ class ViewBookPage extends StatelessWidget {
               SeeMoreItem(
                 padding: 15,
                 gestureTapCallback: () {},
-                text: 'More books from the same auther',
+                text: '${appTranslation(context).moreBooksFromThisAuthor}',
               ),
               Container(
                 padding: const EdgeInsetsDirectional.only(

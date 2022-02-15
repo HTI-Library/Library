@@ -58,7 +58,7 @@ class SavedDetailsItem extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              'Python Programming  ',
+                              'Java Programming A to Z',
                               style: Theme.of(context).textTheme.subtitle2,
                               maxLines: 1,
                             ),
@@ -74,7 +74,7 @@ class SavedDetailsItem extends StatelessWidget {
                           ],
                         ),
                         Text(
-                          'Author : Franklin',
+                          '${appTranslation(context).author} : Franklin',
                           style: Theme.of(context).textTheme.subtitle2,
                           maxLines: 1,
                         ),
@@ -83,7 +83,7 @@ class SavedDetailsItem extends StatelessWidget {
                           style: Theme.of(context).textTheme.subtitle2,
                         ),
                         Text(
-                          '205, Pages',
+                          '${appTranslation(context).pagesNum} : 227',
                           style: Theme.of(context).textTheme.subtitle2,
                         ),
                         const Spacer(),
@@ -93,7 +93,7 @@ class SavedDetailsItem extends StatelessWidget {
                           children: [
                             const Spacer(),
                             AvailableItem(
-                              label: 'Available',
+                              label: '${appTranslation(context).available}',
                             ),
                           ],
                         ),

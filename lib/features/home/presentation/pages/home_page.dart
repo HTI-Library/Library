@@ -30,14 +30,14 @@ class HomePage extends StatelessWidget {
                     voidCallback: () {
                       navigateTo(context, SearchPage());
                     },
-                    text: 'Search',
+                    text: '${appTranslation(context).search}',
                     imagePath: 'search',
                   ),
                 ),
                 space15Vertical,
                 SeeMoreItem(
                   gestureTapCallback: () {},
-                  text: 'Top Borrow Books',
+                  text: '${appTranslation(context).topBorrowBooks}',
                 ),
                 Container(
                   padding: const EdgeInsetsDirectional.only(
@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
                 ),
                 SeeMoreItem(
                   gestureTapCallback: () {},
-                  text: 'Recently Returned',
+                  text: '${appTranslation(context).recentlyReturned}',
                 ),
                 Container(
                   padding: const EdgeInsetsDirectional.only(
@@ -71,7 +71,7 @@ class HomePage extends StatelessWidget {
                 ),
                 SeeMoreItem(
                   gestureTapCallback: () {},
-                  text: 'HTI Material',
+                  text: '${appTranslation(context).htiMaterial}',
                 ),
                 Container(
                   padding: const EdgeInsetsDirectional.only(
@@ -88,7 +88,7 @@ class HomePage extends StatelessWidget {
                 ),
                 SeeMoreItem(
                   gestureTapCallback: () {},
-                  text: 'Graduation Projects',
+                  text: '${appTranslation(context).graduationProjects}',
                 ),
                 Container(
                   padding: const EdgeInsetsDirectional.only(
