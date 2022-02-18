@@ -170,6 +170,12 @@ abstract class Repository {
     required String bookId,
   });
 
+  Future<Response> categoriesRepo();
+
+  Future<Response> categoryDetailsRepo({
+    required String categoryName,
+  });
+
   Future<Response> logOut();
 }
 
@@ -630,4 +636,24 @@ class RepoImplementation extends Repository {
       },
     );
   }
+
+  @override
+  Future<Response> categoriesRepo() async {
+    return await dioHelper.get(
+      url: categoriesUrl,
+    );
+  }
+
+  @override
+  Future<Response> categoryDetailsRepo({
+    required String categoryName,
+  }) async {
+    return await dioHelper.get(
+      url: categoryUrl,
+      query: {
+        'category': categoryName,
+      },
+    );
+  }
+
 }

@@ -28,6 +28,7 @@ class SimpleBook {
   late final String name;
   late final int amount;
   late final String overview;
+  late final String authors;
 
   late final int rate;
   late final String edition;
@@ -45,10 +46,10 @@ class SimpleBook {
     name = json['name'] ?? '';
     amount = json['amount'] ?? 0;
     // overview = json['overview'] ?? '';
-
+    authors = json['authers'] ?? '';
     rate = json['rate'] ?? 0;
-    // edition = json['edition'] ?? '';
-    // pages = json['pages'] ?? 0;
+    edition = json['edition'] ?? '';
+    pages = json['pages'] ?? 0;
     // category = json['category'] ?? '';
     // topBorrow = json['top_Borrow'] ?? 0;
     bookImage = json['bookImage'] ?? '';

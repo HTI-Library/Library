@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/core/models/top_borrow_model.dart';
 import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/widgets/app_button.dart';
 import 'package:hti_library/core/util/widgets/available_item.dart';
 import 'package:hti_library/features/book/view_book.dart';
 
 class CatDetailsItem extends StatelessWidget {
-  const CatDetailsItem({Key? key}) : super(key: key);
+  const CatDetailsItem({Key? key, required this.model}) : super(key: key);
+  final SimpleBook model;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,11 @@ class CatDetailsItem extends StatelessWidget {
         color: HexColor(greyWhite),
         child: InkWell(
           onTap: () {
-            // navigateTo(context, ViewBookPage(bookId: '',));
+            navigateTo(
+                context,
+                ViewBookPage(
+                  bookId: model.id,
+                ));
           },
           child: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -41,8 +47,7 @@ class CatDetailsItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Image(
-                    image: const NetworkImage(
-                        'https://edit.org/images/cat/book-covers-big-2019101610.jpg'),
+                    image: NetworkImage(model.bookImage),
                     height: MediaQuery.of(context).size.width / 3.9 * 1.6,
                     width: MediaQuery.of(context).size.width / 3.9,
                     fit: BoxFit.fill,
@@ -55,17 +60,17 @@ class CatDetailsItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Python Programming Zero to Hero',
+                        model.name,
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 1,
                       ),
                       Text(
-                        '${appTranslation(context).author} : Franklin',
+                        '${appTranslation(context).author} : ${model.authors}',
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 1,
                       ),
                       Text(
-                        '3th Edition',
+                        model.edition,
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                       Text(
@@ -92,8 +97,7 @@ class CatDetailsItem extends StatelessWidget {
                               }),
                           const Spacer(),
                           AvailableItem(
-
-                            label: '${appTranslation(context).available}',
+                            amount: model.amount,
                           ),
                         ],
                       ),
@@ -105,7 +109,7 @@ class CatDetailsItem extends StatelessWidget {
                           Expanded(
                             child: AppButton(
                               height: 35.0,
-                              label: '${appTranslation(context).borrow}',
+                              label: appTranslation(context).borrow,
                               onPress: () {},
                             ),
                           ),
@@ -114,7 +118,7 @@ class CatDetailsItem extends StatelessWidget {
                             child: AppButton(
                                 height: 35.0,
                                 color: HexColor(greyWhite),
-                                label: '${appTranslation(context).read}',
+                                label: appTranslation(context).read,
                                 textColor: HexColor(mainColor),
                                 onPress: () {}),
                           ),

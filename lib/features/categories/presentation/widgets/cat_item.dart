@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/core/models/categories_model.dart';
 import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/features/category_details/presentation/pages/category_details_page.dart';
 
 class CatItem extends StatelessWidget {
-  const CatItem({Key? key}) : super(key: key);
+  const CatItem({Key? key, required this.model}) : super(key: key);
+  final CategoryModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class CatItem extends StatelessWidget {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: InkWell(
         onTap: () {
-          navigateTo(context, CategoryDetailsPage());
+          navigateTo(context, CategoryDetailsPage(catName: model.name,));
         },
         child: Column(
           children: [
@@ -34,7 +36,7 @@ class CatItem extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Text(
-                'Python',
+                model.name,
                 style: Theme.of(context).textTheme.subtitle2,
               ),
             ),
