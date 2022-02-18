@@ -9,6 +9,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/error/exceptions.dart';
 import 'package:hti_library/core/models/book_details_model.dart';
+import 'package:hti_library/core/models/categories_model.dart';
 import 'package:hti_library/core/models/login_model.dart';
 import 'package:hti_library/core/models/top_borrow_model.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
@@ -553,6 +554,55 @@ class MainCubit extends Cubit<MainState> {
     });
   }
 
-// bookDetails ------------------- end
+  // bookDetails ------------------- end
+
+  // categories ------------------- start
+
+  CategoriesModel? categoriesModel;
+
+  void categories() async {
+    debugPrint('categories------------loading');
+    emit(CategoriesLoading());
+    await _repository.categoriesRepo().then((value) {
+      // success
+      categoriesModel = CategoriesModel.fromJson(value.data);
+      debugPrint('categories------------success');
+      emit(CategoriesSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint('categories------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+
+  // categories ------------------- end
+
+  // categoryDetails ------------------- start
+
+  TopBorrowModel? categoryDetailsModel;
+
+  void categoryDetails({
+    required String categoryName,
+  }) async {
+    categoryDetailsModel = null;
+    debugPrint('categoryDetails------------loading');
+    emit(CategoryLoading());
+    await _repository
+        .categoryDetailsRepo(categoryName: categoryName)
+        .then((value) {
+      // success
+      categoryDetailsModel = TopBorrowModel.fromJson(value.data);
+      debugPrint('categoryDetails------------success');
+      emit(CategorySuccess());
+    }).catchError((error) {
+      // error
+      debugPrint('categoryDetails------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+
+// categoryDetails ------------------- end
 
 }

@@ -108,20 +108,10 @@ class _ViewBookPageState extends State<ViewBookPage> {
                           Row(
                             children: [
                               AvailableItem(
-                                label: MainCubit.get(context)
-                                            .bookModel!
-                                            .book
-                                            .amount !=
-                                        0
-                                    ? 'Available'
-                                    : 'Not Available',
-                                color: MainCubit.get(context)
-                                            .bookModel!
-                                            .book
-                                            .amount ==
-                                        0
-                                    ? HexColor(red)
-                                    : null,
+                                amount: MainCubit.get(context)
+                                    .bookModel!
+                                    .book
+                                    .amount,
                               ),
                               const Spacer(),
                               RatingBar.builder(

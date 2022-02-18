@@ -98,7 +98,7 @@ class SavedItem extends StatelessWidget {
                     ),
                     const Spacer(),
                     AvailableItem(
-                      label: 'Available',
+                      amount: 1,
                     ),
                   ],
                 ),

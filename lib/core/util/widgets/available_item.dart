@@ -6,13 +6,11 @@ import '../constants.dart';
 class AvailableItem extends StatelessWidget {
   AvailableItem({
     Key? key,
-    required this.label,
+    required this.amount,
     this.fontSize = 10.0,
-    this.color,
   }) : super(key: key);
-  final String label;
+  final int amount;
   double fontSize;
-  Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +20,11 @@ class AvailableItem extends StatelessWidget {
         vertical: 3.0,
       ),
       decoration: BoxDecoration(
-        color: color ?? HexColor(green),
+        color: amount == 0 ? HexColor(red) : HexColor(green),
         borderRadius: BorderRadius.circular(4.0),
       ),
       child: Text(
-        label,
+          amount != 0 ? appTranslation(context).available : appTranslation(context).unavailable,
         style: Theme.of(context).textTheme.caption!.copyWith(
               color: HexColor(surface),
               fontSize: fontSize,

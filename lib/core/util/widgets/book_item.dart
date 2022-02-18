@@ -91,8 +91,7 @@ class BookItem extends StatelessWidget {
                       ),
                     ),
                     AvailableItem(
-                      label: book.amount != 0 ? 'Available' : 'Not Available',
-                      color: book.amount == 0 ? HexColor(red) : null,
+                      amount: book.amount,
                     ),
                   ],
                 ),
