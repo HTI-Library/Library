@@ -2,14 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/error/exceptions.dart';
-import 'package:hti_library/core/models/book_model.dart';
+import 'package:hti_library/core/models/book_details_model.dart';
 import 'package:hti_library/core/models/login_model.dart';
 import 'package:hti_library/core/models/top_borrow_model.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
@@ -94,7 +93,7 @@ class MainCubit extends Cubit<MainState> {
   }
 
   void changeTheme() {
-    family = isRtl ? 'Cairo' : 'Poppins';
+    family = isRtl ? 'Roboto' : 'Roboto';
 
     lightTheme = ThemeData(
       scaffoldBackgroundColor: Colors.white,
@@ -446,6 +445,7 @@ class MainCubit extends Cubit<MainState> {
     required String email,
     required String password,
   }) async {
+    debugPrint('login------------loading');
     emit(LoginLoading());
     await _repository.login(email: email, password: password).then((value) {
       // success
@@ -454,12 +454,14 @@ class MainCubit extends Cubit<MainState> {
       loginModel = LoginModel.fromJson(value.data);
       changeUser(true);
       currentIndex = 0;
+      debugPrint('login------------success');
       emit(LoginSuccess(loginModel: loginModel!));
     }).catchError((error) {
       // error
       debugPrint(error.toString());
       debugPrint('error');
       ServerException exception = error as ServerException;
+      debugPrint('login------------error');
       debugPrint(exception.error);
       emit(Error(error.toString()));
     });
@@ -506,15 +508,18 @@ class MainCubit extends Cubit<MainState> {
   TopBorrowModel? topBorrowModel;
 
   void topBorrow({required int page}) async {
+    debugPrint('topBorrow------------loading');
     emit(TopBorrowLoading());
     await _repository.topBorrowRepo(page: page).then((value) {
       // success
       topBorrowModel = TopBorrowModel.fromJson(value.data);
       debugPrint(topBorrowModel!.books[1].bookImage);
       debugPrint('topBorrowModel!.books[1].bookImage');
+      debugPrint('topBorrow------------success');
       emit(TopBorrowSuccess());
     }).catchError((error) {
       // error
+      debugPrint('topBorrow------------error');
       debugPrint(error.toString());
       emit(Error(error.toString()));
     });
@@ -524,9 +529,10 @@ class MainCubit extends Cubit<MainState> {
 
   // bookDetails ------------------- start
 
-  Book? bookModel;
+  BookDetailsModel? bookModel;
 
   void bookDetails({required String bookId}) async {
+    debugPrint('bookDetails------------loading');
     bookModel = null;
     emit(BookDetailsLoading());
     await _repository
@@ -535,11 +541,13 @@ class MainCubit extends Cubit<MainState> {
     )
         .then((value) {
       // success
-      bookModel = Book.fromJson(value.data['book']);
-      debugPrint(bookModel!.bookImage);
+      bookModel = BookDetailsModel.fromJson(value.data);
+      debugPrint(bookModel!.book.bookImage);
+      debugPrint('bookDetails------------success');
       emit(BookDetailsSuccess());
     }).catchError((error) {
       // error
+      debugPrint('bookDetails------------error');
       debugPrint(error.toString());
       emit(Error(error.toString()));
     });

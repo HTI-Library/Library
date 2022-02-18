@@ -53,7 +53,7 @@ class BookItem extends StatelessWidget {
                   ),
                   child: Image(
                     image: NetworkImage(
-                      'https://${book.bookImage}',
+                      book.bookImage,
                     ),
                     height: MediaQuery.of(context).size.width / 3.2 * 1.6,
                     width: MediaQuery.of(context).size.width / 3.2,

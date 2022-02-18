@@ -1,12 +1,46 @@
-import 'auther_model.dart';
+import 'package:hti_library/core/models/top_borrow_model.dart';
 
-class Book {
+class BookDetailsModel {
+  final BookDetails book;
+  final List<SimpleBook> sameCategory;
+  final List<SimpleBook> sameAuthor;
+  final List<SimpleBook> sameEdition;
+
+  const BookDetailsModel({
+    required this.book,
+    required this.sameCategory,
+    required this.sameAuthor,
+    required this.sameEdition,
+  });
+
+  factory BookDetailsModel.fromJson(Map<String, dynamic> json) {
+    return BookDetailsModel(
+      book: BookDetails.fromJson(json['book']),
+      sameCategory:
+          List.from(json['same_category']).map((e) => SimpleBook.fromJson(e)).toList(),
+      sameAuthor:
+      List.from(json['same_auther']).map((e) => SimpleBook.fromJson(e)).toList(),
+      sameEdition:
+      List.from(json['same_edition']).map((e) => SimpleBook.fromJson(e)).toList(),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'book': book,
+      'same_category': sameCategory,
+      'same_auther': sameAuthor,
+      'same_edition': sameEdition,
+    };
+  }
+}
+
+class BookDetails {
   late final String id;
   late final String name;
   late final int amount;
   late final String overview;
-  late final List<Author> authors;
-
+  late final String authors;
   late final int rate;
   late final String edition;
   late final int pages;
@@ -17,18 +51,13 @@ class Book {
   late final String createdAt;
   late final String updatedAt;
   late final int __v;
-  late final String bookImagePath;
-  late final String bookLinkPath;
 
-  Book.fromJson(Map<String, dynamic> json) {
+  BookDetails.fromJson(Map<String, dynamic> json) {
     id = json['_id'] ?? '';
     name = json['name'] ?? '';
     amount = json['amount'] ?? 0;
     overview = json['overview'] ?? '';
-
-    authors =
-        List.from(json['authers']).map((e) => Author.fromJson(e)).toList();
-
+    authors = json['authers'] ?? '';
     rate = json['rate'] ?? 0;
     edition = json['edition'] ?? '';
     pages = json['pages'] ?? 0;
@@ -39,8 +68,6 @@ class Book {
     createdAt = json['createdAt'] ?? '';
     updatedAt = json['updatedAt'] ?? '';
     __v = json['__v'] ?? 0;
-    bookImagePath = json['bookImagepath'] ?? '';
-    bookLinkPath = json['bookLinkpath'] ?? '';
   }
 
   Map<String, dynamic> toJson() {
@@ -49,7 +76,6 @@ class Book {
     _data['name'] = name;
     _data['amount'] = amount;
     _data['overview'] = overview;
-
     _data['rate'] = rate;
     _data['edition'] = edition;
     _data['pages'] = pages;
@@ -60,8 +86,6 @@ class Book {
     _data['createdAt'] = createdAt;
     _data['updatedAt'] = updatedAt;
     _data['__v'] = __v;
-    _data['bookImagepath'] = bookImagePath;
-    _data['bookLinkpath'] = bookLinkPath;
     return _data;
   }
 }
