@@ -80,7 +80,10 @@ class _ViewBookPageState extends State<ViewBookPage> {
                                 image: DecorationImage(
                                   fit: BoxFit.fill,
                                   image: NetworkImage(
-                                    'https://${MainCubit.get(context).bookModel!.bookImage}',
+                                    MainCubit.get(context)
+                                        .bookModel!
+                                        .book
+                                        .bookImage,
                                   ),
                                 ),
                               ),
@@ -88,42 +91,44 @@ class _ViewBookPageState extends State<ViewBookPage> {
                           ),
                           space20Vertical,
                           Text(
-                            MainCubit.get(context).bookModel!.name,
+                            MainCubit.get(context).bookModel!.book.name,
                             style: Theme.of(context).textTheme.subtitle2!,
                           ),
                           space3Vertical,
                           Text(
-                            MainCubit.get(context)
-                                .bookModel!
-                                .authors[1]
-                                .authorName,
+                            MainCubit.get(context).bookModel!.book.authors,
                             style: Theme.of(context).textTheme.subtitle2!,
                           ),
                           space3Vertical,
                           Text(
-                            MainCubit.get(context).bookModel!.edition,
+                            MainCubit.get(context).bookModel!.book.edition,
                             style: Theme.of(context).textTheme.subtitle2!,
                           ),
                           space8Vertical,
                           Row(
                             children: [
                               AvailableItem(
-                                label:
-                                    MainCubit.get(context).bookModel!.amount !=
-                                            0
-                                        ? 'Available'
-                                        : 'Not Available',
-                                color:
-                                    MainCubit.get(context).bookModel!.amount ==
-                                            0
-                                        ? HexColor(red)
-                                        : null,
+                                label: MainCubit.get(context)
+                                            .bookModel!
+                                            .book
+                                            .amount !=
+                                        0
+                                    ? 'Available'
+                                    : 'Not Available',
+                                color: MainCubit.get(context)
+                                            .bookModel!
+                                            .book
+                                            .amount ==
+                                        0
+                                    ? HexColor(red)
+                                    : null,
                               ),
                               const Spacer(),
                               RatingBar.builder(
                                   ignoreGestures: true,
                                   initialRating: MainCubit.get(context)
                                       .bookModel!
+                                      .book
                                       .rate
                                       .toDouble(),
                                   minRating: 1,
@@ -176,7 +181,7 @@ class _ViewBookPageState extends State<ViewBookPage> {
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Text(
-                                MainCubit.get(context).bookModel!.overview,
+                                MainCubit.get(context).bookModel!.book.overview,
                                 maxLines: 8,
                                 style: Theme.of(context).textTheme.bodyText1,
                               ),
@@ -185,81 +190,99 @@ class _ViewBookPageState extends State<ViewBookPage> {
                         ],
                       ),
                     ),
-                    SeeMoreItem(
-                      padding: 15,
-                      gestureTapCallback: () {},
-                      text: 'More Edition of this book',
-                    ),
-                    Container(
-                      padding: const EdgeInsetsDirectional.only(
-                        top: 5.0,
-                        bottom: 5.0,
+                    if (MainCubit.get(context)
+                        .bookModel!
+                        .sameEdition
+                        .isNotEmpty)
+                      SeeMoreItem(
+                        padding: 15,
+                        gestureTapCallback: () {},
+                        text: 'More Edition of this book',
                       ),
-                      color: HexColor(greyWhite),
-                      height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                      child: ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) => BookItem(
-                                book: MainCubit.get(context)
-                                    .topBorrowModel!
-                                    .books[index],
-                              ),
-                          itemCount: MainCubit.get(context)
-                              .topBorrowModel!
-                              .books
-                              .length),
-                    ),
-                    SeeMoreItem(
-                      padding: 15,
-                      gestureTapCallback: () {},
-                      text: 'More books from the same category',
-                    ),
-                    Container(
-                      padding: const EdgeInsetsDirectional.only(
-                        top: 5.0,
-                        bottom: 5.0,
+                    if (MainCubit.get(context)
+                        .bookModel!
+                        .sameEdition
+                        .isNotEmpty)
+                      Container(
+                        padding: const EdgeInsetsDirectional.only(
+                          top: 5.0,
+                          bottom: 5.0,
+                        ),
+                        color: HexColor(greyWhite),
+                        height: MediaQuery.of(context).size.width / 3.2 * 2.2,
+                        child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) => BookItem(
+                                  book: MainCubit.get(context)
+                                      .bookModel!
+                                      .sameEdition[index],
+                                ),
+                            itemCount: MainCubit.get(context)
+                                .bookModel!
+                                .sameEdition
+                                .length),
                       ),
-                      color: HexColor(greyWhite),
-                      height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                      child: ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) => BookItem(
-                                book: MainCubit.get(context)
-                                    .topBorrowModel!
-                                    .books[index],
-                              ),
-                          itemCount: MainCubit.get(context)
-                              .topBorrowModel!
-                              .books
-                              .length),
-                    ),
-                    SeeMoreItem(
-                      padding: 15,
-                      gestureTapCallback: () {},
-                      text: 'More books from the same auther',
-                    ),
-                    Container(
-                      padding: const EdgeInsetsDirectional.only(
-                        top: 5.0,
-                        bottom: 5.0,
+                    if (MainCubit.get(context)
+                        .bookModel!
+                        .sameCategory
+                        .isNotEmpty)
+                      SeeMoreItem(
+                        padding: 15,
+                        gestureTapCallback: () {},
+                        text: 'More books from the same category',
                       ),
-                      color: HexColor(greyWhite),
-                      height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                      child: ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) => BookItem(
-                                book: MainCubit.get(context)
-                                    .topBorrowModel!
-                                    .books[index],
-                              ),
-                          itemCount: MainCubit.get(context)
-                              .topBorrowModel!
-                              .books
-                              .length),
-                    ),
+                    if (MainCubit.get(context)
+                        .bookModel!
+                        .sameCategory
+                        .isNotEmpty)
+                      Container(
+                        padding: const EdgeInsetsDirectional.only(
+                          top: 5.0,
+                          bottom: 5.0,
+                        ),
+                        color: HexColor(greyWhite),
+                        height: MediaQuery.of(context).size.width / 3.2 * 2.2,
+                        child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) => BookItem(
+                                  book: MainCubit.get(context)
+                                      .bookModel!
+                                      .sameCategory[index],
+                                ),
+                            itemCount: MainCubit.get(context)
+                                .bookModel!
+                                .sameCategory
+                                .length),
+                      ),
+                    if (MainCubit.get(context).bookModel!.sameAuthor.isNotEmpty)
+                      SeeMoreItem(
+                        padding: 15,
+                        gestureTapCallback: () {},
+                        text: 'More books from the same author',
+                      ),
+                    if (MainCubit.get(context).bookModel!.sameAuthor.isNotEmpty)
+                      Container(
+                        padding: const EdgeInsetsDirectional.only(
+                          top: 5.0,
+                          bottom: 5.0,
+                        ),
+                        color: HexColor(greyWhite),
+                        height: MediaQuery.of(context).size.width / 3.2 * 2.2,
+                        child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) => BookItem(
+                                  book: MainCubit.get(context)
+                                      .bookModel!
+                                      .sameAuthor[index],
+                                ),
+                            itemCount: MainCubit.get(context)
+                                .bookModel!
+                                .sameAuthor
+                                .length),
+                      ),
                   ],
                 )),
             fallback: (context) => const LoadingWidget(),

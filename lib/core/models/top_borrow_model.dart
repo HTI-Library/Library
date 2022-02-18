@@ -1,6 +1,6 @@
 class TopBorrowModel {
   final List<SimpleBook> books;
-  final int allBooks;
+  final num allBooks;
 
   const TopBorrowModel({
     required this.books,
@@ -39,8 +39,6 @@ class SimpleBook {
   late final String createdAt;
   late final String updatedAt;
   late final int __v;
-  late final String bookImagePath;
-  late final String bookLinkPath;
 
   SimpleBook.fromJson(Map<String, dynamic> json) {
     id = json['_id'] ?? '';
@@ -77,8 +75,6 @@ class SimpleBook {
     _data['createdAt'] = createdAt;
     _data['updatedAt'] = updatedAt;
     _data['__v'] = __v;
-    _data['bookImagepath'] = bookImagePath;
-    _data['bookLinkpath'] = bookLinkPath;
     return _data;
   }
 }
