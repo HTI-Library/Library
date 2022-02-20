@@ -57,7 +57,7 @@ class BookDetails {
     name = json['name'] ?? '';
     amount = json['amount'] ?? 0;
     overview = json['overview'] ?? '';
-    authors = json['authers'] ?? '';
+    authors = json['auther'] ?? '';
     rate = json['rate'] ?? 0;
     edition = json['edition'] ?? '';
     pages = json['pages'] ?? 0;

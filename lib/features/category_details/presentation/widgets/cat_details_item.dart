@@ -70,11 +70,11 @@ class CatDetailsItem extends StatelessWidget {
                         maxLines: 1,
                       ),
                       Text(
-                        model.edition,
+                        'Edition : ${model.edition}',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                       Text(
-                        '${appTranslation(context).pagesNum} : 223',
+                        '${appTranslation(context).pagesNum} : ${model.pages}',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                       const Divider(),
