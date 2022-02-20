@@ -11,7 +11,7 @@ class InfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainScaffold(
       scaffold: BackScaffold(
-        title: "Info",
+        title: "${appTranslation(context).info}",
         scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: Padding(
           padding: const EdgeInsets.all(15.0),

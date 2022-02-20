@@ -75,7 +75,7 @@ class AccountPage extends StatelessWidget {
                   radius: 55,
                 ),
                 space20Vertical,
-                Text('Htian Here',
+                Text('HELLO TEAM',
                     style: Theme.of(context).textTheme.headline6!),
                 space20Vertical,
                 if (MainCubit.get(context).userSigned)

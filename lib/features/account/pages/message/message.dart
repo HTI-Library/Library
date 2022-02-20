@@ -23,7 +23,7 @@ class MessagePage extends StatelessWidget {
               children: [
                 Image.asset("assets/images/message.png"),
                 space20Vertical,
-                Text("you don't have message" ,
+                Text("${appTranslation(context).myMessageNo}" ,
                   style: Theme.of(context).textTheme .headline6!,),
               ],
             ),

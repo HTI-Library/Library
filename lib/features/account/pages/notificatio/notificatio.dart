@@ -23,7 +23,7 @@ class NotificationPage extends StatelessWidget {
                   Image.asset("assets/images/notification.png"),
                   space20Vertical,
                   Text(
-                    'You don’t have any notifications',
+                    '${appTranslation(context).notificationNo}',
                     style: Theme.of(context).textTheme.headline6!,
                   ),
                 ],

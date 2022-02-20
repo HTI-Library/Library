@@ -2,6 +2,8 @@
 
   "myProfile": "الملف الشخصى",
   "notification": "الإشعارات",
+  "notificationNo": "لا يوجد لديك أي إشعارات",
+  "myMessageNo": "لا يوجد لديك أي رسائل",
   "myMessage": "رسائلى",
   "calender": "التقويم",
   "setting": "الإعدادات",
@@ -19,7 +21,7 @@
   "logOut": "تسجيل الخروج",
   "search": "بحث",
   "topBorrowBooks": "الأكثر استعارة",
-  "recentlyReturned": "المُسترج حديثاً",
+  "recentlyReturned": "المُعاد حديثاً",
   "htiMaterial": "كتب المعهد",
   "graduationProjects": "مشاريع تخرج",
   "available": "متاح",
@@ -35,6 +37,7 @@
   "bookName": "اسم الكتاب",
   "author": "المؤلف",
   "pagesNum": "صفحات",
+  "edition": "الإصدار",
 
   "youDonthavenotifications": "لا توجد لديك اي إشعارات",
 
@@ -44,6 +47,11 @@
   "loginToLibrary": "تسجيل الدخول الي المكتبة",
   "password": "كلمة المرور",
   "id": "الرقم الاكاديمي",
+
+  "home": "الشاشة الرئيسية",
+  "categories": "الأقسام",
+  "saved": "المحفوظات",
+  "account": "حسابي",
 
 
 
