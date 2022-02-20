@@ -96,13 +96,18 @@ class _ViewBookPageState extends State<ViewBookPage> {
                           ),
                           space3Vertical,
                           Text(
-                            MainCubit.get(context).bookModel!.book.authors,
+                            '${appTranslation(context).author} : ${MainCubit.get(context).bookModel!.book.authors}',
                             style: Theme.of(context).textTheme.subtitle2!,
                           ),
                           space3Vertical,
                           Text(
-                            MainCubit.get(context).bookModel!.book.edition,
+                            'Edition : ${MainCubit.get(context).bookModel!.book.edition}',
                             style: Theme.of(context).textTheme.subtitle2!,
+                          ),
+                          space3Vertical,
+                          Text(
+                            '${appTranslation(context).pagesNum} : ${MainCubit.get(context).bookModel!.book.pages}',
+                            style: Theme.of(context).textTheme.subtitle2,
                           ),
                           space8Vertical,
                           Row(
