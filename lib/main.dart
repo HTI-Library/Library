@@ -107,7 +107,8 @@ class _MyAppState extends State<MyApp> {
             ..checkInternet()
             ..checkConnectivity()
             ..categories()
-            ..topBorrow(page: 1),
+            ..topBorrow(page: 1)
+            ..getNotifications(),
         ),
       ],
       child: BlocBuilder<MainCubit, MainState>(

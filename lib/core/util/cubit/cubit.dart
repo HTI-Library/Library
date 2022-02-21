@@ -18,6 +18,7 @@ import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/core/util/translation.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../models/notification_model.dart';
 import '../constants.dart';
 
 class MainCubit extends Cubit<MainState> {
@@ -604,5 +605,33 @@ class MainCubit extends Cubit<MainState> {
   }
 
 // categoryDetails ------------------- end
+
+  // getNotifications ------------------- start
+
+  NotificationModel? getNotificationsModel;
+
+  void getNotifications()
+  async {
+    debugPrint('getNotifications------------loading');
+    emit(NotificationLoading());
+    await _repository
+        .getNotificationsRepo()
+        .then((value) {
+      // success
+      // getNotificationsModel = NotificationModel.fromJson(value.data);
+      debugPrint('getNotifications------------success');
+      print(getNotificationsModel!.notifications[0].message);
+      emit(NotificationSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint('getNotifications------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+
+// getNotifications ------------------- end
+
+
 
 }

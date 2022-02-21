@@ -495,3 +495,7 @@ class CategoriesSuccess extends MainState {}
 class CategoryLoading extends MainState {}
 
 class CategorySuccess extends MainState {}
+
+class NotificationLoading extends MainState {}
+
+class NotificationSuccess extends MainState {}
