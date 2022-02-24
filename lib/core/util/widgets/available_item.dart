@@ -20,7 +20,7 @@ class AvailableItem extends StatelessWidget {
         vertical: 3.0,
       ),
       decoration: BoxDecoration(
-        color: amount == 0 ? HexColor(red) : HexColor(green),
+        color: amount <= 1 ? HexColor(red) : HexColor(green),
         borderRadius: BorderRadius.circular(4.0),
       ),
       child: Text(
