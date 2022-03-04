@@ -44,8 +44,9 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.hti.hti_library"
-        minSdkVersion 20
-        targetSdkVersion 31
+        minSdkVersion 19
+        targetSdkVersion 30
+        multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

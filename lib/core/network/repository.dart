@@ -157,6 +157,8 @@ abstract class Repository {
   //   required int compareId,
   // });
 
+  Future<Response> getNotificationsRepo();
+
   Future<Response> login({
     required String email,
     required String password,
@@ -653,6 +655,14 @@ class RepoImplementation extends Repository {
       query: {
         'category': categoryName,
       },
+    );
+  }
+
+  @override
+  Future<Response> getNotificationsRepo() async {
+    return await dioHelper.get(
+      url: notificationsUrl,
+      token: token,
     );
   }
 

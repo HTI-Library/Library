@@ -21,14 +21,17 @@ class CatItem extends StatelessWidget {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: InkWell(
         onTap: () {
-          navigateTo(context, CategoryDetailsPage(catName: model.name,));
+          navigateTo(
+              context,
+              CategoryDetailsPage(
+                catName: model.name,
+              ));
         },
         child: Column(
           children: [
             Expanded(
               child: Image(
-                image: const NetworkImage(
-                    'https://image.freepik.com/free-vector/hand-drawn-flat-design-metaverse-illustration_23-2149245317.jpg'),
+                image: NetworkImage(model.image),
                 fit: BoxFit.cover,
                 width: MediaQuery.of(context).size.width / 2,
               ),

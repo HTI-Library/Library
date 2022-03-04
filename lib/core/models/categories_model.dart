@@ -27,6 +27,7 @@ class CategoriesModel {
 class CategoryModel {
   late final String id;
   late final String name;
+  late final String image;
   late final String createdAt;
   late final String updatedAt;
   late final int __v;
@@ -34,6 +35,7 @@ class CategoryModel {
   CategoryModel.fromJson(Map<String, dynamic> json) {
     id = json['_id'] ?? '';
     name = json['name'] ?? '';
+    image = json['image'] ?? '';
     // createdAt = json['createdAt'] ?? '';
     // updatedAt = json['updatedAt'] ?? '';
     // __v = json['__v'] ?? 0;
@@ -43,6 +45,7 @@ class CategoryModel {
     final _data = <String, dynamic>{};
     _data['id'] = id;
     _data['name'] = name;
+    _data['image'] = image;
     _data['createdAt'] = createdAt;
     _data['updatedAt'] = updatedAt;
     _data['__v'] = __v;
