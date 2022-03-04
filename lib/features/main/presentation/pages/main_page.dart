@@ -52,7 +52,9 @@ class _MainPageState extends State<MainPage> {
               appBar: AppBar(
                 titleSpacing: 15.0,
                 title: Text(
-                  MainCubit.get(context).mainPageTitles[MainCubit.get(context).currentIndex],
+                  MainCubit.get(context).isRtl?
+                  MainCubit.get(context).mainPageTitles[MainCubit.get(context).currentIndex]['ar']:
+                  MainCubit.get(context).mainPageTitles[MainCubit.get(context).currentIndex]['en'],
                   style: Theme.of(context).textTheme.headline6,
                 ),
               ),

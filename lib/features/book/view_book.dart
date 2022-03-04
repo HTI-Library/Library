@@ -101,7 +101,7 @@ class _ViewBookPageState extends State<ViewBookPage> {
                           ),
                           space3Vertical,
                           Text(
-                            'Edition : ${MainCubit.get(context).bookModel!.book.edition}',
+                            '${appTranslation(context).edition} : ${MainCubit.get(context).bookModel!.book.edition}',
                             style: Theme.of(context).textTheme.subtitle2!,
                           ),
                           space3Vertical,

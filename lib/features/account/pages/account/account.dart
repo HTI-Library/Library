@@ -71,8 +71,9 @@ class AccountPage extends StatelessWidget {
                 if (state is LogoutLoading) const LinearProgressIndicator(),
                 if (state is LogoutLoading) space15Vertical,
                 CircleAvatar(
-                  child: Image.asset('assets/images/hti_logo.png'),
-                  radius: 55,
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  child: Image.asset('assets/images/hti123.png'),
+                  radius: 75,
                 ),
                 space20Vertical,
                 Text('HELLO TEAM',

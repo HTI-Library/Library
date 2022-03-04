@@ -15,7 +15,7 @@ class CatDetailsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      height: MediaQuery.of(context).size.width / 3.9 * 1.6 + 20,
+      height: MediaQuery.of(context).size.width / 3.9 * 1.6 + 34,
       width: MediaQuery.of(context).size.width,
       margin: const EdgeInsetsDirectional.only(
         bottom: 15.0,
@@ -101,7 +101,7 @@ class CatDetailsItem extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const Spacer(),
+                      space10Vertical,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,

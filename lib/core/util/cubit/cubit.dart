@@ -34,11 +34,23 @@ class MainCubit extends Cubit<MainState> {
       PageController(initialPage: 0, keepPage: true);
 
   int currentIndex = 0;
-  List<String> mainPageTitles = [
-    'Home',
-    'Categories',
-    'Saved',
-    'Account',
+  List<Map> mainPageTitles = [
+    {
+      'ar': 'الرئيسية',
+      'en': 'Home',
+    },
+    {
+      'ar': 'الأقسام',
+      'en': 'Categories',
+    },
+    {
+      'ar': 'المحفوظات',
+      'en': 'Saved',
+    },
+    {
+      'ar': 'حسابي',
+      'en': 'Account',
+    },
   ];
 
   void bottomChanged(int index) {
