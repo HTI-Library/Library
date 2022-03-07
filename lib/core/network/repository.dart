@@ -179,7 +179,12 @@ abstract class Repository {
   });
 
   Future<Response> logOut();
+
+  Future<Response> booksSavedRepo();
+
 }
+
+
 
 class RepoImplementation extends Repository {
   final DioHelper dioHelper;
@@ -662,6 +667,14 @@ class RepoImplementation extends Repository {
   Future<Response> getNotificationsRepo() async {
     return await dioHelper.get(
       url: notificationsUrl,
+      token: token,
+    );
+  }
+
+  @override
+  Future<Response> booksSavedRepo() async {
+    return await dioHelper.get(
+      url: savedBooksUrl,
       token: token,
     );
   }
