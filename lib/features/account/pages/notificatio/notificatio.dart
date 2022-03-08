@@ -5,6 +5,7 @@ import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
+import 'package:hti_library/features/saved/presentation/widgets/saved_details_item.dart';
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -43,12 +44,18 @@ class NotificationPage extends StatelessWidget {
   );
 
 
-  Widget buildNotification(NotificationModel model,BuildContext context)=>
-  //     ListView.builder(
-  //   itemBuilder: (context, index) => SavedItem(model: MainCubit.get(context).savedBooksModel!.books![index]),
-  //   physics: const BouncingScrollPhysics(),
-  //   itemCount: MainCubit.get(context).savedBooksModel!.books!.length,
-  // );
+  Widget buildNotification(NotificationData model,BuildContext context)=>
+      ListView(
+        children: [
+          Text('${model.message}')
+        ],
+      );
 
+
+  // ListView.builder(
+  // itemBuilder: (context, index) => SavedItem(model: MainCubit.get(context).savedBooksModel!.books![index]),
+  // physics: const BouncingScrollPhysics(),
+  // itemCount: MainCubit.get(context).savedBooksModel!.books!.length,
+  // )
 
 }
