@@ -91,7 +91,7 @@ class BookItem extends StatelessWidget {
                       ),
                     ),
                     AvailableItem(
-                      amount: book.amount,
+                      amount: book.amount.toInt(),
                     ),
                   ],
                 ),

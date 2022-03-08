@@ -182,6 +182,14 @@ abstract class Repository {
 
   Future<Response> booksSavedRepo();
 
+  Future<Response> removeSaveBookRepo({
+    required String bookID,
+  });
+
+  Future<Response> SaveBooksRepo({
+    required String bookID,
+  });
+
 }
 
 
@@ -674,8 +682,34 @@ class RepoImplementation extends Repository {
   @override
   Future<Response> booksSavedRepo() async {
     return await dioHelper.get(
-      url: savedBooksUrl,
+      url: getSavedBooksUrl,
       token: token,
+    );
+  }
+
+  @override
+  Future<Response> removeSaveBookRepo({
+    required String bookID,
+  }) async {
+    return await dioHelper.post(
+      url: removeSavedBooksUrl,
+      token: token,
+      data: {
+        'bookID': bookID,
+      },
+    );
+  }
+
+  @override
+  Future<Response> SaveBooksRepo({
+    required String bookID,
+  }) async {
+    return await dioHelper.post(
+      url: categoryUrl,
+      token: token,
+      data: {
+        'bookID': bookID,
+      },
     );
   }
 

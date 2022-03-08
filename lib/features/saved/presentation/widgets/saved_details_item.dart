@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/core/models/get_saved_books_model.dart';
 import 'package:hti_library/core/util/constants.dart';
+import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/widgets/asset_svg.dart';
 import 'package:hti_library/core/util/widgets/available_item.dart';
 import 'package:hti_library/features/book/view_book.dart';
 
 class SavedItem extends StatelessWidget {
-  const SavedItem({Key? key}) : super(key: key);
+
+  const SavedItem({Key? key , required this.model}) : super(key: key);
+  final BookSavedData model;
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +44,8 @@ class SavedItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Image(
-                    image: const NetworkImage(
-                        'https://edit.org/images/cat/book-covers-big-2019101610.jpg'),
+                    image: NetworkImage(
+                        '${model.bookImage}'),
                     height: MediaQuery.of(context).size.width / 4.9 * 1.6,
                     width: MediaQuery.of(context).size.width / 4.9,
                     fit: BoxFit.fill,
@@ -54,21 +58,21 @@ class SavedItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Python Programming  ssssss ssss s s s sssssssssssss',
+                        '${model.name}',
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 2,
                       ),
                       Text(
-                        'Author : Franklin',
+                        'Author : ${model.author[1].authorName}',
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 2,
                       ),
                       Text(
-                        'Edition : 3th',
+                        'Edition : ${model.edition}',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                       Text(
-                        '205, Pages',
+                        'page : ${model.pages}',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ],
@@ -86,7 +90,9 @@ class SavedItem extends StatelessWidget {
                       child: Material(
                         color:  HexColor(greyWhite),
                         child: InkWell(
-                          onTap: (){},
+                          onTap: (){
+                            MainCubit.get(context).postRemoveBookSave(bookID: model.id);
+                          },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: AssetSvg(
