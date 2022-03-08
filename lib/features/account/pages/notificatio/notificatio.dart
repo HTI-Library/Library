@@ -1,7 +1,11 @@
+import 'package:buildcondition/buildcondition.dart';
 import 'package:flutter/material.dart';
+import 'package:hti_library/core/models/notification_model.dart';
 import 'package:hti_library/core/util/constants.dart';
+import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
+import 'package:hti_library/features/saved/presentation/widgets/saved_details_item.dart';
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -12,24 +16,46 @@ class NotificationPage extends StatelessWidget {
       scaffold: BackScaffold(
         scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: '${appTranslation(context).notification}',
-        body: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset("assets/images/notification.png"),
-                space20Vertical,
-                Text(
-                  'You don’t have any notifications',
-                  style: Theme.of(context).textTheme.headline6!,
-                ),
-              ],
-            ),
-          ),
-        ),
+        body: BuildCondition(
+          condition:  MainCubit.get(context).getNotificationsModel!= null,
+          builder: (context)=> buildNotification(MainCubit.get(context).getNotificationsModel!.notifications , context),
+          fallback: (context)=> buildNotNotification(context),
+        )
       ),
     );
   }
+
+  Widget buildNotNotification(BuildContext context)=> Padding(
+    padding: const EdgeInsets.all(15.0),
+    child: Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset("assets/images/notification.png"),
+          space20Vertical,
+          Text(
+            'You don’t have any notifications',
+            style: Theme.of(context).textTheme.headline6!,
+          ),
+        ],
+      ),
+    ),
+  );
+
+
+  Widget buildNotification(NotificationData model,BuildContext context)=>
+      ListView(
+        children: [
+          Text('${model.message}')
+        ],
+      );
+
+
+  // ListView.builder(
+  // itemBuilder: (context, index) => SavedItem(model: MainCubit.get(context).savedBooksModel!.books![index]),
+  // physics: const BouncingScrollPhysics(),
+  // itemCount: MainCubit.get(context).savedBooksModel!.books!.length,
+  // )
+
 }

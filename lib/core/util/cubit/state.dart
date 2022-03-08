@@ -499,3 +499,15 @@ class CategorySuccess extends MainState {}
 class NotificationLoading extends MainState {}
 
 class NotificationSuccess extends MainState {}
+
+class SavedBooksLoading extends MainState {}
+
+class SavedBooksSuccess extends MainState {}
+
+class RemoveSavedBooksLoading extends MainState {}
+
+class RemoveSavedBooksSuccess extends MainState {}
+
+class PostSavedBooksLoading extends MainState {}
+
+class PostSavedBooksSuccess extends MainState {}
