@@ -510,4 +510,8 @@ class RemoveSavedBooksSuccess extends MainState {}
 
 class PostSavedBooksLoading extends MainState {}
 
-class PostSavedBooksSuccess extends MainState {}
+class PostSavedBooksSuccess extends MainState {
+  final String message;
+
+  PostSavedBooksSuccess(this.message);
+}

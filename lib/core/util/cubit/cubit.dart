@@ -10,10 +10,9 @@ import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/error/exceptions.dart';
 import 'package:hti_library/core/models/book_details_model.dart';
 import 'package:hti_library/core/models/categories_model.dart';
-import 'package:hti_library/core/models/login_model.dart';
 import 'package:hti_library/core/models/get_saved_books_model.dart';
+import 'package:hti_library/core/models/login_model.dart';
 import 'package:hti_library/core/models/remove_save_books_model.dart';
-import 'package:hti_library/core/models/save_books_model.dart';
 import 'package:hti_library/core/models/top_borrow_model.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/network/repository.dart';
@@ -613,17 +612,14 @@ class MainCubit extends Cubit<MainState> {
 
   NotificationModel? getNotificationsModel;
 
-  void getNotifications()
-  async {
+  void getNotifications() async {
     debugPrint('getNotifications------------loading');
     emit(NotificationLoading());
-    await _repository
-        .getNotificationsRepo()
-        .then((value) {
+    await _repository.getNotificationsRepo().then((value) {
       // success
       getNotificationsModel = NotificationModel.fromJson(value.data);
       debugPrint('getNotifications------------success');
-      print(getNotificationsModel!.notifications[0].message);
+      // print(getNotificationsModel!.notifications[0].message);
       emit(NotificationSuccess());
     }).catchError((error) {
       // error
@@ -639,24 +635,23 @@ class MainCubit extends Cubit<MainState> {
 
   GetSavedBooksModel? savedBooksModel;
 
-  void getSavedBooks()
-  async {
-    debugPrint('getSavedBooks------------loading');
-    emit(SavedBooksLoading());
-    await _repository
-        .booksSavedRepo()
-        .then((value) {
-      // success
-      savedBooksModel = GetSavedBooksModel.fromJson(value.data);
-      debugPrint('getSavedBooks------------success');
-      print(savedBooksModel!.books![0].name);
-      emit(SavedBooksSuccess());
-    }).catchError((error) {
-      // error
-      debugPrint('getSavedBooks------------error');
-      debugPrint(error.toString());
-      emit(Error(error.toString()));
-    });
+  void getSavedBooks() async {
+    if (userSigned) {
+      debugPrint('getSavedBooks------------loading');
+      emit(SavedBooksLoading());
+      await _repository.booksSavedRepo().then((value) {
+        // success
+        savedBooksModel = GetSavedBooksModel.fromJson(value.data);
+        debugPrint('getSavedBooks------------success');
+        // print(savedBooksModel!.books![0].name);
+        emit(SavedBooksSuccess());
+      }).catchError((error) {
+        // error
+        debugPrint('getSavedBooks------------error');
+        debugPrint(error.toString());
+        emit(Error(error.toString()));
+      });
+    }
   }
 
 // getSavedBooksModel ------------------- end
@@ -667,18 +662,16 @@ class MainCubit extends Cubit<MainState> {
 
   void postRemoveBookSave({
     required String bookID,
-    })
-  async {
+  }) async {
     debugPrint('removeBookSave------------loading');
     emit(RemoveSavedBooksLoading());
-    await _repository
-        .removeSaveBookRepo(bookID: bookID)
-        .then((value) {
+    await _repository.removeSaveBookRepo(bookID: bookID).then((value) {
       // success
       // removeSavedBooksModel = RemoveSavedBooksModel.fromJson(value.data);
       debugPrint('removeBookSave------------success');
       // print(removeSavedBooksModel!.message);
       emit(RemoveSavedBooksSuccess());
+      getSavedBooks();
     }).catchError((error) {
       // error
       debugPrint('removeBookSave------------error');
@@ -693,18 +686,16 @@ class MainCubit extends Cubit<MainState> {
 
   void postSaveBook({
     required String bookID,
-  })
-  async {
+  }) async {
     debugPrint('postSaveBook------------loading');
     emit(PostSavedBooksLoading());
-    await _repository
-        .SaveBooksRepo(bookID: bookID)
-        .then((value) {
+    await _repository.saveBooksRepo(bookID: bookID).then((value) {
       // success
       // removeSavedBooksModel = RemoveSavedBooksModel.fromJson(value.data);
       debugPrint('postSaveBook------------success');
       // print(removeSavedBooksModel!.message);
-      emit(PostSavedBooksSuccess());
+      emit(PostSavedBooksSuccess(value.data['message']));
+      getSavedBooks();
     }).catchError((error) {
       // error
       debugPrint('postSaveBook------------error');
@@ -714,8 +705,5 @@ class MainCubit extends Cubit<MainState> {
   }
 
 // SavedBooksModel ------------------- end
-
-
-
 
 }

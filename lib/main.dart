@@ -102,7 +102,6 @@ class _MyAppState extends State<MyApp> {
             ..checkConnectivity()
             ..categories()
             ..topBorrow(page: 1)
-            ..getNotifications()
             ..getSavedBooks(),
         ),
       ],

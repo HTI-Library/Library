@@ -7,6 +7,7 @@ import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/core/util/widgets/app_button.dart';
+import 'package:hti_library/core/util/widgets/asset_svg.dart';
 import 'package:hti_library/core/util/widgets/available_item.dart';
 import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/core/util/widgets/book_item.dart';
@@ -32,7 +33,12 @@ class _ViewBookPageState extends State<ViewBookPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MainCubit, MainState>(
+    return BlocConsumer<MainCubit, MainState>(
+      listener: (context, state) {
+        if (state is PostSavedBooksSuccess) {
+          showToast(message: state.message, toastStates: ToastStates.SUCCESS);
+        }
+      },
       builder: (context, state) {
         return BackScaffold(
           scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -41,12 +47,18 @@ class _ViewBookPageState extends State<ViewBookPage> {
             child: Row(
               children: [
                 IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.bookmark_border_rounded,
+                  onPressed: () {
+                    MainCubit.get(context).postSaveBook(bookID: widget.bookId);
+                  },
+                  icon: AssetSvg(
+                    imagePath: 'save_soled',
+                    size: 20.0,
                     color: HexColor(mainColor),
                   ),
-                  constraints: BoxConstraints(),
+                  // icon: Icon(
+                  //   Icons.bookmark_border_rounded,
+                  //   color: HexColor(mainColor),
+                  // ),
                 ),
                 IconButton(
                   onPressed: () {},
@@ -54,7 +66,6 @@ class _ViewBookPageState extends State<ViewBookPage> {
                     Icons.share_rounded,
                     color: HexColor(mainColor),
                   ),
-                  constraints: BoxConstraints(),
                 )
               ],
             ),
@@ -65,6 +76,8 @@ class _ViewBookPageState extends State<ViewBookPage> {
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
+                    if (state is PostSavedBooksLoading)
+                      const LinearProgressIndicator(),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15.0),
                       child: Column(
@@ -96,7 +109,7 @@ class _ViewBookPageState extends State<ViewBookPage> {
                           ),
                           space3Vertical,
                           Text(
-                            '${appTranslation(context).author} : ${MainCubit.get(context).bookModel!.book.authors}',
+                            '${appTranslation(context).author} : ${MainCubit.get(context).bookModel!.book.authors[0].authorName}',
                             style: Theme.of(context).textTheme.subtitle2!,
                           ),
                           space3Vertical,
@@ -116,7 +129,8 @@ class _ViewBookPageState extends State<ViewBookPage> {
                                 amount: MainCubit.get(context)
                                     .bookModel!
                                     .book
-                                    .amount,
+                                    .amount
+                                    .toInt(),
                               ),
                               const Spacer(),
                               RatingBar.builder(

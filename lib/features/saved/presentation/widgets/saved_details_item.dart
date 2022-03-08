@@ -45,7 +45,7 @@ class SavedItem extends StatelessWidget {
                   ),
                   child: Image(
                     image: NetworkImage(
-                        '${model.bookImage}'),
+                        model.bookImage),
                     height: MediaQuery.of(context).size.width / 4.9 * 1.6,
                     width: MediaQuery.of(context).size.width / 4.9,
                     fit: BoxFit.fill,
@@ -58,12 +58,12 @@ class SavedItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${model.name}',
+                        model.name,
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 2,
                       ),
                       Text(
-                        'Author : ${model.author[1].authorName}',
+                        'Author : ${model.author[0].authorName}',
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 2,
                       ),
