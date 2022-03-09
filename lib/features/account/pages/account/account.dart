@@ -17,7 +17,6 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class AccountPage extends StatelessWidget {
   AccountPage({Key? key}) : super(key: key);
-  var _width = 230.0;
 
   Widget appointmentBuilder(BuildContext context,
       CalendarAppointmentDetails calendarAppointmentDetails) {
