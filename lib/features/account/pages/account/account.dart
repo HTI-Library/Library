@@ -63,6 +63,7 @@ class AccountPage extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(15.0),
           child: SingleChildScrollView(
+            physics:  const BouncingScrollPhysics(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,

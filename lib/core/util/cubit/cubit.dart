@@ -619,7 +619,8 @@ class MainCubit extends Cubit<MainState> {
       // success
       getNotificationsModel = NotificationModel.fromJson(value.data);
       debugPrint('getNotifications------------success');
-      // print(getNotificationsModel!.notifications[0].message);
+      print(getNotificationsModel!.notifications.length);
+      print(value.data['notifications']);
       emit(NotificationSuccess());
     }).catchError((error) {
       // error
