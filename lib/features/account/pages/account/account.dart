@@ -82,7 +82,7 @@ class AccountPage extends StatelessWidget {
                     voidCallback: () {
                       navigateTo(context, ChangeNewPhoto());
                     },
-                    text: '${appTranslation(context).myProfile}',
+                    text: appTranslation(context).myProfile,
                     imagePath: 'user_user_circle',
                   ),
                 if (MainCubit.get(context).userSigned) space10Vertical,
@@ -91,7 +91,7 @@ class AccountPage extends StatelessWidget {
                     voidCallback: () {
                       navigateTo(context, NotificationPage());
                     },
-                    text: '${appTranslation(context).notification}',
+                    text: appTranslation(context).notification,
                     imagePath: 'notification_notification_outline',
                   ),
                 if (MainCubit.get(context).userSigned) space10Vertical,
@@ -100,7 +100,7 @@ class AccountPage extends StatelessWidget {
                     voidCallback: () {
                       navigateTo(context, MessagePage());
                     },
-                    text: '${appTranslation(context).myMessage}',
+                    text: appTranslation(context).myMessage,
                     imagePath: 'message_account',
                   ),
                 if (MainCubit.get(context).userSigned) space10Vertical,
@@ -142,7 +142,7 @@ class AccountPage extends StatelessWidget {
                             );
                           });
                     },
-                    text: '${appTranslation(context).calender}',
+                    text: appTranslation(context).calender,
                     imagePath: 'calendar',
                   ),
                 if (MainCubit.get(context).userSigned) space10Vertical,
@@ -150,7 +150,7 @@ class AccountPage extends StatelessWidget {
                   voidCallback: () {
                     navigateTo(context, SettingPages());
                   },
-                  text: '${appTranslation(context).setting}',
+                  text: appTranslation(context).setting,
                   imagePath: 'settings',
                 ),
                 space10Vertical,
@@ -158,7 +158,7 @@ class AccountPage extends StatelessWidget {
                   voidCallback: () {
                     navigateTo(context, InfoPage());
                   },
-                  text: '${appTranslation(context).info}',
+                  text: appTranslation(context).info,
                   imagePath: 'info',
                 ),
                 space10Vertical,
@@ -174,23 +174,23 @@ class AccountPage extends StatelessWidget {
                         dismissOnBackKeyPress: true,
                         dialogType: DialogType.WARNING,
                         animType: AnimType.BOTTOMSLIDE,
-                        btnCancelText: "${appTranslation(context).no}",
+                        btnCancelText: appTranslation(context).no,
                         btnCancelColor: HexColor(greyWhite),
                         btnOkColor: HexColor(mainColor),
-                        btnOkText: "${appTranslation(context).yes}",
-                        title: '${appTranslation(context).logOut}',
+                        btnOkText: appTranslation(context).yes,
+                        title: appTranslation(context).logOut,
                         isDense: true,
                         buttonsTextStyle:
                             Theme.of(context).textTheme.button!.copyWith(),
                         // padding: const EdgeInsets.all(5.0),
-                        desc: '${appTranslation(context).doYouWantToLogout}',
+                        desc: appTranslation(context).doYouWantToLogout,
                         btnCancelOnPress: () {
-                          debugPrint('${appTranslation(context).no}');
+                          debugPrint(appTranslation(context).no);
                         },
                         btnOkOnPress: () {
                           if (token != null) {
                             MainCubit.get(context).logOut(context: context);
-                            debugPrint('${appTranslation(context).yes}');
+                            debugPrint(appTranslation(context).yes);
                             debugPrint('${MainCubit.get(context).userSigned}');
                             debugPrint(token);
                           } else {
@@ -202,7 +202,7 @@ class AccountPage extends StatelessWidget {
                         },
                       ).show();
                     },
-                    text: '${appTranslation(context).logOut}',
+                    text: appTranslation(context).logOut,
                     imagePath: 'sign_out',
                   ),
                 if (MainCubit.get(context).userSigned) space10Vertical,
