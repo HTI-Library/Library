@@ -9,10 +9,12 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/error/exceptions.dart';
 import 'package:hti_library/core/models/book_details_model.dart';
+import 'package:hti_library/core/models/borrow_book_model.dart';
 import 'package:hti_library/core/models/categories_model.dart';
 import 'package:hti_library/core/models/get_saved_books_model.dart';
 import 'package:hti_library/core/models/login_model.dart';
 import 'package:hti_library/core/models/remove_save_books_model.dart';
+import 'package:hti_library/core/models/save_books_model.dart';
 import 'package:hti_library/core/models/top_borrow_model.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/network/repository.dart';
@@ -632,6 +634,31 @@ class MainCubit extends Cubit<MainState> {
 
 // getNotifications ------------------- end
 
+  // getNotifications ------------------- start
+  NotificationModel? removeNotificationsModel;
+
+  void removeNotifications() async {
+    debugPrint('getNotifications------------loading');
+    emit(NotificationLoading());
+    await _repository.removeNotificationsRepo().then((value) {
+      // success
+      removeNotificationsModel = NotificationModel.fromJson(value.data);
+      debugPrint('getNotifications------------success');
+      // print(getNotificationsModel!.notifications.length);
+      // print(value.data['notifications']);
+      getNotifications();
+      emit(NotificationSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint('getNotifications------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+
+// getNotifications ------------------- end
+
+
   // getSavedBooksModel ------------------- start
 
   GetSavedBooksModel? savedBooksModel;
@@ -706,5 +733,29 @@ class MainCubit extends Cubit<MainState> {
   }
 
 // SavedBooksModel ------------------- end
+
+  // borrow_book ------------------- start
+SavedBooksModel? borrowBookModel;
+
+  void postBorrowBook({
+    required String bookID,
+  }) async {
+    debugPrint('postBorrowBook------------loading');
+    emit(PostBorrowingBooksLoading());
+    await _repository.postBorrowBookRepo(bookID: bookID).then((value) {
+      // success
+      borrowBookModel = SavedBooksModel.fromJson(value.data);
+      debugPrint('postBorrowBook------------success');
+      emit(PostBorrowingBooksSuccess(value.data['message']));
+      getSavedBooks();
+    }).catchError((error) {
+      // error
+      debugPrint('postBorrowBook------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+
+// borrow_book ------------------- end
 
 }

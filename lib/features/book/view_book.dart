@@ -163,7 +163,12 @@ class _ViewBookPageState extends State<ViewBookPage> {
                                 child: AppButton(
                                     label: 'Borrow',
                                     onPress: () {
-                                      navigateTo(context, BorrowingPage());
+                                      navigateTo(context, BorrowingPage(
+                                        book_id: MainCubit.get(context)
+                                            .bookModel!
+                                            .book
+                                            .id,
+                                      ));
                                     }),
                               ),
                               space10Horizontal,

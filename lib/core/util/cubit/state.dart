@@ -500,6 +500,10 @@ class NotificationLoading extends MainState {}
 
 class NotificationSuccess extends MainState {}
 
+class NotificationRemoveLoading extends MainState {}
+
+class NotificationRemoveSuccess extends MainState {}
+
 class SavedBooksLoading extends MainState {}
 
 class SavedBooksSuccess extends MainState {}
@@ -509,6 +513,13 @@ class RemoveSavedBooksLoading extends MainState {}
 class RemoveSavedBooksSuccess extends MainState {}
 
 class PostSavedBooksLoading extends MainState {}
+
+class PostBorrowingBooksLoading extends MainState {}
+
+class PostBorrowingBooksSuccess extends MainState {
+  final String text;
+  PostBorrowingBooksSuccess(this.text);
+}
 
 class PostSavedBooksSuccess extends MainState {
   final String message;

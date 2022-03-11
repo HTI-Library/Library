@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
               message: state.loginModel.message!,
               toastStates: ToastStates.SUCCESS);
         } else if (state is Error) {
-          showToast(message: state.error, toastStates: ToastStates.SUCCESS);
+          showToast(message: state.error, toastStates: ToastStates.ERROR);
         }
       },
       builder: (context, state) {
