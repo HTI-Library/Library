@@ -164,7 +164,9 @@ class AccountPage extends StatelessWidget {
                   text: appTranslation(context).info,
                   imagePath: 'info',
                 ),
+                if (MainCubit.get(context).userSigned)
                 space10Vertical,
+                if (MainCubit.get(context).userSigned)
                 MyBtnAccount(
                   voidCallback: () {
                     navigateTo(context, MyBorrowBook());

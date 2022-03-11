@@ -1,10 +1,10 @@
-import 'package:buildcondition/buildcondition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hti_library/core/models/notification_model.dart';
 import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/widgets/back_scaffold.dart';
+import 'package:hti_library/core/util/widgets/loading.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
 import 'package:hti_library/core/util/widgets/notification_items.dart';
 
@@ -35,22 +35,20 @@ class _NotificationPageState extends State<NotificationPage> {
             title: appTranslation(context).notification,
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BuildCondition(
-                    condition:
-                    MainCubit.get(context).getNotificationsModel != null,
-                    builder: (context) => buildNotification(MainCubit.get(context).getNotificationsModel!.notifications,context),
-                    fallback: (context) => buildNotNotification(context),
-                  ),
-                ],
-              ),
+              child: MainCubit.get(context).getNotificationsModel != null
+                  ? MainCubit.get(context)
+                          .getNotificationsModel!
+                          .notifications
+                          .isNotEmpty
+                      ? buildNotification(
+                          MainCubit.get(context)
+                              .getNotificationsModel!
+                              .notifications,
+                          context)
+                      : buildNotNotification(context)
+                  : const LoadingWidget(),
             ),
           ),
-
-          //
         );
       },
     );
@@ -74,7 +72,8 @@ class _NotificationPageState extends State<NotificationPage> {
         ),
       );
 
-  Widget buildNotification(List<NotificationData> model, BuildContext context) =>
+  Widget buildNotification(
+          List<NotificationData> model, BuildContext context) =>
       Expanded(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -82,21 +81,24 @@ class _NotificationPageState extends State<NotificationPage> {
           children: [
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.25,
-              child: IconButton(onPressed: (){
-                MainCubit.get(context).removeNotifications();
-              },
-                icon: Text('Clear All' ,
-                textAlign: TextAlign.start,
-                style: Theme.of(context).textTheme.headline6,)),
+              child: IconButton(
+                  onPressed: () {
+                    MainCubit.get(context).removeNotifications();
+                  },
+                  icon: Text(
+                    'Clear All',
+                    textAlign: TextAlign.start,
+                    style: Theme.of(context).textTheme.headline6,
+                  )),
             ),
             Expanded(
-        child: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: (context, index) =>
-          NotificationItem(model: model[index]),
-          itemCount: model.length,
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) =>
+                    NotificationItem(model: model[index]),
+                itemCount: model.length,
               ),
-              ),
+            ),
           ],
         ),
       );

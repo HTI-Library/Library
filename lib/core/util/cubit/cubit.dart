@@ -9,7 +9,6 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/error/exceptions.dart';
 import 'package:hti_library/core/models/book_details_model.dart';
-import 'package:hti_library/core/models/borrow_book_model.dart';
 import 'package:hti_library/core/models/categories_model.dart';
 import 'package:hti_library/core/models/get_saved_books_model.dart';
 import 'package:hti_library/core/models/login_model.dart';
@@ -658,7 +657,6 @@ class MainCubit extends Cubit<MainState> {
 
 // getNotifications ------------------- end
 
-
   // getSavedBooksModel ------------------- start
 
   GetSavedBooksModel? savedBooksModel;
@@ -735,7 +733,7 @@ class MainCubit extends Cubit<MainState> {
 // SavedBooksModel ------------------- end
 
   // borrow_book ------------------- start
-SavedBooksModel? borrowBookModel;
+  SavedBooksModel? borrowBookModel;
 
   void postBorrowBook({
     required String bookID,

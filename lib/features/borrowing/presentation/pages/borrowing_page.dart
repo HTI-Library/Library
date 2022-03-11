@@ -11,14 +11,12 @@ import 'package:hti_library/core/util/widgets/main_scaffold.dart';
 import 'package:intl/intl.dart';
 
 class BorrowingPage extends StatelessWidget {
-  BorrowingPage({Key? key , required this.book_id}) : super(key: key);
+  BorrowingPage({Key? key, required this.book_id}) : super(key: key);
   final String book_id;
   TextEditingController dataOfBorrowController = TextEditingController();
   TextEditingController dataOfReturnController = TextEditingController();
   DateTime date = DateTime.now();
   var jiffy = DateTime.now().add(Duration(days: 3));
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +27,6 @@ class BorrowingPage extends StatelessWidget {
         } else if (state is Error) {
           showToast(message: state.error, toastStates: ToastStates.ERROR);
         }
-
       },
       builder: (context, state) {
         return MainScaffold(
@@ -42,8 +39,9 @@ class BorrowingPage extends StatelessWidget {
                 child: Column(
                   children: [
                     if (state is PostBorrowingBooksLoading)
-                      const Padding(padding: EdgeInsets.symmetric(vertical: 10),
-                      child: LinearProgressIndicator()),
+                      const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          child: LinearProgressIndicator()),
                     Container(
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       height: MediaQuery.of(context).size.width / 2 * 1.6,
@@ -57,6 +55,8 @@ class BorrowingPage extends StatelessWidget {
                     ),
                     space20Vertical,
                     AppTextFormField(
+                      enabled: false,
+                      readOnly: true,
                       hint: DateFormat('yyyy-MM-dd').format(date).toString(),
                       callbackHandle: (controller) {
                         dataOfBorrowController = controller;
@@ -64,6 +64,8 @@ class BorrowingPage extends StatelessWidget {
                     ),
                     space15Vertical,
                     AppTextFormField(
+                      readOnly: true,
+                      enabled: false,
                       hint: (jiffy.toString()).split(' ')[0],
                       callbackHandle: (controller) {
                         dataOfReturnController = controller;
