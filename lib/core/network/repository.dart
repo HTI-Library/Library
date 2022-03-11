@@ -159,6 +159,8 @@ abstract class Repository {
 
   Future<Response> getNotificationsRepo();
 
+  Future<Response> removeNotificationsRepo();
+
   Future<Response> login({
     required String email,
     required String password,
@@ -189,6 +191,11 @@ abstract class Repository {
   Future<Response> saveBooksRepo({
     required String bookID,
   });
+
+  Future<Response> postBorrowBookRepo({
+    required String bookID,
+  });
+
 }
 
 class RepoImplementation extends Repository {
@@ -695,11 +702,30 @@ class RepoImplementation extends Repository {
   }
 
   @override
+  Future<Response> removeNotificationsRepo()
+  async {
+    return await dioHelper.post(
+      url: removeNotificationsUrl,
+      token: token,
+    );
+  }
+
+  @override
   Future<Response> saveBooksRepo({
     required String bookID,
   }) async {
     return await dioHelper.post(
       url: '$savedBooksUrl?bookID=$bookID',
+      token: token,
+    );
+  }
+
+  @override
+  Future<Response> postBorrowBookRepo({
+    required String bookID,
+  }) async {
+    return await dioHelper.post(
+      url: '$borrowBookUrl?book_id=$bookID',
       token: token,
     );
   }

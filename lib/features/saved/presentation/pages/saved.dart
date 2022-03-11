@@ -19,7 +19,6 @@ class SavedPage extends StatefulWidget {
 class _SavedPageState extends State<SavedPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     if (MainCubit.get(context).userSigned) {
       MainCubit.get(context).getSavedBooks();

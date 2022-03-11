@@ -7,6 +7,7 @@ import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/features/account/pages/info/info.dart';
 import 'package:hti_library/features/account/pages/message/message.dart';
+import 'package:hti_library/features/account/pages/my_borrow_books/myBorrowBooks.dart';
 import 'package:hti_library/features/account/pages/notificatio/notificatio.dart';
 import 'package:hti_library/features/account/pages/setting/presntation/setting.dart';
 import 'package:hti_library/features/account/widget/btn_my_account.dart';
@@ -90,6 +91,7 @@ class AccountPage extends StatelessWidget {
                 if (MainCubit.get(context).userSigned)
                   MyBtnAccount(
                     voidCallback: () {
+                      MainCubit.get(context).getNotifications();
                       navigateTo(context, NotificationPage());
                     },
                     text: appTranslation(context).notification,
@@ -161,6 +163,14 @@ class AccountPage extends StatelessWidget {
                   },
                   text: appTranslation(context).info,
                   imagePath: 'info',
+                ),
+                space10Vertical,
+                MyBtnAccount(
+                  voidCallback: () {
+                    navigateTo(context, MyBorrowBook());
+                  },
+                  text: 'my borrow book',
+                  imagePath: 'ic_borrow',
                 ),
                 space10Vertical,
                 if (MainCubit.get(context).userSigned)

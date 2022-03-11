@@ -17,11 +17,13 @@ class AppTextFormField extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final TextInputType type;
   final TextInputAction? textInputAction;
+  // final bool? readOnly;
 
   const AppTextFormField({
     Key? key,
     this.label = '',
     this.icon,
+    // this.readOnly = false,
     this.textInputAction,
     required this.hint,
     this.type = TextInputType.text,
@@ -55,6 +57,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                   color: HexColor(mainColor),
                 ),
             keyboardType: widget.type,
+            // readOnly: widget.readOnly ? false : true,
             controller: textEditingController,
             obscureText: widget.isPassword ? isShown : false,
             onChanged: widget.onChanged,

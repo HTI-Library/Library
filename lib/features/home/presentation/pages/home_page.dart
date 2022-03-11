@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
                   ),
                   color: HexColor(greyWhite),
                   height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                  child:MainCubit.get(context).topBorrowModel != null? ListView.builder(
+                  child:MainCubit.get(context).topBorrowModel != null ? ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => BookItem(
