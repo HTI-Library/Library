@@ -102,7 +102,9 @@ class _MyAppState extends State<MyApp> {
             ..checkConnectivity()
             ..categories()
             ..topBorrow(page: 1)
+            ..getRecentlyReturned(page: 1)
             ..postBorrowBook(bookID: '6225df6faf57b7ef4675f50a')
+            ..getRecentlyReturned(page: 1)
             ..getSavedBooks(),
         ),
       ],

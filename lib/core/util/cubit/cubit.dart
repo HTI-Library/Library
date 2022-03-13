@@ -756,4 +756,27 @@ class MainCubit extends Cubit<MainState> {
 
 // borrow_book ------------------- end
 
+  // recentlyReturned ------------------- start
+
+  TopBorrowModel? recentlyReturned;
+
+  void getRecentlyReturned({required int page}) async {
+    debugPrint('RecentlyReturned------------loading');
+    emit(RecentlyReturnedLoading());
+    await _repository.recentlyReturnedRepo(page: page).then((value) {
+      // success
+      recentlyReturned = TopBorrowModel.fromJson(value.data);
+      debugPrint('RecentlyReturned------------success');
+      emit(RecentlyReturnedSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint('RecentlyReturned------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+
+// recentlyReturned ------------------- end
+
+
 }

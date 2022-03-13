@@ -12,4 +12,6 @@ const getSavedBooksUrl = 'books_saved';
 const removeSavedBooksUrl = 'remove_book_saved';
 const savedBooksUrl = 'save_book';
 const borrowBookUrl = 'borrow_book';
+const returnedBookUrl = 'returned_bookses';
+const recentlyReturnedUrl = 'recently_returned';
 

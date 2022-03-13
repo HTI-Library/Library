@@ -77,11 +77,11 @@ class HomePage extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => BookItem(
                         book: MainCubit.get(context)
-                            .topBorrowModel!
+                            .recentlyReturned!
                             .books[index],
                       ),
                       itemCount: MainCubit.get(context)
-                          .topBorrowModel!
+                          .recentlyReturned!
                           .books
                           .length) : const LoadingWidget(),
                 ),

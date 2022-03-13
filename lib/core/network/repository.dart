@@ -170,6 +170,10 @@ abstract class Repository {
     required int page,
   });
 
+  Future<Response> recentlyReturnedRepo({
+    required int page,
+  });
+
   Future<Response> bookDetailsRepo({
     required String bookId,
   });
@@ -642,6 +646,17 @@ class RepoImplementation extends Repository {
       },
     );
   }
+
+  @override
+  Future<Response> recentlyReturnedRepo({
+    required int page,
+  }) async {
+    return await dioHelper.get(
+      url: '$recentlyReturnedUrl?page=$page',
+      token: token,
+    );
+  }
+
 
   @override
   Future<Response> bookDetailsRepo({

@@ -484,6 +484,10 @@ class TopBorrowLoading extends MainState {}
 
 class TopBorrowSuccess extends MainState {}
 
+class RecentlyReturnedLoading extends MainState {}
+
+class RecentlyReturnedSuccess extends MainState {}
+
 class BookDetailsLoading extends MainState {}
 
 class BookDetailsSuccess extends MainState {}

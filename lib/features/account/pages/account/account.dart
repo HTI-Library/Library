@@ -172,7 +172,7 @@ class AccountPage extends StatelessWidget {
                     navigateTo(context, MyBorrowBook());
                   },
                   text: 'my borrow book',
-                  imagePath: 'ic_borrow',
+                  imagePath: 'ic_book',
                 ),
                 space10Vertical,
                 if (MainCubit.get(context).userSigned)
