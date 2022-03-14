@@ -12,9 +12,9 @@ import 'package:hti_library/core/models/book_details_model.dart';
 import 'package:hti_library/core/models/categories_model.dart';
 import 'package:hti_library/core/models/get_saved_books_model.dart';
 import 'package:hti_library/core/models/login_model.dart';
+import 'package:hti_library/core/models/profile_model.dart';
 import 'package:hti_library/core/models/remove_save_books_model.dart';
 import 'package:hti_library/core/models/save_books_model.dart';
-import 'package:hti_library/core/models/profile_model.dart';
 import 'package:hti_library/core/models/top_borrow_model.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/network/repository.dart';
@@ -22,7 +22,6 @@ import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/core/util/translation.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../models/get_saved_books.dart';
 import '../../models/notification_model.dart';
 import '../constants.dart';
 
@@ -69,7 +68,6 @@ class MainCubit extends Cubit<MainState> {
 
     emit(BottomChanged());
   }
-
 
   // dark colors
   String scaffoldBackground = '11202a';
@@ -160,7 +158,7 @@ class MainCubit extends Cubit<MainState> {
           fontSize: 18.0,
           fontFamily: family,
           fontWeight: FontWeight.w600,
-          color:HexColor(secondary),
+          color: HexColor(secondary),
           height: 1.3,
         ),
         // appbarTitle: TextStyle(
@@ -475,7 +473,9 @@ class MainCubit extends Cubit<MainState> {
       changeUser(true);
       currentIndex = 0;
       debugPrint('login------------success');
+      token = loginModel!.token;
       getUserDate();
+      getSavedBooks();
       emit(LoginSuccess(loginModel: loginModel!));
     }).catchError((error) {
       // error
@@ -498,7 +498,8 @@ class MainCubit extends Cubit<MainState> {
       // success
       signOut(context);
       changeUser(false);
-      profileModel=null;
+      profileModel = null;
+      savedBooksModel = null;
       emit(LogoutSuccess());
     }).catchError((error) {
       // error
@@ -585,7 +586,9 @@ class MainCubit extends Cubit<MainState> {
   }) async {
     debugPrint('categories------------loading');
     emit(CategoriesLoading());
-    await _repository.categoriesRepo(library: library, type: type).then((value) {
+    await _repository
+        .categoriesRepo(library: library, type: type)
+        .then((value) {
       // success
       categoriesModel = CategoriesModel.fromJson(value.data);
       debugPrint('categories------------success');
@@ -725,7 +728,7 @@ class MainCubit extends Cubit<MainState> {
   }
 
 // removeSavedBooksModel ------------------- end
-/// getUserDate ------------------- start
+  /// getUserDate ------------------- start
   ProfileModel? profileModel;
 
   void getUserDate() async {
@@ -745,8 +748,6 @@ class MainCubit extends Cubit<MainState> {
       });
     }
   }
-
-
 
 // getUserDate ------------------- end
 
