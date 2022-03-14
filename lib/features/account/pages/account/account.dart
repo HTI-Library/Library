@@ -78,12 +78,12 @@ class AccountPage extends StatelessWidget {
                   radius: 75,
                 ),
                 space20Vertical,
-                if (MainCubit.get(context).profileModel != null)
+                if (MainCubit.get(context).profileModel != null && MainCubit.get(context).userSigned)
                   Text(
                     MainCubit.get(context).profileModel!.name,
                     style: Theme.of(context).textTheme.headline6!,
                   ),
-                if (MainCubit.get(context).profileModel == null)
+                if (MainCubit.get(context).profileModel == null && MainCubit.get(context).userSigned)
                   const CupertinoActivityIndicator(),
                 space20Vertical,
                 if (MainCubit.get(context).userSigned)

@@ -475,6 +475,7 @@ class MainCubit extends Cubit<MainState> {
       changeUser(true);
       currentIndex = 0;
       debugPrint('login------------success');
+      getUserDate();
       emit(LoginSuccess(loginModel: loginModel!));
     }).catchError((error) {
       // error
@@ -497,6 +498,7 @@ class MainCubit extends Cubit<MainState> {
       // success
       signOut(context);
       changeUser(false);
+      profileModel=null;
       emit(LogoutSuccess());
     }).catchError((error) {
       // error
