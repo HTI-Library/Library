@@ -35,7 +35,7 @@ class CategoryModel {
   CategoryModel.fromJson(Map<String, dynamic> json) {
     id = json['_id'] ?? '';
     name = json['name'] ?? '';
-    image = json['image'] ?? '';
+    image = json['image'] ?? 'https://upload.wikimedia.org/wikipedia/commons/4/4d/HTI_Logo.jpg';
     // createdAt = json['createdAt'] ?? '';
     // updatedAt = json['updatedAt'] ?? '';
     // __v = json['__v'] ?? 0;

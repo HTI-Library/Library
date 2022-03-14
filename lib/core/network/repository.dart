@@ -174,7 +174,10 @@ abstract class Repository {
     required String bookId,
   });
 
-  Future<Response> categoriesRepo();
+  Future<Response> categoriesRepo({
+    required String library,
+    required String type,
+  });
 
   Future<Response> categoryDetailsRepo({
     required String categoryName,
@@ -659,9 +662,16 @@ class RepoImplementation extends Repository {
   }
 
   @override
-  Future<Response> categoriesRepo() async {
+  Future<Response> categoriesRepo({
+    required String library,
+    required String type,
+  }) async {
     return await dioHelper.get(
       url: categoriesUrl,
+      query: {
+        'library': library,
+        'type': type,
+      },
     );
   }
 

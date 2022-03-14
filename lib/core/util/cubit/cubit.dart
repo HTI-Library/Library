@@ -562,10 +562,13 @@ class MainCubit extends Cubit<MainState> {
 
   CategoriesModel? categoriesModel;
 
-  void categories() async {
+  void categories({
+    required String library,
+    required String type,
+  }) async {
     debugPrint('categories------------loading');
     emit(CategoriesLoading());
-    await _repository.categoriesRepo().then((value) {
+    await _repository.categoriesRepo(library: library, type: type).then((value) {
       // success
       categoriesModel = CategoriesModel.fromJson(value.data);
       debugPrint('categories------------success');
@@ -730,7 +733,7 @@ class MainCubit extends Cubit<MainState> {
 
 // SavedBooksModel ------------------- end
 
-  // borrow_book ------------------- start
+  // postBorrowBook ------------------- start
   SavedBooksModel? borrowBookModel;
 
   void postBorrowBook({
@@ -743,7 +746,6 @@ class MainCubit extends Cubit<MainState> {
       borrowBookModel = SavedBooksModel.fromJson(value.data);
       debugPrint('postBorrowBook------------success');
       emit(PostBorrowingBooksSuccess(value.data['message']));
-      getSavedBooks();
     }).catchError((error) {
       // error
       debugPrint('postBorrowBook------------error');
@@ -752,7 +754,7 @@ class MainCubit extends Cubit<MainState> {
     });
   }
 
-// borrow_book ------------------- end
+// postBorrowBook ------------------- end
 
   // chickTime ------------------- start
 
