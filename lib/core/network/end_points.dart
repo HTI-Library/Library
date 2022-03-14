@@ -12,4 +12,4 @@ const getSavedBooksUrl = 'books_saved';
 const removeSavedBooksUrl = 'remove_book_saved';
 const savedBooksUrl = 'save_book';
 const borrowBookUrl = 'borrow_book';
-
+const checksTimeUrl = 'checksTime';

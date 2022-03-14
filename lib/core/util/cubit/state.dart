@@ -526,3 +526,7 @@ class PostSavedBooksSuccess extends MainState {
 
   PostSavedBooksSuccess(this.message);
 }
+
+class ChickTimeLoading extends MainState {}
+
+class ChickTimeSuccess extends MainState {}

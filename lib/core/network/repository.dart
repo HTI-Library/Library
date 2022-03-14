@@ -196,6 +196,9 @@ abstract class Repository {
     required String bookID,
   });
 
+  Future<Response> chickTimeRepo({
+    required String userID,
+  });
 }
 
 class RepoImplementation extends Repository {
@@ -636,7 +639,6 @@ class RepoImplementation extends Repository {
   }) async {
     return await dioHelper.get(
       url: topBorrowUrl,
-      token: token,
       query: {
         'page': page,
       },
@@ -702,8 +704,7 @@ class RepoImplementation extends Repository {
   }
 
   @override
-  Future<Response> removeNotificationsRepo()
-  async {
+  Future<Response> removeNotificationsRepo() async {
     return await dioHelper.post(
       url: removeNotificationsUrl,
       token: token,
@@ -727,6 +728,15 @@ class RepoImplementation extends Repository {
     return await dioHelper.post(
       url: '$borrowBookUrl?book_id=$bookID',
       token: token,
+    );
+  }
+
+  @override
+  Future<Response> chickTimeRepo({
+    required String userID,
+  }) async {
+    return await dioHelper.post(
+      url: '$checksTimeUrl?userID=$userID',
     );
   }
 }

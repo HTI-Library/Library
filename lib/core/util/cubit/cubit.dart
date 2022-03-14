@@ -518,8 +518,6 @@ class MainCubit extends Cubit<MainState> {
     await _repository.topBorrowRepo(page: page).then((value) {
       // success
       topBorrowModel = TopBorrowModel.fromJson(value.data);
-      debugPrint(topBorrowModel!.books[1].bookImage);
-      debugPrint('topBorrowModel!.books[1].bookImage');
       debugPrint('topBorrow------------success');
       emit(TopBorrowSuccess());
     }).catchError((error) {
@@ -755,5 +753,28 @@ class MainCubit extends Cubit<MainState> {
   }
 
 // borrow_book ------------------- end
+
+  // chickTime ------------------- start
+
+  void chickTime({
+    required String userID,
+  }) async {
+    if (userSigned) {
+      debugPrint('chickTime------------loading');
+      emit(ChickTimeLoading());
+      await _repository.chickTimeRepo(userID: userID).then((value) {
+        // success
+        debugPrint('chickTime------------success');
+        emit(ChickTimeSuccess());
+      }).catchError((error) {
+        // error
+        debugPrint('chickTime------------error');
+        debugPrint(error.toString());
+        emit(Error(error.toString()));
+      });
+    }
+  }
+
+// chickTime ------------------- end
 
 }
