@@ -326,7 +326,9 @@ class _MainPageState extends State<MainPage> {
                             top: 10.0,
                           ),
                           child: AssetSvg(
-                            color: HexColor(mainColor),
+                            color:MainCubit.get(context).isDark
+                                ? HexColor(surface)
+                                : HexColor(mainColor),
                             imagePath: MainCubit.get(context).currentIndex == 0
                                 ? 'home_soled'
                                 : 'home',
@@ -340,7 +342,9 @@ class _MainPageState extends State<MainPage> {
                             top: 10.0,
                           ),
                           child: AssetSvg(
-                            color: HexColor(mainColor),
+                            color:MainCubit.get(context).isDark
+                                ? HexColor(surface)
+                                : HexColor(mainColor),
                             imagePath: MainCubit.get(context).currentIndex == 1
                                 ? 'category_soled'
                                 : 'category',
@@ -354,7 +358,9 @@ class _MainPageState extends State<MainPage> {
                             top: 10.0,
                           ),
                           child: AssetSvg(
-                            color: HexColor(mainColor),
+                            color: MainCubit.get(context).isDark
+                                ? HexColor(surface)
+                                :HexColor(mainColor),
                             imagePath: MainCubit.get(context).currentIndex == 2
                                 ? 'save_soled'
                                 : 'save',
@@ -368,7 +374,9 @@ class _MainPageState extends State<MainPage> {
                             top: 10.0,
                           ),
                           child: AssetSvg(
-                            color: HexColor(mainColor),
+                            color:MainCubit.get(context).isDark
+                                ? HexColor(surface)
+                                : HexColor(mainColor),
                             imagePath: MainCubit.get(context).currentIndex == 3
                                 ? 'user_soled'
                                 : 'user',

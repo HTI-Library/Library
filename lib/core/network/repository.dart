@@ -164,6 +164,8 @@ abstract class Repository {
     required String password,
   });
 
+  Future<Response> getSavedBooksRepo();
+
   Future<Response> topBorrowRepo({
     required int page,
   });
@@ -171,6 +173,8 @@ abstract class Repository {
   Future<Response> bookDetailsRepo({
     required String bookId,
   });
+
+  Future<Response> getUserDateRepo();
 
   Future<Response> categoriesRepo();
 
@@ -666,4 +670,19 @@ class RepoImplementation extends Repository {
     );
   }
 
+  @override
+  Future<Response> getUserDateRepo() async {
+    return await dioHelper.get(
+      url: getUserUrl,
+      token: token,
+    );
+  }
+
+  @override
+  Future<Response> getSavedBooksRepo() async {
+    return await dioHelper.get(
+      url: getBooksSavedUrl,
+      token: token,
+    );
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -76,8 +77,13 @@ class AccountPage extends StatelessWidget {
                   radius: 75,
                 ),
                 space20Vertical,
-                Text('HELLO TEAM',
-                    style: Theme.of(context).textTheme.headline6!),
+                if (MainCubit.get(context).profileModel != null)
+                  Text(
+                    MainCubit.get(context).profileModel!.name,
+                    style: Theme.of(context).textTheme.headline6!,
+                  ),
+                if (MainCubit.get(context).profileModel == null)
+                  const CupertinoActivityIndicator(),
                 space20Vertical,
                 if (MainCubit.get(context).userSigned)
                   MyBtnAccount(

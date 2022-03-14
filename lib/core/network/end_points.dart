@@ -7,5 +7,7 @@ const bookDetailsUrl = 'get_book';
 const categoriesUrl = 'categories';
 const categoryUrl = 'category';
 const notificationsUrl = 'notifications';
+const getUserUrl = 'get_user';
+const getBooksSavedUrl = 'books_saved';
 
 
