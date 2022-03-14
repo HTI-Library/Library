@@ -184,6 +184,8 @@ abstract class Repository {
 
   Future<Response> categoryDetailsRepo({
     required String categoryName,
+    required String library,
+    required String type,
   });
 
   Future<Response> logOut();
@@ -681,11 +683,15 @@ class RepoImplementation extends Repository {
   @override
   Future<Response> categoryDetailsRepo({
     required String categoryName,
+    required String library,
+    required String type,
   }) async {
     return await dioHelper.get(
       url: categoryUrl,
       query: {
         'category': categoryName,
+        'library': library,
+        'type': type,
       },
     );
   }

@@ -65,7 +65,7 @@ class CatDetailsItem extends StatelessWidget {
                         maxLines: 1,
                       ),
                       Text(
-                        '${appTranslation(context).author} : ${model.authors}',
+                        '${appTranslation(context).author} : ${model.authors[0].authorName}',
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 1,
                       ),

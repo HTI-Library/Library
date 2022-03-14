@@ -28,6 +28,8 @@ class CategoryModel {
   late final String id;
   late final String name;
   late final String image;
+  late final String library;
+  late final String type;
   late final String createdAt;
   late final String updatedAt;
   late final int __v;
@@ -35,6 +37,8 @@ class CategoryModel {
   CategoryModel.fromJson(Map<String, dynamic> json) {
     id = json['_id'] ?? '';
     name = json['name'] ?? '';
+    library = json['library'] ?? '';
+    type = json['type'] ?? '';
     image = json['image'] ?? 'https://upload.wikimedia.org/wikipedia/commons/4/4d/HTI_Logo.jpg';
     // createdAt = json['createdAt'] ?? '';
     // updatedAt = json['updatedAt'] ?? '';

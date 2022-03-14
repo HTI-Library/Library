@@ -25,6 +25,8 @@ class CatItem extends StatelessWidget {
               context,
               CategoryDetailsPage(
                 catName: model.name,
+                type: model.type,
+                library: model.library,
               ));
         },
         child: Column(

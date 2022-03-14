@@ -10,9 +10,15 @@ import 'package:hti_library/features/category_details/presentation/widgets/cat_d
 import 'package:hti_library/features/search/presentation/search.dart';
 
 class CategoryDetailsPage extends StatefulWidget {
-  const CategoryDetailsPage({Key? key, required this.catName})
-      : super(key: key);
+  const CategoryDetailsPage({
+    Key? key,
+    required this.catName,
+    required this.type,
+    required this.library,
+  }) : super(key: key);
   final String catName;
+  final String type;
+  final String library;
 
   @override
   State<CategoryDetailsPage> createState() => _CategoryDetailsPageState();
@@ -23,7 +29,10 @@ class _CategoryDetailsPageState extends State<CategoryDetailsPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    MainCubit.get(context).categoryDetails(categoryName: widget.catName);
+    MainCubit.get(context).categoryDetails(
+        categoryName: widget.catName,
+        library: widget.library,
+        type: widget.type);
   }
 
   @override

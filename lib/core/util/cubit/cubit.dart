@@ -609,12 +609,14 @@ class MainCubit extends Cubit<MainState> {
 
   void categoryDetails({
     required String categoryName,
+    required String library,
+    required String type,
   }) async {
     categoryDetailsModel = null;
     debugPrint('categoryDetails------------loading');
     emit(CategoryLoading());
     await _repository
-        .categoryDetailsRepo(categoryName: categoryName)
+        .categoryDetailsRepo(categoryName: categoryName, library: library, type: type)
         .then((value) {
       // success
       categoryDetailsModel = TopBorrowModel.fromJson(value.data);
