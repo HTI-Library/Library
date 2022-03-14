@@ -2,9 +2,11 @@
 
   "myProfile": "Profile",
   "notification": "Notifications",
+  "notificationNo": "You don't have any notification",
   "myMessage": "My Massages",
+  "myMessageNo": "You don't have any message",
   "calender": "Calender",
-  "setting": "settings",
+  "setting": "Settings",
   "changeLanguage": "Change Language",
   "language": "language",
   "arabic": "Arabic",
@@ -34,12 +36,18 @@
   "bookName": "Book Name",
   "author": "Author",
   "pagesNum": "Pages Num",
+  "edition": "Edition",
 
   "yes": "Yes",
   "no": "No",
   "loginToLibrary": "Login to Library",
   "password": "Password",
   "id": "ID",
+
+  "home": "Home",
+  "categories": "Categories",
+  "saved": "Saved",
+  "account": "Account",
 
 
   "logIn": "Login"

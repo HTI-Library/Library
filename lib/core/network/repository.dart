@@ -166,6 +166,8 @@ abstract class Repository {
     required String password,
   });
 
+  Future<Response> getSavedBooksRepo();
+
   Future<Response> topBorrowRepo({
     required int page,
   });
@@ -178,6 +180,7 @@ abstract class Repository {
     required String library,
     required String type,
   });
+  Future<Response> getUserDateRepo();
 
   Future<Response> categoryDetailsRepo({
     required String categoryName,
@@ -747,6 +750,21 @@ class RepoImplementation extends Repository {
   }) async {
     return await dioHelper.post(
       url: '$checksTimeUrl?userID=$userID',
+    );
+  }
+  @override
+  Future<Response> getUserDateRepo() async {
+    return await dioHelper.get(
+      url: getUserUrl,
+      token: token,
+    );
+  }
+
+  @override
+  Future<Response> getSavedBooksRepo() async {
+    return await dioHelper.get(
+      url: getBooksSavedUrl,
+      token: token,
     );
   }
 }

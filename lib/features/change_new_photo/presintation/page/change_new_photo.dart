@@ -22,7 +22,7 @@ class ChangeNewPhoto extends StatelessWidget {
         return MainScaffold(
           scaffold: BackScaffold(
             scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            title: 'Picture',
+            title: '${appTranslation(context).myProfile}',
             body: Padding(
               padding: const EdgeInsets.all(15.0),
               child: Center(

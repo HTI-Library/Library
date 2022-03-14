@@ -2,7 +2,9 @@ class TranslationModel {
 
   late String myProfile;
   late String notification;
+  late String notificationNo;
   late String myMessage;
+  late String myMessageNo;
   late String calender;
   late String setting;
   late String changeLanguage;
@@ -34,11 +36,16 @@ class TranslationModel {
   late String bookName;
   late String author;
   late String pagesNum;
+  late String edition;
   late String yes;
   late String no;
   late String loginToLibrary;
   late String password;
   late String id;
+  late String home;
+  late String categories;
+  late String saved;
+  late String account;
 
 
   late String logIn;
@@ -55,7 +62,9 @@ class TranslationModel {
     themes = json['themes'];
     myProfile = json['myProfile'];
     notification = json['notification'];
+    notificationNo = json['notificationNo'];
     myMessage = json['myMessage'];
+    myMessageNo = json['myMessageNo'];
     calender = json['calender'];
     info = json['info'];
     privacyPolicy = json['privacyPolicy'];
@@ -78,6 +87,7 @@ class TranslationModel {
     doYouWantToLogout = json['doYouWantToLogout'];
     author = json['author'];
     pagesNum = json['pagesNum'];
+    edition = json['edition'];
     yes = json['yes'];
     no = json['no'];
     loginToLibrary = json['loginToLibrary'];
@@ -86,6 +96,11 @@ class TranslationModel {
     available = json['available'];
     unavailable = json['unavailable'];
     bookName = json['bookName'];
+
+    home = json['home'];
+    categories = json['categories'];
+    saved = json['saved'];
+    account = json['account'];
 
   }
 }

@@ -14,6 +14,7 @@ import 'package:hti_library/core/models/get_saved_books_model.dart';
 import 'package:hti_library/core/models/login_model.dart';
 import 'package:hti_library/core/models/remove_save_books_model.dart';
 import 'package:hti_library/core/models/save_books_model.dart';
+import 'package:hti_library/core/models/profile_model.dart';
 import 'package:hti_library/core/models/top_borrow_model.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/network/repository.dart';
@@ -21,6 +22,7 @@ import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/core/util/translation.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../models/get_saved_books.dart';
 import '../../models/notification_model.dart';
 import '../constants.dart';
 
@@ -38,11 +40,23 @@ class MainCubit extends Cubit<MainState> {
       PageController(initialPage: 0, keepPage: true);
 
   int currentIndex = 0;
-  List<String> mainPageTitles = [
-    'Home',
-    'Categories',
-    'Saved',
-    'Account',
+  List<Map> mainPageTitles = [
+    {
+      'ar': 'الرئيسية',
+      'en': 'Home',
+    },
+    {
+      'ar': 'الأقسام',
+      'en': 'Categories',
+    },
+    {
+      'ar': 'المحفوظات',
+      'en': 'Saved',
+    },
+    {
+      'ar': 'حسابي',
+      'en': 'Account',
+    },
   ];
 
   void bottomChanged(int index) {
@@ -56,8 +70,9 @@ class MainCubit extends Cubit<MainState> {
     emit(BottomChanged());
   }
 
+
   // dark colors
-  String scaffoldBackground = '333739';
+  String scaffoldBackground = '11202a';
 
   String mainColorDark = 'ffffff';
   String mainColorVariantDark = '8a8a89';
@@ -134,18 +149,18 @@ class MainCubit extends Cubit<MainState> {
       ),
       primarySwatch: MaterialColor(int.parse('0xff$mainColor'), color),
       textTheme: TextTheme(
-        headline5: TextStyle(
-          fontSize: 24.0,
-          fontFamily: family,
-          fontWeight: FontWeight.w400,
-          color: HexColor(secondary),
-          height: 1.4,
-        ),
+        // headline5: TextStyle(
+        //   fontSize: 24.0,
+        //   fontFamily: family,
+        //   fontWeight: FontWeight.w400,
+        //   color: HexColor(secondary),
+        //   height: 1.4,
+        // ),
         headline6: TextStyle(
           fontSize: 18.0,
           fontFamily: family,
           fontWeight: FontWeight.w600,
-          color: HexColor(secondary),
+          color:HexColor(secondary),
           height: 1.3,
         ),
         // appbarTitle: TextStyle(
@@ -240,18 +255,18 @@ class MainCubit extends Cubit<MainState> {
       ),
       primarySwatch: MaterialColor(int.parse('0xff$mainColor'), color),
       textTheme: TextTheme(
-        headline5: TextStyle(
-          fontSize: 24.0,
-          fontFamily: family,
-          fontWeight: FontWeight.w400,
-          color: HexColor(secondaryDark),
-          height: 1.4,
-        ),
+        // headline5: TextStyle(
+        //   fontSize: 24.0,
+        //   fontFamily: family,
+        //   fontWeight: FontWeight.w400,
+        //   color: HexColor(secondaryDark),
+        //   height: 1.4,
+        // ),
         headline6: TextStyle(
           fontSize: 20.0,
           fontFamily: family,
           fontWeight: FontWeight.w600,
-          color: HexColor(secondaryDark),
+          color: HexColor(surface),
           height: 1.3,
         ),
         // mainTitle: TextStyle(
@@ -272,35 +287,35 @@ class MainCubit extends Cubit<MainState> {
           fontSize: 14.0,
           fontFamily: family,
           fontWeight: FontWeight.w400,
-          color: HexColor(secondaryVariantDark),
+          color: HexColor(surface),
           height: 1.4,
         ),
         bodyText2: TextStyle(
           fontSize: 25.0,
           fontFamily: family,
           fontWeight: FontWeight.w700,
-          color: HexColor(secondaryVariantDark),
+          color: HexColor(surface),
           height: 1.4,
         ),
         subtitle1: TextStyle(
           fontSize: 16.0,
           fontFamily: family,
           fontWeight: FontWeight.w700,
-          color: HexColor(secondaryDark),
+          color: HexColor(surface),
           height: 1.4,
         ),
         subtitle2: TextStyle(
           fontSize: 16.0,
           fontFamily: family,
           fontWeight: FontWeight.w400,
-          color: HexColor(secondaryDark),
+          color: HexColor(surface),
           height: 1.4,
         ),
         caption: TextStyle(
           fontSize: 12.0,
           fontFamily: family,
           fontWeight: FontWeight.w400,
-          color: HexColor(secondaryDark),
+          color: HexColor(surface),
           height: 1.4,
         ),
         button: TextStyle(
@@ -708,6 +723,30 @@ class MainCubit extends Cubit<MainState> {
   }
 
 // removeSavedBooksModel ------------------- end
+/// getUserDate ------------------- start
+  ProfileModel? profileModel;
+
+  void getUserDate() async {
+    if (userSigned) {
+      debugPrint('getUserDate------------loading');
+      emit(GetUserDataLoading());
+      await _repository.getUserDateRepo().then((value) {
+        // success
+        profileModel = ProfileModel.fromJson(value.data);
+        debugPrint('getUserDate------------success');
+        emit(GetUserDataSuccess());
+      }).catchError((error) {
+        // error
+        debugPrint('getUserDate------------error');
+        debugPrint(error.toString());
+        emit(Error(error.toString()));
+      });
+    }
+  }
+
+
+
+// getUserDate ------------------- end
 
   // SavedBooksModel ------------------- start
 

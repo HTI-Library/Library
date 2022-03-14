@@ -456,8 +456,8 @@ class LoginSuccess extends MainState {
 class LogoutLoading extends MainState {}
 
 class LogoutSuccess extends MainState {}
-class SelectMonth extends MainState {
 
+class SelectMonth extends MainState {
   final int value;
 
   SelectMonth({
@@ -466,7 +466,6 @@ class SelectMonth extends MainState {
 }
 
 class SelectDay extends MainState {
-
   final int value;
 
   SelectDay({
@@ -474,8 +473,7 @@ class SelectDay extends MainState {
   });
 
   @override
-  List<Object> get props =>
-      [
+  List<Object> get props => [
         value,
       ];
 }
@@ -499,6 +497,15 @@ class CategorySuccess extends MainState {}
 class NotificationLoading extends MainState {}
 
 class NotificationSuccess extends MainState {}
+
+class GetUserDataLoading extends MainState {}
+
+class GetUserDataSuccess extends MainState {}
+
+class GetSavedBooksLoading extends MainState {}
+
+class GetSavedBooksSuccess extends MainState {}
+
 
 class NotificationRemoveLoading extends MainState {}
 

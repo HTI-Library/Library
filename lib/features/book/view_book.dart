@@ -114,7 +114,7 @@ class _ViewBookPageState extends State<ViewBookPage> {
                           ),
                           space3Vertical,
                           Text(
-                            'Edition : ${MainCubit.get(context).bookModel!.book.edition}',
+                            '${appTranslation(context).edition} : ${MainCubit.get(context).bookModel!.book.edition}',
                             style: Theme.of(context).textTheme.subtitle2!,
                           ),
                           space3Vertical,
@@ -161,7 +161,7 @@ class _ViewBookPageState extends State<ViewBookPage> {
                             children: [
                               Expanded(
                                 child: AppButton(
-                                    label: 'Borrow',
+                                    label: '${appTranslation(context).borrow}',
                                     onPress: () {
                                       navigateTo(context, BorrowingPage(
                                         book_id: MainCubit.get(context)
@@ -175,7 +175,7 @@ class _ViewBookPageState extends State<ViewBookPage> {
                               Expanded(
                                 child: AppButton(
                                     color: HexColor(greyWhite),
-                                    label: 'Read',
+                                    label: '${appTranslation(context).read}',
                                     textColor: HexColor(mainColor),
                                     onPress: () {}),
                               ),
@@ -183,7 +183,7 @@ class _ViewBookPageState extends State<ViewBookPage> {
                           ),
                           space15Vertical,
                           Text(
-                            'Overview.',
+                            '${appTranslation(context).overview}.',
                             style: Theme.of(context).textTheme.headline6!,
                           ),
                           space5Vertical,

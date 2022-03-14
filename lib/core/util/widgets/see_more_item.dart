@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/core/util/cubit/cubit.dart';
 
 import '../constants.dart';
 import 'asset_svg.dart';
@@ -32,13 +33,12 @@ class SeeMoreItem extends StatelessWidget {
                   text,
                   maxLines: 1,
                   style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                        color: HexColor(mainColor),
                       ),
                 ),
               ),
               AssetSvg(
                 imagePath: 'arrow_right',
-                color: HexColor(mainColor),
+                color:  MainCubit.get(context).isDark?HexColor(surface):HexColor(mainColor),
                 size: 18.0,
               )
             ],

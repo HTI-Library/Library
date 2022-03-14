@@ -52,7 +52,9 @@ class _MainPageState extends State<MainPage> {
               appBar: AppBar(
                 titleSpacing: 15.0,
                 title: Text(
-                  MainCubit.get(context).mainPageTitles[MainCubit.get(context).currentIndex],
+                  MainCubit.get(context).isRtl?
+                  MainCubit.get(context).mainPageTitles[MainCubit.get(context).currentIndex]['ar']:
+                  MainCubit.get(context).mainPageTitles[MainCubit.get(context).currentIndex]['en'],
                   style: Theme.of(context).textTheme.headline6,
                 ),
               ),
@@ -324,7 +326,9 @@ class _MainPageState extends State<MainPage> {
                             top: 10.0,
                           ),
                           child: AssetSvg(
-                            color: HexColor(mainColor),
+                            color:MainCubit.get(context).isDark
+                                ? HexColor(surface)
+                                : HexColor(mainColor),
                             imagePath: MainCubit.get(context).currentIndex == 0
                                 ? 'home_soled'
                                 : 'home',
@@ -338,7 +342,9 @@ class _MainPageState extends State<MainPage> {
                             top: 10.0,
                           ),
                           child: AssetSvg(
-                            color: HexColor(mainColor),
+                            color:MainCubit.get(context).isDark
+                                ? HexColor(surface)
+                                : HexColor(mainColor),
                             imagePath: MainCubit.get(context).currentIndex == 1
                                 ? 'category_soled'
                                 : 'category',
@@ -352,7 +358,9 @@ class _MainPageState extends State<MainPage> {
                             top: 10.0,
                           ),
                           child: AssetSvg(
-                            color: HexColor(mainColor),
+                            color: MainCubit.get(context).isDark
+                                ? HexColor(surface)
+                                :HexColor(mainColor),
                             imagePath: MainCubit.get(context).currentIndex == 2
                                 ? 'save_soled'
                                 : 'save',
@@ -366,7 +374,9 @@ class _MainPageState extends State<MainPage> {
                             top: 10.0,
                           ),
                           child: AssetSvg(
-                            color: HexColor(mainColor),
+                            color:MainCubit.get(context).isDark
+                                ? HexColor(surface)
+                                : HexColor(mainColor),
                             imagePath: MainCubit.get(context).currentIndex == 3
                                 ? 'user_soled'
                                 : 'user',
