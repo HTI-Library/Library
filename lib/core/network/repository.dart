@@ -159,6 +159,8 @@ abstract class Repository {
 
   Future<Response> getNotificationsRepo();
 
+  Future<Response> removeNotificationsRepo();
+
   Future<Response> login({
     required String email,
     required String password,
@@ -174,15 +176,35 @@ abstract class Repository {
     required String bookId,
   });
 
+  Future<Response> categoriesRepo({
+    required String library,
+    required String type,
+  });
   Future<Response> getUserDateRepo();
-
-  Future<Response> categoriesRepo();
 
   Future<Response> categoryDetailsRepo({
     required String categoryName,
   });
 
   Future<Response> logOut();
+
+  Future<Response> booksSavedRepo();
+
+  Future<Response> removeSaveBookRepo({
+    required String bookID,
+  });
+
+  Future<Response> saveBooksRepo({
+    required String bookID,
+  });
+
+  Future<Response> postBorrowBookRepo({
+    required String bookID,
+  });
+
+  Future<Response> chickTimeRepo({
+    required String userID,
+  });
 }
 
 class RepoImplementation extends Repository {
@@ -623,7 +645,6 @@ class RepoImplementation extends Repository {
   }) async {
     return await dioHelper.get(
       url: topBorrowUrl,
-      token: token,
       query: {
         'page': page,
       },
@@ -644,9 +665,16 @@ class RepoImplementation extends Repository {
   }
 
   @override
-  Future<Response> categoriesRepo() async {
+  Future<Response> categoriesRepo({
+    required String library,
+    required String type,
+  }) async {
     return await dioHelper.get(
       url: categoriesUrl,
+      query: {
+        'library': library,
+        'type': type,
+      },
     );
   }
 
@@ -670,6 +698,60 @@ class RepoImplementation extends Repository {
     );
   }
 
+  @override
+  Future<Response> booksSavedRepo() async {
+    return await dioHelper.get(
+      url: getSavedBooksUrl,
+      token: token,
+    );
+  }
+
+  @override
+  Future<Response> removeSaveBookRepo({
+    required String bookID,
+  }) async {
+    return await dioHelper.post(
+      url: '$removeSavedBooksUrl?bookID=$bookID',
+      token: token,
+    );
+  }
+
+  @override
+  Future<Response> removeNotificationsRepo() async {
+    return await dioHelper.post(
+      url: removeNotificationsUrl,
+      token: token,
+    );
+  }
+
+  @override
+  Future<Response> saveBooksRepo({
+    required String bookID,
+  }) async {
+    return await dioHelper.post(
+      url: '$savedBooksUrl?bookID=$bookID',
+      token: token,
+    );
+  }
+
+  @override
+  Future<Response> postBorrowBookRepo({
+    required String bookID,
+  }) async {
+    return await dioHelper.post(
+      url: '$borrowBookUrl?book_id=$bookID',
+      token: token,
+    );
+  }
+
+  @override
+  Future<Response> chickTimeRepo({
+    required String userID,
+  }) async {
+    return await dioHelper.post(
+      url: '$checksTimeUrl?userID=$userID',
+    );
+  }
   @override
   Future<Response> getUserDateRepo() async {
     return await dioHelper.get(

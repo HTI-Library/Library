@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/util/constants.dart';
-import 'package:hti_library/core/util/widgets/asset_svg.dart';
-import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
 
 class NoSavedPage extends StatelessWidget {
@@ -11,9 +8,8 @@ class NoSavedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
-      scaffold: BackScaffold(
-        scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: 'Saved',
+      scaffold: Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
@@ -27,14 +23,14 @@ class NoSavedPage extends StatelessWidget {
                 children: [
                   Text(
                     'No Saved',
-                    style: Theme.of(context).textTheme.bodyText2,
+                    style: Theme.of(context).textTheme.subtitle2,
                   ),
-                  space5Horizontal,
-                  AssetSvg(
-                    imagePath: 'info',
-                    size: 14.0,
-                    color: HexColor(mainColor),
-                  ),
+                  // space5Horizontal,
+                  // AssetSvg(
+                  //   imagePath: 'info',
+                  //   size: 14.0,
+                  //   color: HexColor(mainColor),
+                  // ),
                 ],
               ),
               space80Vertical,

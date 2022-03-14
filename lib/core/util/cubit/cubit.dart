@@ -10,7 +10,10 @@ import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/error/exceptions.dart';
 import 'package:hti_library/core/models/book_details_model.dart';
 import 'package:hti_library/core/models/categories_model.dart';
+import 'package:hti_library/core/models/get_saved_books_model.dart';
 import 'package:hti_library/core/models/login_model.dart';
+import 'package:hti_library/core/models/remove_save_books_model.dart';
+import 'package:hti_library/core/models/save_books_model.dart';
 import 'package:hti_library/core/models/profile_model.dart';
 import 'package:hti_library/core/models/top_borrow_model.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
@@ -530,8 +533,6 @@ class MainCubit extends Cubit<MainState> {
     await _repository.topBorrowRepo(page: page).then((value) {
       // success
       topBorrowModel = TopBorrowModel.fromJson(value.data);
-      debugPrint(topBorrowModel!.books[1].bookImage);
-      debugPrint('topBorrowModel!.books[1].bookImage');
       debugPrint('topBorrow------------success');
       emit(TopBorrowSuccess());
     }).catchError((error) {
@@ -576,10 +577,13 @@ class MainCubit extends Cubit<MainState> {
 
   CategoriesModel? categoriesModel;
 
-  void categories() async {
+  void categories({
+    required String library,
+    required String type,
+  }) async {
     debugPrint('categories------------loading');
     emit(CategoriesLoading());
-    await _repository.categoriesRepo().then((value) {
+    await _repository.categoriesRepo(library: library, type: type).then((value) {
       // success
       categoriesModel = CategoriesModel.fromJson(value.data);
       debugPrint('categories------------success');
@@ -630,9 +634,10 @@ class MainCubit extends Cubit<MainState> {
     emit(NotificationLoading());
     await _repository.getNotificationsRepo().then((value) {
       // success
-      // getNotificationsModel = NotificationModel.fromJson(value.data);
+      getNotificationsModel = NotificationModel.fromJson(value.data);
       debugPrint('getNotifications------------success');
-      print(getNotificationsModel!.notifications[0].message);
+      print(getNotificationsModel!.notifications.length);
+      print(value.data['notifications']);
       emit(NotificationSuccess());
     }).catchError((error) {
       // error
@@ -644,6 +649,80 @@ class MainCubit extends Cubit<MainState> {
 
 // getNotifications ------------------- end
 
+  // getNotifications ------------------- start
+  NotificationModel? removeNotificationsModel;
+
+  void removeNotifications() async {
+    debugPrint('getNotifications------------loading');
+    emit(NotificationLoading());
+    await _repository.removeNotificationsRepo().then((value) {
+      // success
+      removeNotificationsModel = NotificationModel.fromJson(value.data);
+      debugPrint('getNotifications------------success');
+      // print(getNotificationsModel!.notifications.length);
+      // print(value.data['notifications']);
+      getNotifications();
+      emit(NotificationSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint('getNotifications------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+
+// getNotifications ------------------- end
+
+  // getSavedBooksModel ------------------- start
+
+  GetSavedBooksModel? savedBooksModel;
+
+  void getSavedBooks() async {
+    if (userSigned) {
+      debugPrint('getSavedBooks------------loading');
+      emit(SavedBooksLoading());
+      await _repository.booksSavedRepo().then((value) {
+        // success
+        savedBooksModel = GetSavedBooksModel.fromJson(value.data);
+        debugPrint('getSavedBooks------------success');
+        // print(savedBooksModel!.books![0].name);
+        emit(SavedBooksSuccess());
+      }).catchError((error) {
+        // error
+        debugPrint('getSavedBooks------------error');
+        debugPrint(error.toString());
+        emit(Error(error.toString()));
+      });
+    }
+  }
+
+// getSavedBooksModel ------------------- end
+
+  // removeSavedBooksModel ------------------- start
+
+  RemoveSavedBooksModel? removeSavedBooksModel;
+
+  void postRemoveBookSave({
+    required String bookID,
+  }) async {
+    debugPrint('removeBookSave------------loading');
+    emit(RemoveSavedBooksLoading());
+    await _repository.removeSaveBookRepo(bookID: bookID).then((value) {
+      // success
+      // removeSavedBooksModel = RemoveSavedBooksModel.fromJson(value.data);
+      debugPrint('removeBookSave------------success');
+      // print(removeSavedBooksModel!.message);
+      emit(RemoveSavedBooksSuccess());
+      getSavedBooks();
+    }).catchError((error) {
+      // error
+      debugPrint('removeBookSave------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+
+// removeSavedBooksModel ------------------- end
 /// getUserDate ------------------- start
   ProfileModel? profileModel;
 
@@ -669,27 +748,74 @@ class MainCubit extends Cubit<MainState> {
 
 // getUserDate ------------------- end
 
-  /// getSavedBooks ------------------- start
-  GetSavedBooksModel? getSavedBooksModel;
+  // SavedBooksModel ------------------- start
 
-  void getSavedBooks() async {
+  void postSaveBook({
+    required String bookID,
+  }) async {
+    debugPrint('postSaveBook------------loading');
+    emit(PostSavedBooksLoading());
+    await _repository.saveBooksRepo(bookID: bookID).then((value) {
+      // success
+      // removeSavedBooksModel = RemoveSavedBooksModel.fromJson(value.data);
+      debugPrint('postSaveBook------------success');
+      // print(removeSavedBooksModel!.message);
+      emit(PostSavedBooksSuccess(value.data['message']));
+      getSavedBooks();
+    }).catchError((error) {
+      // error
+      debugPrint('postSaveBook------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+
+// SavedBooksModel ------------------- end
+
+  // postBorrowBook ------------------- start
+  SavedBooksModel? borrowBookModel;
+
+  void postBorrowBook({
+    required String bookID,
+  }) async {
+    debugPrint('postBorrowBook------------loading');
+    emit(PostBorrowingBooksLoading());
+    await _repository.postBorrowBookRepo(bookID: bookID).then((value) {
+      // success
+      borrowBookModel = SavedBooksModel.fromJson(value.data);
+      debugPrint('postBorrowBook------------success');
+      emit(PostBorrowingBooksSuccess(value.data['message']));
+    }).catchError((error) {
+      // error
+      debugPrint('postBorrowBook------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+
+// postBorrowBook ------------------- end
+
+  // chickTime ------------------- start
+
+  void chickTime({
+    required String userID,
+  }) async {
     if (userSigned) {
-      debugPrint('getSavedBooks------------loading');
-      emit(GetSavedBooksLoading());
-      await _repository.getSavedBooksRepo().then((value) {
+      debugPrint('chickTime------------loading');
+      emit(ChickTimeLoading());
+      await _repository.chickTimeRepo(userID: userID).then((value) {
         // success
-        getSavedBooksModel = GetSavedBooksModel.fromJson(value.data);
-        debugPrint('getSavedBooks------------success');
-        emit(GetSavedBooksSuccess());
+        debugPrint('chickTime------------success');
+        emit(ChickTimeSuccess());
       }).catchError((error) {
         // error
-        debugPrint('getSavedBooks------------error');
+        debugPrint('chickTime------------error');
         debugPrint(error.toString());
         emit(Error(error.toString()));
       });
     }
   }
 
-// getSavedBooks ------------------- end
+// chickTime ------------------- end
 
 }

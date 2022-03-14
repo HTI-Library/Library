@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
               message: state.loginModel.message!,
               toastStates: ToastStates.SUCCESS);
         } else if (state is Error) {
-          showToast(message: state.error, toastStates: ToastStates.SUCCESS);
+          showToast(message: state.error, toastStates: ToastStates.ERROR);
         }
       },
       builder: (context, state) {
@@ -85,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              '${appTranslation(context).loginToLibrary}',
+                              appTranslation(context).loginToLibrary,
                               style: Theme.of(context)
                                   .textTheme
                                   .headline4!
@@ -100,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                                 imagePath: 'sms',
                                 color: HexColor(mainColor),
                               ),
-                              hint: '${appTranslation(context).id}',
+                              hint: appTranslation(context).id,
                               callbackHandle: (controller) {
                                 emailController = controller;
                               },
@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                             space20Vertical,
                             AppTextFormField(
                               isPassword: true,
-                              hint: '${appTranslation(context).password}',
+                              hint: appTranslation(context).password,
                               callbackHandle: (controller) {
                                 passwordController = controller;
                               },
@@ -146,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                                             password: passwordController.text);
                                       }
                                     : null,
-                                label: '${appTranslation(context).logIn}',
+                                label: appTranslation(context).logIn,
                               ),
                             ),
                           ],

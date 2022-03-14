@@ -505,3 +505,35 @@ class GetUserDataSuccess extends MainState {}
 class GetSavedBooksLoading extends MainState {}
 
 class GetSavedBooksSuccess extends MainState {}
+
+
+class NotificationRemoveLoading extends MainState {}
+
+class NotificationRemoveSuccess extends MainState {}
+
+class SavedBooksLoading extends MainState {}
+
+class SavedBooksSuccess extends MainState {}
+
+class RemoveSavedBooksLoading extends MainState {}
+
+class RemoveSavedBooksSuccess extends MainState {}
+
+class PostSavedBooksLoading extends MainState {}
+
+class PostBorrowingBooksLoading extends MainState {}
+
+class PostBorrowingBooksSuccess extends MainState {
+  final String text;
+  PostBorrowingBooksSuccess(this.text);
+}
+
+class PostSavedBooksSuccess extends MainState {
+  final String message;
+
+  PostSavedBooksSuccess(this.message);
+}
+
+class ChickTimeLoading extends MainState {}
+
+class ChickTimeSuccess extends MainState {}

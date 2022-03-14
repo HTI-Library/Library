@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_conditional_rendering/conditional.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/features/internet_connection/page/internet_connection_page.dart';
-
 
 class MainScaffold extends StatelessWidget {
   final Widget scaffold;
@@ -25,9 +23,10 @@ class MainScaffold extends StatelessWidget {
               : TextDirection.ltr,
           child: Conditional.single(
             context: context,
-            conditionBuilder: (context) => !MainCubit.get(context).noInternetConnection,
+            conditionBuilder: (context) =>
+                !MainCubit.get(context).noInternetConnection,
             widgetBuilder: (context) => scaffold,
-            fallbackBuilder:(context) => const InternetConnectionPage(),
+            fallbackBuilder: (context) => const InternetConnectionPage(),
           ),
         );
       },

@@ -97,7 +97,7 @@ class CatDetailsItem extends StatelessWidget {
                               }),
                           const Spacer(),
                           AvailableItem(
-                            amount: model.amount,
+                            amount: model.amount.toInt(),
                           ),
                         ],
                       ),

@@ -11,3 +11,9 @@ const getUserUrl = 'get_user';
 const getBooksSavedUrl = 'books_saved';
 
 
+const removeNotificationsUrl = 'clear_notifications';
+const getSavedBooksUrl = 'books_saved';
+const removeSavedBooksUrl = 'remove_book_saved';
+const savedBooksUrl = 'save_book';
+const borrowBookUrl = 'borrow_book';
+const checksTimeUrl = 'checksTime';

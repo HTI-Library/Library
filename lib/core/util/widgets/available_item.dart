@@ -24,7 +24,9 @@ class AvailableItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(4.0),
       ),
       child: Text(
-          amount != 0 ? appTranslation(context).available : appTranslation(context).unavailable,
+        amount > 1
+            ? appTranslation(context).available
+            : appTranslation(context).unavailable,
         style: Theme.of(context).textTheme.caption!.copyWith(
               color: HexColor(surface),
               fontSize: fontSize,

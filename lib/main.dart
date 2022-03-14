@@ -89,23 +89,23 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (BuildContext context) => sl<MainCubit>()
-            ..setThemes(
-              rtl: widget.isRtl,
-              dark: widget.isDark,
-            )
-            ..changeUser(token!.isNotEmpty)
-            ..setTranslation(
-              translation: widget.translation,
-            )
-            ..checkInternet()
-            ..checkConnectivity()
-            ..categories()
-            ..topBorrow(page: 1)
-            ..getUserDate()
-            ..getSavedBooks()
-            ..getNotifications(),
-        ),
+            create: (BuildContext context) => sl<MainCubit>()
+              ..setThemes(
+                rtl: widget.isRtl,
+                dark: widget.isDark,
+              )
+              ..changeUser(token!.isNotEmpty)
+              ..setTranslation(
+                translation: widget.translation,
+              )
+              ..checkInternet()
+              ..checkConnectivity()
+              ..categories(library: 'a', type: 'b')
+              ..topBorrow(page: 1)
+              // ..postBorrowBook(bookID: '6225df6faf57b7ef4675f50a')
+              ..getSavedBooks()
+            // ..chickTime(userID: '622dd3eb1100261d3d25c18b'),
+            ),
       ],
       child: BlocBuilder<MainCubit, MainState>(
         builder: (context, state) {
