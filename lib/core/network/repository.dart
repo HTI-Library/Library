@@ -190,6 +190,7 @@ abstract class Repository {
 
   Future<Response> logOut();
 
+
   Future<Response> booksSavedRepo();
 
   Future<Response> removeSaveBookRepo({
@@ -207,7 +208,26 @@ abstract class Repository {
   Future<Response> chickTimeRepo({
     required String userID,
   });
+
+  Future<Response> getAllReturnedRepo();
+
+  Future<Response> getMyReturnedBooksRepo();
+
+
+
+  Future<Response> searchRepo({
+    required String word,
+});
+
+  Future<Response> getMyLastSearchRepo();
+
+  Future<Response> myBorrowBooksRepo({
+  required String page,
+  });
+
+
 }
+
 
 class RepoImplementation extends Repository {
   final DioHelper dioHelper;
@@ -773,4 +793,51 @@ class RepoImplementation extends Repository {
       token: token,
     );
   }
+
+  @override
+  Future<Response> getAllReturnedRepo() async {
+    return await dioHelper.get(
+      url: getAllReturnedBooksUrl,
+    );
+  }
+
+  @override
+  Future<Response> getMyReturnedBooksRepo() async {
+    return await dioHelper.get(
+      url: getRecentlyReturnedUrl,
+      token: token,
+    );
+  }
+
+
+  @override
+  Future<Response> searchRepo({
+    required String word,
+}) async {
+    return await dioHelper.get(
+      url: searchUrl,
+      token: token,
+    );
+  }
+
+  @override
+  Future<Response> getMyLastSearchRepo() async {
+    return await dioHelper.get(
+      url: mySearchUrl,
+      token: token,
+    );
+  }
+
+  @override
+  Future<Response> myBorrowBooksRepo({
+    required String page,
+}) async {
+    return await dioHelper.get(
+      url: myBorrowBooksUrl,
+      token: token,
+    );
+  }
+
 }
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjJkZDNlYjExMDAyNjFkM2QyNWMxOGIiLCJpYXQiOjE2NDc0NTEyNjR9.Hi-0Wh7QANH_GJ9tqvyM-YgQccUJBE-eEoXdBmEf-HM

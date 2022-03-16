@@ -14,5 +14,12 @@ const removeNotificationsUrl = 'clear_notifications';
 const getSavedBooksUrl = 'books_saved';
 const removeSavedBooksUrl = 'remove_book_saved';
 const savedBooksUrl = 'save_book';
-const borrowBookUrl = 'borrow_book';
 const checksTimeUrl = 'checksTime';
+
+const borrowBookUrl = 'borrow_book';
+
+const getAllReturnedBooksUrl = 'returned_bookses';
+const getRecentlyReturnedUrl = 'recently_returned';
+const searchUrl = 'search';
+const myBorrowBooksUrl = 'my_borrow_books';
+const mySearchUrl = 'last_search';
