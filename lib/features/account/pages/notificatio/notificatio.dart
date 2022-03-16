@@ -74,32 +74,30 @@ class _NotificationPageState extends State<NotificationPage> {
 
   Widget buildNotification(
           List<NotificationData> model, BuildContext context) =>
-      Expanded(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.25,
-              child: IconButton(
-                  onPressed: () {
-                    MainCubit.get(context).removeNotifications();
-                  },
-                  icon: Text(
-                    'Clear All',
-                    textAlign: TextAlign.start,
-                    style: Theme.of(context).textTheme.headline6,
-                  )),
+      Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.25,
+            child: IconButton(
+                onPressed: () {
+                  MainCubit.get(context).removeNotifications();
+                },
+                icon: Text(
+                  'Clear All',
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.headline6,
+                )),
+          ),
+          Expanded(
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (context, index) =>
+                  NotificationItem(model: model[index]),
+              itemCount: model.length,
             ),
-            Expanded(
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) =>
-                    NotificationItem(model: model[index]),
-                itemCount: model.length,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       );
 }
