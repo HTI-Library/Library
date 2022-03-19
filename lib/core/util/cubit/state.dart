@@ -557,3 +557,9 @@ class LastSearchSuccess extends MainState {}
 class SearchLoading extends MainState {}
 
 class SearchSuccess extends MainState {}
+
+class UserAvatarLoading extends MainState {}
+
+class UserAvatarSuccess extends MainState {}
+class PickImageSuccessState extends MainState {}
+class ClearImageSuccessState extends MainState {}

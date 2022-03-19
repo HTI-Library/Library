@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
+import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/core/util/widgets/asset_svg.dart';
 
 class DialogChangePhoto extends StatelessWidget {
@@ -9,72 +12,73 @@ class DialogChangePhoto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-
-      child: AlertDialog(
-        elevation: 10,
-        shape:RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15)),
-        title: Center(child: Text("Choose option",style: Theme.of(context) .textTheme.headline6)),
-        content: Container(
-          height: MediaQuery.of(context).size.height / 7.5,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: InkWell(
-                  onTap: (){
-                    MainCubit.get(context).openCamera(context);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        AssetSvg(imagePath: 'ic_camera' , size: 60,),
-                        Text("Camera" , style: Theme.of(context) .textTheme.headline6),
-
-                      ],
+    return BlocBuilder<MainCubit, MainState>(
+      builder: (context, state) {
+        return AlertDialog(
+          elevation: 10,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          title: Center(
+              child: Text("Choose option",
+                  style: Theme.of(context).textTheme.headline6)),
+          content: Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    height: 60.0,
+                    width: 40.0,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(10.0),
+                      onTap: (){
+                        MainCubit.get(context).selectCamera(context);
+                      },
+                      child: Material(
+                        clipBehavior:
+                        Clip.antiAliasWithSaveLayer,
+                        borderRadius:
+                        BorderRadius.circular(10.0),
+                        color: HexColor(greyWhite),
+                        child: Icon(
+                          FontAwesomeIcons.cameraRetro,
+                          size: 25.0,
+                          color: HexColor(mainColor),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const Divider(height: 10,),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: InkWell(
-                  onTap: (){
-                    MainCubit.get(context).openGallery(context);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        AssetSvg(imagePath: 'ic_gallery' , size: 60,),
-                        Text("gallery" , style: Theme.of(context) .textTheme.headline6),
-                      ],
+                space15Horizontal,
+                Expanded(
+                  child: SizedBox(
+                    height: 60.0,
+                    width: 40.0,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(10.0),
+                      onTap: (){
+                        MainCubit.get(context).selectImage(context);
+                      },
+                      child: Material(
+                        clipBehavior:
+                        Clip.antiAliasWithSaveLayer,
+                        borderRadius:
+                        BorderRadius.circular(10.0),
+                        color: HexColor(greyWhite),
+                        child: Icon(
+                          FontAwesomeIcons.solidImages,
+                          size: 25.0,
+                          color: HexColor(mainColor),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              // ListTile(
-              //   onTap: (){
-              //     MainCubit.get(context).openGallery(context);
-              //   },
-              //   title: Text("Gallery"),
-              //   leading: Icon(Icons.account_box,color: Colors.blue,),
-              // ),
-              // ListTile(
-              //   onTap: (){
-              //     MainCubit.get(context).openCamera(context);
-              //   },
-              //   title: Text("Camera"),
-              //   leading: Icon(Icons.camera,color: Colors.blue,),
-              // ),
-            ],
+              ],
+            ),
           ),
-        ),),
+        );
+      },
     );
-
   }
 }

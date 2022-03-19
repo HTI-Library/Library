@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:hti_library/core/network/remote/dio_helper.dart';
 import 'package:hti_library/core/util/constants.dart';
@@ -181,6 +183,10 @@ abstract class Repository {
     required String type,
   });
   Future<Response> getUserDateRepo();
+
+  Future<Response> userAvatarRepo({
+    File? image,
+  });
 
   Future<Response> categoryDetailsRepo({
     required String categoryName,
@@ -838,6 +844,27 @@ class RepoImplementation extends Repository {
     );
   }
 
+
+  @override
+  Future<Response> userAvatarRepo({
+    File? image,
+  }) async {
+    return await dioHelper.post(
+      url: userAvatarUrl,
+      token: token,
+      data: FormData.fromMap(
+        {
+          if (image != null)
+            'avatar': await MultipartFile.fromFile(
+              image.path,
+              filename: Uri.file(image.path).pathSegments.last,
+            ),
+        },
+      ),
+    );
+  }
 }
+
+
 
 // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjJkZDNlYjExMDAyNjFkM2QyNWMxOGIiLCJpYXQiOjE2NDc0NTEyNjR9.Hi-0Wh7QANH_GJ9tqvyM-YgQccUJBE-eEoXdBmEf-HM

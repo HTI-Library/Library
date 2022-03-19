@@ -13,7 +13,6 @@ import 'package:hti_library/core/models/categories_model.dart';
 import 'package:hti_library/core/models/get_saved_books_model.dart';
 import 'package:hti_library/core/models/last_search_model.dart';
 import 'package:hti_library/core/models/login_model.dart';
-import 'package:hti_library/core/models/old/get_all_returned_model.dart';
 import 'package:hti_library/core/models/old/search_model.dart';
 import 'package:hti_library/core/models/profile_model.dart';
 import 'package:hti_library/core/models/remove_save_books_model.dart';
@@ -397,59 +396,64 @@ class MainCubit extends Cubit<MainState> {
     emit(InternetState());
   }
 
-  PickedFile? imageFile;
-
-  void openGallery(BuildContext context) async {
-    await ImagePicker()
-        .getImage(
-      source: ImageSource.gallery,
-    )
-        .then((value) {
-      imageFile = value;
-      emit(ChangeImageSuccessState());
-    }).catchError((onError) {
-      debugPrint(onError.toString());
-      emit(ChangeImageLoadingState());
-    });
-    Navigator.pop(context);
-  }
-
-  void openCamera(BuildContext context) async {
-    await ImagePicker()
-        .getImage(
-      source: ImageSource.camera,
-    )
-        .then((value) {
-      imageFile = value;
-      emit(ChangeImageSuccessState());
-    }).catchError((onError) {
-      debugPrint(onError.toString());
-      emit(ChangeImageLoadingState());
-    });
-    Navigator.pop(context);
-  }
+  // PickedFile? imageFile;
+  //
+  // void openGallery(BuildContext context) async {
+  //   await ImagePicker()
+  //       .getImage(
+  //     source: ImageSource.gallery,
+  //   )
+  //       .then((value) {
+  //     imageFile = value;
+  //     emit(ChangeImageSuccessState());
+  //   }).catchError((onError) {
+  //     debugPrint(onError.toString());
+  //     emit(ChangeImageLoadingState());
+  //   });
+  //   Navigator.pop(context);
+  // }
+  //
+  // void openCamera(BuildContext context) async {
+  //   await ImagePicker()
+  //       .getImage(
+  //     source: ImageSource.camera,
+  //   )
+  //       .then((value) {
+  //     imageFile = value;
+  //     emit(ChangeImageSuccessState());
+  //   }).catchError((onError) {
+  //     debugPrint(onError.toString());
+  //     emit(ChangeImageLoadingState());
+  //   });
+  //   Navigator.pop(context);
+  // }
 
   ///TODO pick photo ------------ start
-  // final ImagePicker _picker = ImagePicker();
-  // File? imageFile;
-  //
-  // void selectImage() async {
-  //   _picker.pickImage(source: ImageSource.gallery).then((value) {
-  //     imageFile = File(value!.path);
-  //   });
-  //
-  //   emit(PickImageSuccessState());
-  // }
-  //
-  // File? cameraFile;
-  //
-  // void selectCamera() async {
-  //   _picker.pickImage(source: ImageSource.camera).then((value) {
-  //     cameraFile = File(value!.path);
-  //   });
-  //
-  //   emit(PickImageSuccessState());
-  // }
+  final ImagePicker _picker = ImagePicker();
+  File? imageFile;
+
+  void selectImage(context) async {
+    _picker.pickImage(source: ImageSource.gallery).then((value) {
+      imageFile = File(value!.path);
+      emit(PickImageSuccessState());
+    });
+    Navigator.pop(context);
+  }
+
+  void selectCamera(context) async {
+    _picker.pickImage(source: ImageSource.camera).then((value) {
+      imageFile = File(value!.path);
+      emit(PickImageSuccessState());
+    });
+
+    Navigator.pop(context);
+  }
+
+  void clearSelectedImage() {
+    imageFile = null;
+    emit(ClearImageSuccessState());
+  }
+
   ///TODO pick photo ------------ end
 
   // login ------------------- start
@@ -620,7 +624,8 @@ class MainCubit extends Cubit<MainState> {
     debugPrint('categoryDetails------------loading');
     emit(CategoryLoading());
     await _repository
-        .categoryDetailsRepo(categoryName: categoryName, library: library, type: type)
+        .categoryDetailsRepo(
+            categoryName: categoryName, library: library, type: type)
         .then((value) {
       // success
       categoryDetailsModel = TopBorrowModel.fromJson(value.data);
@@ -744,6 +749,8 @@ class MainCubit extends Cubit<MainState> {
       await _repository.getUserDateRepo().then((value) {
         // success
         profileModel = ProfileModel.fromJson(value.data);
+
+        debugPrint(profileModel!.avatar);
         debugPrint('getUserDate------------success');
         emit(GetUserDataSuccess());
       }).catchError((error) {
@@ -832,19 +839,19 @@ class MainCubit extends Cubit<MainState> {
   TopBorrowModel? allReturnedBook;
 
   void getAllReturned() async {
-      debugPrint('getAllReturned------------loading');
-      emit(AllReturnedLoading());
-      await _repository.getAllReturnedRepo().then((value) {
-        // success
-        debugPrint('getAllReturned------------success');
-        allReturnedBook = TopBorrowModel.fromJson(value.data);
-        emit(AllReturnedSuccess());
-      }).catchError((error) {
-        // error
-        debugPrint('getAllReturned------------error');
-        debugPrint(error.toString());
-        emit(Error(error.toString()));
-      });
+    debugPrint('getAllReturned------------loading');
+    emit(AllReturnedLoading());
+    await _repository.getAllReturnedRepo().then((value) {
+      // success
+      debugPrint('getAllReturned------------success');
+      allReturnedBook = TopBorrowModel.fromJson(value.data);
+      emit(AllReturnedSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint('getAllReturned------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
   }
 
 // AllReturned ------------------- end
@@ -879,20 +886,20 @@ class MainCubit extends Cubit<MainState> {
 
   void getMyBorrow({
     required int page,
-}   ) async {
-      debugPrint('getMyBorrow------------loading');
-      emit(MyBorrowBookLoading());
-      await _repository.myBorrowBooksRepo(page: page).then((value) {
-        // success
-        debugPrint('getMyBorrow------------success');
-        myBorrowBooks = MyBorrowBookModel.fromJson(value.data);
-        emit(MyBorrowBookSuccess());
-      }).catchError((error) {
-        // error
-        debugPrint('getMyBorrow------------error');
-        debugPrint(error.toString());
-        emit(Error(error.toString()));
-      });
+  }) async {
+    debugPrint('getMyBorrow------------loading');
+    emit(MyBorrowBookLoading());
+    await _repository.myBorrowBooksRepo(page: page).then((value) {
+      // success
+      debugPrint('getMyBorrow------------success');
+      myBorrowBooks = MyBorrowBookModel.fromJson(value.data);
+      emit(MyBorrowBookSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint('getMyBorrow------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
   }
 
 // myBorrowBook ------------------- end
@@ -927,7 +934,7 @@ class MainCubit extends Cubit<MainState> {
 
   void getSearch({
     required String word,
-  }   ) async {
+  }) async {
     if (userSigned) {
       debugPrint('getSearch------------loading');
       emit(SearchLoading());
@@ -947,5 +954,26 @@ class MainCubit extends Cubit<MainState> {
 
 // Search ------------------- end
 
+  /// userAvatar ------------------- start
+
+  void userAvatar() async {
+    if (userSigned) {
+      debugPrint('userAvatar------------loading');
+      emit(UserAvatarLoading());
+      await _repository.userAvatarRepo(image: imageFile).then((value) {
+        // success
+        debugPrint('userAvatar ------------ success');
+        emit(UserAvatarSuccess());
+        getUserDate();
+      }).catchError((error) {
+        // error
+        debugPrint('userAvatar------------error');
+        debugPrint(error.toString());
+        emit(Error(error.toString()));
+      });
+    }
+  }
+
+// userAvatar ------------------- end
 
 }

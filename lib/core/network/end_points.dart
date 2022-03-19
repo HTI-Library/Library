@@ -23,3 +23,5 @@ const getRecentlyReturnedUrl = 'recently_returned';
 const searchUrl = 'search';
 const myBorrowBooksUrl = 'my_borrow_books';
 const mySearchUrl = 'last_search';
+const userAvatarUrl = 'user/avatar';
+
