@@ -222,7 +222,7 @@ abstract class Repository {
   Future<Response> getMyLastSearchRepo();
 
   Future<Response> myBorrowBooksRepo({
-  required String page,
+  required int page,
   });
 
 
@@ -804,7 +804,7 @@ class RepoImplementation extends Repository {
   @override
   Future<Response> getMyReturnedBooksRepo() async {
     return await dioHelper.get(
-      url: getRecentlyReturnedUrl,
+      url: '$getRecentlyReturnedUrl?page=1',
       token: token,
     );
   }
@@ -815,7 +815,7 @@ class RepoImplementation extends Repository {
     required String word,
 }) async {
     return await dioHelper.get(
-      url: searchUrl,
+      url: '$searchUrl?word=$word',
       token: token,
     );
   }
@@ -830,10 +830,10 @@ class RepoImplementation extends Repository {
 
   @override
   Future<Response> myBorrowBooksRepo({
-    required String page,
+    required int page,
 }) async {
     return await dioHelper.get(
-      url: myBorrowBooksUrl,
+      url: '$myBorrowBooksUrl?page=$page',
       token: token,
     );
   }

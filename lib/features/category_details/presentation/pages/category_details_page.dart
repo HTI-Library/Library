@@ -47,7 +47,7 @@ class _CategoryDetailsPageState extends State<CategoryDetailsPage> {
               size: 18.0,
             ),
             onPressed: () {
-              navigateTo(context, SearchPage());
+              navigateTo(context, SearchPage(model: MainCubit.get(context).lastSearchModel!,));
             },
           ),
           scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,

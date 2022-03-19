@@ -105,6 +105,11 @@ class _MyAppState extends State<MyApp> {
               // ..postBorrowBook(bookID: '6225df6faf57b7ef4675f50a')
               ..getSavedBooks()
               ..getUserDate()
+              ..getAllReturned()
+
+                ..getMyReturned()
+
+
             // ..chickTime(userID: '622dd3eb1100261d3d25c18b'),
             ),
       ],
