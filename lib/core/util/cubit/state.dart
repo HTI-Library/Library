@@ -537,3 +537,23 @@ class PostSavedBooksSuccess extends MainState {
 class ChickTimeLoading extends MainState {}
 
 class ChickTimeSuccess extends MainState {}
+
+class AllReturnedLoading extends MainState {}
+
+class AllReturnedSuccess extends MainState {}
+
+class MyReturnedLoading extends MainState {}
+
+class MyReturnedSuccess extends MainState {}
+
+class MyBorrowBookLoading extends MainState {}
+
+class MyBorrowBookSuccess extends MainState {}
+
+class LastSearchLoading extends MainState {}
+
+class LastSearchSuccess extends MainState {}
+
+class SearchLoading extends MainState {}
+
+class SearchSuccess extends MainState {}

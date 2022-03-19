@@ -11,7 +11,10 @@ import 'package:hti_library/core/error/exceptions.dart';
 import 'package:hti_library/core/models/book_details_model.dart';
 import 'package:hti_library/core/models/categories_model.dart';
 import 'package:hti_library/core/models/get_saved_books_model.dart';
+import 'package:hti_library/core/models/last_search_model.dart';
 import 'package:hti_library/core/models/login_model.dart';
+import 'package:hti_library/core/models/old/get_all_returned_model.dart';
+import 'package:hti_library/core/models/old/search_model.dart';
 import 'package:hti_library/core/models/profile_model.dart';
 import 'package:hti_library/core/models/remove_save_books_model.dart';
 import 'package:hti_library/core/models/save_books_model.dart';
@@ -22,6 +25,7 @@ import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/core/util/translation.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../models/myBorrowBookModel.dart';
 import '../../models/notification_model.dart';
 import '../constants.dart';
 
@@ -822,5 +826,126 @@ class MainCubit extends Cubit<MainState> {
   }
 
 // chickTime ------------------- end
+
+  // AllReturned ------------------- start
+
+  TopBorrowModel? allReturnedBook;
+
+  void getAllReturned() async {
+      debugPrint('getAllReturned------------loading');
+      emit(AllReturnedLoading());
+      await _repository.getAllReturnedRepo().then((value) {
+        // success
+        debugPrint('getAllReturned------------success');
+        allReturnedBook = TopBorrowModel.fromJson(value.data);
+        emit(AllReturnedSuccess());
+      }).catchError((error) {
+        // error
+        debugPrint('getAllReturned------------error');
+        debugPrint(error.toString());
+        emit(Error(error.toString()));
+      });
+  }
+
+// AllReturned ------------------- end
+
+  // AllReturned ------------------- start
+
+  TopBorrowModel? myReturnedBooks;
+
+  void getMyReturned() async {
+    if (userSigned) {
+      debugPrint('getMyReturned------------loading');
+      emit(MyReturnedLoading());
+      await _repository.getMyReturnedBooksRepo().then((value) {
+        // success
+        debugPrint('getMyReturned------------success');
+        myReturnedBooks = TopBorrowModel.fromJson(value.data);
+        emit(MyReturnedSuccess());
+      }).catchError((error) {
+        // error
+        debugPrint('getMyReturned------------error');
+        debugPrint(error.toString());
+        emit(Error(error.toString()));
+      });
+    }
+  }
+
+// AllReturned ------------------- end
+
+  // myBorrowBook ------------------- start
+
+  MyBorrowBookModel? myBorrowBooks;
+
+  void getMyBorrow({
+    required int page,
+}   ) async {
+      debugPrint('getMyBorrow------------loading');
+      emit(MyBorrowBookLoading());
+      await _repository.myBorrowBooksRepo(page: page).then((value) {
+        // success
+        debugPrint('getMyBorrow------------success');
+        myBorrowBooks = MyBorrowBookModel.fromJson(value.data);
+        emit(MyBorrowBookSuccess());
+      }).catchError((error) {
+        // error
+        debugPrint('getMyBorrow------------error');
+        debugPrint(error.toString());
+        emit(Error(error.toString()));
+      });
+  }
+
+// myBorrowBook ------------------- end
+
+  // LastSearch ------------------- start
+
+  LastSearchModel? lastSearchModel;
+
+  void lastSearch() async {
+    if (userSigned) {
+      debugPrint('lastSearch------------loading');
+      emit(LastSearchLoading());
+      await _repository.getMyLastSearchRepo().then((value) {
+        // success
+        debugPrint('lastSearch------------success');
+        lastSearchModel = LastSearchModel.fromJson(value.data);
+        emit(LastSearchSuccess());
+      }).catchError((error) {
+        // error
+        debugPrint('lastSearch------------error');
+        debugPrint(error.toString());
+        emit(Error(error.toString()));
+      });
+    }
+  }
+
+// LastSearch ------------------- end
+
+  // Search ------------------- start
+
+  SearchModel? searchModel;
+
+  void getSearch({
+    required String word,
+  }   ) async {
+    if (userSigned) {
+      debugPrint('getSearch------------loading');
+      emit(SearchLoading());
+      await _repository.searchRepo(word: word).then((value) {
+        // success
+        debugPrint('getSearch------------success');
+        searchModel = SearchModel.fromJson(value.data);
+        emit(SearchSuccess());
+      }).catchError((error) {
+        // error
+        debugPrint('getSearch------------error');
+        debugPrint(error.toString());
+        emit(Error(error.toString()));
+      });
+    }
+  }
+
+// Search ------------------- end
+
 
 }

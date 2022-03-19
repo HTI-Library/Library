@@ -176,6 +176,7 @@ class AccountPage extends StatelessWidget {
                 if (MainCubit.get(context).userSigned)
                 MyBtnAccount(
                   voidCallback: () {
+                    MainCubit.get(context).getMyBorrow(page: 1);
                     navigateTo(context, MyBorrowBook());
                   },
                   text: 'my borrow book',

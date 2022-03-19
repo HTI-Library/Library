@@ -19,6 +19,7 @@ class AppTextFormField extends StatefulWidget {
   final TextInputAction? textInputAction;
   final bool? readOnly;
   final bool? enabled;
+  final ValueChanged<String>? onSubmit;
 
 
   const AppTextFormField({
@@ -32,6 +33,7 @@ class AppTextFormField extends StatefulWidget {
     this.type = TextInputType.text,
     this.isPassword = false,
     this.onChanged,
+    this.onSubmit,
     required this.callbackHandle,
   }) : super(key: key);
 
@@ -65,6 +67,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
             controller: textEditingController,
             obscureText: widget.isPassword ? isShown : false,
             onChanged: widget.onChanged,
+            onFieldSubmitted: widget.onSubmit,
             textInputAction: widget.textInputAction,
             decoration: InputDecoration(
               border: OutlineInputBorder(

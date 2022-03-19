@@ -29,7 +29,7 @@ class Categories extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 5.0),
                     child: MyBtnAccount(
                       voidCallback: () {
-                        navigateTo(context, SearchPage());
+                        navigateTo(context, SearchPage(model: MainCubit.get(context).lastSearchModel!));
                       },
                       text: '${appTranslation(context).search}',
                       imagePath: 'search',

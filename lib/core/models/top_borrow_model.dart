@@ -30,6 +30,7 @@ class SimpleBook {
   late final String name;
   late final num amount;
   late final String overview;
+  late final String userId;
   late final List<Author> authors;
 
   late final num rate;
@@ -48,10 +49,12 @@ class SimpleBook {
     name = json['name'] ?? '';
     amount = json['amount'] ?? 0;
     // overview = json['overview'] ?? '';
-    authors = List.from(json['auther']).map((e) => Author.fromJson(e)).toList();
+    if (json['auther'] != null)
+    authors = List.from(json['auther']).map((e) => Author.fromJson(e)).toList() ;
     rate = json['rate'] ?? 0;
     edition = json['edition'] ?? '';
     pages = json['pages'] ?? 0;
+    userId = json['user_id'] ?? '';
     // category = json['category'] ?? '';
     // topBorrow = json['top_Borrow'] ?? 0;
     bookImage = json['bookImage'] ?? '';
@@ -67,7 +70,7 @@ class SimpleBook {
     _data['name'] = name;
     _data['amount'] = amount;
     _data['overview'] = overview;
-
+    _data['user_id'] = userId;
     _data['rate'] = rate;
     _data['edition'] = edition;
     _data['pages'] = pages;
