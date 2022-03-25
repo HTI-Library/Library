@@ -13,6 +13,7 @@ import 'package:hti_library/core/util/widgets/loading.dart';
 import 'package:hti_library/core/util/widgets/see_more_item.dart';
 import 'package:hti_library/features/account/widget/btn_my_account.dart';
 import 'package:hti_library/features/search/presentation/search.dart';
+import 'package:hti_library/features/see_more/presentation/page/see_more.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -39,7 +40,10 @@ class HomePage extends StatelessWidget {
                 ),
                 space15Vertical,
                 SeeMoreItem(
-                  gestureTapCallback: () {},
+                  gestureTapCallback: () {
+                    navigateTo(context, SeeMore(
+                      model: MainCubit.get(context).topBorrowModel!,));
+                  },
                   text: '${appTranslation(context).topBorrowBooks}',
                 ),
                 Container(
@@ -63,7 +67,9 @@ class HomePage extends StatelessWidget {
                           .length) : const LoadingWidget(),
                 ),
                 SeeMoreItem(
-                  gestureTapCallback: () {},
+                  gestureTapCallback: () {
+                    navigateTo(context, SeeMore());
+                  },
                   text: '${appTranslation(context).recentlyReturned}',
                 ),
                 Container(

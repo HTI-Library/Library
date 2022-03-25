@@ -713,12 +713,7 @@ class RepoImplementation extends Repository {
     required String type,
   }) async {
     return await dioHelper.get(
-      url: categoryUrl,
-      query: {
-        'category': categoryName,
-        'library': library,
-        'type': type,
-      },
+      url:'$categoryUrl?category=$categoryName&library=$library&type=$type',
     );
   }
 
