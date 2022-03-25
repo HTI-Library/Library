@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
       builder: (context, state) {
         return BackScaffold(
             body: SingleChildScrollView(
-              physics: const NeverScrollableScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Container(
                 height: MediaQuery.of(context).size.height -
                     MainCubit.get(context).appBarHeight -

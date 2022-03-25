@@ -17,7 +17,11 @@ class ChangeNewPhoto extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MainCubit, MainState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is UserAvatarSuccess) {
+          showToast(message: 'تم رفع الصورة بنجاح', toastStates: ToastStates.SUCCESS);
+        }
+      },
       builder: (context, state) {
         return MainScaffold(
           scaffold: BackScaffold(

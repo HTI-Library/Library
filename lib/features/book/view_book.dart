@@ -14,6 +14,7 @@ import 'package:hti_library/core/util/widgets/book_item.dart';
 import 'package:hti_library/core/util/widgets/loading.dart';
 import 'package:hti_library/core/util/widgets/see_more_item.dart';
 import 'package:hti_library/features/borrowing/presentation/pages/borrowing_page.dart';
+import 'package:hti_library/features/see_more/presentation/page/see_more.dart';
 
 class ViewBookPage extends StatefulWidget {
   const ViewBookPage({Key? key, required this.bookId}) : super(key: key);
@@ -243,7 +244,11 @@ class _ViewBookPageState extends State<ViewBookPage> {
                         .isNotEmpty)
                       SeeMoreItem(
                         padding: 15,
-                        gestureTapCallback: () {},
+                        gestureTapCallback: () {
+                          navigateTo(context, SeeMore(
+                            model: MainCubit.get(context).topBorrowModel,
+                          ));
+                        },
                         text: 'More books from the same category',
                       ),
                     if (MainCubit.get(context)

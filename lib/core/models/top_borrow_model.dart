@@ -32,9 +32,12 @@ class SimpleBook {
   late final String overview;
   late final String userId;
   late final List<Author> authors;
-
   late final num rate;
   late final String edition;
+
+  late final String library;
+  late final String type;
+
   late final num pages;
   late final String category;
   late final num topBorrow;
@@ -47,6 +50,8 @@ class SimpleBook {
   SimpleBook.fromJson(Map<String, dynamic> json) {
     id = json['_id'] ?? '';
     name = json['name'] ?? '';
+    library = json['library'] ?? '';
+    type = json['type'] ?? '';
     amount = json['amount'] ?? 0;
     // overview = json['overview'] ?? '';
     if (json['auther'] != null)
@@ -80,6 +85,8 @@ class SimpleBook {
     _data['bookLink'] = bookLink;
     _data['createdAt'] = createdAt;
     _data['updatedAt'] = updatedAt;
+    _data['type'] = type;
+    _data['library'] = library;
     _data['__v'] = __v;
     return _data;
   }

@@ -30,7 +30,7 @@ class SavedItem extends StatelessWidget {
         color: HexColor(greyWhite),
         child: InkWell(
           onTap: () {
-            // navigateTo(context, ViewBookPage());
+           navigateTo(context, ViewBookPage(bookId: model.id,));
           },
           child: Padding(
             padding: const EdgeInsets.all(10.0),
