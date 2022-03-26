@@ -7,7 +7,7 @@ class SavedBooksModel {
 
   factory SavedBooksModel.fromJson(Map<String, dynamic> json) {
     return SavedBooksModel(
-      message: json['message'] ?? 0,
+      message: json['message'] ?? '',
     );
   }
 

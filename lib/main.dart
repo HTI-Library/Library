@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hti_library/core/di/injection.dart' as di;
+import 'package:hti_library/features/select_library/page/selectLibrary.dart';
 
 import 'core/di/injection.dart';
 import 'core/network/local/cache_helper.dart';
@@ -100,17 +101,14 @@ class _MyAppState extends State<MyApp> {
               )
               ..checkInternet()
               ..checkConnectivity()
-              ..categories(library: 'aaa', type: 'ssbs')
+              ..categories(library: 'hti matrial', type: 'hti matrial')
               ..topBorrow(page: 1)
-              // ..postBorrowBook(bookID: '6225df6faf57b7ef4675f50a')
+              ..categoryDetailsHti(categoryName: 'hti matrial' , library: 'hti matrial' , type: 'hti matrial')
+              ..categoryProject(categoryName: 'graduation projects' , library: 'graduation projects' , type: 'graduation projects')
               ..getSavedBooks()
               ..getUserDate()
-              ..getAllReturned()
-
-                ..getMyReturned()
-
-
-            // ..chickTime(userID: '622dd3eb1100261d3d25c18b'),
+              ..getAllReturned(page: 1)
+              ..getMyReturned()
             ),
       ],
       child: BlocBuilder<MainCubit, MainState>(
@@ -124,7 +122,7 @@ class _MyAppState extends State<MyApp> {
             theme: MainCubit.get(context).lightTheme,
             darkTheme: MainCubit.get(context).darkTheme,
             // home: token == '' ? LoginPage() : MainPage(),
-            home: MainPage(),
+            home: SelectLibrary(),
           );
         },
       ),

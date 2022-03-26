@@ -182,6 +182,7 @@ abstract class Repository {
     required String library,
     required String type,
   });
+
   Future<Response> getUserDateRepo();
 
   Future<Response> userAvatarRepo({
@@ -215,20 +216,21 @@ abstract class Repository {
     required String userID,
   });
 
-  Future<Response> getAllReturnedRepo();
+  Future<Response> getAllReturnedRepo({
+    required int page,
+  });
 
   Future<Response> getMyReturnedBooksRepo();
 
 
-
   Future<Response> searchRepo({
     required String word,
-});
+  });
 
   Future<Response> getMyLastSearchRepo();
 
   Future<Response> myBorrowBooksRepo({
-  required int page,
+    required int page,
   });
 
 
@@ -713,7 +715,7 @@ class RepoImplementation extends Repository {
     required String type,
   }) async {
     return await dioHelper.get(
-      url:'$categoryUrl?category=$categoryName&library=$library&type=$type',
+      url: '$categoryUrl?category=$categoryName&library=$library&type=$type',
     );
   }
 
@@ -779,6 +781,7 @@ class RepoImplementation extends Repository {
       url: '$checksTimeUrl?userID=$userID',
     );
   }
+
   @override
   Future<Response> getUserDateRepo() async {
     return await dioHelper.get(
@@ -796,9 +799,11 @@ class RepoImplementation extends Repository {
   }
 
   @override
-  Future<Response> getAllReturnedRepo() async {
+  Future<Response> getAllReturnedRepo({
+    required int page,
+  }) async {
     return await dioHelper.get(
-      url: getAllReturnedBooksUrl,
+      url: '$getAllReturnedBooksUrl?=$page',
     );
   }
 
@@ -814,7 +819,7 @@ class RepoImplementation extends Repository {
   @override
   Future<Response> searchRepo({
     required String word,
-}) async {
+  }) async {
     return await dioHelper.get(
       url: '$searchUrl?word=$word',
       token: token,
@@ -832,7 +837,7 @@ class RepoImplementation extends Repository {
   @override
   Future<Response> myBorrowBooksRepo({
     required int page,
-}) async {
+  }) async {
     return await dioHelper.get(
       url: '$myBorrowBooksUrl?page=$page',
       token: token,
@@ -852,14 +857,16 @@ class RepoImplementation extends Repository {
           if (image != null)
             'avatar': await MultipartFile.fromFile(
               image.path,
-              filename: Uri.file(image.path).pathSegments.last,
+              filename: Uri
+                  .file(image.path)
+                  .pathSegments
+                  .last,
             ),
         },
       ),
     );
   }
 }
-
 
 
 // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjJkZDNlYjExMDAyNjFkM2QyNWMxOGIiLCJpYXQiOjE2NDc0NTEyNjR9.Hi-0Wh7QANH_GJ9tqvyM-YgQccUJBE-eEoXdBmEf-HM

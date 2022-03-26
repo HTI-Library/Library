@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/core/models/getAllReturnedBooks.dart';
 import 'package:hti_library/core/models/top_borrow_model.dart';
 import 'package:hti_library/features/book/view_book.dart';
 
@@ -10,8 +11,9 @@ import '../../../../core/util/widgets/app_button.dart';
 import '../../../../core/util/widgets/available_item.dart';
 
 class SeeMoreItem extends StatelessWidget {
-  SeeMoreItem({Key? key , required this.model}) : super(key: key);
-  SimpleBook model;
+  SeeMoreItem({Key? key , this.simpleData , this.data}) : super(key: key);
+  SimpleBook? simpleData;
+  BooksReturned? data;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class SeeMoreItem extends StatelessWidget {
             navigateTo(
                 context,
                 ViewBookPage(
-                  bookId: model.id,
+                  bookId: simpleData != null ? simpleData!.id : data!.book.id,
                 ));
           },
           child: Padding(
@@ -49,7 +51,7 @@ class SeeMoreItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Image(
-                    image: NetworkImage('${model.bookImage}'),
+                    image: NetworkImage('${simpleData != null ? simpleData!.bookImage : data!.book.bookImage}'),
                     height: MediaQuery.of(context).size.width / 3.9 * 1.6,
                     width: MediaQuery.of(context).size.width / 3.9,
                     fit: BoxFit.fill,
@@ -62,22 +64,22 @@ class SeeMoreItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        model.name,
+                        simpleData != null ? simpleData!.name : data!.book.name,
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 1,
                       ),
                       Text(
-                        // '${appTranslation(context).author} : ${model.authors[0].authorName}',
+                        // '${appTranslation(context).author} : ${simpleData.authors[0].authorName}',
                         '${appTranslation(context).author}',
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 1,
                       ),
                       Text(
-                        'Edition : ${model.edition[0]}',
+                        'Edition : ${simpleData != null ? simpleData!.edition[0] : data!.book.edition[0]}',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                       Text(
-                        '${appTranslation(context).pagesNum} : ${model.pages}',
+                        '${appTranslation(context).pagesNum} : ${simpleData != null ? simpleData!.pages : data!.book.pages}',
                         // '${appTranslation(context).pagesNum} : ',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),

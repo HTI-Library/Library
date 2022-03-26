@@ -11,8 +11,10 @@ import 'package:hti_library/core/util/widgets/main_scaffold.dart';
 import 'package:intl/intl.dart';
 
 class BorrowingPage extends StatelessWidget {
-  BorrowingPage({Key? key, required this.book_id}) : super(key: key);
+  BorrowingPage({Key? key, required this.book_id , required this.img , required this.name}) : super(key: key);
   final String book_id;
+  final String img;
+  final String name;
   TextEditingController dataOfBorrowController = TextEditingController();
   TextEditingController dataOfReturnController = TextEditingController();
   DateTime date = DateTime.now();
@@ -31,7 +33,7 @@ class BorrowingPage extends StatelessWidget {
       builder: (context, state) {
         return MainScaffold(
           scaffold: BackScaffold(
-            title: 'Borrow Book',
+            title: name,
             body: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Padding(
@@ -48,9 +50,10 @@ class BorrowingPage extends StatelessWidget {
                       width: MediaQuery.of(context).size.width / 2,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
-                          image: const DecorationImage(
+                          image: DecorationImage(
                             image: NetworkImage(
-                                'https://edit.org/images/cat/book-covers-big-2019101610.jpg'),
+                                img),
+                            fit: BoxFit.fill
                           )),
                     ),
                     space20Vertical,
