@@ -10,6 +10,7 @@ import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/error/exceptions.dart';
 import 'package:hti_library/core/models/book_details_model.dart';
 import 'package:hti_library/core/models/categories_model.dart';
+import 'package:hti_library/core/models/getAllReturnedBooks.dart';
 import 'package:hti_library/core/models/get_saved_books_model.dart';
 import 'package:hti_library/core/models/last_search_model.dart';
 import 'package:hti_library/core/models/login_model.dart';
@@ -620,7 +621,6 @@ class MainCubit extends Cubit<MainState> {
     required String library,
     required String type,
   }) async {
-    categoryDetailsModel = null;
     debugPrint('categoryDetails------------loading');
     emit(CategoryLoading());
     await _repository
@@ -639,7 +639,65 @@ class MainCubit extends Cubit<MainState> {
     });
   }
 
+
 // categoryDetails ------------------- end
+
+  // categoryDetails ------------------- start
+
+  TopBorrowModel? categoryDetailsModelHti;
+
+  void categoryDetailsHti({
+    required String categoryName,
+    required String library,
+    required String type,
+  }) async {
+    debugPrint('categoryDetails------------loading');
+    emit(CategoryLoading());
+    await _repository
+        .categoryDetailsRepo(
+        categoryName: categoryName, library: library, type: type)
+        .then((value) {
+      // success
+      categoryDetailsModelHti = TopBorrowModel.fromJson(value.data);
+      debugPrint('categoryDetails------------success');
+      emit(CategorySuccess());
+    }).catchError((error) {
+      // error
+      debugPrint('categoryDetails------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+
+
+// categoryDetails ------------------- end
+
+  /// start project exit .
+  TopBorrowModel? categoriesModelProject;
+
+  void categoryProject({
+    required String categoryName,
+    required String library,
+    required String type,
+  }) async {
+    debugPrint('categoriesModelProject------------loading');
+    emit(CategoryLoading());
+    await _repository
+        .categoryDetailsRepo(
+        categoryName: categoryName, library: library, type: type)
+        .then((value) {
+      // success
+      categoriesModelProject = TopBorrowModel.fromJson(value.data);
+      debugPrint('categoriesModelProject------------success');
+      emit(CategorySuccess());
+    }).catchError((error) {
+      // error
+      debugPrint('categoriesModelProject------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+  // end project exit .
 
   // getNotifications ------------------- start
 
@@ -836,15 +894,17 @@ class MainCubit extends Cubit<MainState> {
 
   // AllReturned ------------------- start
 
-  TopBorrowModel? allReturnedBook;
+  GetAllReturnedBooks? allReturnedBook;
 
-  void getAllReturned() async {
+  void getAllReturned({
+  required int page,
+}) async {
     debugPrint('getAllReturned------------loading');
     emit(AllReturnedLoading());
-    await _repository.getAllReturnedRepo().then((value) {
+    await _repository.getAllReturnedRepo(page: page).then((value) {
       // success
       debugPrint('getAllReturned------------success');
-      allReturnedBook = TopBorrowModel.fromJson(value.data);
+      allReturnedBook = GetAllReturnedBooks.fromJson(value.data);
       emit(AllReturnedSuccess());
     }).catchError((error) {
       // error

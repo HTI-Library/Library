@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/core/models/getAllReturnedBooks.dart';
 import 'package:hti_library/core/models/top_borrow_model.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/features/book/view_book.dart';
@@ -11,10 +12,12 @@ import 'available_item.dart';
 class BookItem extends StatelessWidget {
   const BookItem({
     Key? key,
-    required this.book,
+     this.book,
+     this.returned,
   }) : super(key: key);
 
-  final SimpleBook book;
+  final BooksReturned? returned;
+  final SimpleBook? book;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,7 @@ class BookItem extends StatelessWidget {
             navigateTo(
                 context,
                 ViewBookPage(
-                  bookId: book.id,
+                  bookId: book != null ? book!.id : returned!.book.id,
                 ));
           },
           child: Padding(
@@ -53,7 +56,7 @@ class BookItem extends StatelessWidget {
                   ),
                   child: Image(
                     image: NetworkImage(
-                      book.bookImage,
+                      book != null ? book!.bookImage : returned!.book.bookImage,
                     ),
                     height: MediaQuery.of(context).size.width / 3.2 * 1.6,
                     width: MediaQuery.of(context).size.width / 3.2,
@@ -62,7 +65,7 @@ class BookItem extends StatelessWidget {
                 ),
                 space5Vertical,
                 Text(
-                  book.name,
+                  book != null ? book!.name : returned!.book.name,
                   maxLines: 1,
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
                       color: MainCubit.get(context).isDark
@@ -73,7 +76,7 @@ class BookItem extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '${book.rate}',
+                      '${book != null ? book!.rate : returned!.book.rate}',
                       maxLines: 2,
                       style: Theme.of(context).textTheme.caption,
                     ),
@@ -91,7 +94,7 @@ class BookItem extends StatelessWidget {
                       ),
                     ),
                     AvailableItem(
-                      amount: book.amount.toInt(),
+                      amount: book != null ? book!.amount.toInt() : returned!.book.amount.toInt(),
                     ),
                   ],
                 ),

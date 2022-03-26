@@ -59,6 +59,8 @@ List<Widget> bottomPages = [
 ];
 
 String? token = '';
+String? library = '';
+String? type = '';
 
 void navigateTo(context, widget) => Navigator.push(
       context,

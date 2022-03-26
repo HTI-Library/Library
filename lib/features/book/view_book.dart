@@ -169,6 +169,15 @@ class _ViewBookPageState extends State<ViewBookPage> {
                                             .bookModel!
                                             .book
                                             .id,
+                                        name:MainCubit.get(context)
+                                            .bookModel!
+                                            .book
+                                            .name,
+                                        img: MainCubit.get(context)
+                                            .bookModel!
+                                            .book
+                                            .bookImage
+                                        ,
                                       ));
                                     }),
                               ),
@@ -246,6 +255,7 @@ class _ViewBookPageState extends State<ViewBookPage> {
                         padding: 15,
                         gestureTapCallback: () {
                           navigateTo(context, SeeMore(
+                            title: "Top Borrow Books",
                             model: MainCubit.get(context).topBorrowModel,
                           ));
                         },
@@ -278,7 +288,12 @@ class _ViewBookPageState extends State<ViewBookPage> {
                     if (MainCubit.get(context).bookModel!.sameAuthor.isNotEmpty)
                       SeeMoreItem(
                         padding: 15,
-                        gestureTapCallback: () {},
+                        gestureTapCallback: () {
+                          navigateTo(context, SeeMore(
+                            title: "${MainCubit.get(context).topBorrowModel!.books[0].library}",
+                             model: MainCubit.get(context).categoryDetailsModelHti,
+                          ));
+                        },
                         text: 'More books from the same author',
                       ),
                     if (MainCubit.get(context).bookModel!.sameAuthor.isNotEmpty)

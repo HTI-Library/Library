@@ -43,8 +43,9 @@ class _NotificationPageState extends State<NotificationPage> {
                       ? buildNotification(
                           MainCubit.get(context)
                               .getNotificationsModel!
-                              .notifications,
-                          context)
+                              .notifications.reversed.toList(),
+                          context,
+              state)
                       : buildNotNotification(context)
                   : const LoadingWidget(),
             ),
@@ -73,11 +74,13 @@ class _NotificationPageState extends State<NotificationPage> {
       );
 
   Widget buildNotification(
-          List<NotificationData> model, BuildContext context) =>
+          List<NotificationData> model, BuildContext context , MainState state) =>
       Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (state is NotificationLoading)
+            const LinearProgressIndicator(),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.25,
             child: IconButton(
@@ -91,11 +94,15 @@ class _NotificationPageState extends State<NotificationPage> {
                 )),
           ),
           Expanded(
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) =>
-                  NotificationItem(model: model[index]),
-              itemCount: model.length,
+            child: RefreshIndicator(
+              onRefresh: () async {
+                return MainCubit.get(context).getNotifications();
+              } ,
+              child: ListView.builder(
+                itemBuilder: (context, index) =>
+                    NotificationItem(model: model[index]),
+                itemCount: model.length,
+              ),
             ),
           ),
         ],

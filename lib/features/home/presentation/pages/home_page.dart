@@ -1,4 +1,3 @@
-import 'package:buildcondition/buildcondition.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -34,7 +33,7 @@ class HomePage extends StatelessWidget {
                       MainCubit.get(context).lastSearch();
                       navigateTo(context, SearchPage(model: MainCubit.get(context).lastSearchModel!));
                     },
-                    text: '${appTranslation(context).search}',
+                    text: appTranslation(context).search,
                     imagePath: 'search',
                   ),
                 ),
@@ -42,9 +41,10 @@ class HomePage extends StatelessWidget {
                 SeeMoreItem(
                   gestureTapCallback: () {
                     navigateTo(context, SeeMore(
+                      title: "Top Borrow Books",
                       model: MainCubit.get(context).topBorrowModel!,));
                   },
-                  text: '${appTranslation(context).topBorrowBooks}',
+                  text: appTranslation(context).topBorrowBooks,
                 ),
                 Container(
                   padding: const EdgeInsetsDirectional.only(
@@ -68,9 +68,12 @@ class HomePage extends StatelessWidget {
                 ),
                 SeeMoreItem(
                   gestureTapCallback: () {
-                    navigateTo(context, SeeMore());
+                    navigateTo(context, SeeMore(
+                      title: "Recently Returned",
+                      data: MainCubit.get(context).allReturnedBook!,
+                    ));
                   },
-                  text: '${appTranslation(context).recentlyReturned}',
+                  text: appTranslation(context).recentlyReturned,
                 ),
                 Container(
                   padding: const EdgeInsetsDirectional.only(
@@ -79,11 +82,11 @@ class HomePage extends StatelessWidget {
                   ),
                   color: HexColor(greyWhite),
                   height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                  child:MainCubit.get(context).allReturnedBook != null? ListView.builder(
+                  child:MainCubit.get(context).allReturnedBook != null ? ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => BookItem(
-                        book: MainCubit.get(context)
+                        returned: MainCubit.get(context)
                             .allReturnedBook!
                             .books[index],
                       ),
@@ -93,8 +96,13 @@ class HomePage extends StatelessWidget {
                           .length) : const LoadingWidget(),
                 ),
                 SeeMoreItem(
-                  gestureTapCallback: () {},
-                  text: '${appTranslation(context).htiMaterial}',
+                  gestureTapCallback: () {
+                    navigateTo(context, SeeMore(
+                      title: "HTI Materials",
+                      model: MainCubit.get(context).categoryDetailsModelHti,
+                    ));
+                  },
+                  text: appTranslation(context).htiMaterial,
                 ),
                 Container(
                   padding: const EdgeInsetsDirectional.only(
@@ -103,22 +111,27 @@ class HomePage extends StatelessWidget {
                   ),
                   color: HexColor(greyWhite),
                   height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                  child:MainCubit.get(context).topBorrowModel != null? ListView.builder(
+                  child:  MainCubit.get(context).categoryDetailsModelHti != null ? ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => BookItem(
                         book: MainCubit.get(context)
-                            .topBorrowModel!
+                            .categoryDetailsModelHti!
                             .books[index],
                       ),
                       itemCount: MainCubit.get(context)
-                          .topBorrowModel!
+                          .categoryDetailsModelHti!
                           .books
                           .length) : const LoadingWidget(),
                 ),
                 SeeMoreItem(
-                  gestureTapCallback: () {},
-                  text: '${appTranslation(context).graduationProjects}',
+                  gestureTapCallback: () {
+                    navigateTo(context, SeeMore(
+                      title: "graduation Projects",
+                      model: MainCubit.get(context).categoriesModelProject,
+                    ));
+                  },
+                  text: appTranslation(context).graduationProjects,
                 ),
                 Container(
                   padding: const EdgeInsetsDirectional.only(
@@ -127,16 +140,16 @@ class HomePage extends StatelessWidget {
                   ),
                   color: HexColor(greyWhite),
                   height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                  child:MainCubit.get(context).topBorrowModel != null? ListView.builder(
+                  child:MainCubit.get(context).categoriesModelProject != null ? ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => BookItem(
                         book: MainCubit.get(context)
-                            .topBorrowModel!
+                            .categoriesModelProject!
                             .books[index],
                       ),
                       itemCount: MainCubit.get(context)
-                          .topBorrowModel!
+                          .categoriesModelProject!
                           .books
                           .length) : const LoadingWidget(),
                 ),
