@@ -39,12 +39,15 @@ class SelectLibraryItem extends StatelessWidget {
                 Container(
                     width: double.infinity,
                     color: Colors.black.withOpacity(.7),
-                    child: Text(
-                      name,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.width * 0.05),
-                      textAlign: TextAlign.center,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        name,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: MediaQuery.of(context).size.width * 0.05),
+                        textAlign: TextAlign.center,
+                      ),
                     )),
               ],
             ),

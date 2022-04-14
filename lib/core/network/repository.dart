@@ -159,6 +159,11 @@ abstract class Repository {
   //   required int compareId,
   // });
 
+  Future<Response> getAllTypeRepo({
+    required String library,
+    required int page,
+  });
+
   Future<Response> getNotificationsRepo();
 
   Future<Response> removeNotificationsRepo();
@@ -841,6 +846,16 @@ class RepoImplementation extends Repository {
     return await dioHelper.get(
       url: '$myBorrowBooksUrl?page=$page',
       token: token,
+    );
+  }
+
+  @override
+  Future<Response> getAllTypeRepo({
+    required int page,
+    required String library,
+  }) async {
+    return await dioHelper.get(
+      url: '$getAllTypeUrl?page=$page&library=$library',
     );
   }
 
