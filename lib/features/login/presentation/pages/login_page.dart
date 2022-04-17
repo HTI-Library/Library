@@ -14,6 +14,7 @@ import 'package:hti_library/core/util/widgets/app_text_form_field.dart';
 import 'package:hti_library/core/util/widgets/asset_svg.dart';
 import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/features/main/presentation/pages/main_page.dart';
+import 'package:hti_library/features/select_library/page/selectLibrary.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -48,10 +49,18 @@ class _LoginPageState extends State<LoginPage> {
                 .put('token', state.loginModel.token)
                 .then((value) {
               token = state.loginModel.token;
-              navigateAndFinish(context, MainPage());
+              if (libraryCache!.isNotEmpty && typeCache!.isNotEmpty) {
+                navigateAndFinish(context, MainPage(library: libraryCache, type: typeCache,));
+              }  else {
+                navigateAndFinish(context, const SelectLibrary());
+              }
             });
           }
-          navigateAndFinish(context, MainPage());
+          if (libraryCache!.isNotEmpty && typeCache!.isNotEmpty) {
+            navigateAndFinish(context, MainPage(library: libraryCache, type: typeCache,));
+          }  else {
+            navigateAndFinish(context, const SelectLibrary());
+          }
           showToast(
               message: state.loginModel.message!,
               toastStates: ToastStates.SUCCESS);

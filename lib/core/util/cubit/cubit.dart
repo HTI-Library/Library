@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/error/exceptions.dart';
+import 'package:hti_library/core/models/allTypeModel.dart';
 import 'package:hti_library/core/models/book_details_model.dart';
 import 'package:hti_library/core/models/categories_model.dart';
 import 'package:hti_library/core/models/getAllReturnedBooks.dart';
@@ -1035,5 +1036,31 @@ class MainCubit extends Cubit<MainState> {
   }
 
 // userAvatar ------------------- end
+
+  /// get All Type ------------------- start
+  AllTypeModel? allTypeModel;
+
+  void getAllType({
+  required String library,
+  required int page,
+  }) async {
+    if (userSigned) {
+      debugPrint('getAllLibrary------------loading');
+      emit(GetTypeLoading());
+      await _repository.getAllTypeRepo(library: library, page: page).then((value) {
+        // success
+        allTypeModel = AllTypeModel.fromJson(value.data);
+        debugPrint('getAllLibrary ------------ success');
+        emit(GetTypeSuccess());
+      }).catchError((error) {
+        // error
+        debugPrint('getAllLibrary------------error');
+        debugPrint(error.toString());
+        emit(Error(error.toString()));
+      });
+    }
+  }
+
+// get All Type ------------------- end
 
 }

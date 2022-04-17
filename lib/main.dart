@@ -48,6 +48,24 @@ void main() async {
     }
   });
 
+  sl<CacheHelper>().get('type').then((value) {
+    debugPrint('type---------------------------- $value');
+    if (value == null) {
+      typeCache = '';
+    } else {
+      typeCache = value;
+    }
+  });
+
+  sl<CacheHelper>().get('library').then((value) {
+    debugPrint('library---------------------------- $value');
+    if (value == null) {
+      libraryCache = '';
+    } else {
+      libraryCache = value;
+    }
+  });
+
   debugPrint('dark mode ------------- $isDark');
 
   runApp(MyApp(
@@ -101,10 +119,10 @@ class _MyAppState extends State<MyApp> {
               )
               ..checkInternet()
               ..checkConnectivity()
-              ..categories(library: 'hti matrial', type: 'hti matrial')
+              // ..categories(library: 'hti matrial', type: 'hti matrial')
               ..topBorrow(page: 1)
-              ..categoryDetailsHti(categoryName: 'hti matrial' , library: 'hti matrial' , type: 'hti matrial')
-              ..categoryProject(categoryName: 'graduation projects' , library: 'graduation projects' , type: 'graduation projects')
+              // ..categoryDetailsHti(categoryName: 'hti matrial' , library: 'hti matrial' , type: 'hti matrial')
+              // ..categoryProject(categoryName: 'graduation projects' , library: 'graduation projects' , type: 'graduation projects')
               ..getSavedBooks()
               ..getUserDate()
               ..getAllReturned(page: 1)

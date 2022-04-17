@@ -5,6 +5,7 @@ import 'package:hti_library/core/util/widgets/app_text_button.dart';
 import 'package:hti_library/core/util/widgets/asset_svg.dart';
 import 'package:hti_library/features/login/presentation/pages/login_page.dart';
 import 'package:hti_library/features/main/presentation/pages/main_page.dart';
+import 'package:hti_library/features/select_library/page/selectLibrary.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingPage extends StatefulWidget {
@@ -42,7 +43,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               label: 'SKIP',
               style: Theme.of(context).textTheme.subtitle1,
               onPress: () {
-                navigateAndFinish(context, MainPage());
+                if (libraryCache!.isNotEmpty && typeCache!.isNotEmpty) {
+                  navigateAndFinish(context, MainPage(library: libraryCache, type: typeCache,));
+                }  else {
+                  navigateAndFinish(context, const SelectLibrary());
+                }
               }),
         ],
       ),
@@ -77,7 +82,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     duration: const Duration(seconds: 1),
                     curve: Curves.fastLinearToSlowEaseIn);
               } else {
-                navigateAndFinish(context, MainPage());
+                if (libraryCache!.isNotEmpty && typeCache!.isNotEmpty) {
+                  navigateAndFinish(context, MainPage(library: libraryCache, type: typeCache,));
+                }  else {
+                  navigateAndFinish(context, const SelectLibrary());
+                }
               }
             },
             icon: AssetSvg(

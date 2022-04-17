@@ -9,6 +9,7 @@ import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
 import 'package:hti_library/features/main/presentation/pages/main_page.dart';
 import 'package:hti_library/features/select_library/widget/selectLibraryItem.dart';
+import 'package:hti_library/features/select_type/page/selectType.dart';
 
 class SelectLibrary extends StatelessWidget {
   const SelectLibrary({Key? key}) : super(key: key);
@@ -19,33 +20,34 @@ class SelectLibrary extends StatelessWidget {
       return MainScaffold(
           scaffold: BackScaffold(
             title: 'Select Library',
-            body: Column(
-              children: [
-                SelectLibraryItem(
-                  name: 'Main Library',
-                  img: 'main_library',
-                  callbackHandle: (){
-                    sl<CacheHelper>().put(library!, "main library");
-                    showToast(message: 'المكتبة الرئيسيه يابا', toastStates: ToastStates.SUCCESS);
-                    navigateAndFinish(context, MainPage());
-                  },),
-                SelectLibraryItem(
-                  name: 'S library',
-                  img: 's_library',
-                  callbackHandle: (){
-                    sl<CacheHelper>().put(library!, "s library");
-                    showToast(message: 'المكتبة بتاعت اداره يابا', toastStates: ToastStates.SUCCESS);
-                    navigateAndFinish(context, MainPage());
-                  },),
-                SelectLibraryItem(
-                  name: 'M library',
-                  img: 's_library',
-                  callbackHandle: (){
-                    sl<CacheHelper>().put(library!, "m library");
-                    showToast(message: 'المكتبة بتاعت العباقره يابا', toastStates: ToastStates.SUCCESS);
-                    navigateAndFinish(context, MainPage());
-                  },),
-              ],
+            body: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  SelectLibraryItem(
+                    name: 'Main Library',
+                    img: 'main_library',
+                    callbackHandle: (){
+                      showToast(message: 'geometry library', toastStates: ToastStates.SUCCESS);
+                      navigateAndFinish(context, SelectType(library: 'main library '));
+                    },),
+                  SelectLibraryItem(
+                    name: 'S library',
+                    img: 's_library',
+                    callbackHandle: (){
+                      showToast(message: 'business library', toastStates: ToastStates.SUCCESS);
+                      navigateAndFinish(context, SelectType(library: 's library'));
+                    },),
+                  SelectLibraryItem(
+                    name: 'M library',
+                    img: 's_library',
+                    callbackHandle: (){
+                      showToast(message: 'computer science library', toastStates: ToastStates.SUCCESS);
+                      navigateAndFinish(context, SelectType(library: 'm library '));
+                    },),
+                  const SizedBox(height: 40,),
+                ],
+              ),
             ), scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
           )
       );
