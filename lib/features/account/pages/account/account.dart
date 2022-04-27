@@ -15,6 +15,7 @@ import 'package:hti_library/features/account/widget/btn_my_account.dart';
 import 'package:hti_library/features/change_new_photo/presintation/page/change_new_photo.dart';
 import 'package:hti_library/features/login/presentation/pages/login_page.dart';
 import 'package:hti_library/features/s_f_calender/widget/meeting.dart';
+import 'package:hti_library/features/select_library/page/selectLibrary.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class AccountPage extends StatelessWidget {
@@ -170,6 +171,14 @@ class AccountPage extends StatelessWidget {
                   },
                   text: appTranslation(context).info,
                   imagePath: 'info',
+                ),
+                space10Vertical,
+                MyBtnAccount(
+                  voidCallback: () {
+                    navigateTo(context, SelectLibrary());
+                  },
+                  text: appTranslation(context).changeLib,
+                  imagePath: 'change_lib',
                 ),
                 if (MainCubit.get(context).userSigned)
                 space10Vertical,

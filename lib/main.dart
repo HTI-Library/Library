@@ -19,7 +19,6 @@ void main() async {
   await di.init();
 
   bool isRtl = false;
-
   await sl<CacheHelper>().get('isRtl').then((value) {
     debugPrint('trl ------------- $value');
     if (value != null) {
@@ -31,7 +30,6 @@ void main() async {
       .loadString('assets/translations/${isRtl ? 'ar' : 'en'}.json');
 
   bool isDark = false;
-
   await sl<CacheHelper>().get('isDark').then((value) {
     debugPrint('dark mode ------------- $value');
     if (value != null) {
@@ -139,8 +137,8 @@ class _MyAppState extends State<MyApp> {
                 : ThemeMode.light,
             theme: MainCubit.get(context).lightTheme,
             darkTheme: MainCubit.get(context).darkTheme,
-            // home: token == '' ? LoginPage() : MainPage(),
-            home: SelectLibrary(),
+            home: libraryCache == '' ? SelectLibrary():
+            MainPage(library: libraryCache,type: typeCache),
           );
         },
       ),

@@ -49,6 +49,8 @@ class BookDetails {
   late final String edition;
   late final num pages;
   late final String category;
+  late final String library;
+  late final String type;
   late final num topBorrow;
   late final String bookImage;
   late final String bookLink;
@@ -67,6 +69,8 @@ class BookDetails {
     pages = json['pages'] ?? 0;
     category = json['category'] ?? '';
     topBorrow = json['top_Borrow'] ?? 0;
+    library = json['library'] ?? 0;
+    type = json['type'] ?? 0;
     bookImage = json['bookImage'] ?? '';
     bookLink = json['bookLink'] ?? '';
     createdAt = json['createdAt'] ?? '';
@@ -84,6 +88,8 @@ class BookDetails {
     _data['edition'] = edition;
     _data['pages'] = pages;
     _data['category'] = category;
+    _data['library'] = library;
+    _data['type'] = type;
     _data['top_Borrow'] = topBorrow;
     _data['bookImage'] = bookImage;
     _data['bookLink'] = bookLink;

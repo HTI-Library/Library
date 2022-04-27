@@ -566,10 +566,7 @@ class MainCubit extends Cubit<MainState> {
     debugPrint('bookDetails------------loading');
     bookModel = null;
     emit(BookDetailsLoading());
-    await _repository
-        .bookDetailsRepo(
-      bookId: bookId,
-    )
+    await _repository.bookDetailsRepo(bookId: bookId,)
         .then((value) {
       // success
       bookModel = BookDetailsModel.fromJson(value.data);
@@ -685,7 +682,7 @@ class MainCubit extends Cubit<MainState> {
     emit(CategoryLoading());
     await _repository
         .categoryDetailsRepo(
-        categoryName: categoryName, library: library, type: type)
+        categoryName: 'graduation projects', library: library, type: type)
         .then((value) {
       // success
       categoriesModelProject = TopBorrowModel.fromJson(value.data);
@@ -990,6 +987,7 @@ class MainCubit extends Cubit<MainState> {
 // LastSearch ------------------- end
 
   // Search ------------------- start
+  TextEditingController searchController = TextEditingController();
 
   SearchModel? searchModel;
 
@@ -1044,7 +1042,6 @@ class MainCubit extends Cubit<MainState> {
   required String library,
   required int page,
   }) async {
-    if (userSigned) {
       debugPrint('getAllLibrary------------loading');
       emit(GetTypeLoading());
       await _repository.getAllTypeRepo(library: library, page: page).then((value) {
@@ -1058,7 +1055,6 @@ class MainCubit extends Cubit<MainState> {
         debugPrint(error.toString());
         emit(Error(error.toString()));
       });
-    }
   }
 
 // get All Type ------------------- end
