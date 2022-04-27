@@ -63,7 +63,7 @@ class SimpleBook {
     // category = json['category'] ?? '';
     // topBorrow = json['top_Borrow'] ?? 0;
     bookImage = json['bookImage'] ?? '';
-    // bookLink = json['bookLink'] ?? '';
+    bookLink = json['bookLink'] ?? '';
     // createdAt = json['createdAt'] ?? '';
     // updatedAt = json['updatedAt'] ?? '';
     // __v = json['__v'] ?? 0;

@@ -15,6 +15,7 @@ class TranslationModel {
   late String light;
   late String dark;
   late String info;
+  late String changeLib;
   late String privacyPolicy;
   late String getHelp;
   late String aboutUs;
@@ -46,8 +47,7 @@ class TranslationModel {
   late String categories;
   late String saved;
   late String account;
-
-
+  late String detailsBook;
   late String logIn;
 
 
@@ -101,6 +101,9 @@ class TranslationModel {
     categories = json['categories'];
     saved = json['saved'];
     account = json['account'];
+    changeLib = json['changeLib'];
+    detailsBook = json['detailsBook'];
+
 
   }
 }

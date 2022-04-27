@@ -21,7 +21,7 @@ class SelectType extends StatefulWidget {
 }
 
 class _SelectTypeState extends State<SelectType> {
-  //
+
   @override
   void initState() {
     super.initState();

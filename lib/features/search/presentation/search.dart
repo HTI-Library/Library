@@ -20,7 +20,7 @@ class SearchPage extends StatelessWidget {
   SearchPage({Key? key , required this.model}) : super(key: key);
   LastSearchModel model;
 
-  TextEditingController searchController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class SearchPage extends StatelessWidget {
                         MainCubit.get(context).getSearch(word: text);
                       },
                       callbackHandle: (controller) {
-                        searchController = controller;
+                        MainCubit.get(context).searchController = controller;
                       },
                     ),
                     space15Vertical,
@@ -58,7 +58,6 @@ class SearchPage extends StatelessWidget {
                                 children: [
                                   LastSearchItem(label: e.word,),
                                 ],
-
                               ))).toList(),
                         ],
                       ),
@@ -70,14 +69,34 @@ class SearchPage extends StatelessWidget {
                      child: Padding(
                        padding: const EdgeInsets.symmetric(vertical: 10),
                        child: BuildCondition(
-                         condition: MainCubit.get(context).myBorrowBooks != null,
+                         condition: MainCubit.get(context).searchModel != null,
                          builder: (context)=>
                              ListView.builder(
                                  itemCount: MainCubit.get(context).searchModel!.books.length,
                                  physics: const BouncingScrollPhysics(),
-                                 itemBuilder: (context, index) => BorrowBook(data: MainCubit.get(context).searchModel!.books[index]),
+                                 itemBuilder: (context, index) =>
+                                     BorrowBook(data: MainCubit.get(context).searchModel!.books[index]),
                                  ),
-                         fallback: (context)=> Text('sasd'),
+                         fallback: (context)=> SingleChildScrollView(
+                           physics: const BouncingScrollPhysics(),
+                           child: Padding(
+                             padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                             child: Column(
+                               mainAxisAlignment: MainAxisAlignment.center,
+                               crossAxisAlignment: CrossAxisAlignment.center,
+                               children: [
+                                 space10Vertical,
+                                 Image.asset(
+                                   'assets/images/onboarding_2.png',
+                                 fit: BoxFit.cover,),
+                                 space10Vertical,
+                                 Text('عفوا لم نتمكن من جلب البيانات تاكد من المدخلات بشكل صحيح',
+                                 textAlign: TextAlign.center,
+                                 style: Theme.of(context).textTheme.headline6,)
+                               ],
+                             ),
+                           ),
+                         ),
                        ),
 
                        ),

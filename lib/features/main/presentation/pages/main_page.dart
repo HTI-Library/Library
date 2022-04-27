@@ -17,10 +17,14 @@ import 'package:hti_library/features/internet_connection/page/internet_connectio
 import 'package:hti_library/features/saved/presentation/pages/saved.dart';
 import 'dart:io';
 
+import 'package:hti_library/features/select_library/page/selectLibrary.dart';
+
 class MainPage extends StatefulWidget {
   const MainPage({Key? key, required this.type, required this.library}) : super(key: key);
   final String? type;
   final String? library;
+
+
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -35,6 +39,9 @@ class _MainPageState extends State<MainPage> {
     _pageController = PageController();
     super.initState();
 
+    // if (widget.type == '' && widget.library == '' || widget.type == null && widget.library == null) {
+    //   navigateAndFinish(context, SelectLibrary());
+    // }
 
     MainCubit.get(context).categories(
         library: widget.library!,

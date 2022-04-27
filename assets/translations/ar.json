@@ -38,6 +38,7 @@
   "author": "المؤلف",
   "pagesNum": "صفحات",
   "edition": "الإصدار",
+  "detailsBook": "مشاركة بيانات حول الكتاب",
 
   "youDonthavenotifications": "لا توجد لديك اي إشعارات",
 
@@ -55,5 +56,6 @@
 
 
 
-  "logIn": "تسجيل الدخول"
+  "logIn": "تسجيل الدخول",
+  "changeLib": "تغيير المكتبة"
 }
