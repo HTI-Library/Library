@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class SelectLibraryItem extends StatelessWidget {
-  const SelectLibraryItem(
-      {Key? key,
-      required this.img,
-      required this.name,
-      required this.callbackHandle})
-      : super(key: key);
+  const SelectLibraryItem({
+    Key? key,
+    required this.img,
+    required this.name,
+    required this.callbackHandle,
+  }) : super(key: key);
 
   final String img;
   final String name;

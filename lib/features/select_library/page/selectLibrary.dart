@@ -16,10 +16,15 @@ class SelectLibrary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MainCubit, MainState>(builder: (context, state) {
-      return MainScaffold(
-          scaffold: BackScaffold(
-            title: 'Select Library',
+    return BlocBuilder<MainCubit, MainState>(
+      builder: (context, state) {
+        return MainScaffold(
+          scaffold: Scaffold(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            appBar: AppBar(
+              centerTitle: true,
+              title: const Text('Select Library'),
+            ),
             body: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Column(
@@ -27,30 +32,45 @@ class SelectLibrary extends StatelessWidget {
                   SelectLibraryItem(
                     name: 'Main Library',
                     img: 'main_library',
-                    callbackHandle: (){
-                      showToast(message: 'geometry library', toastStates: ToastStates.SUCCESS);
-                      navigateAndFinish(context, SelectType(library: 'main library '));
-                    },),
+                    callbackHandle: () {
+                      showToast(
+                          message: 'geometry library',
+                          toastStates: ToastStates.SUCCESS);
+                      navigateAndFinish(
+                          context, SelectType(library: 'main library '));
+                    },
+                  ),
                   SelectLibraryItem(
                     name: 'S library',
                     img: 's_library',
-                    callbackHandle: (){
-                      showToast(message: 'business library', toastStates: ToastStates.SUCCESS);
-                      navigateAndFinish(context, SelectType(library: 's library'));
-                    },),
+                    callbackHandle: () {
+                      showToast(
+                          message: 'business library',
+                          toastStates: ToastStates.SUCCESS);
+                      navigateAndFinish(
+                          context, SelectType(library: 's library'));
+                    },
+                  ),
                   SelectLibraryItem(
                     name: 'M library',
                     img: 's_library',
-                    callbackHandle: (){
-                      showToast(message: 'computer science library', toastStates: ToastStates.SUCCESS);
-                      navigateAndFinish(context, SelectType(library: 'm library '));
-                    },),
-                  const SizedBox(height: 40,),
+                    callbackHandle: () {
+                      showToast(
+                          message: 'computer science library',
+                          toastStates: ToastStates.SUCCESS);
+                      navigateAndFinish(
+                          context, SelectType(library: 'm library '));
+                    },
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
                 ],
               ),
-            ), scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          )
-      );
-    });
+            ),
+          ),
+        );
+      },
+    );
   }
 }

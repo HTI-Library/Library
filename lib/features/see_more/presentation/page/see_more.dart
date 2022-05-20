@@ -19,7 +19,6 @@ class SeeMore extends StatefulWidget {
     required this.title,
     this.model,
     this.data,
-
   }) : super(key: key);
   TopBorrowModel? model;
   GetAllReturnedBooks? data;
@@ -34,9 +33,15 @@ class _SeeMoreState extends State<SeeMore> {
     // TODO: implement initState
     super.initState();
     MainCubit.get(context).categoryDetails(
-        categoryName: widget.model == null ? widget.data!.books[0].book.name : widget.model!.books[0].name,
-        library: widget.model == null ? widget.data!.books[0].book.library : widget.model!.books[0].library,
-        type: widget.model == null ? widget.data!.books[0].book.type : widget.model!.books[0].type);
+        categoryName: widget.model == null
+            ? widget.data!.books[0].book.name
+            : widget.model!.books[0].name,
+        library: widget.model == null
+            ? widget.data!.books[0].book.library
+            : widget.model!.books[0].library,
+        type: widget.model == null
+            ? widget.data!.books[0].book.type
+            : widget.model!.books[0].type);
   }
 
   @override
@@ -52,23 +57,25 @@ class _SeeMoreState extends State<SeeMore> {
             ),
             onPressed: () {
               navigateTo(
-                  context,
-                  SearchPage(
-                    model: MainCubit.get(context).lastSearchModel!,
-                  ));
+                context,
+                const SearchPage(),
+              );
             },
           ),
           scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: MainCubit.get(context).categoryDetailsModel != null
               ? ListView.builder(
-                  itemBuilder: (context, index) =>
-                  widget.model != null ?
-                      SeeMoreItem(
-                          simpleData: widget.model!.books[index],) :
-                  SeeMoreItem(
-                    data: widget.data!.books[index],),
+                  itemBuilder: (context, index) => widget.model != null
+                      ? SeeMoreItem(
+                          simpleData: widget.model!.books[index],
+                        )
+                      : SeeMoreItem(
+                          data: widget.data!.books[index],
+                        ),
                   physics: const BouncingScrollPhysics(),
-                  itemCount: widget.model != null ? widget.model!.books.length : widget.data!.books.length,
+                  itemCount: widget.model != null
+                      ? widget.model!.books.length
+                      : widget.data!.books.length,
                 )
               : const LoadingWidget(),
         );

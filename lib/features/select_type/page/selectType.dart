@@ -13,7 +13,7 @@ import 'package:hti_library/features/select_library/page/selectLibrary.dart';
 import 'package:hti_library/features/select_library/widget/selectLibraryItem.dart';
 
 class SelectType extends StatefulWidget {
-  SelectType({Key? key , required this.library}) : super(key: key);
+  SelectType({Key? key, required this.library}) : super(key: key);
   String library;
 
   @override
@@ -21,7 +21,6 @@ class SelectType extends StatefulWidget {
 }
 
 class _SelectTypeState extends State<SelectType> {
-
   @override
   void initState() {
     super.initState();
@@ -33,36 +32,67 @@ class _SelectTypeState extends State<SelectType> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MainCubit, MainState>(builder: (context, state) {
-      return WillPopScope(
-        onWillPop: () async {
-          navigateAndFinish(context, const SelectLibrary());
-          return true;
-        },
-        child: MainScaffold(
-            scaffold: BackScaffold(
-              title: 'Select Type',
-              scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              body: MainCubit.get(context).allTypeModel != null ? ListView.builder(
-                  itemBuilder:
-                      (context, index) =>
-                          SelectLibraryItem(
-                      img: MainCubit.get(context).allTypeModel!.types[index].image,
-                      name: MainCubit.get(context).allTypeModel!.types[index].name,
-                      callbackHandle: (){
-                        showToast(message: MainCubit.get(context).allTypeModel!.types[index].name, toastStates: ToastStates.SUCCESS);
-                        sl<CacheHelper>().put('library', widget.library);
-                        sl<CacheHelper>().put('type', MainCubit.get(context).allTypeModel!.types[index].name);
-                        navigateAndFinish(context, MainPage(library: widget.library,type: MainCubit.get(context).allTypeModel!.types[index].name,));
-                      }
-                  ) ,
-                  itemCount: MainCubit.get(context).allTypeModel!.types.length,
-                  physics: const BouncingScrollPhysics()
-              ) : const LoadingWidget(),
-
-            )
-        ),
-      );
-    });
+    return BlocBuilder<MainCubit, MainState>(
+      builder: (context, state) {
+        return WillPopScope(
+          onWillPop: () async {
+            navigateAndFinish(
+              context,
+              const SelectLibrary(),
+            );
+            return true;
+          },
+          child: MainScaffold(
+            scaffold: Scaffold(
+              appBar: AppBar(
+                centerTitle: true,
+                title: const Text('Select Type'),
+              ),
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              body: MainCubit.get(context).allTypeModel != null
+                  ? ListView.builder(
+                      itemBuilder: (context, index) => SelectLibraryItem(
+                          img: MainCubit.get(context)
+                              .allTypeModel!
+                              .types[index]
+                              .image,
+                          name: MainCubit.get(context)
+                              .allTypeModel!
+                              .types[index]
+                              .name,
+                          callbackHandle: () {
+                            showToast(
+                                message: MainCubit.get(context)
+                                    .allTypeModel!
+                                    .types[index]
+                                    .name,
+                                toastStates: ToastStates.SUCCESS);
+                            sl<CacheHelper>().put('library', widget.library);
+                            sl<CacheHelper>().put(
+                                'type',
+                                MainCubit.get(context)
+                                    .allTypeModel!
+                                    .types[index]
+                                    .name);
+                            navigateAndFinish(
+                                context,
+                                MainPage(
+                                  library: widget.library,
+                                  type: MainCubit.get(context)
+                                      .allTypeModel!
+                                      .types[index]
+                                      .name,
+                                ));
+                          }),
+                      itemCount:
+                          MainCubit.get(context).allTypeModel!.types.length,
+                      physics: const BouncingScrollPhysics(),
+                    )
+                  : const LoadingWidget(),
+            ),
+          ),
+        );
+      },
+    );
   }
 }

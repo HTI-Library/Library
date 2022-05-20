@@ -16,54 +16,70 @@ import 'package:hti_library/features/search/widgets/last_search_item.dart';
 import '../../../core/models/last_search_model.dart';
 import '../../../core/util/cubit/state.dart';
 
-class SearchPage extends StatelessWidget {
-  SearchPage({Key? key , required this.model}) : super(key: key);
-  LastSearchModel model;
+class SearchPage extends StatefulWidget {
+  const SearchPage({Key? key}) : super(key: key);
 
+  @override
+  State<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    MainCubit.get(context).lastSearch();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MainCubit, MainState>(
-        listener: (context , state){},
-        builder: (context , state){
-          return MainScaffold(
-            scaffold: BackScaffold(
-              title: 'Search',
-              body: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  children: [
-                    AppTextFormField(
-
-                      hint: 'Search',
-                      icon: AssetSvg(
-                        imagePath: 'search',
-                        color: HexColor(mainColor),
-                      ),
-                      onSubmit: (String text){
-                        MainCubit.get(context).getSearch(word: text);
-                      },
-                      callbackHandle: (controller) {
-                        MainCubit.get(context).searchController = controller;
-                      },
+      listener: (context, state) {},
+      builder: (context, state) {
+        return MainScaffold(
+          scaffold: BackScaffold(
+            title: 'Search',
+            body: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                children: [
+                  AppTextFormField(
+                    hint: 'Search',
+                    icon: AssetSvg(
+                      imagePath: 'search',
+                      color: HexColor(mainColor),
                     ),
-                    space15Vertical,
-                    SizedBox(
-                      width: double.infinity,
-                      child: Wrap(
-                        children: [
-                          ...model.last_search!.map((e) => SizedBox(
-                              child: Wrap(
-                                children: [
-                                  LastSearchItem(label: e.word,),
-                                ],
-                              ))).toList(),
-                        ],
-                      ),
-                    ),
-                    if (state is SearchLoading)
-                      const LinearProgressIndicator(),
-                    if (state is SearchSuccess)
+                    onSubmit: (String text) {
+                      MainCubit.get(context).getSearch(word: text);
+                    },
+                    callbackHandle: (controller) {
+                      MainCubit.get(context).searchController = controller;
+                    },
+                  ),
+                  space15Vertical,
+                  SizedBox(
+                    width: double.infinity,
+                    child: MainCubit.get(context).lastSearchModel != null
+                        ? Wrap(
+                            children: [
+                              ...MainCubit.get(context)
+                                  .lastSearchModel!
+                                  .last_search!
+                                  .map((e) => SizedBox(
+                                          child: Wrap(
+                                        children: [
+                                          LastSearchItem(
+                                            label: e.word,
+                                          ),
+                                        ],
+                                      )))
+                                  .toList(),
+                            ],
+                          )
+                        : const Center(child: CircularProgressIndicator()),
+                  ),
+                  if (state is SearchLoading) const LinearProgressIndicator(),
+                  if (state is SearchSuccess)
                     Expanded(
                      child: Padding(
                        padding: const EdgeInsets.symmetric(vertical: 10),
