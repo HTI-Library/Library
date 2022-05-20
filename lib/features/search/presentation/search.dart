@@ -21,7 +21,6 @@ class SearchPage extends StatelessWidget {
   LastSearchModel model;
 
 
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MainCubit, MainState>(

@@ -123,6 +123,7 @@ class _MyAppState extends State<MyApp> {
               // ..categoryProject(categoryName: 'graduation projects' , library: 'graduation projects' , type: 'graduation projects')
               ..getSavedBooks()
               ..getUserDate()
+              ..lastSearch()
               ..getAllReturned(page: 1)
               ..getMyReturned()
             ),
