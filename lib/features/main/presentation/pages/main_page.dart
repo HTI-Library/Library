@@ -32,26 +32,24 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  late MainCubit cubit;
   late PageController _pageController;
 
   @override
   void initState() {
     _pageController = PageController();
     super.initState();
-
-    // if (widget.type == '' && widget.library == '' || widget.type == null && widget.library == null) {
-    //   navigateAndFinish(context, SelectLibrary());
-    // }
-
-    MainCubit.get(context).categories(
-        library: widget.library!,
-        type: widget.type!,
-    );
+    cubit = context.read<MainCubit>();
 
     MainCubit.get(context).categoryDetailsHti(
       categoryName: 'hti matrial',
       library: widget.library!,
       type: widget.type!,
+    );
+
+    MainCubit.get(context).categories(
+        library: widget.library!,
+        type: widget.type!,
     );
 
     MainCubit.get(context).categoryProject(

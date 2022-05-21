@@ -60,6 +60,8 @@ dependencies:
   flutter_cached_pdfview: ^0.4.0-nullsafety
   flutter_share: ^2.0.0
 
+  local_auth: ^2.1.0
+
   #  firebase_core: ^1.8.0
   #  firebase_messaging: ^11.1.0
 

@@ -60,13 +60,8 @@ class SimpleBook {
     edition = json['edition'] ?? '';
     pages = json['pages'] ?? 0;
     userId = json['user_id'] ?? '';
-    // category = json['category'] ?? '';
-    // topBorrow = json['top_Borrow'] ?? 0;
     bookImage = json['bookImage'] ?? '';
     bookLink = json['bookLink'] ?? '';
-    // createdAt = json['createdAt'] ?? '';
-    // updatedAt = json['updatedAt'] ?? '';
-    // __v = json['__v'] ?? 0;
   }
 
   Map<String, dynamic> toJson() {
@@ -90,4 +85,5 @@ class SimpleBook {
     _data['__v'] = __v;
     return _data;
   }
+
 }

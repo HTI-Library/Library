@@ -653,7 +653,7 @@ class MainCubit extends Cubit<MainState> {
     emit(CategoryLoading());
     await _repository
         .categoryDetailsRepo(
-        categoryName: categoryName, library: library, type: type)
+        categoryName: categoryName, library: 'hti matrial', type: 'hti matrial')
         .then((value) {
       // success
       categoryDetailsModelHti = TopBorrowModel.fromJson(value.data);
