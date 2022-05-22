@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/core/di/injection.dart';
+import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/widgets/app_text_button.dart';
 import 'package:hti_library/core/util/widgets/asset_svg.dart';
@@ -21,7 +23,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   bool isLast = false;
   List<OnBoardingDataModel> onBoardingData = [
     OnBoardingDataModel(
-      'assets/images/onboarding_1.png',
+      'assets/images/Onboarding_1.png',
       'It’s a library, \na place to learn something new',
     ),
     OnBoardingDataModel(
@@ -43,11 +45,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               label: 'SKIP',
               style: Theme.of(context).textTheme.subtitle1,
               onPress: () {
-                if (libraryCache!.isNotEmpty && typeCache!.isNotEmpty) {
-                  navigateAndFinish(context, MainPage(library: libraryCache, type: typeCache,));
-                }  else {
-                  navigateAndFinish(context, const SelectLibrary());
-                }
+                  sl<CacheHelper>().put('onboarding', 'yes');
+                  navigateAndFinish(context, const MainPage(type: 'hti matrial', library: 'hti matrial'));
               }),
         ],
       ),
@@ -59,6 +58,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 if (index == onBoardingData.length - 1) {
                   setState(() {
                     isLast = true;
+                    sl<CacheHelper>().put('onboarding', 'yes');
                   });
                 } else {
                   setState(() {

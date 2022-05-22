@@ -2,7 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:hti_library/features/change_new_photo/widget/dialog_change_photo.dart';
+import 'package:hti_library/core/auth.dart';
+import 'package:hti_library/core/network/local/cache.dart';
+import 'package:hti_library/core/network/local/cache.dart';
+import 'package:hti_library/core/network/local/cache.dart';
+import 'package:hti_library/core/network/local/cache.dart';
+import 'package:hti_library/core/network/local/cache.dart';
 import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
@@ -10,16 +15,36 @@ import 'package:hti_library/core/util/widgets/app_button.dart';
 import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/core/util/widgets/loading.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
+import 'package:hti_library/features/change_new_photo/widget/dialog_change_photo.dart';
 
-class ChangeNewPhoto extends StatelessWidget {
+class ChangeNewPhoto extends StatefulWidget {
   ChangeNewPhoto({Key? key}) : super(key: key);
+
+  @override
+  State<ChangeNewPhoto> createState() => _ChangeNewPhotoState();
+}
+
+class _ChangeNewPhotoState extends State<ChangeNewPhoto> {
+  final FingerPrint _fingerPrint = FingerPrint();
+  late String isSwitch;
+  late bool click;
+  late MainCubit cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    cubit = context.read<MainCubit>();
+    isSwitch = CacheHelper2.getData(key: 'finger') ?? '' ;
+    click = CacheHelper2.getData(key: 'click') ?? false ;
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MainCubit, MainState>(
       listener: (context, state) {
         if (state is UserAvatarSuccess) {
-          showToast(message: 'تم رفع الصورة بنجاح', toastStates: ToastStates.SUCCESS);
+          showToast(
+              message: 'تم رفع الصورة بنجاح', toastStates: ToastStates.SUCCESS);
         }
       },
       builder: (context, state) {
@@ -33,7 +58,7 @@ class ChangeNewPhoto extends StatelessWidget {
                     child: Center(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           if (MainCubit.get(context).imageFile != null)
                             CircleAvatar(
@@ -114,9 +139,25 @@ class ChangeNewPhoto extends StatelessWidget {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height / 3,
-                          ),
+                          space15Vertical,
+                          Row(
+                            children: [
+                              Text(
+                                'turn on finger',
+                                style: Theme.of(context).textTheme.headline6,
+                              ),
+                              const Spacer(),
+                              Switch(
+                                value: click,
+                                activeColor: HexColor(mainColor),
+                                // switch
+                                // slider
+                                onChanged: (value) {
+                                  enableFinger(value);
+                                },
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),
@@ -126,5 +167,30 @@ class ChangeNewPhoto extends StatelessWidget {
         );
       },
     );
+  }
+
+  void enableFinger(bool value) async {
+    if (value) {
+      bool isFingerEnabled = await _fingerPrint.isFingerPrintEnable();
+      if (isFingerEnabled) {
+        CacheHelper2.saveData(
+            key: 'email', value: cubit.profileModel!.email.split('@')[0]);
+        CacheHelper2.saveData(key: 'password', value: '123456789');
+      }
+    } else {
+      CacheHelper2.removeData(key: 'email');
+      CacheHelper2.removeData(key: 'password');
+      CacheHelper2.removeData(key: 'finger');
+    }
+    setState(() {
+      click = value;
+      CacheHelper2.saveData(key: 'finger', value: 'check');
+      CacheHelper2.saveData(key: 'click', value: value);
+      print('------------------------------ $isSwitch');
+      print(
+          'mail ------------------------------ ${CacheHelper2.getData(key: 'email')}');
+      print(
+          'pass ------------------------------ ${CacheHelper2.getData(key: 'password')}');
+    });
   }
 }

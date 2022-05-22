@@ -1,7 +1,7 @@
 
 class GetAllReturnedBooks{
   final List<BooksReturned> books;
-  final int allBooks;
+  final num allBooks;
 
 const GetAllReturnedBooks({
 required this.books,
@@ -98,7 +98,7 @@ class Book {
   late final num amount;
   late final String overview;
   late final List<Auther> auther;
-  late final double rate;
+  late final num rate;
   late final String edition;
   late final num pages;
   late final String category;

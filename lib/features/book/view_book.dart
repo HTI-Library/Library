@@ -175,6 +175,7 @@ class _ViewBookPageState extends State<ViewBookPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
+                              if (MainCubit.get(context).userSigned)
                               Expanded(
                                 child: AppButton(
                                     label: '${appTranslation(context).borrow}',
@@ -196,8 +197,9 @@ class _ViewBookPageState extends State<ViewBookPage> {
                                       ));
                                     }),
                               ),
+                              if (MainCubit.get(context).userSigned)
                               space10Horizontal,
-                              if (MainCubit.get(context).bookModel!.book.bookLink != null)
+                              if (MainCubit.get(context).bookModel!.book.bookLink.isNotEmpty)
                               Expanded(
                                 child: AppButton(
                                     color: HexColor(greyWhite),
