@@ -44,7 +44,7 @@ class AccountPage extends StatelessWidget {
             child: Text(
               appointment.eventName,
               // textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
             ),
           ),
           const Padding(
@@ -79,9 +79,8 @@ class AccountPage extends StatelessWidget {
                   radius: 75,
                 ),
                 space20Vertical,
-                if (MainCubit.get(context).profileModel != null && MainCubit.get(context).userSigned)
                   Text(
-                    MainCubit.get(context).profileModel!.name,
+                    'Setting',
                     style: Theme.of(context).textTheme.headline6!,
                   ),
                 if (MainCubit.get(context).profileModel == null && MainCubit.get(context).userSigned)
@@ -100,7 +99,7 @@ class AccountPage extends StatelessWidget {
                   MyBtnAccount(
                     voidCallback: () {
                       MainCubit.get(context).getNotifications();
-                      navigateTo(context, NotificationPage());
+                      navigateTo(context, const NotificationPage());
                     },
                     text: appTranslation(context).notification,
                     imagePath: 'notification_notification_outline',
@@ -109,7 +108,7 @@ class AccountPage extends StatelessWidget {
                 if (MainCubit.get(context).userSigned)
                   MyBtnAccount(
                     voidCallback: () {
-                      navigateTo(context, MessagePage());
+                      navigateTo(context, const MessagePage());
                     },
                     text: appTranslation(context).myMessage,
                     imagePath: 'message_account',
@@ -159,7 +158,7 @@ class AccountPage extends StatelessWidget {
                 if (MainCubit.get(context).userSigned) space10Vertical,
                 MyBtnAccount(
                   voidCallback: () {
-                    navigateTo(context, SettingPages());
+                    navigateTo(context, const SettingPages());
                   },
                   text: appTranslation(context).setting,
                   imagePath: 'settings',
@@ -167,15 +166,16 @@ class AccountPage extends StatelessWidget {
                 space10Vertical,
                 MyBtnAccount(
                   voidCallback: () {
-                    navigateTo(context, InfoPage());
+                    navigateTo(context, const InfoPage());
                   },
                   text: appTranslation(context).info,
                   imagePath: 'info',
                 ),
                 space10Vertical,
+                if (MainCubit.get(context).userSigned)
                 MyBtnAccount(
                   voidCallback: () {
-                    navigateTo(context, SelectLibrary());
+                    navigateTo(context, const SelectLibrary());
                   },
                   text: appTranslation(context).changeLib,
                   imagePath: 'change_lib',
@@ -186,11 +186,12 @@ class AccountPage extends StatelessWidget {
                 MyBtnAccount(
                   voidCallback: () {
                     MainCubit.get(context).getMyBorrow(page: 1);
-                    navigateTo(context, MyBorrowBook());
+                    navigateTo(context, const MyBorrowBook());
                   },
                   text: 'my borrow book',
                   imagePath: 'ic_borrow',
                 ),
+                if (MainCubit.get(context).userSigned)
                 space10Vertical,
                 if (MainCubit.get(context).userSigned)
                   MyBtnAccount(
@@ -246,6 +247,7 @@ class AccountPage extends StatelessWidget {
                   ),
                 if (!MainCubit.get(context).userSigned) space10Vertical,
                 space10Vertical,
+
               ],
             ),
           ),

@@ -61,6 +61,8 @@ List<Widget> bottomPages = [
 String? token = '';
 String? libraryCache = '';
 String? typeCache = '';
+String? onboarding = '';
+String? isSwitch = '';
 
 void navigateTo(context, widget) => Navigator.push(
       context,

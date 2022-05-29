@@ -523,6 +523,10 @@ class PostSavedBooksLoading extends MainState {}
 
 class PostBorrowingBooksLoading extends MainState {}
 
+class PostStartTimeLoading extends MainState {}
+
+class PostStartTimeSuccess extends MainState {}
+
 class PostBorrowingBooksSuccess extends MainState {
   final String text;
   PostBorrowingBooksSuccess(this.text);

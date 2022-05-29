@@ -3,12 +3,14 @@ class ProfileModel {
   final String name;
   final String email;
   final String avatar;
+  final String phone;
 
   const ProfileModel({
     required this.id,
     required this.name,
     required this.email,
     required this.avatar,
+    required this.phone,
   });
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
@@ -16,7 +18,8 @@ class ProfileModel {
       id: json['_id'] ?? '',
       name: json['name'] ?? '',
       email: json['email'] ?? '',
-      avatar: json['avatar'] ?? 'empty',
+      avatar: json['avatar'] ?? '',
+      phone: json['phone'] ?? '',
     );
   }
 
@@ -26,6 +29,7 @@ class ProfileModel {
       'name': name,
       'email': email,
       'avatar': avatar,
+      'phone': phone,
     };
   }
 }

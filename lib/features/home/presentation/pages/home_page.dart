@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/core/di/injection.dart';
+import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
@@ -14,8 +17,20 @@ import 'package:hti_library/features/account/widget/btn_my_account.dart';
 import 'package:hti_library/features/search/presentation/search.dart';
 import 'package:hti_library/features/see_more/presentation/page/see_more.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late MainCubit cubit;
+  @override
+  void initState() {
+    super.initState();
+    cubit = context.read<MainCubit>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +41,7 @@ class HomePage extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
+
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: MyBtnAccount(
@@ -178,5 +194,4 @@ class HomePage extends StatelessWidget {
         );
       },
     );
-  }
-}
+  }}

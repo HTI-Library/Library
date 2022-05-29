@@ -5,11 +5,13 @@ class SelectLibraryItem extends StatelessWidget {
     Key? key,
     required this.img,
     required this.name,
+    required this.color,
     required this.callbackHandle,
   }) : super(key: key);
 
   final String img;
   final String name;
+  final Color color;
   final Function() callbackHandle;
 
   @override
@@ -25,7 +27,7 @@ class SelectLibraryItem extends StatelessWidget {
           child: InkWell(
             onTap: callbackHandle,
             child: Stack(
-              alignment: Alignment.bottomCenter,
+              alignment: Alignment.centerLeft,
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
@@ -37,16 +39,19 @@ class SelectLibraryItem extends StatelessWidget {
                   ),
                 ),
                 Container(
-                    width: double.infinity,
-                    color: Colors.black.withOpacity(.7),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        name,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: MediaQuery.of(context).size.width * 0.05),
-                        textAlign: TextAlign.center,
+                  height: MediaQuery.of(context).size.height * 0.25,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    color: color,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          name,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: MediaQuery.of(context).size.width * 0.05),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     )),
               ],

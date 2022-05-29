@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/core/auth.dart';
 import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/error/exceptions.dart';
 import 'package:hti_library/core/models/allTypeModel.dart';
@@ -20,6 +21,7 @@ import 'package:hti_library/core/models/profile_model.dart';
 import 'package:hti_library/core/models/remove_save_books_model.dart';
 import 'package:hti_library/core/models/save_books_model.dart';
 import 'package:hti_library/core/models/top_borrow_model.dart';
+import 'package:hti_library/core/network/local/cache.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/network/repository.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
@@ -35,13 +37,14 @@ class MainCubit extends Cubit<MainState> {
 
   MainCubit({
     required Repository repository,
-  })  : _repository = repository,
+  })
+      : _repository = repository,
         super(Empty());
 
   static MainCubit get(context) => BlocProvider.of(context);
 
   PageController pageController =
-      PageController(initialPage: 0, keepPage: true);
+  PageController(initialPage: 0, keepPage: true);
 
   int currentIndex = 0;
   List<Map> mainPageTitles = [
@@ -125,9 +128,9 @@ class MainCubit extends Cubit<MainState> {
         systemOverlayStyle: Platform.isIOS
             ? null
             : const SystemUiOverlayStyle(
-                statusBarColor: Colors.white,
-                statusBarIconBrightness: Brightness.dark,
-              ),
+          statusBarColor: Colors.white,
+          statusBarIconBrightness: Brightness.dark,
+        ),
         backgroundColor: Colors.white,
         elevation: 0.0,
         titleSpacing: 0.0,
@@ -232,9 +235,9 @@ class MainCubit extends Cubit<MainState> {
         systemOverlayStyle: Platform.isIOS
             ? null
             : SystemUiOverlayStyle(
-                statusBarColor: HexColor(scaffoldBackground),
-                statusBarIconBrightness: Brightness.light,
-              ),
+          statusBarColor: HexColor(scaffoldBackground),
+          statusBarIconBrightness: Brightness.light,
+        ),
         backgroundColor: HexColor(scaffoldBackground),
         elevation: 0.0,
         titleSpacing: 0.0,
@@ -522,7 +525,9 @@ class MainCubit extends Cubit<MainState> {
 
   num appBarHeight = AppBar().preferredSize.height;
 
-  var currentMonth = DateTime.now().month;
+  var currentMonth = DateTime
+      .now()
+      .month;
 
   void setSelectedMonth(int value) {
     currentMonth = value;
@@ -626,7 +631,7 @@ class MainCubit extends Cubit<MainState> {
     emit(CategoryLoading());
     await _repository
         .categoryDetailsRepo(
-            categoryName: categoryName, library: library, type: type)
+        categoryName: categoryName, library: library, type: type)
         .then((value) {
       // success
       categoryDetailsModel = TopBorrowModel.fromJson(value.data);
@@ -655,7 +660,7 @@ class MainCubit extends Cubit<MainState> {
     emit(CategoryLoading());
     await _repository
         .categoryDetailsRepo(
-            categoryName: categoryName, library: library, type: type)
+        categoryName: categoryName, library: 'hti matrial', type: 'hti matrial')
         .then((value) {
       // success
       categoryDetailsModelHti = TopBorrowModel.fromJson(value.data);
@@ -703,7 +708,7 @@ class MainCubit extends Cubit<MainState> {
 
   NotificationModel? getNotificationsModel;
 
-  void getNotifications() async {
+  Future<void> getNotifications() async {
     debugPrint('getNotifications------------loading');
     emit(NotificationLoading());
     await _repository.getNotificationsRepo().then((value) {
@@ -1046,9 +1051,8 @@ class MainCubit extends Cubit<MainState> {
   }) async {
     debugPrint('getAllLibrary------------loading');
     emit(GetTypeLoading());
-    await _repository
-        .getAllTypeRepo(library: library, page: page)
-        .then((value) {
+    await _repository.getAllTypeRepo(library: library, page: page).then((
+        value) {
       // success
       allTypeModel = AllTypeModel.fromJson(value.data);
       debugPrint('getAllLibrary ------------ success');
@@ -1062,5 +1066,38 @@ class MainCubit extends Cubit<MainState> {
   }
 
 // get All Type ------------------- end
+
+  ///---
+  final FingerPrint _fingerPrint = FingerPrint();
+  bool? click;
+  void enableFinger(bool value) async {
+    click = !click!;
+    if (value) {
+      bool isFingerEnabled = await _fingerPrint.isFingerPrintEnable();
+      if (isFingerEnabled) {
+        CacheHelper2.saveData(
+            key: 'email', value: profileModel!.email.split('@')[0]);
+        CacheHelper2.saveData(key: 'password', value: '123456789');
+        sl<CacheHelper>().put('finger', 'click');
+      }
+    } else {
+      CacheHelper2.removeData(key: 'email');
+      CacheHelper2.removeData(key: 'password');
+      sl<CacheHelper>().clear('finger');
+    }
+    CacheHelper2.saveData(key: 'click', value: click);
+    print(
+        'mail ------------------------------ ${CacheHelper2.getData(
+            key: 'email')}');
+    print(
+        'pass ------------------------------ ${CacheHelper2.getData(
+            key: 'password')}');
+    print(
+        'finger ------------------------------ ${isSwitch!}');
+  }
+
+  void getClick() {
+    click = CacheHelper2.getData(key: 'click') ?? false ;
+  }
 
 }
