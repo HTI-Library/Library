@@ -566,7 +566,10 @@ class MainCubit extends Cubit<MainState> {
     debugPrint('bookDetails------------loading');
     bookModel = null;
     emit(BookDetailsLoading());
-    await _repository.bookDetailsRepo(bookId: bookId,)
+    await _repository
+        .bookDetailsRepo(
+      bookId: bookId,
+    )
         .then((value) {
       // success
       bookModel = BookDetailsModel.fromJson(value.data);
@@ -637,7 +640,6 @@ class MainCubit extends Cubit<MainState> {
     });
   }
 
-
 // categoryDetails ------------------- end
 
   // categoryDetails ------------------- start
@@ -653,7 +655,7 @@ class MainCubit extends Cubit<MainState> {
     emit(CategoryLoading());
     await _repository
         .categoryDetailsRepo(
-        categoryName: categoryName, library: library, type: type)
+            categoryName: categoryName, library: library, type: type)
         .then((value) {
       // success
       categoryDetailsModelHti = TopBorrowModel.fromJson(value.data);
@@ -666,7 +668,6 @@ class MainCubit extends Cubit<MainState> {
       emit(Error(error.toString()));
     });
   }
-
 
 // categoryDetails ------------------- end
 
@@ -682,7 +683,7 @@ class MainCubit extends Cubit<MainState> {
     emit(CategoryLoading());
     await _repository
         .categoryDetailsRepo(
-        categoryName: 'graduation projects', library: library, type: type)
+            categoryName: 'graduation projects', library: library, type: type)
         .then((value) {
       // success
       categoriesModelProject = TopBorrowModel.fromJson(value.data);
@@ -695,6 +696,7 @@ class MainCubit extends Cubit<MainState> {
       emit(Error(error.toString()));
     });
   }
+
   // end project exit .
 
   // getNotifications ------------------- start
@@ -895,8 +897,8 @@ class MainCubit extends Cubit<MainState> {
   GetAllReturnedBooks? allReturnedBook;
 
   void getAllReturned({
-  required int page,
-}) async {
+    required int page,
+  }) async {
     debugPrint('getAllReturned------------loading');
     emit(AllReturnedLoading());
     await _repository.getAllReturnedRepo(page: page).then((value) {
@@ -1039,22 +1041,24 @@ class MainCubit extends Cubit<MainState> {
   AllTypeModel? allTypeModel;
 
   void getAllType({
-  required String library,
-  required int page,
+    required String library,
+    required int page,
   }) async {
-      debugPrint('getAllLibrary------------loading');
-      emit(GetTypeLoading());
-      await _repository.getAllTypeRepo(library: library, page: page).then((value) {
-        // success
-        allTypeModel = AllTypeModel.fromJson(value.data);
-        debugPrint('getAllLibrary ------------ success');
-        emit(GetTypeSuccess());
-      }).catchError((error) {
-        // error
-        debugPrint('getAllLibrary------------error');
-        debugPrint(error.toString());
-        emit(Error(error.toString()));
-      });
+    debugPrint('getAllLibrary------------loading');
+    emit(GetTypeLoading());
+    await _repository
+        .getAllTypeRepo(library: library, page: page)
+        .then((value) {
+      // success
+      allTypeModel = AllTypeModel.fromJson(value.data);
+      debugPrint('getAllLibrary ------------ success');
+      emit(GetTypeSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint('getAllLibrary------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
   }
 
 // get All Type ------------------- end

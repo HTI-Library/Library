@@ -50,15 +50,25 @@ class _LoginPageState extends State<LoginPage> {
                 .then((value) {
               token = state.loginModel.token;
               if (libraryCache!.isNotEmpty && typeCache!.isNotEmpty) {
-                navigateAndFinish(context, MainPage(library: libraryCache, type: typeCache,));
-              }  else {
+                navigateAndFinish(
+                    context,
+                    MainPage(
+                      library: libraryCache,
+                      type: typeCache,
+                    ));
+              } else {
                 navigateAndFinish(context, const SelectLibrary());
               }
             });
           }
           if (libraryCache!.isNotEmpty && typeCache!.isNotEmpty) {
-            navigateAndFinish(context, MainPage(library: libraryCache, type: typeCache,));
-          }  else {
+            navigateAndFinish(
+                context,
+                MainPage(
+                  library: libraryCache,
+                  type: typeCache,
+                ));
+          } else {
             navigateAndFinish(context, const SelectLibrary());
           }
           showToast(
