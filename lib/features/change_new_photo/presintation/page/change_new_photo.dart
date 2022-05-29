@@ -31,7 +31,7 @@ class _ChangeNewPhotoState extends State<ChangeNewPhoto> {
   late MainCubit cubit;
 
   @override
-  void initState()  {
+  void initState() {
     super.initState();
     cubit = context.read<MainCubit>();
     cubit.getClick();
@@ -62,61 +62,58 @@ class _ChangeNewPhotoState extends State<ChangeNewPhoto> {
 
   Padding buildPadding(BuildContext context, MainState state) {
     return Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    children: [
-                      if (MainCubit.get(context).imageFile != null)
-                        CircleAvatar(
-                          radius: MediaQuery.of(context).size.width / 4,
-                          backgroundImage:
-                              FileImage(MainCubit.get(context).imageFile!),
-                        ),
-                      if (MainCubit.get(context).imageFile == null)
-                        GestureDetector(
-                          onTap: (){
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                const DialogChangePhoto());
-                          },
-                          child: CircleAvatar(
-                            backgroundImage: NetworkImage(MainCubit.get(
-                                            context)
-                                        .profileModel!
-                                        .avatar ==
-                                    'empty'
-                                ? 'https://alresalah.ps/uploads/images/54887b2cc2924f742f75c8c6c40d22ef.jpg'
-                                : MainCubit.get(context)
-                                    .profileModel!
-                                    .avatar),
-                            radius: MediaQuery.of(context).size.width / 4,
-                          ),
-                        ),
-                      space30Vertical,
-                      buildTextFormFiled(state),
-                      Row(
-                        children: [
-                          Text(
-                            'turn on finger',
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                          const Spacer(),
-                          Switch(
-                            value: cubit.click!,
-                            activeColor: HexColor(mainColor),
-                            // switch
-                            // slider
-                            onChanged: (value) {
-                              cubit.enableFinger(value);
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
+      padding: const EdgeInsets.all(15.0),
+      child: Column(
+        children: [
+          if (MainCubit.get(context).imageFile != null)
+            CircleAvatar(
+              radius: MediaQuery.of(context).size.width / 4,
+              backgroundImage: FileImage(MainCubit.get(context).imageFile!),
+            ),
+          if (MainCubit.get(context).imageFile == null)
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) =>
+                        const DialogChangePhoto());
+              },
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(MainCubit.get(context)
+                            .profileModel!
+                            .avatar ==
+                        'empty'
+                    ? 'https://alresalah.ps/uploads/images/54887b2cc2924f742f75c8c6c40d22ef.jpg'
+                    : MainCubit.get(context).profileModel!.avatar),
+                radius: MediaQuery.of(context).size.width / 4,
+              ),
+            ),
+          space30Vertical,
+          buildTextFormFiled(state),
+          Row(
+            children: [
+              Text(
+                'turn on finger',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              const Spacer(),
+              Switch(
+                value: cubit.click,
+                activeColor: HexColor(mainColor),
+                // switch
+                // slider
+                onChanged: (value) {
+                  cubit.enableFinger(value);
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
-Widget buildTextFormFiled(MainState state) {
+
+  Widget buildTextFormFiled(MainState state) {
     return Column(
       children: [
         SizedBox(
@@ -134,8 +131,7 @@ Widget buildTextFormFiled(MainState state) {
                     },
                   ),
                 ),
-              if (MainCubit.get(context).imageFile != null)
-                space15Horizontal,
+              if (MainCubit.get(context).imageFile != null) space15Horizontal,
               if (MainCubit.get(context).imageFile != null)
                 SizedBox(
                   height: 40.0,
@@ -143,75 +139,71 @@ Widget buildTextFormFiled(MainState state) {
                   child: state is UserAvatarLoading
                       ? const CupertinoActivityIndicator()
                       : Material(
-                    clipBehavior:
-                    Clip.antiAliasWithSaveLayer,
-                    borderRadius:
-                    BorderRadius.circular(10.0),
-                    color: HexColor(greyWhite),
-                    child: IconButton(
-                      onPressed: () {
-                        MainCubit.get(context)
-                            .clearSelectedImage();
-                      },
-                      icon: Icon(
-                        Icons.delete_rounded,
-                        size: 16.0,
-                        color: HexColor(red),
-                      ),
-                    ),
-                  ),
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: HexColor(greyWhite),
+                          child: IconButton(
+                            onPressed: () {
+                              MainCubit.get(context).clearSelectedImage();
+                            },
+                            icon: Icon(
+                              Icons.delete_rounded,
+                              size: 16.0,
+                              color: HexColor(red),
+                            ),
+                          ),
+                        ),
                 ),
             ],
           ),
         ),
         space15Vertical,
         SizedBox(
-            width:double.infinity,
-            child: Text('email',
-              style: Theme.of(context).textTheme.headline6,textAlign: TextAlign.start,
+            width: double.infinity,
+            child: Text(
+              'email',
+              style: Theme.of(context).textTheme.headline6,
+              textAlign: TextAlign.start,
             )),
         space10Vertical,
         AppTextFormField(
           enabled: false,
           hint: cubit.profileModel!.email,
-          callbackHandle: (controller) {
-          },
-          onChanged: (value) {
-          },
+          callbackHandle: (controller) {},
+          onChanged: (value) {},
         ),
         space10Vertical,
         SizedBox(
-            width:double.infinity,
-            child: Text('name',
-              style: Theme.of(context).textTheme.headline6,textAlign: TextAlign.start,
+            width: double.infinity,
+            child: Text(
+              'name',
+              style: Theme.of(context).textTheme.headline6,
+              textAlign: TextAlign.start,
             )),
         space10Vertical,
         AppTextFormField(
           enabled: false,
           hint: cubit.profileModel!.name,
-          callbackHandle: (controller) {
-          },
-          onChanged: (value) {
-          },
+          callbackHandle: (controller) {},
+          onChanged: (value) {},
         ),
         space10Vertical,
         SizedBox(
-            width:double.infinity,
-            child: Text('phone',
-              style: Theme.of(context).textTheme.headline6,textAlign: TextAlign.start,
+            width: double.infinity,
+            child: Text(
+              'phone',
+              style: Theme.of(context).textTheme.headline6,
+              textAlign: TextAlign.start,
             )),
         space10Vertical,
         AppTextFormField(
           enabled: false,
           hint: cubit.profileModel!.phone,
-          callbackHandle: (controller) {
-          },
-          onChanged: (value) {
-          },
+          callbackHandle: (controller) {},
+          onChanged: (value) {},
         ),
         space10Vertical,
       ],
     );
-}
-
+  }
 }

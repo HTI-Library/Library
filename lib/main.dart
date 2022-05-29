@@ -32,7 +32,7 @@ void main() async {
     if (value != null) {
       isSwitch = value;
     } else {
-      isSwitch = '';
+      isSwitch = false;
     }
   });
 
@@ -77,9 +77,9 @@ void main() async {
   await sl<CacheHelper>().get('onboarding').then((value) {
     debugPrint('onboarding ------------- $value');
     if (value != null) {
-      onboarding = value;
+      onBoarding = value;
     } else {
-      onboarding = null;
+      onBoarding = null;
     }
   });
 
@@ -164,7 +164,7 @@ class _MyAppState extends State<MyApp> {
             darkTheme: MainCubit
                 .get(context)
                 .darkTheme,
-            home: onboarding == null
+            home: onBoarding == null
                 ? const OnBoardingPage()
                   : MainPage(library: libraryCache, type: typeCache),
 

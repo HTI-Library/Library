@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
       if (value != null) {
         isSwitch = value;
       } else {
-        isSwitch = '';
+        isSwitch = false;
       }
     });
 
@@ -170,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               fallback: (context) => Row(
                                 children: [
-                                  if (isSwitch!.isNotEmpty)
+                                  if (isSwitch)
                                     Container(
                                       width:
                                           MediaQuery.of(context).size.width / 6,
@@ -190,7 +190,7 @@ class _LoginPageState extends State<LoginPage> {
                                         },
                                       ),
                                     ),
-                                  if (isSwitch!.isNotEmpty) space10Horizontal,
+                                  if (isSwitch) space10Horizontal,
                                   Expanded(
                                     child: AppButton(
                                       // width: MediaQuery.of(context).size.width / 2,
