@@ -27,6 +27,15 @@ void main() async {
     }
   });
 
+  sl<CacheHelper>().get('finger').then((value) {
+    debugPrint('finger ------------- $value');
+    if (value != null) {
+      isSwitch = value;
+    } else {
+      isSwitch = '';
+    }
+  });
+
   String translation = await rootBundle
       .loadString('assets/translations/${isRtl ? 'ar' : 'en'}.json');
 
@@ -104,6 +113,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+
   }
 
   @override

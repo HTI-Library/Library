@@ -1,6 +1,7 @@
 import 'package:buildcondition/buildcondition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/util/constants.dart';
@@ -53,6 +54,7 @@ class _SelectLibraryState extends State<SelectLibrary> {
                     SelectLibraryItem(
                       name: 'Main Library',
                       img: 'main_library',
+                      color:HexColor('1b9aaa').withOpacity(0.8),
                       callbackHandle: () {
                         showToast(
                             message: 'geometry library',
@@ -62,6 +64,7 @@ class _SelectLibraryState extends State<SelectLibrary> {
                       },
                     ),
                     SelectLibraryItem(
+                      color:HexColor('50723c').withOpacity(0.8),
                       name: 'S library',
                       img: 's_library',
                       callbackHandle: () {
@@ -73,8 +76,9 @@ class _SelectLibraryState extends State<SelectLibrary> {
                       },
                     ),
                     SelectLibraryItem(
+                      color:HexColor('ff934f').withOpacity(0.8),
                       name: 'M library',
-                      img: 's_library',
+                      img: 'libm',
                       callbackHandle: () {
                         showToast(
                             message: 'computer science library',

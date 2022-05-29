@@ -27,7 +27,7 @@ class BorrowingPage extends StatelessWidget {
         if (state is PostBorrowingBooksSuccess) {
           showToast(message: state.text, toastStates: ToastStates.SUCCESS);
         } else if (state is Error) {
-          showToast(message: state.error, toastStates: ToastStates.ERROR);
+          showToast(message: 'you cannot borrow more than 2 books', toastStates: ToastStates.ERROR);
         }
       },
       builder: (context, state) {

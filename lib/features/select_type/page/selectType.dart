@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/util/constants.dart';
@@ -83,7 +84,7 @@ class _SelectTypeState extends State<SelectType> {
                                       .types[index]
                                       .name,
                                 ));
-                          }),
+                          }, color: HexColor('1b9aaa'),),
                       itemCount:
                           MainCubit.get(context).allTypeModel!.types.length,
                       physics: const BouncingScrollPhysics(),
