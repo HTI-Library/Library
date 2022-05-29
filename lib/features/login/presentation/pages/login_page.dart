@@ -30,7 +30,6 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isDisabled = true;
-  late String isSwitch;
   final FingerPrint _fingerPrint = FingerPrint();
   late MainCubit cubit;
 
@@ -47,9 +46,17 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    isSwitch = CacheHelper2.getData(key: 'finger') ?? '';
     cubit = context.read<MainCubit>();
-    print('switch ---------------- $isSwitch');
+
+    sl<CacheHelper>().get('finger').then((value) {
+      debugPrint('finger ------------- $value');
+      if (value != null) {
+        isSwitch = value;
+      } else {
+        isSwitch = '';
+      }
+    });
+
   }
 
   @override
@@ -163,14 +170,14 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               fallback: (context) => Row(
                                 children: [
-                                  if (isSwitch.isNotEmpty)
+                                  if (isSwitch!.isNotEmpty)
                                     Container(
                                       width:
                                           MediaQuery.of(context).size.width / 6,
                                       height: 40,
                                       decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(10),
+                                              BorderRadius.circular(20),
                                           color:
                                               Theme.of(context).primaryColor),
                                       child: IconButton(
@@ -183,7 +190,7 @@ class _LoginPageState extends State<LoginPage> {
                                         },
                                       ),
                                     ),
-                                  if (isSwitch.isNotEmpty) space10Horizontal,
+                                  if (isSwitch!.isNotEmpty) space10Horizontal,
                                   Expanded(
                                     child: AppButton(
                                       // width: MediaQuery.of(context).size.width / 2,

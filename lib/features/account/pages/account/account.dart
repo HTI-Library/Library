@@ -79,9 +79,8 @@ class AccountPage extends StatelessWidget {
                   radius: 75,
                 ),
                 space20Vertical,
-                if (MainCubit.get(context).profileModel != null && MainCubit.get(context).userSigned)
                   Text(
-                    MainCubit.get(context).profileModel!.name,
+                    'Setting',
                     style: Theme.of(context).textTheme.headline6!,
                   ),
                 if (MainCubit.get(context).profileModel == null && MainCubit.get(context).userSigned)
