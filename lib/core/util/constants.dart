@@ -70,7 +70,7 @@ double responsiveValue(BuildContext context, double value) =>
 
 void navigateTo(context, widget) => Navigator.push(
       context,
-  CupertinoPageRoute(
+      MaterialPageRoute(
         builder: (context) => widget,
       ),
     );
@@ -81,7 +81,7 @@ void navigateAndFinish(
 ) =>
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(
+      CupertinoPageRoute(
         builder: (context) => widget,
       ),
       (route) {
