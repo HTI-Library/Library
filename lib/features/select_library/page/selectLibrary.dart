@@ -52,6 +52,7 @@ class _SelectLibraryState extends State<SelectLibrary> {
                 child: Column(
                   children: [
                     SelectLibraryItem(
+                      type: 1,
                       name: 'Main Library',
                       img: 'main_library',
                       color:HexColor('1b9aaa').withOpacity(0.8),
@@ -64,6 +65,7 @@ class _SelectLibraryState extends State<SelectLibrary> {
                       },
                     ),
                     SelectLibraryItem(
+                      type: 1,
                       color:HexColor('50723c').withOpacity(0.8),
                       name: 'S library',
                       img: 's_library',
@@ -76,6 +78,7 @@ class _SelectLibraryState extends State<SelectLibrary> {
                       },
                     ),
                     SelectLibraryItem(
+                      type: 1,
                       color:HexColor('ff934f').withOpacity(0.8),
                       name: 'M library',
                       img: 'libm',

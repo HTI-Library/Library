@@ -122,6 +122,7 @@ class _HomePageState extends State<HomePage> {
                               .length)
                       : const LoadingWidget(),
                 ),
+                if (cubit.categoryDetailsModelHti != null && cubit.categoryDetailsModelHti!.books.isNotEmpty)
                 SeeMoreItem(
                   gestureTapCallback: () {
                     navigateTo(
@@ -133,6 +134,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   text: appTranslation(context).htiMaterial,
                 ),
+                if (cubit.categoryDetailsModelHti != null && cubit.categoryDetailsModelHti!.books.isNotEmpty)
                 Container(
                   padding: const EdgeInsetsDirectional.only(
                     top: 5.0,
@@ -155,6 +157,7 @@ class _HomePageState extends State<HomePage> {
                               .length)
                       : const LoadingWidget(),
                 ),
+                if (cubit.categoriesModelProject != null && cubit.categoriesModelProject!.books.isNotEmpty)
                 SeeMoreItem(
                   gestureTapCallback: () {
                     navigateTo(
@@ -166,6 +169,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   text: appTranslation(context).graduationProjects,
                 ),
+                if (cubit.categoriesModelProject != null && cubit.categoriesModelProject!.books.isNotEmpty)
                 Container(
                   padding: const EdgeInsetsDirectional.only(
                     top: 5.0,

@@ -53,6 +53,7 @@ class _SelectTypeState extends State<SelectType> {
               body: MainCubit.get(context).allTypeModel != null
                   ? ListView.builder(
                       itemBuilder: (context, index) => SelectLibraryItem(
+                        type: 2,
                           img: MainCubit.get(context)
                               .allTypeModel!
                               .types[index]
