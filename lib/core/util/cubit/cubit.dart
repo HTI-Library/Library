@@ -1069,33 +1069,27 @@ class MainCubit extends Cubit<MainState> {
 
   ///---
   final FingerPrint _fingerPrint = FingerPrint();
-  bool click = false;
+  void enableFinger() async {
 
-  void enableFinger(bool value) async {
-    click = !click;
-    if (value) {
+    isSwitch = !isSwitch;
+    if (isSwitch) {
       bool isFingerEnabled = await _fingerPrint.isFingerPrintEnable();
       if (isFingerEnabled) {
         CacheHelper2.saveData(
             key: 'email', value: profileModel!.email.split('@')[0]);
         CacheHelper2.saveData(key: 'password', value: '123456789');
-        sl<CacheHelper>().put('finger', 'click');
+        sl<CacheHelper>().put('finger',true);
       }
     } else {
       CacheHelper2.removeData(key: 'email');
       CacheHelper2.removeData(key: 'password');
-      sl<CacheHelper>().clear('finger');
+      sl<CacheHelper>().put('finger',false);
     }
-    CacheHelper2.saveData(key: 'click', value: click);
     print(
         'mail ------------------------------ ${CacheHelper2.getData(key: 'email')}');
     print(
         'pass ------------------------------ ${CacheHelper2.getData(key: 'password')}');
     print('finger ------------------------------ $isSwitch');
     emit(FingerPrintSuccess());
-  }
-
-  void getClick() {
-    click = CacheHelper2.getData(key: 'click') ?? false;
   }
 }

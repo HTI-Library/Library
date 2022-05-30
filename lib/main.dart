@@ -83,6 +83,15 @@ void main() async {
     }
   });
 
+  sl<CacheHelper>().get('finger').then((value) {
+    if (value == null) {
+      isSwitch = false;
+    } else {
+      isSwitch = value;
+    }
+    debugPrint('library---------------------------- $value');
+  });
+
   debugPrint('dark mode ------------- $isDark');
 
   runApp(MyApp(

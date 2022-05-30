@@ -34,7 +34,6 @@ class _ChangeNewPhotoState extends State<ChangeNewPhoto> {
   void initState() {
     super.initState();
     cubit = context.read<MainCubit>();
-    cubit.getClick();
   }
 
   @override
@@ -98,12 +97,12 @@ class _ChangeNewPhotoState extends State<ChangeNewPhoto> {
               ),
               const Spacer(),
               Switch(
-                value: cubit.click,
+                value: isSwitch,
                 activeColor: HexColor(mainColor),
                 // switch
                 // slider
-                onChanged: (value) {
-                  cubit.enableFinger(value);
+                onChanged: (_) {
+                  cubit.enableFinger();
                 },
               ),
             ],
