@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hti_library/core/di/injection.dart' as di;
+import 'package:hti_library/core/network/local/cache.dart';
+import 'package:hti_library/features/on_boarding/presentation/pages/on_boarding_page.dart';
 import 'package:hti_library/features/select_library/page/selectLibrary.dart';
-
 import 'core/di/injection.dart';
 import 'core/network/local/cache_helper.dart';
 import 'core/util/bloc_observer.dart';
@@ -15,11 +16,10 @@ import 'features/main/presentation/pages/main_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
-
   await di.init();
+  await CacheHelper2.init();
 
   bool isRtl = false;
-
   await sl<CacheHelper>().get('isRtl').then((value) {
     debugPrint('trl ------------- $value');
     if (value != null) {
@@ -27,11 +27,19 @@ void main() async {
     }
   });
 
+  sl<CacheHelper>().get('finger').then((value) {
+    debugPrint('finger ------------- $value');
+    if (value != null) {
+      isSwitch = value;
+    } else {
+      isSwitch = false;
+    }
+  });
+
   String translation = await rootBundle
       .loadString('assets/translations/${isRtl ? 'ar' : 'en'}.json');
 
   bool isDark = false;
-
   await sl<CacheHelper>().get('isDark').then((value) {
     debugPrint('dark mode ------------- $value');
     if (value != null) {
@@ -49,21 +57,39 @@ void main() async {
   });
 
   sl<CacheHelper>().get('type').then((value) {
-    debugPrint('type---------------------------- $value');
     if (value == null) {
-      typeCache = '';
+      typeCache = 'hti matrial';
     } else {
       typeCache = value;
     }
+    debugPrint('type---------------------------- $value');
   });
 
   sl<CacheHelper>().get('library').then((value) {
-    debugPrint('library---------------------------- $value');
     if (value == null) {
-      libraryCache = '';
+      libraryCache = 'hti matrial';
     } else {
       libraryCache = value;
     }
+    debugPrint('library---------------------------- $value');
+  });
+
+  await sl<CacheHelper>().get('onboarding').then((value) {
+    debugPrint('onboarding ------------- $value');
+    if (value != null) {
+      onBoarding = value;
+    } else {
+      onBoarding = null;
+    }
+  });
+
+  sl<CacheHelper>().get('finger').then((value) {
+    if (value == null) {
+      isSwitch = false;
+    } else {
+      isSwitch = value;
+    }
+    debugPrint('library---------------------------- $value');
   });
 
   debugPrint('dark mode ------------- $isDark');
@@ -96,6 +122,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+
   }
 
   @override
@@ -108,7 +135,8 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (BuildContext context) => sl<MainCubit>()
+            create: (BuildContext context) =>
+            sl<MainCubit>()
               ..setThemes(
                 rtl: widget.isRtl,
                 dark: widget.isDark,
@@ -119,28 +147,36 @@ class _MyAppState extends State<MyApp> {
               )
               ..checkInternet()
               ..checkConnectivity()
-              // ..categories(library: 'hti matrial', type: 'hti matrial')
+            // ..categories(library: 'hti matrial', type: 'hti matrial')
               ..topBorrow(page: 1)
-              // ..categoryDetailsHti(categoryName: 'hti matrial' , library: 'hti matrial' , type: 'hti matrial')
-              // ..categoryProject(categoryName: 'graduation projects' , library: 'graduation projects' , type: 'graduation projects')
+            // ..categoryProject(categoryName: 'graduation projects' , library: 'graduation projects' , type: 'graduation projects')
               ..getSavedBooks()
               ..getUserDate()
+              ..lastSearch()
               ..getAllReturned(page: 1)
               ..getMyReturned()
-            ),
+        ),
       ],
       child: BlocBuilder<MainCubit, MainState>(
         builder: (context, state) {
           return MaterialApp(
             title: 'HTI Library',
             debugShowCheckedModeBanner: false,
-            themeMode: MainCubit.get(context).isDark
+            themeMode: MainCubit
+                .get(context)
+                .isDark
                 ? ThemeMode.dark
                 : ThemeMode.light,
-            theme: MainCubit.get(context).lightTheme,
-            darkTheme: MainCubit.get(context).darkTheme,
-            // home: token == '' ? LoginPage() : MainPage(),
-            home: SelectLibrary(),
+            theme: MainCubit
+                .get(context)
+                .lightTheme,
+            darkTheme: MainCubit
+                .get(context)
+                .darkTheme,
+            home: onBoarding == null
+                ? const OnBoardingPage()
+                  : MainPage(library: libraryCache, type: typeCache),
+
           );
         },
       ),

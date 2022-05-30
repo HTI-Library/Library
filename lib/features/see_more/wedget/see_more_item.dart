@@ -4,6 +4,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/models/getAllReturnedBooks.dart';
 import 'package:hti_library/core/models/top_borrow_model.dart';
+import 'package:hti_library/features/account/pages/my_borrow_books/wedget/borrowBook.dart';
+import 'package:hti_library/features/book/pdf/PdfDetails.dart';
 import 'package:hti_library/features/book/view_book.dart';
 
 import '../../../../core/util/constants.dart';
@@ -117,17 +119,35 @@ class SeeMoreItem extends StatelessWidget {
                             child: AppButton(
                               height: 35.0,
                               label: appTranslation(context).borrow,
-                              onPress: () {},
+                              onPress: () {
+                                navigateTo(context, BorrowBook());
+                              },
                             ),
                           ),
                           space10Horizontal,
+                          if (simpleData != null)
+                            if (simpleData!.bookLink != null)
                           Expanded(
                             child: AppButton(
                                 height: 35.0,
                                 color: HexColor(greyWhite),
                                 label: appTranslation(context).read,
                                 textColor: HexColor(mainColor),
-                                onPress: () {}),
+                                onPress: () {
+                                  navigateTo(context, PdfDetails(bookId: simpleData!.id,));
+                                }),
+                          ),
+                          if (data != null)
+                          if (data!.book.bookLink != null)
+                          Expanded(
+                            child: AppButton(
+                                height: 35.0,
+                                color: HexColor(greyWhite),
+                                label: appTranslation(context).read,
+                                textColor: HexColor(mainColor),
+                                onPress: () {
+                                  navigateTo(context, PdfDetails(bookId: data!.book.id,));
+                                }),
                           ),
                         ],
                       ),

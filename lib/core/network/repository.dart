@@ -188,6 +188,10 @@ abstract class Repository {
     required String type,
   });
 
+  Future<Response> startBorrowRepo({
+    required String borrowID,
+  });
+
   Future<Response> getUserDateRepo();
 
   Future<Response> userAvatarRepo({
@@ -881,7 +885,20 @@ class RepoImplementation extends Repository {
       ),
     );
   }
+
+  @override
+  Future<Response> startBorrowRepo({
+  required String borrowID,
+}) async {
+    return await dioHelper.post(
+      url: '$getRecentlyReturnedUrl?borrowID=$borrowID',
+      token: token,
+    );
+  }
+
 }
+
+
 
 
 // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjJkZDNlYjExMDAyNjFkM2QyNWMxOGIiLCJpYXQiOjE2NDc0NTEyNjR9.Hi-0Wh7QANH_GJ9tqvyM-YgQccUJBE-eEoXdBmEf-HM

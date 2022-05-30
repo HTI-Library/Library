@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/core/di/injection.dart';
+import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
@@ -14,8 +17,20 @@ import 'package:hti_library/features/account/widget/btn_my_account.dart';
 import 'package:hti_library/features/search/presentation/search.dart';
 import 'package:hti_library/features/see_more/presentation/page/see_more.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late MainCubit cubit;
+  @override
+  void initState() {
+    super.initState();
+    cubit = context.read<MainCubit>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +41,15 @@ class HomePage extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
+
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: MyBtnAccount(
                     voidCallback: () {
-                      MainCubit.get(context).lastSearch();
-                      navigateTo(context, SearchPage(model: MainCubit.get(context).lastSearchModel!));
+                      navigateTo(
+                        context,
+                        const SearchPage(),
+                      );
                     },
                     text: appTranslation(context).search,
                     imagePath: 'search',
@@ -40,9 +58,12 @@ class HomePage extends StatelessWidget {
                 space15Vertical,
                 SeeMoreItem(
                   gestureTapCallback: () {
-                    navigateTo(context, SeeMore(
-                      title: "Top Borrow Books",
-                      model: MainCubit.get(context).topBorrowModel!,));
+                    navigateTo(
+                        context,
+                        SeeMore(
+                          title: "Top Borrow Books",
+                          model: MainCubit.get(context).topBorrowModel!,
+                        ));
                   },
                   text: appTranslation(context).topBorrowBooks,
                 ),
@@ -53,25 +74,29 @@ class HomePage extends StatelessWidget {
                   ),
                   color: HexColor(greyWhite),
                   height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                  child:MainCubit.get(context).topBorrowModel != null ? ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => BookItem(
-                        book: MainCubit.get(context)
-                            .topBorrowModel!
-                            .books[index],
-                      ),
-                      itemCount: MainCubit.get(context)
-                          .topBorrowModel!
-                          .books
-                          .length) : const LoadingWidget(),
+                  child: MainCubit.get(context).topBorrowModel != null
+                      ? ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) => BookItem(
+                                book: MainCubit.get(context)
+                                    .topBorrowModel!
+                                    .books[index],
+                              ),
+                          itemCount: MainCubit.get(context)
+                              .topBorrowModel!
+                              .books
+                              .length)
+                      : const LoadingWidget(),
                 ),
                 SeeMoreItem(
                   gestureTapCallback: () {
-                    navigateTo(context, SeeMore(
-                      title: "Recently Returned",
-                      data: MainCubit.get(context).allReturnedBook!,
-                    ));
+                    navigateTo(
+                        context,
+                        SeeMore(
+                          title: "Recently Returned",
+                          data: MainCubit.get(context).allReturnedBook!,
+                        ));
                   },
                   text: appTranslation(context).recentlyReturned,
                 ),
@@ -82,28 +107,34 @@ class HomePage extends StatelessWidget {
                   ),
                   color: HexColor(greyWhite),
                   height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                  child:MainCubit.get(context).allReturnedBook != null ? ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => BookItem(
-                        returned: MainCubit.get(context)
-                            .allReturnedBook!
-                            .books[index],
-                      ),
-                      itemCount: MainCubit.get(context)
-                          .allReturnedBook!
-                          .books
-                          .length) : const LoadingWidget(),
+                  child: MainCubit.get(context).allReturnedBook != null
+                      ? ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) => BookItem(
+                                returned: MainCubit.get(context)
+                                    .allReturnedBook!
+                                    .books[index],
+                              ),
+                          itemCount: MainCubit.get(context)
+                              .allReturnedBook!
+                              .books
+                              .length)
+                      : const LoadingWidget(),
                 ),
+                if (cubit.categoryDetailsModelHti != null && cubit.categoryDetailsModelHti!.books.isNotEmpty)
                 SeeMoreItem(
                   gestureTapCallback: () {
-                    navigateTo(context, SeeMore(
-                      title: "HTI Materials",
-                      model: MainCubit.get(context).categoryDetailsModelHti,
-                    ));
+                    navigateTo(
+                        context,
+                        SeeMore(
+                          title: "HTI Materials",
+                          model: MainCubit.get(context).categoryDetailsModelHti,
+                        ));
                   },
                   text: appTranslation(context).htiMaterial,
                 ),
+                if (cubit.categoryDetailsModelHti != null && cubit.categoryDetailsModelHti!.books.isNotEmpty)
                 Container(
                   padding: const EdgeInsetsDirectional.only(
                     top: 5.0,
@@ -111,28 +142,34 @@ class HomePage extends StatelessWidget {
                   ),
                   color: HexColor(greyWhite),
                   height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                  child:  MainCubit.get(context).categoryDetailsModelHti != null ? ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => BookItem(
-                        book: MainCubit.get(context)
-                            .categoryDetailsModelHti!
-                            .books[index],
-                      ),
-                      itemCount: MainCubit.get(context)
-                          .categoryDetailsModelHti!
-                          .books
-                          .length) : const LoadingWidget(),
+                  child: MainCubit.get(context).categoryDetailsModelHti != null
+                      ? ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) => BookItem(
+                                book: MainCubit.get(context)
+                                    .categoryDetailsModelHti!
+                                    .books[index],
+                              ),
+                          itemCount: MainCubit.get(context)
+                              .categoryDetailsModelHti!
+                              .books
+                              .length)
+                      : const LoadingWidget(),
                 ),
+                if (cubit.categoriesModelProject != null && cubit.categoriesModelProject!.books.isNotEmpty)
                 SeeMoreItem(
                   gestureTapCallback: () {
-                    navigateTo(context, SeeMore(
-                      title: "graduation Projects",
-                      model: MainCubit.get(context).categoriesModelProject,
-                    ));
+                    navigateTo(
+                        context,
+                        SeeMore(
+                          title: "graduation Projects",
+                          model: MainCubit.get(context).categoriesModelProject,
+                        ));
                   },
                   text: appTranslation(context).graduationProjects,
                 ),
+                if (cubit.categoriesModelProject != null && cubit.categoriesModelProject!.books.isNotEmpty)
                 Container(
                   padding: const EdgeInsetsDirectional.only(
                     top: 5.0,
@@ -140,18 +177,20 @@ class HomePage extends StatelessWidget {
                   ),
                   color: HexColor(greyWhite),
                   height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                  child:MainCubit.get(context).categoriesModelProject != null ? ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => BookItem(
-                        book: MainCubit.get(context)
-                            .categoriesModelProject!
-                            .books[index],
-                      ),
-                      itemCount: MainCubit.get(context)
-                          .categoriesModelProject!
-                          .books
-                          .length) : const LoadingWidget(),
+                  child: MainCubit.get(context).categoriesModelProject != null
+                      ? ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) => BookItem(
+                                book: MainCubit.get(context)
+                                    .categoriesModelProject!
+                                    .books[index],
+                              ),
+                          itemCount: MainCubit.get(context)
+                              .categoriesModelProject!
+                              .books
+                              .length)
+                      : const LoadingWidget(),
                 ),
               ],
             ),
@@ -159,5 +198,4 @@ class HomePage extends StatelessWidget {
         );
       },
     );
-  }
-}
+  }}

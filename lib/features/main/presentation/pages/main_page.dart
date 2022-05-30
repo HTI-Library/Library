@@ -17,10 +17,14 @@ import 'package:hti_library/features/internet_connection/page/internet_connectio
 import 'package:hti_library/features/saved/presentation/pages/saved.dart';
 import 'dart:io';
 
+import 'package:hti_library/features/select_library/page/selectLibrary.dart';
+
 class MainPage extends StatefulWidget {
   const MainPage({Key? key, required this.type, required this.library}) : super(key: key);
   final String? type;
   final String? library;
+
+
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -28,23 +32,24 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  late MainCubit cubit;
   late PageController _pageController;
 
   @override
   void initState() {
     _pageController = PageController();
     super.initState();
-
-
-    MainCubit.get(context).categories(
-        library: widget.library!,
-        type: widget.type!,
-    );
+    cubit = context.read<MainCubit>();
 
     MainCubit.get(context).categoryDetailsHti(
       categoryName: 'hti matrial',
       library: widget.library!,
       type: widget.type!,
+    );
+
+    MainCubit.get(context).categories(
+        library: widget.library!,
+        type: widget.type!,
     );
 
     MainCubit.get(context).categoryProject(

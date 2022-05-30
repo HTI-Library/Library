@@ -1,7 +1,9 @@
 import 'package:buildcondition/buildcondition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
@@ -13,6 +15,8 @@ import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/core/util/widgets/book_item.dart';
 import 'package:hti_library/core/util/widgets/loading.dart';
 import 'package:hti_library/core/util/widgets/see_more_item.dart';
+import 'package:hti_library/features/book/booksBycategories/BookByCategories.dart';
+import 'package:hti_library/features/book/pdf/PdfDetails.dart';
 import 'package:hti_library/features/borrowing/presentation/pages/borrowing_page.dart';
 import 'package:hti_library/features/see_more/presentation/page/see_more.dart';
 
@@ -30,6 +34,7 @@ class _ViewBookPageState extends State<ViewBookPage> {
     // TODO: implement initState
     super.initState();
     MainCubit.get(context).bookDetails(bookId: widget.bookId);
+
   }
 
   @override
@@ -42,6 +47,7 @@ class _ViewBookPageState extends State<ViewBookPage> {
       },
       builder: (context, state) {
         return BackScaffold(
+          title: 'Details',
           scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
           actionIcon: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -62,7 +68,16 @@ class _ViewBookPageState extends State<ViewBookPage> {
                   // ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await FlutterShare.share(
+                        title: 'مشاركة',
+                        text: appTranslation(context).detailsBook,
+
+                        linkUrl: MainCubit.get(context).bookModel!.book.name +
+                            "\n" + MainCubit.get(context).bookModel!.book.edition + "\n" +
+                            MainCubit.get(context).bookModel!.book.overview ,
+                        chooserTitle: 'Chooser Title');
+                  },
                   icon: Icon(
                     Icons.share_rounded,
                     color: HexColor(mainColor),
@@ -160,6 +175,7 @@ class _ViewBookPageState extends State<ViewBookPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
+                              if (MainCubit.get(context).userSigned)
                               Expanded(
                                 child: AppButton(
                                     label: '${appTranslation(context).borrow}',
@@ -181,13 +197,17 @@ class _ViewBookPageState extends State<ViewBookPage> {
                                       ));
                                     }),
                               ),
+                              if (MainCubit.get(context).userSigned)
                               space10Horizontal,
+                              if (MainCubit.get(context).bookModel!.book.bookLink.isNotEmpty)
                               Expanded(
                                 child: AppButton(
                                     color: HexColor(greyWhite),
                                     label: '${appTranslation(context).read}',
                                     textColor: HexColor(mainColor),
-                                    onPress: () {}),
+                                    onPress: () {
+                                      navigateTo(context, PdfDetails(bookId: widget.bookId,));
+                                    }),
                               ),
                             ],
                           ),
@@ -254,9 +274,10 @@ class _ViewBookPageState extends State<ViewBookPage> {
                       SeeMoreItem(
                         padding: 15,
                         gestureTapCallback: () {
-                          navigateTo(context, SeeMore(
-                            title: "Top Borrow Books",
-                            model: MainCubit.get(context).topBorrowModel,
+                          navigateTo(context, BookByCategories(
+                            type: MainCubit.get(context).bookModel!.book.type,
+                            library: MainCubit.get(context).bookModel!.book.library,
+                            category: MainCubit.get(context).bookModel!.book.category,
                           ));
                         },
                         text: 'More books from the same category',

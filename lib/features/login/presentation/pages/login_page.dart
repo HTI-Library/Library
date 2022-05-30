@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/core/auth.dart';
 import 'package:hti_library/core/di/injection.dart';
+import 'package:hti_library/core/network/local/cache.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
@@ -28,6 +30,8 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isDisabled = true;
+  final FingerPrint _fingerPrint = FingerPrint();
+  late MainCubit cubit;
 
   void enableLoginButton() {
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
@@ -37,6 +41,22 @@ class _LoginPageState extends State<LoginPage> {
       isDisabled = true;
       setState(() {});
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    cubit = context.read<MainCubit>();
+
+    sl<CacheHelper>().get('finger').then((value) {
+      debugPrint('finger ------------- $value');
+      if (value != null) {
+        isSwitch = value;
+      } else {
+        isSwitch = false;
+      }
+    });
+
   }
 
   @override
@@ -50,15 +70,18 @@ class _LoginPageState extends State<LoginPage> {
                 .then((value) {
               token = state.loginModel.token;
               if (libraryCache!.isNotEmpty && typeCache!.isNotEmpty) {
-                navigateAndFinish(context, MainPage(library: libraryCache, type: typeCache,));
-              }  else {
                 navigateAndFinish(context, const SelectLibrary());
               }
             });
           }
           if (libraryCache!.isNotEmpty && typeCache!.isNotEmpty) {
-            navigateAndFinish(context, MainPage(library: libraryCache, type: typeCache,));
-          }  else {
+            navigateAndFinish(
+                context,
+                MainPage(
+                  library: libraryCache,
+                  type: typeCache,
+                ));
+          } else {
             navigateAndFinish(context, const SelectLibrary());
           }
           showToast(
@@ -145,17 +168,44 @@ class _LoginPageState extends State<LoginPage> {
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
                                 child: const CupertinoActivityIndicator(),
                               ),
-                              fallback: (context) => AppButton(
-                                // width: MediaQuery.of(context).size.width / 2,
-                                onPress: !isDisabled
-                                    ? () {
-                                        print('test');
-                                        MainCubit.get(context).login(
-                                            email: emailController.text,
-                                            password: passwordController.text);
-                                      }
-                                    : null,
-                                label: appTranslation(context).logIn,
+                              fallback: (context) => Row(
+                                children: [
+                                  if (isSwitch)
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color:
+                                              Theme.of(context).primaryColor),
+                                      child: IconButton(
+                                        color: Colors.white,
+                                        iconSize: 28,
+                                        icon: Icon(Icons.fingerprint_rounded),
+                                        splashRadius: 20,
+                                        onPressed: () {
+                                          fingerLogin();
+                                        },
+                                      ),
+                                    ),
+                                  if (isSwitch) space10Horizontal,
+                                  Expanded(
+                                    child: AppButton(
+                                      // width: MediaQuery.of(context).size.width / 2,
+                                      onPress: !isDisabled
+                                          ? () {
+                                              MainCubit.get(context).login(
+                                                  email: emailController.text,
+                                                  password:
+                                                      passwordController.text);
+                                            }
+                                          : null,
+                                      label: appTranslation(context).logIn,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
@@ -169,5 +219,17 @@ class _LoginPageState extends State<LoginPage> {
             scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor);
       },
     );
+  }
+
+  void fingerLogin() async {
+    bool isFinished = await _fingerPrint.isFingerPrintEnable();
+    if (isFinished) {
+      bool isAuth = await _fingerPrint.isAuth('login finger print');
+      if (isAuth) {
+        String mail = CacheHelper2.getData(key: 'email');
+        String pass = CacheHelper2.getData(key: 'password');
+        cubit.login(email: mail, password: pass);
+      }
+    }
   }
 }

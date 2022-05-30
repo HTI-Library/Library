@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/core/auth.dart';
 import 'package:hti_library/core/di/injection.dart';
 import 'package:hti_library/core/error/exceptions.dart';
 import 'package:hti_library/core/models/allTypeModel.dart';
@@ -20,6 +21,7 @@ import 'package:hti_library/core/models/profile_model.dart';
 import 'package:hti_library/core/models/remove_save_books_model.dart';
 import 'package:hti_library/core/models/save_books_model.dart';
 import 'package:hti_library/core/models/top_borrow_model.dart';
+import 'package:hti_library/core/network/local/cache.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/network/repository.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
@@ -640,7 +642,6 @@ class MainCubit extends Cubit<MainState> {
     });
   }
 
-
 // categoryDetails ------------------- end
 
   // categoryDetails ------------------- start
@@ -656,7 +657,9 @@ class MainCubit extends Cubit<MainState> {
     emit(CategoryLoading());
     await _repository
         .categoryDetailsRepo(
-        categoryName: categoryName, library: library, type: type)
+            categoryName: categoryName,
+            library: 'hti matrial',
+            type: 'hti matrial')
         .then((value) {
       // success
       categoryDetailsModelHti = TopBorrowModel.fromJson(value.data);
@@ -669,7 +672,6 @@ class MainCubit extends Cubit<MainState> {
       emit(Error(error.toString()));
     });
   }
-
 
 // categoryDetails ------------------- end
 
@@ -685,7 +687,7 @@ class MainCubit extends Cubit<MainState> {
     emit(CategoryLoading());
     await _repository
         .categoryDetailsRepo(
-        categoryName: categoryName, library: library, type: type)
+            categoryName: 'graduation projects', library: library, type: type)
         .then((value) {
       // success
       categoriesModelProject = TopBorrowModel.fromJson(value.data);
@@ -698,13 +700,14 @@ class MainCubit extends Cubit<MainState> {
       emit(Error(error.toString()));
     });
   }
+
   // end project exit .
 
   // getNotifications ------------------- start
 
   NotificationModel? getNotificationsModel;
 
-  void getNotifications() async {
+  Future<void> getNotifications() async {
     debugPrint('getNotifications------------loading');
     emit(NotificationLoading());
     await _repository.getNotificationsRepo().then((value) {
@@ -898,8 +901,8 @@ class MainCubit extends Cubit<MainState> {
   GetAllReturnedBooks? allReturnedBook;
 
   void getAllReturned({
-  required int page,
-}) async {
+    required int page,
+  }) async {
     debugPrint('getAllReturned------------loading');
     emit(AllReturnedLoading());
     await _repository.getAllReturnedRepo(page: page).then((value) {
@@ -990,6 +993,7 @@ class MainCubit extends Cubit<MainState> {
 // LastSearch ------------------- end
 
   // Search ------------------- start
+  TextEditingController searchController = TextEditingController();
 
   SearchModel? searchModel;
 
@@ -1041,26 +1045,51 @@ class MainCubit extends Cubit<MainState> {
   AllTypeModel? allTypeModel;
 
   void getAllType({
-  required String library,
-  required int page,
+    required String library,
+    required int page,
   }) async {
-    if (userSigned) {
-      debugPrint('getAllLibrary------------loading');
-      emit(GetTypeLoading());
-      await _repository.getAllTypeRepo(library: library, page: page).then((value) {
-        // success
-        allTypeModel = AllTypeModel.fromJson(value.data);
-        debugPrint('getAllLibrary ------------ success');
-        emit(GetTypeSuccess());
-      }).catchError((error) {
-        // error
-        debugPrint('getAllLibrary------------error');
-        debugPrint(error.toString());
-        emit(Error(error.toString()));
-      });
-    }
+    debugPrint('getAllLibrary------------loading');
+    emit(GetTypeLoading());
+    await _repository
+        .getAllTypeRepo(library: library, page: page)
+        .then((value) {
+      // success
+      allTypeModel = AllTypeModel.fromJson(value.data);
+      debugPrint('getAllLibrary ------------ success');
+      emit(GetTypeSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint('getAllLibrary------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
   }
 
 // get All Type ------------------- end
 
+  ///---
+  final FingerPrint _fingerPrint = FingerPrint();
+  void enableFinger() async {
+
+    isSwitch = !isSwitch;
+    if (isSwitch) {
+      bool isFingerEnabled = await _fingerPrint.isFingerPrintEnable();
+      if (isFingerEnabled) {
+        CacheHelper2.saveData(
+            key: 'email', value: profileModel!.email.split('@')[0]);
+        CacheHelper2.saveData(key: 'password', value: '123456789');
+        sl<CacheHelper>().put('finger',true);
+      }
+    } else {
+      CacheHelper2.removeData(key: 'email');
+      CacheHelper2.removeData(key: 'password');
+      sl<CacheHelper>().put('finger',false);
+    }
+    print(
+        'mail ------------------------------ ${CacheHelper2.getData(key: 'email')}');
+    print(
+        'pass ------------------------------ ${CacheHelper2.getData(key: 'password')}');
+    print('finger ------------------------------ $isSwitch');
+    emit(FingerPrintSuccess());
+  }
 }

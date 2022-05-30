@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -61,6 +62,11 @@ List<Widget> bottomPages = [
 String? token = '';
 String? libraryCache = '';
 String? typeCache = '';
+String? onBoarding = '';
+bool isSwitch = false;
+
+double responsiveValue(BuildContext context, double value) =>
+    MediaQuery.of(context).size.width * (value / 375.0);
 
 void navigateTo(context, widget) => Navigator.push(
       context,
@@ -75,7 +81,7 @@ void navigateAndFinish(
 ) =>
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(
+      CupertinoPageRoute(
         builder: (context) => widget,
       ),
       (route) {

@@ -21,6 +21,7 @@ const searchUrl = 'search';
 const myBorrowBooksUrl = 'my_borrow_books';
 const mySearchUrl = 'last_search';
 const userAvatarUrl = 'user/avatar';
+const startBorrowUrl = 'start_borrow_time';
 
 const getAllTypeUrl = 'types';
 
