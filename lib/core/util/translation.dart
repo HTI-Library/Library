@@ -16,7 +16,7 @@ class TranslationModel {
   late String dark;
   late String info;
   late String changeLib;
-  late String privacyPolicy;
+  late String borrowingPolicy;
   late String getHelp;
   late String aboutUs;
   late String logOut;
@@ -67,7 +67,7 @@ class TranslationModel {
     myMessageNo = json['myMessageNo'];
     calender = json['calender'];
     info = json['info'];
-    privacyPolicy = json['privacyPolicy'];
+    borrowingPolicy = json['borrowingPolicy'];
     getHelp = json['getHelp'];
     aboutUs = json['aboutUs'];
     logOut = json['logOut'];

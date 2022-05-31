@@ -1067,7 +1067,7 @@ class MainCubit extends Cubit<MainState> {
 
 // get All Type ------------------- end
 
-  ///---
+  /// ----------------------- finger Print - start
   final FingerPrint _fingerPrint = FingerPrint();
   void enableFinger() async {
 
@@ -1092,4 +1092,18 @@ class MainCubit extends Cubit<MainState> {
     print('finger ------------------------------ $isSwitch');
     emit(FingerPrintSuccess());
   }
+
+  // ----------------------- finger Print - end
+
+
+  /// ----------------------- return back abd save data - start
+  void backScreen(BuildContext context) {
+    sl<CacheHelper>().put('isReadPolicy',true).then((value) => isReadPolicy = value);
+    Navigator.of(context).pop();
+    emit(ChangeReadSuccess());
+
+  }
+// ----------------------- return back abd save data - end
+
+
 }

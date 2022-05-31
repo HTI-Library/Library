@@ -5,6 +5,8 @@ import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library/core/di/injection.dart';
+import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
@@ -15,6 +17,7 @@ import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/core/util/widgets/book_item.dart';
 import 'package:hti_library/core/util/widgets/loading.dart';
 import 'package:hti_library/core/util/widgets/see_more_item.dart';
+import 'package:hti_library/features/account/pages/info/pages/policyBorrowing.dart';
 import 'package:hti_library/features/book/booksBycategories/BookByCategories.dart';
 import 'package:hti_library/features/book/pdf/PdfDetails.dart';
 import 'package:hti_library/features/borrowing/presentation/pages/borrowing_page.dart';
@@ -180,21 +183,22 @@ class _ViewBookPageState extends State<ViewBookPage> {
                                 child: AppButton(
                                     label: '${appTranslation(context).borrow}',
                                     onPress: () {
-                                      navigateTo(context, BorrowingPage(
-                                        book_id: MainCubit.get(context)
-                                            .bookModel!
-                                            .book
-                                            .id,
-                                        name:MainCubit.get(context)
-                                            .bookModel!
-                                            .book
-                                            .name,
-                                        img: MainCubit.get(context)
-                                            .bookModel!
-                                            .book
-                                            .bookImage
-                                        ,
-                                      ));
+                                      isReadPolicy ? navigateTo(context, BorrowingPage(
+                                          book_id: MainCubit.get(context)
+                                          .bookModel!
+                                          .book
+                                          .id,
+                                      name:MainCubit.get(context)
+                                          .bookModel!
+                                          .book
+                                          .name,
+                                      img: MainCubit.get(context)
+                                          .bookModel!
+                                          .book
+                                          .bookImage
+                                      ,
+                                      )): navigateTo(context, PolicyBorrowing());
+
                                     }),
                               ),
                               if (MainCubit.get(context).userSigned)

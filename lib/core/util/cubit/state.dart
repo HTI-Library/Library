@@ -573,3 +573,4 @@ class GetTypeSuccess extends MainState {}
 class PickImageSuccessState extends MainState {}
 class ClearImageSuccessState extends MainState {}
 class FingerPrintSuccess extends MainState {}
+class ChangeReadSuccess extends MainState {}
