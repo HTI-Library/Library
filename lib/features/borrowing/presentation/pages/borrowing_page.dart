@@ -8,17 +8,33 @@ import 'package:hti_library/core/util/widgets/app_button.dart';
 import 'package:hti_library/core/util/widgets/app_text_form_field.dart';
 import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
+import 'package:hti_library/features/account/pages/info/pages/policyBorrowing.dart';
 import 'package:intl/intl.dart';
 
-class BorrowingPage extends StatelessWidget {
+class BorrowingPage extends StatefulWidget {
   BorrowingPage({Key? key, required this.book_id , required this.img , required this.name}) : super(key: key);
   final String book_id;
   final String img;
   final String name;
+
+  @override
+  State<BorrowingPage> createState() => _BorrowingPageState();
+}
+
+class _BorrowingPageState extends State<BorrowingPage> {
   TextEditingController dataOfBorrowController = TextEditingController();
+
   TextEditingController dataOfReturnController = TextEditingController();
+
   DateTime date = DateTime.now();
+
   var jiffy = DateTime.now().add(Duration(days: 3));
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +49,7 @@ class BorrowingPage extends StatelessWidget {
       builder: (context, state) {
         return MainScaffold(
           scaffold: BackScaffold(
-            title: name,
+            title: widget.name,
             body: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Padding(
@@ -52,7 +68,7 @@ class BorrowingPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.0),
                           image: DecorationImage(
                             image: NetworkImage(
-                                img),
+                                widget.img),
                             fit: BoxFit.fill
                           )),
                     ),
@@ -77,7 +93,7 @@ class BorrowingPage extends StatelessWidget {
                     space20Vertical,
                     AppButton(
                       onPress: () {
-                        MainCubit.get(context).postBorrowBook(bookID: book_id);
+                        MainCubit.get(context).postBorrowBook(bookID: widget.book_id);
                       },
                       label: 'SUBMIT',
                     ),

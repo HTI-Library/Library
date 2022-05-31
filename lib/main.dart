@@ -5,6 +5,7 @@ import 'package:hti_library/core/di/injection.dart' as di;
 import 'package:hti_library/core/network/local/cache.dart';
 import 'package:hti_library/features/on_boarding/presentation/pages/on_boarding_page.dart';
 import 'package:hti_library/features/select_library/page/selectLibrary.dart';
+import 'package:hti_library/features/splash_screen/splash_screen.dart';
 import 'core/di/injection.dart';
 import 'core/network/local/cache_helper.dart';
 import 'core/util/bloc_observer.dart';
@@ -89,7 +90,17 @@ void main() async {
     } else {
       isSwitch = value;
     }
-    debugPrint('library---------------------------- $value');
+    debugPrint('finger---------------------------- $value');
+  });
+
+  sl<CacheHelper>().get('isReadPolicy').then((value) {
+    if (value == null) {
+      isReadPolicy = false;
+    } else {
+      isReadPolicy = value;
+    }
+    debugPrint('isReadPolicy ------------- $isReadPolicy');
+
   });
 
   debugPrint('dark mode ------------- $isDark');
@@ -175,7 +186,7 @@ class _MyAppState extends State<MyApp> {
                 .darkTheme,
             home: onBoarding == null
                 ? const OnBoardingPage()
-                  : MainPage(library: libraryCache, type: typeCache),
+                  : const SplashScreen(),
 
           );
         },

@@ -64,13 +64,14 @@ String? libraryCache = '';
 String? typeCache = '';
 String? onBoarding = '';
 bool isSwitch = false;
+bool isReadPolicy = false;
 
 double responsiveValue(BuildContext context, double value) =>
     MediaQuery.of(context).size.width * (value / 375.0);
 
 void navigateTo(context, widget) => Navigator.push(
       context,
-      MaterialPageRoute(
+  CupertinoPageRoute(
         builder: (context) => widget,
       ),
     );
