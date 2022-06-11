@@ -506,7 +506,6 @@ class GetSavedBooksLoading extends MainState {}
 
 class GetSavedBooksSuccess extends MainState {}
 
-
 class NotificationRemoveLoading extends MainState {}
 
 class NotificationRemoveSuccess extends MainState {}
@@ -529,6 +528,7 @@ class PostStartTimeSuccess extends MainState {}
 
 class PostBorrowingBooksSuccess extends MainState {
   final String text;
+
   PostBorrowingBooksSuccess(this.text);
 }
 
@@ -571,6 +571,13 @@ class GetTypeLoading extends MainState {}
 class GetTypeSuccess extends MainState {}
 
 class PickImageSuccessState extends MainState {}
+
 class ClearImageSuccessState extends MainState {}
+
 class FingerPrintSuccess extends MainState {}
+
 class ChangeReadSuccess extends MainState {}
+
+class SetPaginationLoading extends MainState {}
+
+class SetPaginationSuccess extends MainState {}
