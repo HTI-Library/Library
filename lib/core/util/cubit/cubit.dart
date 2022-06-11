@@ -541,21 +541,51 @@ class MainCubit extends Cubit<MainState> {
   // topBorrow ------------------- start
 
   TopBorrowModel? topBorrowModel;
+  List paginationBooks = [];
+  int pageCounter = 1;
 
-  void topBorrow({required int page}) async {
-    debugPrint('topBorrow------------loading');
-    emit(TopBorrowLoading());
-    await _repository.topBorrowRepo(page: page).then((value) {
-      // success
-      topBorrowModel = TopBorrowModel.fromJson(value.data);
-      debugPrint('topBorrow------------success');
-      emit(TopBorrowSuccess());
-    }).catchError((error) {
-      // error
-      debugPrint('topBorrow------------error');
-      debugPrint(error.toString());
-      emit(Error(error.toString()));
-    });
+  void topBorrow({
+    required bool isFirst,
+    TopBorrowModel? model,
+  }) async {
+    if (isFirst) {
+      pageCounter = 1;
+      paginationBooks = [];
+      emit(TopBorrowLoading());
+    } else {
+      pageCounter++;
+      emit(SetPaginationLoading());
+    }
+    if (model != null) {
+      for (var element in model.books) {
+        paginationBooks.add(element);
+        emit(TopBorrowSuccess());
+      }
+    } else {
+      print('paginationBooks: ${paginationBooks.length}');
+      print('pageCounter: $pageCounter');
+      debugPrint('topBorrow------------loading');
+
+      await _repository.topBorrowRepo(page: pageCounter).then((value) {
+        // success
+        if (isFirst) {
+          topBorrowModel = TopBorrowModel.fromJson(value.data);
+        }
+        for (var element in TopBorrowModel.fromJson(value.data).books) {
+          paginationBooks.add(element);
+        }
+        print('paginationBooks: ${paginationBooks.length}');
+        print('topBorrowModel!.books: ${topBorrowModel!.books.length}');
+        print('pageCounter: $pageCounter');
+        debugPrint('topBorrow------------success');
+        emit(TopBorrowSuccess());
+      }).catchError((error) {
+        // error
+        debugPrint('topBorrow------------error');
+        debugPrint(error.toString());
+        emit(Error(error.toString()));
+      });
+    }
   }
 
 // topBorrow ------------------- end
@@ -900,22 +930,41 @@ class MainCubit extends Cubit<MainState> {
 
   GetAllReturnedBooks? allReturnedBook;
 
-  void getAllReturned({
-    required int page,
-  }) async {
-    debugPrint('getAllReturned------------loading');
-    emit(AllReturnedLoading());
-    await _repository.getAllReturnedRepo(page: page).then((value) {
-      // success
-      debugPrint('getAllReturned------------success');
-      allReturnedBook = GetAllReturnedBooks.fromJson(value.data);
-      emit(AllReturnedSuccess());
-    }).catchError((error) {
-      // error
-      debugPrint('getAllReturned------------error');
-      debugPrint(error.toString());
-      emit(Error(error.toString()));
-    });
+  void getAllReturned(
+      {required bool isFirst, GetAllReturnedBooks? data}) async {
+    if (isFirst) {
+      pageCounter = 1;
+      paginationBooks = [];
+      emit(AllReturnedLoading());
+    } else {
+      pageCounter++;
+      emit(SetPaginationLoading());
+    }
+    if (data != null) {
+      for (var element in data.books) {
+        paginationBooks.add(element);
+        emit(AllReturnedSuccess());
+      }
+    } else {
+      debugPrint('getAllReturned------------loading');
+      await _repository.getAllReturnedRepo(page: pageCounter).then((value) {
+        // success
+        debugPrint('getAllReturned------------success');
+
+        if (isFirst) {
+          allReturnedBook = GetAllReturnedBooks.fromJson(value.data);
+        }
+        for (var element in GetAllReturnedBooks.fromJson(value.data).books) {
+          paginationBooks.add(element);
+        }
+        emit(AllReturnedSuccess());
+      }).catchError((error) {
+        // error
+        debugPrint('getAllReturned------------error');
+        debugPrint(error.toString());
+        emit(Error(error.toString()));
+      });
+    }
   }
 
 // AllReturned ------------------- end
@@ -1069,8 +1118,8 @@ class MainCubit extends Cubit<MainState> {
 
   /// ----------------------- finger Print - start
   final FingerPrint _fingerPrint = FingerPrint();
-  void enableFinger() async {
 
+  void enableFinger() async {
     isSwitch = !isSwitch;
     if (isSwitch) {
       bool isFingerEnabled = await _fingerPrint.isFingerPrintEnable();
@@ -1078,12 +1127,12 @@ class MainCubit extends Cubit<MainState> {
         CacheHelper2.saveData(
             key: 'email', value: profileModel!.email.split('@')[0]);
         CacheHelper2.saveData(key: 'password', value: '123456789');
-        sl<CacheHelper>().put('finger',true);
+        sl<CacheHelper>().put('finger', true);
       }
     } else {
       CacheHelper2.removeData(key: 'email');
       CacheHelper2.removeData(key: 'password');
-      sl<CacheHelper>().put('finger',false);
+      sl<CacheHelper>().put('finger', false);
     }
     print(
         'mail ------------------------------ ${CacheHelper2.getData(key: 'email')}');
@@ -1095,15 +1144,15 @@ class MainCubit extends Cubit<MainState> {
 
   // ----------------------- finger Print - end
 
-
   /// ----------------------- return back abd save data - start
   void backScreen(BuildContext context) {
-    sl<CacheHelper>().put('isReadPolicy',true).then((value) => isReadPolicy = value);
+    sl<CacheHelper>()
+        .put('isReadPolicy', true)
+        .then((value) => isReadPolicy = value);
     Navigator.of(context).pop();
     emit(ChangeReadSuccess());
-
   }
-// ----------------------- return back abd save data - end
 
+// ----------------------- return back abd save data - end
 
 }
