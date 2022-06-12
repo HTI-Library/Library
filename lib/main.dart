@@ -100,7 +100,6 @@ void main() async {
       isReadPolicy = value;
     }
     debugPrint('isReadPolicy ------------- $isReadPolicy');
-
   });
 
   debugPrint('dark mode ------------- $isDark');
@@ -133,7 +132,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -146,8 +144,7 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (BuildContext context) =>
-            sl<MainCubit>()
+            create: (BuildContext context) => sl<MainCubit>()
               ..setThemes(
                 rtl: widget.isRtl,
                 dark: widget.isDark,
@@ -158,36 +155,26 @@ class _MyAppState extends State<MyApp> {
               )
               ..checkInternet()
               ..checkConnectivity()
-            // ..categories(library: 'hti matrial', type: 'hti matrial')
-              ..topBorrow(page: 1)
-            // ..categoryProject(categoryName: 'graduation projects' , library: 'graduation projects' , type: 'graduation projects')
+              ..topBorrow(isFirst: true)
               ..getSavedBooks()
               ..getUserDate()
               ..lastSearch()
-              ..getAllReturned(page: 1)
-              ..getMyReturned()
-        ),
+              ..getAllReturned(isFirst: true)
+              ..getMyReturned()),
       ],
       child: BlocBuilder<MainCubit, MainState>(
         builder: (context, state) {
           return MaterialApp(
             title: 'HTI Library',
             debugShowCheckedModeBanner: false,
-            themeMode: MainCubit
-                .get(context)
-                .isDark
+            themeMode: MainCubit.get(context).isDark
                 ? ThemeMode.dark
                 : ThemeMode.light,
-            theme: MainCubit
-                .get(context)
-                .lightTheme,
-            darkTheme: MainCubit
-                .get(context)
-                .darkTheme,
+            theme: MainCubit.get(context).lightTheme,
+            darkTheme: MainCubit.get(context).darkTheme,
             home: onBoarding == null
                 ? const OnBoardingPage()
-                  : const SplashScreen(),
-
+                : const SplashScreen(),
           );
         },
       ),
