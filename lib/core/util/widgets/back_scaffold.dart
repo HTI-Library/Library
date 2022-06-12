@@ -17,6 +17,7 @@ class BackScaffold extends StatelessWidget {
   Widget actionIcon;
   bool titleImage;
   Widget? floatingButton;
+  bool? typing;
   final Color scaffoldBackgroundColor;
 
   BackScaffold({
@@ -30,6 +31,7 @@ class BackScaffold extends StatelessWidget {
     this.actionIcon = const SizedBox(),
     this.titleImage = false,
     this.floatingButton,
+    this.typing = false,
   }) : super(key: key);
 
   @override
@@ -45,6 +47,7 @@ class BackScaffold extends StatelessWidget {
             conditionBuilder: (context) =>
                 !MainCubit.get(context).noInternetConnection,
             widgetBuilder: (context) => Scaffold(
+              resizeToAvoidBottomInset: typing,
               backgroundColor: scaffoldBackgroundColor,
               appBar: AppBar(
                 centerTitle: true,

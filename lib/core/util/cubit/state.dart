@@ -581,3 +581,17 @@ class ChangeReadSuccess extends MainState {}
 class SetPaginationLoading extends MainState {}
 
 class SetPaginationSuccess extends MainState {}
+
+class SendMessageSuccess extends MainState {}
+
+class SendMessageError extends MainState {}
+
+class GetMessagesSuccessState extends MainState {}
+
+class UserUpdateSuccess extends MainState {}
+
+class UserUpdateError extends MainState {}
+
+class UserUploadDataError extends MainState {}
+
+class UserUploadDataSuccess extends MainState {}

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:buildcondition/buildcondition.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +32,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isDisabled = true;
+  bool isLoad = false;
   final FingerPrint _fingerPrint = FingerPrint();
   late MainCubit cubit;
 
@@ -87,7 +90,8 @@ class _LoginPageState extends State<LoginPage> {
           showToast(
               message: state.loginModel.message!,
               toastStates: ToastStates.SUCCESS);
-        } else if (state is Error) {
+        }
+        else if (state is Error) {
           showToast(message: state.error, toastStates: ToastStates.ERROR);
         }
       },
@@ -168,7 +172,8 @@ class _LoginPageState extends State<LoginPage> {
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
                                 child: const CupertinoActivityIndicator(),
                               ),
-                              fallback: (context) => Row(
+                              fallback: (context) =>
+                                Row(
                                 children: [
                                   if (isSwitch)
                                     Container(
