@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +17,8 @@ import 'features/main/presentation/pages/main_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = MyBlocObserver();
+  // Bloc.observer = MyBlocObserver();
+  await Firebase.initializeApp();
   await di.init();
   await CacheHelper2.init();
 
@@ -91,6 +93,15 @@ void main() async {
       isSwitch = value;
     }
     debugPrint('finger---------------------------- $value');
+  });
+
+  sl<CacheHelper>().get('email').then((value) {
+    if (value == null) {
+      email = '';
+    } else {
+      email = value;
+    }
+    debugPrint('email---------------------------- $value');
   });
 
   sl<CacheHelper>().get('isReadPolicy').then((value) {

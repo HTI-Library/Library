@@ -85,7 +85,7 @@ class _PolicyBorrowingState extends State<PolicyBorrowing> {
                         context: context),
                     buildText(
                         text:
-                            '2• TThe borrowing period is 3 working days for the Institute.',
+                            '2• The borrowing period is 3 working days for the Institute.',
                         context: context),
                     buildText(
                         text:

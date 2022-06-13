@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,11 +17,13 @@ import 'package:hti_library/core/models/getAllReturnedBooks.dart';
 import 'package:hti_library/core/models/get_saved_books_model.dart';
 import 'package:hti_library/core/models/last_search_model.dart';
 import 'package:hti_library/core/models/login_model.dart';
+import 'package:hti_library/core/models/messageModel.dart';
 import 'package:hti_library/core/models/old/search_model.dart';
 import 'package:hti_library/core/models/profile_model.dart';
 import 'package:hti_library/core/models/remove_save_books_model.dart';
 import 'package:hti_library/core/models/save_books_model.dart';
 import 'package:hti_library/core/models/top_borrow_model.dart';
+import 'package:hti_library/core/models/userModel.dart';
 import 'package:hti_library/core/network/local/cache.dart';
 import 'package:hti_library/core/network/local/cache_helper.dart';
 import 'package:hti_library/core/network/repository.dart';
@@ -70,9 +73,7 @@ class MainCubit extends Cubit<MainState> {
       currentIndex = index;
       emit(BottomChanged());
     }
-
     currentIndex = index;
-
     emit(BottomChanged());
   }
 
@@ -489,6 +490,10 @@ class MainCubit extends Cubit<MainState> {
       getUserDate();
       getSavedBooks();
       emit(LoginSuccess(loginModel: loginModel!));
+      CacheHelper2.saveData(
+          key: 'password', value: password);
+      sl<CacheHelper>().put('email', loginModel!.user!.email);
+
     }).catchError((error) {
       // error
       debugPrint(error.toString());
@@ -574,9 +579,6 @@ class MainCubit extends Cubit<MainState> {
         for (var element in TopBorrowModel.fromJson(value.data).books) {
           paginationBooks.add(element);
         }
-        print('paginationBooks: ${paginationBooks.length}');
-        print('topBorrowModel!.books: ${topBorrowModel!.books.length}');
-        print('pageCounter: $pageCounter');
         debugPrint('topBorrow------------success');
         emit(TopBorrowSuccess());
       }).catchError((error) {
@@ -1126,12 +1128,10 @@ class MainCubit extends Cubit<MainState> {
       if (isFingerEnabled) {
         CacheHelper2.saveData(
             key: 'email', value: profileModel!.email.split('@')[0]);
-        CacheHelper2.saveData(key: 'password', value: '123456789');
         sl<CacheHelper>().put('finger', true);
       }
     } else {
       CacheHelper2.removeData(key: 'email');
-      CacheHelper2.removeData(key: 'password');
       sl<CacheHelper>().put('finger', false);
     }
     print(
@@ -1154,5 +1154,111 @@ class MainCubit extends Cubit<MainState> {
   }
 
 // ----------------------- return back abd save data - end
+
+  /// ----------------------- firebase (Start)
+
+  void sendMessage(MessageModel message) async {
+
+    // go collection users_instagram +
+    await FirebaseFirestore.instance
+        .collection("users")
+    // sendId to user (unique every user)
+        .doc(profileModel!.email)
+    // collection chats
+        .collection("chats")
+    // receiveId to user (unique every user)
+        .doc('admin')
+    // message collection
+        .collection("messages")
+    // messageId .
+        .doc(message.messageId)
+    // set data .
+        .set(message.toJson());
+
+    uploadData();
+
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(message.reciverId)
+        .collection("chats")
+        .doc(message.senderId)
+        .collection("messages")
+        .doc(message.messageId)
+        .set(message.toJson());
+
+
+    emit(SendMessageSuccess());
+  }
+
+  List<MessageModel> messages = [];
+  void getMessages(String receiverId) {
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(profileModel!.email)
+        .collection("chats")
+        .doc(receiverId)
+        .collection("messages")
+        .get()
+        .then((value) {
+      messages.clear();
+
+      for (var element in value.docs) {
+        MessageModel message = MessageModel.fromJson(element.data());
+        messages.add(message);
+      }
+      emit(GetMessagesSuccessState());
+    });
+  }
+
+  void  listenToMessages(String receiverId) {
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(profileModel!.email)
+        .collection("chats")
+        .doc(receiverId)
+        .collection("messages")
+    // sort data
+        .orderBy("time")
+    // get last message  || if you can get first message use (limit)
+        .limitToLast(1)
+    // stream snapshots
+        .snapshots()
+    // listen to message .
+        .listen((event) {
+      // messages.clear();
+
+      print('Docs => ${event.docs.length}');
+
+      // another method
+      // MessageModel message = MessageModel.fromJson(event.docs[0].data());
+      for (var element in event.docs) {
+        MessageModel model = MessageModel.fromJson(element.data());
+        messages.add(model);
+      }
+      emit(GetMessagesSuccessState());
+    });
+  }
+
+  void uploadData() {
+    UserModelFirebase model = UserModelFirebase(
+        email: profileModel!.email.split('@')[0],
+        name: profileModel!.name,
+        phone: profileModel!.phone,
+        avatar: profileModel!.avatar
+    );
+
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(email)
+        .set(model.toMap()).then((value) {
+      UserUploadDataSuccess();
+    }).catchError((error) {
+      emit(UserUploadDataError());
+    });
+  }
+
+
+// ----------------------- firebase (end)
+
 
 }

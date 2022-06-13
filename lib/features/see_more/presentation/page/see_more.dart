@@ -47,16 +47,21 @@ class _SeeMoreState extends State<SeeMore> {
       builder: (context, state) {
         return BackScaffold(
           title: widget.title,
-          actionIcon: IconButton(
+          actionIcon:
+          IconButton(
             icon: AssetSvg(
               imagePath: 'search',
               size: 18.0,
             ),
             onPressed: () {
-              navigateTo(
+              if (token != null && token!.length > 5) {
+                navigateTo(
                 context,
                 const SearchPage(),
               );
+              } else {
+                showToast(message: 'Please login first', toastStates: ToastStates.WARNING);
+              }
             },
           ),
           scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,

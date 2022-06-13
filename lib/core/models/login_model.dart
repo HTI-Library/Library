@@ -27,17 +27,20 @@ class UserModel {
     required this.name,
     required this.email,
     required this.avatar,
+    required this.phone,
   });
 
   late final String id;
   late final String name;
   late final String email;
   late final String avatar;
+  late final String phone;
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? '';
     name = json['name'] ?? '';
     email = json['email'] ?? '';
     avatar = json['avatar'] ?? '';
+    phone = json['phone'] ?? '';
   }
 }
