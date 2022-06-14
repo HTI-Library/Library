@@ -1188,7 +1188,7 @@ class MainCubit extends Cubit<MainState> {
     emit(SendMessageSuccess());
   }
 
-
+  bool isLoad = false;
   void getMessages(String receiverId) {
     FirebaseFirestore.instance
         .collection("users")
@@ -1205,7 +1205,9 @@ class MainCubit extends Cubit<MainState> {
         MessageModel message = MessageModel.fromJson(element.data());
         messages.add(message);
       }
+      isLoad = true;
       emit(GetMessagesSuccessState());
+      print('messagw ---------------- ${messages.length}');
     });
   }
 

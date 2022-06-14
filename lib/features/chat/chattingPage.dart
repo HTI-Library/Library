@@ -9,6 +9,7 @@ import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/core/util/widgets/back_scaffold.dart';
+import 'package:hti_library/core/util/widgets/loading.dart';
 
 class ChattingPage extends StatefulWidget {
   const ChattingPage({Key? key}) : super(key: key);
@@ -31,23 +32,24 @@ class _ChattingPageState extends State<ChattingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<MainCubit, MainState>(
-      listener: (context, state) {},
-      child: BackScaffold(
-        scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: 'Admin',
-        body: Column(
-          children: [
-            BuildCondition(
-              condition: cubit.messages.isNotEmpty,
-              builder: (_) => buildChattingListView(),
-              fallback: (_) => buildNotMessages(),
+    return BlocBuilder<MainCubit, MainState>(
+        builder: (context, state) {
+          return BackScaffold(
+            scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            title: 'Admin',
+            body: Column(
+              children: [
+                BuildCondition(
+                  condition: cubit.messages.isNotEmpty,
+                  builder: (_) => cubit.isLoad && cubit.profileModel != null? buildChattingListView() : const Center(child: LoadingWidget()),
+                  fallback: (_) => buildNotMessages(),
+                ),
+                if (cubit.messages.isEmpty || cubit.isLoad == false) const Spacer(),
+                buildTextChat(),
+              ],
             ),
-            if (cubit.messages.isEmpty) const Spacer(),
-            buildTextChat(),
-          ],
-        ),
-      ),
+          );
+        },
     );
   }
 
@@ -60,10 +62,11 @@ class _ChattingPageState extends State<ChattingPage> {
             itemCount: cubit.messages.length,
             itemBuilder: (context, index) {
               MessageModel message = cubit.messages[index];
-
-              if (message.senderId == cubit.profileModel!.email) {
+              if (message.senderId == cubit.profileModel!.email)
+              {
                 return buildSenderMessage(message.message!);
-              } else {
+              } else
+              {
                 return buildReceiverMessage(message.message!);
               }
             },
@@ -110,8 +113,8 @@ class _ChattingPageState extends State<ChattingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsetsDirectional.only(end: 8),
-          decoration: BoxDecoration(
+          margin: const EdgeInsetsDirectional.only(end: 8),
+          decoration: const BoxDecoration(
             color: Colors.green,
             shape: BoxShape.circle,
           ),
