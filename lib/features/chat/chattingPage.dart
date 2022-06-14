@@ -77,34 +77,34 @@ class _ChattingPageState extends State<ChattingPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Container(
-          alignment: Alignment.centerRight,
+        Expanded(
           child: Container(
-            margin: const EdgeInsets.only(
-              top: 5,
-              bottom: 5,
-              right: 15,
-              left: 25,
-            ),
-            padding: const EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 10,
-            ),
-            // width: double.infinity,
-            // alignment: Alignment.centerRight,
-            decoration: BoxDecoration(
-              color: Colors.blue[500],
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(15),
-                topRight: Radius.circular(15),
-                bottomLeft: Radius.circular(15),
+            alignment: Alignment.topRight,
+            child: Container(
+              margin: const EdgeInsets.only(
+                top: 5,
+                bottom: 5,
+                right: 15,
+                left: 25,
               ),
-            ),
-            child: Text(
-              message,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 10,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.blue[500],
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                  bottomLeft: Radius.circular(15),
+                ),
+              ),
+              child: Text(
+                message,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
               ),
             ),
           ),
@@ -140,32 +140,34 @@ class _ChattingPageState extends State<ChattingPage> {
             backgroundImage: AssetImage('assets/images/hti123.png'),
           ),
         ),
-        Container(
-          alignment: Alignment.centerLeft,
+        Expanded(
           child: Container(
-            margin: const EdgeInsets.only(
-              top: 10,
-              bottom: 10,
-              right: 25,
-              left: 15,
-            ),
-            padding: const EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 10,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.blue[100],
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15),
-                topRight: Radius.circular(15),
-                bottomRight: Radius.circular(15),
+            alignment: Alignment.centerLeft,
+            child: Container(
+              margin: const EdgeInsets.only(
+                top: 10,
+                bottom: 10,
+                right: 25,
+                left: 15,
               ),
-            ),
-            child: Text(
-              message,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 16,
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 10,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.blue[100],
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                  bottomRight: Radius.circular(15),
+                ),
+              ),
+              child: Text(
+                message,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                ),
               ),
             ),
           ),
