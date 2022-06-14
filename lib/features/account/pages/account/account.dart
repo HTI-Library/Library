@@ -13,6 +13,7 @@ import 'package:hti_library/features/account/pages/notificatio/notificatio.dart'
 import 'package:hti_library/features/account/pages/setting/presntation/setting.dart';
 import 'package:hti_library/features/account/widget/btn_my_account.dart';
 import 'package:hti_library/features/change_new_photo/presintation/page/change_new_photo.dart';
+import 'package:hti_library/features/chat/chattingPage.dart';
 import 'package:hti_library/features/login/presentation/pages/login_page.dart';
 import 'package:hti_library/features/s_f_calender/widget/meeting.dart';
 import 'package:hti_library/features/select_library/page/selectLibrary.dart';
@@ -108,7 +109,7 @@ class AccountPage extends StatelessWidget {
                 if (MainCubit.get(context).userSigned)
                   MyBtnAccount(
                     voidCallback: () {
-                      navigateTo(context, const MessagePage());
+                      navigateTo(context, const ChattingPage());
                     },
                     text: appTranslation(context).myMessage,
                     imagePath: 'message_account',
@@ -206,7 +207,7 @@ class AccountPage extends StatelessWidget {
                         dialogType: DialogType.WARNING,
                         animType: AnimType.BOTTOMSLIDE,
                         btnCancelText: appTranslation(context).no,
-                        btnCancelColor: HexColor(greyWhite),
+                        btnCancelColor: HexColor(mainColor),
                         btnOkColor: HexColor(mainColor),
                         btnOkText: appTranslation(context).yes,
                         title: appTranslation(context).logOut,

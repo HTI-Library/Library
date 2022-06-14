@@ -63,6 +63,7 @@ String? token = '';
 String? libraryCache = '';
 String? typeCache = '';
 String? onBoarding = '';
+String? email = '';
 bool isSwitch = false;
 bool isReadPolicy = false;
 

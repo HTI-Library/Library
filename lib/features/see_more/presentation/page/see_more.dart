@@ -6,7 +6,6 @@ import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/core/util/widgets/app_button.dart';
 import 'package:hti_library/core/util/widgets/back_scaffold.dart';
-import 'package:hti_library/core/util/widgets/book_item.dart';
 import 'package:hti_library/core/util/widgets/loading.dart';
 import 'package:hti_library/features/search/presentation/search.dart';
 import 'package:hti_library/features/see_more/wedget/see_more_item.dart';
@@ -18,101 +17,92 @@ class SeeMore extends StatefulWidget {
   SeeMore({
     Key? key,
     required this.title,
+    required this.loadMorePressed,
     this.model,
     this.data,
   }) : super(key: key);
   TopBorrowModel? model;
   GetAllReturnedBooks? data;
   final String title;
+  final VoidCallback loadMorePressed;
 
   @override
   State<SeeMore> createState() => _SeeMoreState();
 }
 
 class _SeeMoreState extends State<SeeMore> {
-  int page = 1;
-
   @override
   void initState() {
     super.initState();
-
-    MainCubit.get(context).categoryDetails(
-        categoryName: widget.model == null
-            ? widget.data!.books[0].book.name
-            : widget.model!.books[0].name,
-        library: widget.model == null
-            ? widget.data!.books[0].book.library
-            : widget.model!.books[0].library,
-        type: widget.model == null
-            ? widget.data!.books[0].book.type
-            : widget.model!.books[0].type);
-
+    if (widget.model != null) {
+      MainCubit.get(context).topBorrow(isFirst: true, model: widget.model);
+    } else {
+      MainCubit.get(context).getAllReturned(isFirst: true, data: widget.data);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
-        if (state is TopBorrowSuccess) {
-          MainCubit.get(context).topBorrow(page: page);
-        } else if (state is TopBorrowLoading) {
-          const LoadingWidget();
-        }
         return BackScaffold(
           title: widget.title,
-          actionIcon: IconButton(
+          actionIcon:
+          IconButton(
             icon: AssetSvg(
               imagePath: 'search',
               size: 18.0,
             ),
             onPressed: () {
-              navigateTo(
+              if (token != null && token!.length > 5) {
+                navigateTo(
                 context,
                 const SearchPage(),
               );
+              } else {
+                showToast(message: 'Please login first', toastStates: ToastStates.WARNING);
+              }
             },
           ),
           scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          body: MainCubit.get(context).categoryDetailsModel != null
-              ? Column(
-                  children: [
-                    Expanded(
-                      child: BlocBuilder<MainCubit, MainState>(
-                        buildWhen: (previous, current) =>
-                            current is TopBorrowSuccess,
-                        builder: (context, state) {
-                          return ListView.builder(
-                            itemBuilder: (context, index) =>
-                                widget.model != null
-                                    ? SeeMoreItem(
-                                        simpleData: widget.model!.books[index],
-                                      )
-                                    : SeeMoreItem(
-                                        data: widget.data!.books[index],
-                                      ),
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: widget.model != null
-                                ? widget.model!.books.length
-                                : widget.data!.books.length,
-                          );
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(bottom: 15.0 , end: 15.0 , start: 15.0),
-                      child: AppButton(
-                          label: 'Next',
-                          height: 50,
-                          onPress: () {
-                            setState(() {
-                              page++;
-                            });
-                            print('page -------------- $page');
-                          }),
-                    ),
-                  ],
-                )
-              : const LoadingWidget(),
+          body: Column(
+            children: [
+              Expanded(
+                child: BlocBuilder<MainCubit, MainState>(
+                  buildWhen: (previous, current) => current is TopBorrowSuccess,
+                  builder: (context, state) {
+                    return ListView.builder(
+                      itemBuilder: (context, index) => widget.model != null
+                          ? SeeMoreItem(
+                              simpleData:
+                                  MainCubit.get(context).paginationBooks[index],
+                            )
+                          : SeeMoreItem(
+                              data:
+                                  MainCubit.get(context).paginationBooks[index],
+                            ),
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: MainCubit.get(context).paginationBooks.length,
+                    );
+                  },
+                ),
+              ),
+              Container(
+                height: 50.0,
+                color: Colors.transparent.withOpacity(.01),
+                margin: const EdgeInsetsDirectional.only(
+                    bottom: 15.0, end: 15.0, start: 15.0),
+                child: state is SetPaginationLoading
+                    ? const LoadingWidget()
+                    : AppButton(
+                        label: 'Load More',
+                        height: 50,
+                        onPress: () {
+                          widget.loadMorePressed();
+                        }),
+              ),
+            ],
+          ),
         );
       },
     );

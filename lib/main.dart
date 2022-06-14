@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +17,8 @@ import 'features/main/presentation/pages/main_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = MyBlocObserver();
+  // Bloc.observer = MyBlocObserver();
+  await Firebase.initializeApp();
   await di.init();
   await CacheHelper2.init();
 
@@ -93,6 +95,15 @@ void main() async {
     debugPrint('finger---------------------------- $value');
   });
 
+  sl<CacheHelper>().get('email').then((value) {
+    if (value == null) {
+      email = '';
+    } else {
+      email = value;
+    }
+    debugPrint('email---------------------------- $value');
+  });
+
   sl<CacheHelper>().get('isReadPolicy').then((value) {
     if (value == null) {
       isReadPolicy = false;
@@ -100,7 +111,6 @@ void main() async {
       isReadPolicy = value;
     }
     debugPrint('isReadPolicy ------------- $isReadPolicy');
-
   });
 
   debugPrint('dark mode ------------- $isDark');
@@ -133,7 +143,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -146,8 +155,7 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (BuildContext context) =>
-            sl<MainCubit>()
+            create: (BuildContext context) => sl<MainCubit>()
               ..setThemes(
                 rtl: widget.isRtl,
                 dark: widget.isDark,
@@ -158,36 +166,26 @@ class _MyAppState extends State<MyApp> {
               )
               ..checkInternet()
               ..checkConnectivity()
-            // ..categories(library: 'hti matrial', type: 'hti matrial')
-              ..topBorrow(page: 1)
-            // ..categoryProject(categoryName: 'graduation projects' , library: 'graduation projects' , type: 'graduation projects')
+              ..topBorrow(isFirst: true)
               ..getSavedBooks()
               ..getUserDate()
               ..lastSearch()
-              ..getAllReturned(page: 1)
-              ..getMyReturned()
-        ),
+              ..getAllReturned(isFirst: true)
+              ..getMyReturned()),
       ],
       child: BlocBuilder<MainCubit, MainState>(
         builder: (context, state) {
           return MaterialApp(
             title: 'HTI Library',
             debugShowCheckedModeBanner: false,
-            themeMode: MainCubit
-                .get(context)
-                .isDark
+            themeMode: MainCubit.get(context).isDark
                 ? ThemeMode.dark
                 : ThemeMode.light,
-            theme: MainCubit
-                .get(context)
-                .lightTheme,
-            darkTheme: MainCubit
-                .get(context)
-                .darkTheme,
+            theme: MainCubit.get(context).lightTheme,
+            darkTheme: MainCubit.get(context).darkTheme,
             home: onBoarding == null
                 ? const OnBoardingPage()
-                  : const SplashScreen(),
-
+                : const SplashScreen(),
           );
         },
       ),

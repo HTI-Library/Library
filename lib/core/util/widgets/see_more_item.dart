@@ -37,6 +37,7 @@ class SeeMoreItem extends StatelessWidget {
                 ),
               ),
               AssetSvg(
+                change: 1,
                 imagePath: 'arrow_right',
                 color:  MainCubit.get(context).isDark?HexColor(surface):HexColor(mainColor),
                 size: 18.0,

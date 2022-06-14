@@ -37,7 +37,6 @@ class _ViewBookPageState extends State<ViewBookPage> {
     // TODO: implement initState
     super.initState();
     MainCubit.get(context).bookDetails(bookId: widget.bookId);
-
   }
 
   @override
@@ -75,10 +74,11 @@ class _ViewBookPageState extends State<ViewBookPage> {
                     await FlutterShare.share(
                         title: 'مشاركة',
                         text: appTranslation(context).detailsBook,
-
                         linkUrl: MainCubit.get(context).bookModel!.book.name +
-                            "\n" + MainCubit.get(context).bookModel!.book.edition + "\n" +
-                            MainCubit.get(context).bookModel!.book.overview ,
+                            "\n" +
+                            MainCubit.get(context).bookModel!.book.edition +
+                            "\n" +
+                            MainCubit.get(context).bookModel!.book.overview,
                         chooserTitle: 'Chooser Title');
                   },
                   icon: Icon(
@@ -179,40 +179,53 @@ class _ViewBookPageState extends State<ViewBookPage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               if (MainCubit.get(context).userSigned)
-                              Expanded(
-                                child: AppButton(
-                                    label: '${appTranslation(context).borrow}',
-                                    onPress: () {
-                                      isReadPolicy ? navigateTo(context, BorrowingPage(
-                                          book_id: MainCubit.get(context)
-                                          .bookModel!
-                                          .book
-                                          .id,
-                                      name:MainCubit.get(context)
-                                          .bookModel!
-                                          .book
-                                          .name,
-                                      img: MainCubit.get(context)
-                                          .bookModel!
-                                          .book
-                                          .bookImage
-                                      ,
-                                      )): navigateTo(context, PolicyBorrowing());
-
-                                    }),
-                              ),
+                                Expanded(
+                                  child: AppButton(
+                                      label:
+                                          '${appTranslation(context).borrow}',
+                                      onPress: () {
+                                        isReadPolicy
+                                            ? navigateTo(
+                                                context,
+                                                BorrowingPage(
+                                                  book_id:
+                                                      MainCubit.get(context)
+                                                          .bookModel!
+                                                          .book
+                                                          .id,
+                                                  name: MainCubit.get(context)
+                                                      .bookModel!
+                                                      .book
+                                                      .name,
+                                                  img: MainCubit.get(context)
+                                                      .bookModel!
+                                                      .book
+                                                      .bookImage,
+                                                ))
+                                            : navigateTo(
+                                                context, PolicyBorrowing());
+                                      }),
+                                ),
                               if (MainCubit.get(context).userSigned)
-                              space10Horizontal,
-                              if (MainCubit.get(context).bookModel!.book.bookLink.isNotEmpty)
-                              Expanded(
-                                child: AppButton(
-                                    color: HexColor(greyWhite),
-                                    label: '${appTranslation(context).read}',
-                                    textColor: HexColor(mainColor),
-                                    onPress: () {
-                                      navigateTo(context, PdfDetails(bookId: widget.bookId,));
-                                    }),
-                              ),
+                                space10Horizontal,
+                              if (MainCubit.get(context)
+                                  .bookModel!
+                                  .book
+                                  .bookLink
+                                  .isNotEmpty)
+                                Expanded(
+                                  child: AppButton(
+                                      color: HexColor(greyWhite),
+                                      label: '${appTranslation(context).read}',
+                                      textColor: HexColor(mainColor),
+                                      onPress: () {
+                                        navigateTo(
+                                            context,
+                                            PdfDetails(
+                                              bookId: widget.bookId,
+                                            ));
+                                      }),
+                                ),
                             ],
                           ),
                           space15Vertical,
@@ -278,11 +291,20 @@ class _ViewBookPageState extends State<ViewBookPage> {
                       SeeMoreItem(
                         padding: 15,
                         gestureTapCallback: () {
-                          navigateTo(context, BookByCategories(
-                            type: MainCubit.get(context).bookModel!.book.type,
-                            library: MainCubit.get(context).bookModel!.book.library,
-                            category: MainCubit.get(context).bookModel!.book.category,
-                          ));
+                          navigateTo(
+                              context,
+                              BookByCategories(
+                                type:
+                                    MainCubit.get(context).bookModel!.book.type,
+                                library: MainCubit.get(context)
+                                    .bookModel!
+                                    .book
+                                    .library,
+                                category: MainCubit.get(context)
+                                    .bookModel!
+                                    .book
+                                    .category,
+                              ));
                         },
                         text: 'More books from the same category',
                       ),
@@ -314,10 +336,19 @@ class _ViewBookPageState extends State<ViewBookPage> {
                       SeeMoreItem(
                         padding: 15,
                         gestureTapCallback: () {
-                          navigateTo(context, SeeMore(
-                            title: "${MainCubit.get(context).topBorrowModel!.books[0].library}",
-                             model: MainCubit.get(context).categoryDetailsModelHti,
-                          ));
+                          navigateTo(
+                              context,
+                              SeeMore(
+                                title: MainCubit.get(context)
+                                    .topBorrowModel!
+                                    .books[0]
+                                    .library,
+                                model: MainCubit.get(context)
+                                    .categoryDetailsModelHti,
+                                loadMorePressed: () {
+                                  //todo  sameAuthor
+                                },
+                              ));
                         },
                         text: 'More books from the same author',
                       ),
