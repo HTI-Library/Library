@@ -20,7 +20,7 @@ class AssetSvg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.scale(
-      scale: change! !=1 ? 1 : -1,
+      scale: isRtl ? -1 : 1,
       child: SvgPicture.asset(
         'assets/images/$imagePath.svg',
         color: color,

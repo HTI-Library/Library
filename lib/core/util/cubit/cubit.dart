@@ -490,10 +490,8 @@ class MainCubit extends Cubit<MainState> {
       getUserDate();
       getSavedBooks();
       emit(LoginSuccess(loginModel: loginModel!));
-      CacheHelper2.saveData(
-          key: 'password', value: password);
+      CacheHelper2.saveData(key: 'password', value: password);
       sl<CacheHelper>().put('email', loginModel!.user!.email);
-
     }).catchError((error) {
       // error
       debugPrint(error.toString());
@@ -1156,23 +1154,24 @@ class MainCubit extends Cubit<MainState> {
 // ----------------------- return back abd save data - end
 
   /// ----------------------- firebase (Start)
+  ///
+  List<MessageModel> messages = [];
 
   void sendMessage(MessageModel message) async {
-
     // go collection users_instagram +
     await FirebaseFirestore.instance
         .collection("users")
-    // sendId to user (unique every user)
+        // sendId to user (unique every user)
         .doc(profileModel!.email)
-    // collection chats
+        // collection chats
         .collection("chats")
-    // receiveId to user (unique every user)
+        // receiveId to user (unique every user)
         .doc('admin')
-    // message collection
+        // message collection
         .collection("messages")
-    // messageId .
+        // messageId .
         .doc(message.messageId)
-    // set data .
+        // set data .
         .set(message.toJson());
 
     uploadData();
@@ -1186,11 +1185,10 @@ class MainCubit extends Cubit<MainState> {
         .doc(message.messageId)
         .set(message.toJson());
 
-
     emit(SendMessageSuccess());
   }
 
-  List<MessageModel> messages = [];
+  bool isLoad = false;
   void getMessages(String receiverId) {
     FirebaseFirestore.instance
         .collection("users")
@@ -1198,6 +1196,7 @@ class MainCubit extends Cubit<MainState> {
         .collection("chats")
         .doc(receiverId)
         .collection("messages")
+        .orderBy('time')
         .get()
         .then((value) {
       messages.clear();
@@ -1206,24 +1205,26 @@ class MainCubit extends Cubit<MainState> {
         MessageModel message = MessageModel.fromJson(element.data());
         messages.add(message);
       }
+      isLoad = true;
       emit(GetMessagesSuccessState());
+      print('messagw ---------------- ${messages.length}');
     });
   }
 
-  void  listenToMessages(String receiverId) {
+  void listenToMessages(String receiverId) {
     FirebaseFirestore.instance
         .collection("users")
         .doc(profileModel!.email)
         .collection("chats")
         .doc(receiverId)
         .collection("messages")
-    // sort data
+        // sort data
         .orderBy("time")
-    // get last message  || if you can get first message use (limit)
+        // get last message  || if you can get first message use (limit)
         .limitToLast(1)
-    // stream snapshots
+        // stream snapshots
         .snapshots()
-    // listen to message .
+        // listen to message .
         .listen((event) {
       // messages.clear();
 
@@ -1244,21 +1245,19 @@ class MainCubit extends Cubit<MainState> {
         email: profileModel!.email.split('@')[0],
         name: profileModel!.name,
         phone: profileModel!.phone,
-        avatar: profileModel!.avatar
-    );
+        avatar: profileModel!.avatar);
 
     FirebaseFirestore.instance
         .collection('users')
         .doc(email)
-        .set(model.toMap()).then((value) {
+        .set(model.toMap())
+        .then((value) {
       UserUploadDataSuccess();
     }).catchError((error) {
       emit(UserUploadDataError());
     });
   }
 
-
 // ----------------------- firebase (end)
-
 
 }

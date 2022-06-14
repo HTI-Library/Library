@@ -22,7 +22,6 @@ void main() async {
   await di.init();
   await CacheHelper2.init();
 
-  bool isRtl = false;
   await sl<CacheHelper>().get('isRtl').then((value) {
     debugPrint('trl ------------- $value');
     if (value != null) {

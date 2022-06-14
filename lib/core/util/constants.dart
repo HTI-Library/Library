@@ -66,6 +66,8 @@ String? onBoarding = '';
 String? email = '';
 bool isSwitch = false;
 bool isReadPolicy = false;
+bool isRtl = false;
+
 
 double responsiveValue(BuildContext context, double value) =>
     MediaQuery.of(context).size.width * (value / 375.0);
