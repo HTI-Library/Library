@@ -41,7 +41,7 @@ class _ChattingPageState extends State<ChattingPage> {
               children: [
                 BuildCondition(
                   condition: cubit.messages.isNotEmpty,
-                  builder: (_) => cubit.isLoad && cubit.profileModel != null? buildChattingListView() : const Center(child: LoadingWidget()),
+                  builder: (_) => cubit.isLoad && cubit.profileModel != null ? buildChattingListView() : const Center(child: LoadingWidget()),
                   fallback: (_) => buildNotMessages(),
                 ),
                 if (cubit.messages.isEmpty || cubit.isLoad == false) const Spacer(),
@@ -59,6 +59,7 @@ class _ChattingPageState extends State<ChattingPage> {
         buildWhen: (previous, current) => current is GetMessagesSuccessState,
         builder: (context, state) {
           return ListView.builder(
+            reverse: true,
             itemCount: cubit.messages.length,
             itemBuilder: (context, index) {
               MessageModel message = cubit.messages[index];
