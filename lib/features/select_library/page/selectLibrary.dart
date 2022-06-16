@@ -81,7 +81,7 @@ class _SelectLibraryState extends State<SelectLibrary> {
                       type: 1,
                       color:HexColor('ff934f').withOpacity(0.8),
                       name: 'M library',
-                      img: 'libm',
+                      img: 'm-lib',
                       callbackHandle: () {
                         showToast(
                             message: 'computer science library',
