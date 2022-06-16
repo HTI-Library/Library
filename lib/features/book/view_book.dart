@@ -60,14 +60,10 @@ class _ViewBookPageState extends State<ViewBookPage> {
                     MainCubit.get(context).postSaveBook(bookID: widget.bookId);
                   },
                   icon: AssetSvg(
-                    imagePath: 'save_soled',
+                    imagePath: 'save',
                     size: 20.0,
                     color: HexColor(mainColor),
                   ),
-                  // icon: Icon(
-                  //   Icons.bookmark_border_rounded,
-                  //   color: HexColor(mainColor),
-                  // ),
                 ),
                 IconButton(
                   onPressed: () async {
