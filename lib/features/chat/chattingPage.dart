@@ -1,7 +1,5 @@
 import 'package:buildcondition/buildcondition.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/models/messageModel.dart';
@@ -35,13 +33,15 @@ class _ChattingPageState extends State<ChattingPage> {
     return BlocBuilder<MainCubit, MainState>(
         builder: (context, state) {
           return BackScaffold(
+            typing: true,
             scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
             title: 'Admin',
             body: Column(
+
               children: [
                 BuildCondition(
                   condition: cubit.messages.isNotEmpty,
-                  builder: (_) => cubit.isLoad && cubit.profileModel != null? buildChattingListView() : const Center(child: LoadingWidget()),
+                  builder: (_) => cubit.isLoad && cubit.profileModel != null ? buildChattingListView() : const Center(child: LoadingWidget()),
                   fallback: (_) => buildNotMessages(),
                 ),
                 if (cubit.messages.isEmpty || cubit.isLoad == false) const Spacer(),
@@ -184,10 +184,8 @@ class _ChattingPageState extends State<ChattingPage> {
       padding: const EdgeInsets.all(15.0),
       child: Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("assets/images/message.png"),
+            Image.asset("assets/images/message.png",height: 300,width: 300,),
             space20Vertical,
             Text(
               appTranslation(context).myMessageNo,
@@ -267,6 +265,7 @@ class _ChattingPageState extends State<ChattingPage> {
         time: time,
       );
       cubit.sendMessage(message);
+      cubit.getMessages('admin');
       messageController.clear();
     }
   }

@@ -97,124 +97,121 @@ class _LoginPageState extends State<LoginPage> {
       },
       builder: (context, state) {
         return BackScaffold(
-            body: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Container(
-                height: MediaQuery.of(context).size.height -
-                    MainCubit.get(context).appBarHeight -
-                    MediaQuery.of(context).viewPadding.top,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/frame.png'),
-                    fit: BoxFit.fill,
-                  ),
+            body: Container(
+              height: MediaQuery.of(context).size.height -
+                  MainCubit.get(context).appBarHeight -
+                  MediaQuery.of(context).viewPadding.top,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/frame.png'),
+                  fit: BoxFit.fill,
                 ),
-                child: Center(
-                  child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Form(
-                        key: formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              appTranslation(context).loginToLibrary,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline4!
-                                  .copyWith(
-                                    color: HexColor(mainColor),
-                                    fontWeight: FontWeight.w700,
-                                  ),
+              ),
+              child: Center(
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Form(
+                      key: formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            appTranslation(context).loginToLibrary,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline4!
+                                .copyWith(
+                                  color: HexColor(mainColor),
+                                  fontWeight: FontWeight.w700,
+                                ),
+                          ),
+                          space60Vertical,
+                          AppTextFormField(
+                            icon: AssetSvg(
+                              imagePath: 'sms',
+                              color: HexColor(mainColor),
                             ),
-                            space60Vertical,
-                            AppTextFormField(
-                              icon: AssetSvg(
-                                imagePath: 'sms',
-                                color: HexColor(mainColor),
+                            hint: appTranslation(context).id,
+                            callbackHandle: (controller) {
+                              emailController = controller;
+                            },
+                            type: TextInputType.number,
+                            textInputAction: TextInputAction.next,
+                            onChanged: (value) {
+                              enableLoginButton();
+                            },
+                          ),
+                          space20Vertical,
+                          AppTextFormField(
+                            isPassword: true,
+                            hint: appTranslation(context).password,
+                            callbackHandle: (controller) {
+                              passwordController = controller;
+                            },
+                            onChanged: (value) {
+                              enableLoginButton();
+                            },
+                          ),
+                          space40Vertical,
+                          BuildCondition(
+                            condition: state is LoginLoading,
+                            builder: (context) => Container(
+                              width: double.infinity,
+                              height: 45.0,
+                              decoration: BoxDecoration(
+                                color: HexColor(greyWhite),
+                                borderRadius: BorderRadius.circular(
+                                  20.0,
+                                ),
                               ),
-                              hint: appTranslation(context).id,
-                              callbackHandle: (controller) {
-                                emailController = controller;
-                              },
-                              type: TextInputType.number,
-                              textInputAction: TextInputAction.next,
-                              onChanged: (value) {
-                                enableLoginButton();
-                              },
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              child: const CupertinoActivityIndicator(),
                             ),
-                            space20Vertical,
-                            AppTextFormField(
-                              isPassword: true,
-                              hint: appTranslation(context).password,
-                              callbackHandle: (controller) {
-                                passwordController = controller;
-                              },
-                              onChanged: (value) {
-                                enableLoginButton();
-                              },
-                            ),
-                            space40Vertical,
-                            BuildCondition(
-                              condition: state is LoginLoading,
-                              builder: (context) => Container(
-                                width: double.infinity,
-                                height: 45.0,
-                                decoration: BoxDecoration(
-                                  color: HexColor(greyWhite),
-                                  borderRadius: BorderRadius.circular(
-                                    10.0,
+                            fallback: (context) =>
+                              Row(
+                              children: [
+                                if (isSwitch)
+                                  Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 6,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20),
+                                        color:
+                                            Theme.of(context).primaryColor),
+                                    child: IconButton(
+                                      color: Colors.white,
+                                      iconSize: 28,
+                                      icon: const Icon(Icons.fingerprint_rounded),
+                                      splashRadius: 20,
+                                      onPressed: () {
+                                        fingerLogin();
+                                      },
+                                    ),
+                                  ),
+                                if (isSwitch) space10Horizontal,
+                                Expanded(
+                                  child: AppButton(
+                                    // width: MediaQuery.of(context).size.width / 2,
+                                    onPress: !isDisabled
+                                        ? () {
+                                            MainCubit.get(context).login(
+                                                email: emailController.text,
+                                                password:
+                                                    passwordController.text);
+                                          }
+                                        : null,
+                                    label: appTranslation(context).logIn,
                                   ),
                                 ),
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                child: const CupertinoActivityIndicator(),
-                              ),
-                              fallback: (context) =>
-                                Row(
-                                children: [
-                                  if (isSwitch)
-                                    Container(
-                                      width:
-                                          MediaQuery.of(context).size.width / 6,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          color:
-                                              Theme.of(context).primaryColor),
-                                      child: IconButton(
-                                        color: Colors.white,
-                                        iconSize: 28,
-                                        icon: Icon(Icons.fingerprint_rounded),
-                                        splashRadius: 20,
-                                        onPressed: () {
-                                          fingerLogin();
-                                        },
-                                      ),
-                                    ),
-                                  if (isSwitch) space10Horizontal,
-                                  Expanded(
-                                    child: AppButton(
-                                      // width: MediaQuery.of(context).size.width / 2,
-                                      onPress: !isDisabled
-                                          ? () {
-                                              MainCubit.get(context).login(
-                                                  email: emailController.text,
-                                                  password:
-                                                      passwordController.text);
-                                            }
-                                          : null,
-                                      label: appTranslation(context).logIn,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),

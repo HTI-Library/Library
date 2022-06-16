@@ -1220,8 +1220,6 @@ class MainCubit extends Cubit<MainState> {
         .collection("messages")
         // sort data
         .orderBy("time")
-        // get last message  || if you can get first message use (limit)
-        .limitToLast(1)
         // stream snapshots
         .snapshots()
         // listen to message .

@@ -7,7 +7,6 @@ import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/cubit/state.dart';
 import 'package:hti_library/features/account/pages/info/info.dart';
-import 'package:hti_library/features/account/pages/message/message.dart';
 import 'package:hti_library/features/account/pages/my_borrow_books/myBorrowBooks.dart';
 import 'package:hti_library/features/account/pages/notificatio/notificatio.dart';
 import 'package:hti_library/features/account/pages/setting/presntation/setting.dart';
@@ -20,7 +19,7 @@ import 'package:hti_library/features/select_library/page/selectLibrary.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class AccountPage extends StatelessWidget {
-  AccountPage({Key? key}) : super(key: key);
+  const AccountPage({Key? key}) : super(key: key);
 
   Widget appointmentBuilder(BuildContext context,
       CalendarAppointmentDetails calendarAppointmentDetails) {
@@ -76,12 +75,14 @@ class AccountPage extends StatelessWidget {
                 if (state is LogoutLoading) space15Vertical,
                 CircleAvatar(
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                  child: Image.asset('assets/images/hti123.png'),
                   radius: 75,
+                  backgroundImage: NetworkImage(MainCubit.get(context).profileModel != null ? MainCubit.get(context).profileModel!.avatar :
+                  'https://upload.wikimedia.org/wikipedia/commons/2/2e/Higher_Technological_Institute.jpg'),
                 ),
                 space20Vertical,
                   Text(
-                    'Setting',
+                    MainCubit.get(context).profileModel != null ?
+                    MainCubit.get(context).profileModel!.name : 'HTI',
                     style: Theme.of(context).textTheme.headline6!,
                   ),
                 if (MainCubit.get(context).profileModel == null && MainCubit.get(context).userSigned)
