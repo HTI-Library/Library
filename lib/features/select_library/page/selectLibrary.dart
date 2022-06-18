@@ -39,12 +39,8 @@ class _SelectLibraryState extends State<SelectLibrary> {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         return MainScaffold(
-          scaffold: Scaffold(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            appBar: AppBar(
-              centerTitle: true,
-              title:  Text( appTranslation(context).selectLibrary),
-            ),
+          scaffold: BackScaffold(
+            scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,title: appTranslation(context).selectLibrary,
             body: BuildCondition(
               condition: MainCubit.get(context).userSigned,
               builder:(context) =>  SingleChildScrollView(
