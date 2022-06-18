@@ -49,7 +49,7 @@ class _ViewBookPageState extends State<ViewBookPage> {
       },
       builder: (context, state) {
         return BackScaffold(
-          title: 'Details',
+          title: appTranslation(context).details,
           scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
           actionIcon: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -233,7 +233,7 @@ class _ViewBookPageState extends State<ViewBookPage> {
                           Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: HexColor(greyWhite),
+                              color: MainCubit.get(context).isDark ? HexColor(secondaryColorD) : HexColor(greyWhite),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
@@ -313,7 +313,7 @@ class _ViewBookPageState extends State<ViewBookPage> {
                           top: 5.0,
                           bottom: 5.0,
                         ),
-                        color: HexColor(greyWhite),
+                        color: MainCubit.get(context).isDark ? HexColor(secondaryColorD) : HexColor(greyWhite),
                         height: MediaQuery.of(context).size.width / 3.2 * 2.2,
                         child: ListView.builder(
                             physics: const BouncingScrollPhysics(),

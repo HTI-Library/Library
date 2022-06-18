@@ -190,7 +190,7 @@ class AccountPage extends StatelessWidget {
                     MainCubit.get(context).getMyBorrow(page: 1);
                     navigateTo(context, const MyBorrowBook());
                   },
-                  text: 'my borrow book',
+                  text:  appTranslation(context).myBorrowedBooks,
                   imagePath: 'ic_borrow',
                 ),
                 if (MainCubit.get(context).userSigned)
@@ -202,6 +202,7 @@ class AccountPage extends StatelessWidget {
                         dialogBorderRadius: BorderRadius.circular(10.0),
                         buttonsBorderRadius: BorderRadius.circular(10.0),
                         context: context,
+                        dialogBackgroundColor: MainCubit.get(context).isDark ? HexColor(secondaryColorD) : Colors.white,
                         keyboardAware: false,
                         headerAnimationLoop: false,
                         dismissOnBackKeyPress: true,

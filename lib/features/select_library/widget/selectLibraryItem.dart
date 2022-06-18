@@ -49,7 +49,7 @@ class SelectLibraryItem extends StatelessWidget {
                     child:
                     MyNetworkImage(
                         image: img,
-                        height: MediaQuery.of(context).size.height * 0.25,
+                        height: MediaQuery.of(context).size.height * 0.195,
                         width: MediaQuery.of(context).size.width * 0.9,
                         radius: 8.0),
                   ),

@@ -15,11 +15,12 @@ class DialogChangePhoto extends StatelessWidget {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         return AlertDialog(
+          backgroundColor: MainCubit.get(context).isDark ? HexColor(MainCubit.get(context).scaffoldBackground) : Colors.white,
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           title: Center(
-              child: Text("Choose option",
+              child: Text(appTranslation(context).choose,
                   style: Theme.of(context).textTheme.headline6)),
           content: Expanded(
             child: Row(
@@ -39,11 +40,11 @@ class DialogChangePhoto extends StatelessWidget {
                         Clip.antiAliasWithSaveLayer,
                         borderRadius:
                         BorderRadius.circular(10.0),
-                        color: HexColor(greyWhite),
+                        color: MainCubit.get(context).isDark ? HexColor(secondaryColorD) : HexColor(greyWhite),
                         child: Icon(
                           FontAwesomeIcons.cameraRetro,
                           size: 25.0,
-                          color: HexColor(mainColor),
+                          color:MainCubit.get(context).isDark ? Colors.white: HexColor(mainColor),
                         ),
                       ),
                     ),
@@ -64,11 +65,11 @@ class DialogChangePhoto extends StatelessWidget {
                         Clip.antiAliasWithSaveLayer,
                         borderRadius:
                         BorderRadius.circular(10.0),
-                        color: HexColor(greyWhite),
+                        color: MainCubit.get(context).isDark ? HexColor(secondaryColorD) : HexColor(greyWhite),
                         child: Icon(
                           FontAwesomeIcons.solidImages,
                           size: 25.0,
-                          color: HexColor(mainColor),
+                          color:MainCubit.get(context).isDark ? Colors.white: HexColor(mainColor),
                         ),
                       ),
                     ),

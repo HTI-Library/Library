@@ -8,9 +8,22 @@ import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
 import 'package:hti_library/features/account/widget/btn_my_account.dart';
 
-class SettingPages extends StatelessWidget {
+class SettingPages extends StatefulWidget {
   const SettingPages({Key? key}) : super(key: key);
 
+  @override
+  State<SettingPages> createState() => _SettingPagesState();
+}
+
+class _SettingPagesState extends State<SettingPages> {
+  late MainCubit cubit;
+  
+  @override
+  void initState() {
+    super.initState();
+    cubit = context.read<MainCubit>();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit,MainState>(
@@ -19,7 +32,7 @@ class SettingPages extends StatelessWidget {
           MainScaffold(
             scaffold: BackScaffold(
               scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              title: '${appTranslation(context).setting}',
+              title: appTranslation(context).setting,
               body: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
@@ -46,10 +59,10 @@ class SettingPages extends StatelessWidget {
                                   borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(10.0),
                                     topRight: Radius.circular(10.0),
+
                                   ),
                                   color: MainCubit.get(context).isDark
-                                      ? HexColor(secondBackground)
-                                      : HexColor(surface),
+                                      ? HexColor(cubit.scaffoldBackground) : HexColor(greyWhite),
                                 ),
                                 child: Padding(
                                   padding: EdgeInsets.only(
@@ -65,9 +78,12 @@ class SettingPages extends StatelessWidget {
                                         width: double.infinity,
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(10.0),
+
+
                                         ),
                                         child: Material(
-                                          color: HexColor(greyWhite),
+                                          color: MainCubit.get(context).isDark
+                                              ? HexColor(secondaryColorD) : HexColor(greyWhite),
                                           child: InkWell(
                                             onTap: () {
                                               MainCubit.get(context)
@@ -97,6 +113,7 @@ class SettingPages extends StatelessWidget {
                                           ),
                                         ),
                                       ),
+
                                       space15Vertical,
                                       Container(
                                         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -106,7 +123,8 @@ class SettingPages extends StatelessWidget {
                                           borderRadius: BorderRadius.circular(10.0),
                                         ),
                                         child: Material(
-                                          color: HexColor(greyWhite),
+                                          color: MainCubit.get(context).isDark
+                                              ? HexColor(secondaryColorD) : HexColor(greyWhite),
                                           child: InkWell(
                                             onTap: () {
                                               MainCubit.get(context)
@@ -143,7 +161,7 @@ class SettingPages extends StatelessWidget {
                             });
                         // navigateTo(context, LanguagePage());
                       },
-                      text: '${appTranslation(context).language}',
+                      text: appTranslation(context).language,
                       imagePath: "",
                     ),
                     space10Vertical,
@@ -169,8 +187,7 @@ class SettingPages extends StatelessWidget {
                                     topRight: Radius.circular(10.0),
                                   ),
                                   color: MainCubit.get(context).isDark
-                                      ? HexColor(secondBackground)
-                                      : HexColor(surface),
+                                      ? HexColor(cubit.scaffoldBackground) : HexColor(greyWhite),
                                 ),
                                 child: Padding(
                                   padding: EdgeInsets.only(
@@ -185,7 +202,7 @@ class SettingPages extends StatelessWidget {
                                           MainCubit.get(context)
                                               .changeMode(value: false);
                                         },
-                                        text: '${appTranslation(context).light}',
+                                        text: appTranslation(context).light,
                                         imagePath: 'sun_mode',
                                       ),
                                       space10Vertical,
@@ -194,7 +211,7 @@ class SettingPages extends StatelessWidget {
                                           MainCubit.get(context)
                                               .changeMode(value: true);
                                         },
-                                        text: '${appTranslation(context).dark}',
+                                        text: appTranslation(context).dark,
                                         imagePath: "dark_mode",
                                       ),
                                     ],
@@ -204,7 +221,7 @@ class SettingPages extends StatelessWidget {
                             });
                         // navigateTo(context, ThemesPage());
                       },
-                      text: '${appTranslation(context).themes}',
+                      text: appTranslation(context).themes,
                       imagePath: "",
                     ),
                   ],

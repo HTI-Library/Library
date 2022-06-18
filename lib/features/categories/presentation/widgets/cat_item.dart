@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/models/categories_model.dart';
 import 'package:hti_library/core/util/constants.dart';
+import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/features/category_details/presentation/pages/category_details_page.dart';
 
 class CatItem extends StatelessWidget {
@@ -14,8 +15,9 @@ class CatItem extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
+      color:MainCubit.get(context).isDark?HexColor(secondaryColorD):HexColor(greyWhite),
       elevation: 5.0,
-      shadowColor: HexColor(greyWhite),
+      shadowColor: HexColor(secondaryColorD),
       margin:
           const EdgeInsetsDirectional.only(bottom: 15.0, start: 5.0, end: 5.0),
       clipBehavior: Clip.antiAliasWithSaveLayer,

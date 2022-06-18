@@ -3,6 +3,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/models/notification_model.dart';
 
 import '../constants.dart';
+import '../cubit/cubit.dart';
 
 class NotificationItem extends StatelessWidget {
   final NotificationData model;
@@ -20,7 +21,7 @@ class NotificationItem extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: HexColor(greyWhite),
+              color: MainCubit.get(context).isDark ? HexColor(secondaryColorD) : HexColor(greyWhite),
             ),
             child: Padding(
               padding: const EdgeInsets.all(8.0),

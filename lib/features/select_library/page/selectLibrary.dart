@@ -43,7 +43,7 @@ class _SelectLibraryState extends State<SelectLibrary> {
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             appBar: AppBar(
               centerTitle: true,
-              title: const Text('Select Library'),
+              title:  Text( appTranslation(context).selectLibrary),
             ),
             body: BuildCondition(
               condition: MainCubit.get(context).userSigned,

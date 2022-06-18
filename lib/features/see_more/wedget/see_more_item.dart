@@ -37,7 +37,7 @@ class SeeMoreItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: Material(
-            color: HexColor(greyWhite),
+            color: MainCubit.get(context).isDark ? HexColor(secondaryColorD) : HexColor(greyWhite),
             child: InkWell(
               onTap: () {
                 navigateTo(
@@ -80,13 +80,13 @@ class SeeMoreItem extends StatelessWidget {
                             maxLines: 1,
                           ),
                           Text(
-                            // '${appTranslation(context).author} : ${simpleData.authors[0].authorName}',
-                            '${appTranslation(context).author}',
+                            '${appTranslation(context).author}   : ${simpleData!.authors[0].authorName}',
+                            // '${appTranslation(context).author}',
                             style: Theme.of(context).textTheme.subtitle2,
                             maxLines: 1,
                           ),
                           Text(
-                            'Edition : ${simpleData != null ? simpleData!.edition[0] : data!.book.edition[0]}',
+                            '${appTranslation(context).edition}  : ${simpleData != null ? simpleData!.edition[0] : data!.book.edition[0]}',
                             style: Theme.of(context).textTheme.subtitle2,
                           ),
                           Text(

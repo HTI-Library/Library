@@ -124,15 +124,15 @@ class _LoginPageState extends State<LoginPage> {
                                 .textTheme
                                 .headline4!
                                 .copyWith(
-                                  color: HexColor(mainColor),
-                                  fontWeight: FontWeight.w700,
+                              color:MainCubit.get(context).isDark ? Colors.white: HexColor(mainColor),
+                              fontWeight: FontWeight.w700,
                                 ),
                           ),
                           space60Vertical,
                           AppTextFormField(
                             icon: AssetSvg(
                               imagePath: 'sms',
-                              color: HexColor(mainColor),
+                                color:MainCubit.get(context).isDark ? Colors.white: HexColor(mainColor),
                             ),
                             hint: appTranslation(context).id,
                             callbackHandle: (controller) {

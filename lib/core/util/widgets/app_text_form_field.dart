@@ -55,12 +55,13 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
           // height: 49.0,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            color: HexColor(greyWhite),
+            color:MainCubit.get(context).isDark ? HexColor(secondaryColorD): HexColor(greyWhite),
           ),
           child: TextFormField(
             style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                  color: HexColor(mainColor),
-                ),
+              color:MainCubit.get(context).isDark ? Colors.white: HexColor(mainColor),
+
+            ),
             keyboardType: widget.type,
             enabled:widget.enabled!,
             readOnly: widget.readOnly!,
@@ -91,8 +92,9 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                 borderSide: BorderSide.none,
               ),
               hintStyle: Theme.of(context).textTheme.subtitle2!.copyWith(
-                    color: HexColor(mainColor),
-                  ),
+                color:MainCubit.get(context).isDark ? Colors.white: HexColor(mainColor),
+
+              ),
               hintText: widget.hint,
               contentPadding: const EdgeInsetsDirectional.only(
                 start: 15.0,
@@ -107,8 +109,9 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                       },
                       icon: Image(
                         image: isShown
-                            ? const AssetImage('assets/images/eye_slash.png')
+                            ? const AssetImage('assets/images/eye_slash.png', )
                             : const AssetImage('assets/images/eye.png'),
+                          color:MainCubit.get(context).isDark ? Colors.white: HexColor(mainColor),
                       ),
                     )
                   : widget.icon == null
