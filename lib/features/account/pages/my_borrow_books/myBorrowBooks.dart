@@ -19,7 +19,7 @@ class MyBorrowBook extends StatelessWidget {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         return BackScaffold(
-          title: 'My Borrow Book',
+          title:  appTranslation(context).myBorrowedBooks,
           scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: BuildCondition(
             condition: MainCubit.get(context).myBorrowBooks != null,

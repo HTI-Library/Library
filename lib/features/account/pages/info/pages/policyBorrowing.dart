@@ -26,7 +26,7 @@ class _PolicyBorrowingState extends State<PolicyBorrowing> {
   @override
   Widget build(BuildContext context) {
     return BackScaffold(
-      title: 'Borrowing policy',
+      title: appTranslation(context).borrowingPolicy,
       scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(15.0),
@@ -44,20 +44,20 @@ class _PolicyBorrowingState extends State<PolicyBorrowing> {
                         text: TextSpan(
                       children: [
                         TextSpan(
-                            text: 'Before Yor',
+                            text: appTranslation(context).beforeYou,
                             style: Theme.of(context)
                                 .textTheme
                                 .headline6!
                                 .copyWith(fontSize: 18)),
                         TextSpan(
-                            text: '  BORROW',
+                            text:appTranslation(context).borrowBold,
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.green,
                                 fontSize: 19))
                       ],
                     )),
-                    Text('you should know...',
+                    Text(appTranslation(context).youSK,
                         style: Theme.of(context).textTheme.headline6)
                   ],
                 ),
@@ -73,7 +73,8 @@ class _PolicyBorrowingState extends State<PolicyBorrowing> {
               width: double.infinity,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: HexColor(greyWhite)),
+                color: MainCubit.get(context).isDark ? HexColor(secondaryColorD) : HexColor(greyWhite),
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
@@ -81,27 +82,27 @@ class _PolicyBorrowingState extends State<PolicyBorrowing> {
                   children: [
                     buildText(
                         text:
-                            '1• The maximum number of books available for borrowing is 3 books.',
+                        appTranslation(context).policyLine1,
                         context: context),
                     buildText(
                         text:
-                            '2• The borrowing period is 3 working days for the Institute.',
+                        appTranslation(context).policyLine2,
                         context: context),
                     buildText(
                         text:
-                            '3• The borrowing period can be extended, but before the date of delivery.',
+                        appTranslation(context).policyLine3,
                         context: context),
                     buildText(
                         text:
-                            '4• The maximum number of times the borrowing can be extended is only 2 times.',
+                        appTranslation(context).policyLine4,
                         context: context),
                     buildText(
                         text:
-                            '5• If the book is not returned on the delivery date, an email will be sent to Institute .',
+                        appTranslation(context).policyLine5,
                         context: context),
                     buildText(
                         text:
-                            '6• You must have an ID while receiving or delivering the book.',
+                        appTranslation(context).policyLine6,
                         context: context),
                   ],
                 ),

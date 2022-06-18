@@ -5,6 +5,7 @@ import 'package:hti_library/features/book/view_book.dart';
 
 import '../../../../../core/models/myBorrowBookModel.dart';
 import '../../../../../core/util/constants.dart';
+import '../../../../../core/util/cubit/cubit.dart';
 import '../../../../../core/util/widgets/asset_svg.dart';
 
 class BorrowBook extends StatelessWidget {
@@ -27,7 +28,7 @@ class BorrowBook extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Material(
-        color: HexColor(greyWhite),
+          color:MainCubit.get(context).isDark ? HexColor(secondaryColorD) : HexColor(greyWhite),
         child: InkWell(
           onTap: () {
             if (model != null)
@@ -54,23 +55,32 @@ class BorrowBook extends StatelessWidget {
                     fit: BoxFit.fill,
                   ),
                 ),
-                space10Horizontal,
+                space20Horizontal,
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      space5Vertical,
                       Text(
                         model == null ? '${data!.name}' : model!.book.name,
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 2,
                       ),
+                      space20Vertical,
                       Text(
-                        'Edition : ${model == null ? '${data!.edition}' : model!.book.edition}',
+                        '${appTranslation(context).author} : ${model!.book.auther[0].name}',
+                        style: Theme.of(context).textTheme.subtitle2,
+                        maxLines: 1,
+                      ),
+                      space10Vertical,
+                      Text(
+                        '${appTranslation(context).edition}  : ${model == null ? '${data!.edition}' : model!.book.edition}',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
+                      space10Vertical,
                       Text(
-                        'page : ${model == null ? '${data!.pages}' : model!.book.pages}',
+                        '${appTranslation(context).pagesNum} : ${model == null ? '${data!.pages}' : model!.book.pages}',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ],

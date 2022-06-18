@@ -119,7 +119,7 @@ class MainCubit extends Cubit<MainState> {
   }
 
   void changeTheme() {
-    family = isRtl ? 'Roboto' : 'Roboto';
+    family = isRtl ? 'Cairo' : 'Poppins';
 
     lightTheme = ThemeData(
       scaffoldBackgroundColor: Colors.white,
@@ -328,7 +328,7 @@ class MainCubit extends Cubit<MainState> {
           fontSize: 16.0,
           fontFamily: family,
           fontWeight: FontWeight.w700,
-          color: Colors.white,
+          color: HexColor(surface),
           height: 1.4,
         ),
       ),
@@ -495,10 +495,7 @@ class MainCubit extends Cubit<MainState> {
     }).catchError((error) {
       // error
       debugPrint(error.toString());
-      debugPrint('error');
-      ServerException exception = error as ServerException;
       debugPrint('login------------error');
-      debugPrint(exception.error);
       emit(Error(error.toString()));
     });
   }

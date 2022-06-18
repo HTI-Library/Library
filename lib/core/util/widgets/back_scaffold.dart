@@ -58,7 +58,7 @@ class BackScaffold extends StatelessWidget {
                   },
                   icon: Icon(
                     Icons.arrow_back,
-                    color: HexColor(mainColor),
+                    color:MainCubit.get(context).isDark ? Colors.white: HexColor(mainColor),
                     size: 20.0,
                   ),
                 ),

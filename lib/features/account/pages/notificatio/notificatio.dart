@@ -65,7 +65,7 @@ class _NotificationPageState extends State<NotificationPage> {
               Image.asset("assets/images/notification.png"),
               space20Vertical,
               Text(
-                'You don’t have any notifications',
+                appTranslation(context).notificationNo,
                 style: Theme.of(context).textTheme.headline6!,
               ),
             ],
@@ -82,13 +82,13 @@ class _NotificationPageState extends State<NotificationPage> {
           if (state is NotificationLoading)
             const LinearProgressIndicator(),
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.25,
+            width: MediaQuery.of(context).size.width * 0.45,
             child: IconButton(
                 onPressed: () {
                   MainCubit.get(context).removeNotifications();
                 },
                 icon: Text(
-                  'Clear All',
+                  appTranslation(context).clearAll,
                   textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.headline6,
                 )),

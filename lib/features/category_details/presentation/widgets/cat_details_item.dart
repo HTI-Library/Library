@@ -7,6 +7,8 @@ import 'package:hti_library/core/util/widgets/app_button.dart';
 import 'package:hti_library/core/util/widgets/available_item.dart';
 import 'package:hti_library/features/book/view_book.dart';
 
+import '../../../../core/util/cubit/cubit.dart';
+
 class CatDetailsItem extends StatelessWidget {
   const CatDetailsItem({Key? key, required this.model}) : super(key: key);
   final SimpleBook model;
@@ -26,7 +28,7 @@ class CatDetailsItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Material(
-        color: HexColor(greyWhite),
+        color: MainCubit.get(context).isDark ? HexColor(secondaryColorD) : HexColor(greyWhite),
         child: InkWell(
           onTap: () {
             navigateTo(
@@ -65,12 +67,12 @@ class CatDetailsItem extends StatelessWidget {
                         maxLines: 1,
                       ),
                       Text(
-                        '${appTranslation(context).author} : ${model.authors[0].authorName}',
+                        '${appTranslation(context).author}   : ${model.authors[0].authorName}',
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 1,
                       ),
                       Text(
-                        'Edition : ${model.edition}',
+                        '${appTranslation(context).edition}  : ${model.edition}',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                       Text(

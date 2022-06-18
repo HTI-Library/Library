@@ -27,7 +27,7 @@ class SavedItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Material(
-        color: HexColor(greyWhite),
+          color:MainCubit.get(context).isDark?HexColor(secondaryColorD):HexColor(greyWhite),
         child: InkWell(
           onTap: () {
            navigateTo(context, ViewBookPage(bookId: model.id,));
@@ -54,27 +54,33 @@ class SavedItem extends StatelessWidget {
                 space10Horizontal,
                 Expanded(
                   child: Column(
+
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      space10Vertical,
+
                       Text(
                         model.name,
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 2,
                       ),
+                      space10Vertical,
                       Text(
-                        'Author : ${model.author[0].authorName}',
+                        '${appTranslation(context).author}   : ${model.author[0].authorName}',
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 2,
                       ),
+                      space10Vertical,
                       Text(
-                        'Edition : ${model.edition}',
+                        '${appTranslation(context).edition}  : ${model.edition}',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
+                      space10Vertical,
                       Text(
-                        'page : ${model.pages}',
+                        '${appTranslation(context).pagesNum} : ${model.pages}',
                         style: Theme.of(context).textTheme.subtitle2,
-                      ),
+                      )
                     ],
                   ),
                 ),

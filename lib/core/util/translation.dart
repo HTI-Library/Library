@@ -48,6 +48,34 @@ class TranslationModel {
   late String saved;
   late String account;
   late String detailsBook;
+  late String email;
+  late String name;
+  late String phoneNum;
+  late String fingerPrint;
+  late String clearAll;
+  late String typeMessage;
+  late String beforeYou;
+  late String borrowBold;
+  late String youSK;
+  late String policyLine1;
+  late String policyLine2;
+  late String policyLine3;
+  late String policyLine4;
+  late String policyLine5;
+  late String policyLine6;
+  late String getHelpQ1;
+  late String getHelpA1;
+  late String getHelpQ2;
+  late String getHelpA2;
+  late String aboutUsL1;
+  late String aboutUsL2;
+  late String aboutUsL3;
+  late String aboutUsL4;
+  late String selectLibrary;
+  late String myBorrowedBooks;
+  late String details;
+  late String choose;
+
   late String logIn;
 
 
@@ -103,6 +131,34 @@ class TranslationModel {
     account = json['account'];
     changeLib = json['changeLib'];
     detailsBook = json['detailsBook'];
+    email = json['email'];
+    name = json['name'];
+    phoneNum = json['phoneNum'];
+    fingerPrint = json['fingerPrint'];
+    clearAll = json['clearAll'];
+    typeMessage = json['typeMessage'];
+    beforeYou = json['beforeYou'];
+    borrowBold = json['borrowBold'];
+    youSK = json['youSK'];
+    policyLine1 = json['policyLine1'];
+    policyLine2 = json['policyLine2'];
+    policyLine3 = json['policyLine3'];
+    policyLine4 = json['policyLine4'];
+    policyLine5 = json['policyLine5'];
+    policyLine6 = json['policyLine6'];
+    getHelpQ1 = json['getHelpQ1'];
+    getHelpA1 = json['getHelpA1'];
+    getHelpQ2 = json['getHelpQ2'];
+    getHelpA2 = json['getHelpA2'];
+    aboutUsL1 = json['aboutUsL1'];
+    aboutUsL2 = json['aboutUsL2'];
+    aboutUsL3 = json['aboutUsL3'];
+    aboutUsL4 = json['aboutUsL4'];
+    selectLibrary = json['selectLibrary'];
+    myBorrowedBooks = json['myBorrowedBooks'];
+    details = json['details'];
+    choose = json['choose'];
+
 
 
   }

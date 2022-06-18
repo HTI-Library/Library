@@ -8,7 +8,7 @@ class GetHelpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackScaffold(
-      title: 'Get Help',
+      title: appTranslation(context).getHelp,
       scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -17,27 +17,27 @@ class GetHelpPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'How do you log in?',
+              appTranslation(context).getHelpQ1,
               style: Theme.of(context).textTheme.headline6,
               textAlign: TextAlign.center,
             ),
             space10Vertical,
             Text(
-                'At the login step, you must enter your email and password to create your account that allows you to borrow and read books.',
+              appTranslation(context).getHelpA1,
                 style: Theme.of(context).textTheme.headline6!.copyWith(
-                  color: Colors.black87
+                  color: Colors.blueAccent
                 ),),
             space30Vertical,
             Text(
-              'How do you borrow the book?',
+              appTranslation(context).getHelpQ2,
               style: Theme.of(context).textTheme.headline6,
               textAlign: TextAlign.center,
             ),
             space10Vertical,
             Text(
-                "We implement our system in a simple way that does not require you any steps to borrow the book, if you don't have any restrictions preventing you from borrowing the book, the book is automatically borrowed just click the 'BORROW' button",
+              appTranslation(context).getHelpA2,
                 style: Theme.of(context).textTheme.headline6!.copyWith(
-                    color: Colors.black87
+                    color: Colors.blueAccent
                 ),),
             space30Vertical,
           ],

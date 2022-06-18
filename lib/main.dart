@@ -41,7 +41,6 @@ void main() async {
   String translation = await rootBundle
       .loadString('assets/translations/${isRtl ? 'ar' : 'en'}.json');
 
-  bool isDark = false;
   await sl<CacheHelper>().get('isDark').then((value) {
     debugPrint('dark mode ------------- $value');
     if (value != null) {

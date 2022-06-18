@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -26,6 +27,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late MainCubit cubit;
+  List<String> list = [
+    'https://ak.picdn.net/shutterstock/videos/1021881406/thumb/1.jpg',
+    'https://thumbs.dreamstime.com/b/gold-gradient-abstract-background-made-color-soft-glowing-backdrop-texture-175093310.jpg',
+    'https://wallpaperaccess.com/full/1155052.jpg',
+    'https://c4.wallpaperflare.com/wallpaper/947/575/815/abstract-ubuntu-gradient-wallpaper-preview.jpg',
+    'https://cdn.pixabay.com/photo/2017/03/25/17/56/color-2174050__340.png',
+  ];
 
   @override
   void initState() {
@@ -56,6 +64,37 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 space15Vertical,
+                CarouselSlider(
+                  items: list
+                      .map(
+                        (e) => ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: Image(
+                        image: NetworkImage('${e}'),
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                      ),
+                    ),
+                  )
+                      .toList(),
+                  options: CarouselOptions(
+                    height: MediaQuery.of(context).size.height / 4.2,
+                    initialPage: 1,
+                    viewportFraction: .85,
+                    enableInfiniteScroll: true,
+                    // enable image above image another
+                    // enlargeStrategy: CenterPageEnlargeStrategy.height,
+
+                    reverse: false,
+                    autoPlay: true,
+                    enlargeCenterPage: true,
+                    autoPlayInterval: Duration(seconds: 5),
+                    autoPlayAnimationDuration: Duration(seconds: 3),
+                    autoPlayCurve: Curves.linearToEaseOut,
+                    scrollDirection: Axis.horizontal,
+                  ),
+                ),
+                space15Vertical,
                 SeeMoreItem(
                   gestureTapCallback: () {
                     navigateTo(
@@ -77,7 +116,9 @@ class _HomePageState extends State<HomePage> {
                     top: 5.0,
                     bottom: 5.0,
                   ),
-                  color: HexColor(greyWhite),
+                  color: MainCubit.get(context).isDark
+                      ? HexColor(secondaryColorD)
+                      : HexColor(greyWhite),
                   height: MediaQuery.of(context).size.width / 3.2 * 2.2,
                   child: MainCubit.get(context).topBorrowModel != null
                       ? ListView.builder(
@@ -99,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                     navigateTo(
                         context,
                         SeeMore(
-                          title: "Recently Returned",
+                          title: appTranslation(context).recentlyReturned,
                           data: MainCubit.get(context).allReturnedBook!,
                           loadMorePressed: () {
                             MainCubit.get(context).getAllReturned(
@@ -115,7 +156,9 @@ class _HomePageState extends State<HomePage> {
                     top: 5.0,
                     bottom: 5.0,
                   ),
-                  color: HexColor(greyWhite),
+                  color: MainCubit.get(context).isDark
+                      ? HexColor(secondaryColorD)
+                      : HexColor(greyWhite),
                   height: MediaQuery.of(context).size.width / 3.2 * 2.2,
                   child: MainCubit.get(context).allReturnedBook != null
                       ? ListView.builder(
@@ -156,7 +199,9 @@ class _HomePageState extends State<HomePage> {
                       top: 5.0,
                       bottom: 5.0,
                     ),
-                    color: HexColor(greyWhite),
+                    color: MainCubit.get(context).isDark
+                        ? HexColor(secondaryColorD)
+                        : HexColor(greyWhite),
                     height: MediaQuery.of(context).size.width / 3.2 * 2.2,
                     child:
                         MainCubit.get(context).categoryDetailsModelHti != null
@@ -198,7 +243,9 @@ class _HomePageState extends State<HomePage> {
                       top: 5.0,
                       bottom: 5.0,
                     ),
-                    color: HexColor(greyWhite),
+                    color: MainCubit.get(context).isDark
+                        ? HexColor(secondaryColorD)
+                        : HexColor(greyWhite),
                     height: MediaQuery.of(context).size.width / 3.2 * 2.2,
                     child: MainCubit.get(context).categoriesModelProject != null
                         ? ListView.builder(

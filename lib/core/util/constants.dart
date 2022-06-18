@@ -31,6 +31,7 @@ const String green = '#125c03';
 const String surface = '#f5f5f5';
 const String greyWhite = '#8fe1e7f0';
 const String disableButton = '#A7B1D7';
+const String secondaryColorD = '#243447';
 
 //dark theme
 const String secondBackground = '393d40';
@@ -67,6 +68,7 @@ String? email = '';
 bool isSwitch = false;
 bool isReadPolicy = false;
 bool isRtl = false;
+bool isDark = false;
 
 
 double responsiveValue(BuildContext context, double value) =>

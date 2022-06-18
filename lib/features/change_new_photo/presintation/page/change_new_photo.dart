@@ -92,7 +92,7 @@ class _ChangeNewPhotoState extends State<ChangeNewPhoto> {
           Row(
             children: [
               Text(
-                'turn on finger',
+                appTranslation(context).fingerPrint,
                 style: Theme.of(context).textTheme.headline6,
               ),
               const Spacer(),
@@ -160,7 +160,7 @@ class _ChangeNewPhotoState extends State<ChangeNewPhoto> {
         SizedBox(
             width: double.infinity,
             child: Text(
-              'email',
+              appTranslation(context).email,
               style: Theme.of(context).textTheme.headline6,
               textAlign: TextAlign.start,
             )),
@@ -175,7 +175,7 @@ class _ChangeNewPhotoState extends State<ChangeNewPhoto> {
         SizedBox(
             width: double.infinity,
             child: Text(
-              'name',
+              appTranslation(context).name,
               style: Theme.of(context).textTheme.headline6,
               textAlign: TextAlign.start,
             )),
@@ -190,7 +190,7 @@ class _ChangeNewPhotoState extends State<ChangeNewPhoto> {
         SizedBox(
             width: double.infinity,
             child: Text(
-              'phone',
+              appTranslation(context).phoneNum,
               style: Theme.of(context).textTheme.headline6,
               textAlign: TextAlign.start,
             )),

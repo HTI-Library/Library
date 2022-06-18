@@ -228,8 +228,10 @@ class _ChattingPageState extends State<ChattingPage> {
                 child: Expanded(
                       child: TextField(
                         controller: messageController,
-                        decoration: const InputDecoration(
-                          hintText: "Type message",
+                        decoration:  InputDecoration(
+                          hintText: appTranslation(context).typeMessage,
+                          hintStyle:Theme.of(context).textTheme.subtitle2!.copyWith(
+                            color:MainCubit.get(context).isDark ? Colors.white: HexColor(mainColor)),
                           border: InputBorder.none,
                         ),
                       ),
@@ -238,7 +240,7 @@ class _ChattingPageState extends State<ChattingPage> {
             ),
             IconButton(
                 onPressed: () => sendMessage(),
-                icon: Icon(Icons.send_rounded, color: HexColor(mainColor))),
+                icon: Icon(Icons.send_rounded, color:MainCubit.get(context).isDark ? Colors.white: HexColor(mainColor))),
           ],
         ),
       ),

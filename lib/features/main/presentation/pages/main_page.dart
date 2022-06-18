@@ -125,7 +125,6 @@ class _MainPageState extends State<MainPage> {
                         _pageController.jumpToPage(
                           index,
                         );
-
                         MainCubit.get(context).bottomChanged(index);
                       },
                       elevation: 20.0,

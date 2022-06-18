@@ -36,12 +36,11 @@ class SeeMoreItem extends StatelessWidget {
                       ),
                 ),
               ),
-              AssetSvg(
-                change: 1,
-                imagePath: 'arrow_right',
-                color:  MainCubit.get(context).isDark?HexColor(surface):HexColor(mainColor),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
                 size: 18.0,
-              )
+                color:  MainCubit.get(context).isDark?HexColor(surface):HexColor(mainColor),
+              ),
             ],
           ),
         ),

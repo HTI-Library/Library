@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library/core/util/constants.dart';
+import 'package:hti_library/core/util/cubit/cubit.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
 import 'package:hti_library/features/main/presentation/pages/main_page.dart';
 import 'package:lottie/lottie.dart';
@@ -15,10 +17,12 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  late MainCubit cubit;
 
   @override
   void initState() {
     super.initState();
+    cubit = context.read<MainCubit>();
     Timer(const Duration(seconds: 4),() {
       navigateAndFinish(context, MainPage(library: libraryCache, type: typeCache));
     });
@@ -36,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Text(
                 'HTI Library',
                 style: Theme.of(context).textTheme.headline3!.copyWith(
-                    color: HexColor(mainColor)
+                    color: cubit.isDark ? HexColor(surface) : HexColor(mainColor)
                 ),
                 textAlign: TextAlign.center),
 
