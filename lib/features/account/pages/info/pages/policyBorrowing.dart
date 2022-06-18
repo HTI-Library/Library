@@ -41,22 +41,23 @@ class _PolicyBorrowingState extends State<PolicyBorrowing> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     RichText(
-                        text: TextSpan(
-                      children: [
-                        TextSpan(
-                            text: appTranslation(context).beforeYou,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6!
-                                .copyWith(fontSize: 18)),
-                        TextSpan(
-                            text:appTranslation(context).borrowBold,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.green,
-                                fontSize: 19))
-                      ],
-                    )),
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                              text: appTranslation(context).beforeYou,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6!
+                                  .copyWith(fontSize: 18)),
+                          TextSpan(
+                              text: appTranslation(context).borrowBold,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.green,
+                                  fontSize: 19))
+                        ],
+                      ),
+                    ),
                     Text(appTranslation(context).youSK,
                         style: Theme.of(context).textTheme.headline6)
                   ],
@@ -72,8 +73,10 @@ class _PolicyBorrowingState extends State<PolicyBorrowing> {
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                color: MainCubit.get(context).isDark ? HexColor(secondaryColorD) : HexColor(greyWhite),
+                borderRadius: BorderRadius.circular(15),
+                color: MainCubit.get(context).isDark
+                    ? HexColor(secondaryColorD)
+                    : HexColor(greyWhite),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
@@ -81,28 +84,22 @@ class _PolicyBorrowingState extends State<PolicyBorrowing> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     buildText(
-                        text:
-                        appTranslation(context).policyLine1,
+                        text: appTranslation(context).policyLine1,
                         context: context),
                     buildText(
-                        text:
-                        appTranslation(context).policyLine2,
+                        text: appTranslation(context).policyLine2,
                         context: context),
                     buildText(
-                        text:
-                        appTranslation(context).policyLine3,
+                        text: appTranslation(context).policyLine3,
                         context: context),
                     buildText(
-                        text:
-                        appTranslation(context).policyLine4,
+                        text: appTranslation(context).policyLine4,
                         context: context),
                     buildText(
-                        text:
-                        appTranslation(context).policyLine5,
+                        text: appTranslation(context).policyLine5,
                         context: context),
                     buildText(
-                        text:
-                        appTranslation(context).policyLine6,
+                        text: appTranslation(context).policyLine6,
                         context: context),
                   ],
                 ),

@@ -67,6 +67,8 @@ class TranslationModel {
   late String getHelpA1;
   late String getHelpQ2;
   late String getHelpA2;
+  late String getHelpA3;
+  late String getHelpA4;
   late String aboutUsL1;
   late String aboutUsL2;
   late String aboutUsL3;
@@ -76,6 +78,7 @@ class TranslationModel {
   late String details;
   late String choose;
   late String loginError;
+  late String noSaved;
 
   late String logIn;
 
@@ -151,6 +154,8 @@ class TranslationModel {
     getHelpA1 = json['getHelpA1'];
     getHelpQ2 = json['getHelpQ2'];
     getHelpA2 = json['getHelpA2'];
+    getHelpA3 = json['getHelpA3'];
+    // getHelpA4 = json['getHelpA4'];
     aboutUsL1 = json['aboutUsL1'];
     aboutUsL2 = json['aboutUsL2'];
     aboutUsL3 = json['aboutUsL3'];
@@ -160,6 +165,7 @@ class TranslationModel {
     details = json['details'];
     choose = json['choose'];
     loginError = json['loginError'];
+    noSaved = json['noSaved'];
 
 
 

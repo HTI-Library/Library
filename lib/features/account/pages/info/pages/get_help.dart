@@ -34,11 +34,29 @@ class GetHelpPage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             space10Vertical,
-            Text(
-              appTranslation(context).getHelpA2,
-                style: Theme.of(context).textTheme.headline6!.copyWith(
-                    color: Colors.blueAccent
-                ),),
+
+            RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                      text: appTranslation(context).getHelpA2,
+                      style: Theme.of(context).textTheme.headline6!.copyWith(
+                          color: Colors.blueAccent),),
+                  TextSpan(
+                      text: ' ${appTranslation(context).getHelpA3}',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green,
+                          fontSize: 19)),
+                  TextSpan(
+                      text: '${appTranslation(context).getHelpA4}',
+                    style: Theme.of(context).textTheme.headline6!.copyWith(
+                        color: Colors.blueAccent),
+
+                  ),
+                ],
+              ),
+            ),
             space30Vertical,
           ],
         ),

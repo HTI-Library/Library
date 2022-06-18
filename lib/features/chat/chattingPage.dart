@@ -54,11 +54,14 @@ class _ChattingPageState extends State<ChattingPage> {
   }
 
   Widget buildChattingListView() {
-    return Expanded(
-      child: BlocBuilder<MainCubit, MainState>(
-        buildWhen: (previous, current) => current is GetMessagesSuccessState,
-        builder: (context, state) {
-          return ListView.builder(
+    return BlocBuilder<MainCubit, MainState>(
+      buildWhen: (previous, current) => current is GetMessagesSuccessState,
+      builder: (context, state) {
+        return Expanded(
+          // child: Container(
+          //   color: Colors.blueAccent,
+          // ),
+          child: ListView.builder(
             itemCount: cubit.messages.length,
             itemBuilder: (context, index) {
               MessageModel message = cubit.messages[index];
@@ -70,9 +73,9 @@ class _ChattingPageState extends State<ChattingPage> {
                 return buildReceiverMessage(message.message!);
               }
             },
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 

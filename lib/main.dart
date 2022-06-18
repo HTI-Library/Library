@@ -18,7 +18,7 @@ import 'features/main/presentation/pages/main_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Bloc.observer = MyBlocObserver();
-  await Firebase.initializeApp();
+  Firebase.initializeApp();
   await di.init();
   await CacheHelper2.init();
 

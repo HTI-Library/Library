@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hti_library/core/models/notification_model.dart';
 import 'package:hti_library/core/util/constants.dart';
 import 'package:hti_library/core/util/cubit/cubit.dart';
+import 'package:hti_library/core/util/widgets/app_text_button.dart';
 import 'package:hti_library/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library/core/util/widgets/loading.dart';
 import 'package:hti_library/core/util/widgets/main_scaffold.dart';
@@ -81,18 +82,7 @@ class _NotificationPageState extends State<NotificationPage> {
         children: [
           if (state is NotificationLoading)
             const LinearProgressIndicator(),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.45,
-            child: IconButton(
-                onPressed: () {
-                  MainCubit.get(context).removeNotifications();
-                },
-                icon: Text(
-                  appTranslation(context).clearAll,
-                  textAlign: TextAlign.start,
-                  style: Theme.of(context).textTheme.headline6,
-                )),
-          ),
+          AppTextButton(label: appTranslation(context).clearAll, onPress: (){MainCubit.get(context).removeNotifications();},),
           Expanded(
             child: RefreshIndicator(
               onRefresh: () async {

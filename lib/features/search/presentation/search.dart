@@ -40,7 +40,8 @@ class _SearchPageState extends State<SearchPage> {
       builder: (context, state) {
         return MainScaffold(
           scaffold: BackScaffold(
-            title: 'Search',
+            title: appTranslation(context).search,
+
             scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
             body: BuildCondition(
               condition: MainCubit.get(context).userSigned,
@@ -59,7 +60,7 @@ class _SearchPageState extends State<SearchPage> {
       child: Column(
         children: [
           AppTextFormField(
-            hint: 'Search',
+            hint: appTranslation(context).search,
             icon: AssetSvg(
               imagePath: 'search',
               color: HexColor(mainColor),

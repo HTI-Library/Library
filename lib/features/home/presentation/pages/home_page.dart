@@ -14,6 +14,7 @@ import 'package:hti_library/core/util/widgets/see_more_item.dart';
 import 'package:hti_library/features/account/widget/btn_my_account.dart';
 import 'package:hti_library/features/search/presentation/search.dart';
 import 'package:hti_library/features/see_more/presentation/page/see_more.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -24,12 +25,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late MainCubit cubit;
+  CarouselController  controlledSlider = CarouselController ();
+  PageController pageController = PageController();
+  int num = 0;
+
   List<String> list = [
-    'https://ak.picdn.net/shutterstock/videos/1021881406/thumb/1.jpg',
-    'https://thumbs.dreamstime.com/b/gold-gradient-abstract-background-made-color-soft-glowing-backdrop-texture-175093310.jpg',
-    'https://wallpaperaccess.com/full/1155052.jpg',
-    'https://c4.wallpaperflare.com/wallpaper/947/575/815/abstract-ubuntu-gradient-wallpaper-preview.jpg',
-    'https://cdn.pixabay.com/photo/2017/03/25/17/56/color-2174050__340.png',
+    'assets/images/libm.jpg',
+    'assets/images/main_library.jpg',
+    'assets/images/m-lib.jpg',
+    'assets/images/s_library.jpg',
   ];
 
   @override
@@ -62,12 +66,13 @@ class _HomePageState extends State<HomePage> {
                 ),
                 space15Vertical,
                 CarouselSlider(
+                  carouselController: controlledSlider,
                   items: list
                       .map(
                         (e) => ClipRRect(
                       borderRadius: BorderRadius.circular(12.0),
                       child: Image(
-                        image: NetworkImage('${e}'),
+                        image: AssetImage('${e}'),
                         fit: BoxFit.cover,
                         width: double.infinity,
                       ),
@@ -79,8 +84,12 @@ class _HomePageState extends State<HomePage> {
                     initialPage: 1,
                     viewportFraction: .85,
                     enableInfiniteScroll: true,
-                    // enable image above image another
-                    // enlargeStrategy: CenterPageEnlargeStrategy.height,
+                    onPageChanged: (index,reason){
+                      setState((){
+                       num = index;
+                      }
+                      );
+                    },
 
                     reverse: false,
                     autoPlay: true,
@@ -91,6 +100,9 @@ class _HomePageState extends State<HomePage> {
                     scrollDirection: Axis.horizontal,
                   ),
                 ),
+                space10Vertical,
+                AnimatedSmoothIndicator(
+                    activeIndex: num, count: list.length),
                 space15Vertical,
                 SeeMoreItem(
                   gestureTapCallback: () {
@@ -98,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                         context,
                         SeeMore(
                           title: "Top Borrow Books",
-                          model: MainCubit.get(context).topBorrowModel!,
+                          model: MainCubit.get(context).  topBorrowModel!,
                           loadMorePressed: () {
                             MainCubit.get(context).topBorrow(
                               isFirst: false,
