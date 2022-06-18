@@ -39,101 +39,102 @@ class _SearchPageState extends State<SearchPage> {
       listener: (context, state) {},
       builder: (context, state) {
         return MainScaffold(
-            scaffold:BackScaffold(
-              title: 'Search',
-              scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              body: BuildCondition(
-                  condition: MainCubit.get(context).userSigned,
-                  builder:(context) => buildSearch(context, state),
-                  fallback:(context) => const NotLogin(),
-        ),
+          scaffold: BackScaffold(
+            title: 'Search',
+            scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            body: BuildCondition(
+              condition: MainCubit.get(context).userSigned,
+              builder: (context) => buildSearch(context, state),
+              fallback: (context) => const NotLogin(),
             ),
-          );
-        },
+          ),
+        );
+      },
     );
   }
 
   Padding buildSearch(BuildContext context, MainState state) {
     return Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
+      padding: const EdgeInsets.all(15.0),
+      child: Column(
+        children: [
+          AppTextFormField(
+            hint: 'Search',
+            icon: AssetSvg(
+              imagePath: 'search',
+              color: HexColor(mainColor),
+            ),
+            onSubmit: (String text) {
+              MainCubit.get(context).getSearch(word: text);
+            },
+            callbackHandle: (controller) {
+              MainCubit.get(context).searchController = controller;
+            },
+          ),
+          space15Vertical,
+          SizedBox(
+            width: double.infinity,
+            child: MainCubit.get(context).lastSearchModel != null
+                ? Wrap(
                     children: [
-                      AppTextFormField(
-                        hint: 'Search',
-                        icon: AssetSvg(
-                          imagePath: 'search',
-                          color: HexColor(mainColor),
-                        ),
-                        onSubmit: (String text) {
-                          MainCubit.get(context).getSearch(word: text);
-                        },
-                        callbackHandle: (controller) {
-                          MainCubit.get(context).searchController = controller;
-                        },
-                      ),
-                      space15Vertical,
-                      SizedBox(
-                        width: double.infinity,
-                        child: MainCubit.get(context).lastSearchModel != null
-                            ? Wrap(
-                          children: [
-                            ...MainCubit.get(context)
-                                .lastSearchModel!
-                                .last_search!
-                                .map((e) => SizedBox(
-                                child: Wrap(
-                                  children: [
-                                    LastSearchItem(
-                                      label: e.word,
-                                    ),
-                                  ],
-                                )))
-                                .toList(),
-                          ],
-                        )
-                            : const Center(child: CircularProgressIndicator()),
-                      ),
-                      if (state is SearchLoading) const LinearProgressIndicator(),
-                      if (state is SearchSuccess)
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: BuildCondition(
-                              condition: MainCubit.get(context).searchModel != null,
-                              builder: (context)=>
-                                  ListView.builder(
-                                    itemCount: MainCubit.get(context).searchModel!.books.length,
-                                    physics: const BouncingScrollPhysics(),
-                                    itemBuilder: (context, index) =>
-                                        BorrowBook(data: MainCubit.get(context).searchModel!.books[index]),
+                      ...MainCubit.get(context)
+                          .lastSearchModel!
+                          .last_search!
+                          .map((e) => SizedBox(
+                                  child: Wrap(
+                                children: [
+                                  LastSearchItem(
+                                    label: e.word,
                                   ),
-                              fallback: (context)=> SingleChildScrollView(
-                                physics: const BouncingScrollPhysics(),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      space10Vertical,
-                                      Image.asset(
-                                        'assets/images/onboarding_2.png',
-                                        fit: BoxFit.cover,),
-                                      space10Vertical,
-                                      Text('عفوا لم نتمكن من جلب البيانات تاكد من المدخلات بشكل صحيح',
-                                        textAlign: TextAlign.center,
-                                        style: Theme.of(context).textTheme.headline6,)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                          ),
-                        ),
+                                ],
+                              )))
+                          .toList(),
                     ],
+                  )
+                : const Center(child: CircularProgressIndicator()),
+          ),
+          if (state is SearchLoading) const LinearProgressIndicator(),
+          if (state is SearchSuccess)
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: BuildCondition(
+                  condition: MainCubit.get(context).searchModel != null,
+                  builder: (context) => ListView.builder(
+                    itemCount: MainCubit.get(context).searchModel!.books.length,
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) => BorrowBook(
+                        data: MainCubit.get(context).searchModel!.books[index]),
                   ),
-                );
+                  fallback: (context) => SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          space10Vertical,
+                          Image.asset(
+                            'assets/images/onboarding_2.png',
+                            fit: BoxFit.cover,
+                          ),
+                          space10Vertical,
+                          Text(
+                            'عفوا لم نتمكن من جلب البيانات تاكد من المدخلات بشكل صحيح',
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.headline6,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
   }
 
   void checkToken() {
@@ -143,8 +144,4 @@ class _SearchPageState extends State<SearchPage> {
       return;
     }
   }
-
-
-
-
 }

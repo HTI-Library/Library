@@ -1,4 +1,3 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -198,43 +197,54 @@ class AccountPage extends StatelessWidget {
                 if (MainCubit.get(context).userSigned)
                   MyBtnAccount(
                     voidCallback: () {
-                      AwesomeDialog(
-                        dialogBorderRadius: BorderRadius.circular(10.0),
-                        buttonsBorderRadius: BorderRadius.circular(10.0),
-                        context: context,
-                        dialogBackgroundColor: MainCubit.get(context).isDark ? HexColor(secondaryColorD) : Colors.white,
-                        keyboardAware: false,
-                        headerAnimationLoop: false,
-                        dismissOnBackKeyPress: true,
-                        dialogType: DialogType.WARNING,
-                        animType: AnimType.BOTTOMSLIDE,
-                        btnCancelText: appTranslation(context).no,
-                        btnCancelColor: HexColor(mainColor),
-                        btnOkColor: HexColor(mainColor),
-                        btnOkText: appTranslation(context).yes,
-                        title: appTranslation(context).logOut,
-                        isDense: true,
-                        buttonsTextStyle:
-                            Theme.of(context).textTheme.button!.copyWith(),
-                        // padding: const EdgeInsets.all(5.0),
-                        desc: appTranslation(context).doYouWantToLogout,
-                        btnCancelOnPress: () {
-                          debugPrint(appTranslation(context).no);
-                        },
-                        btnOkOnPress: () {
-                          if (token != null) {
-                            MainCubit.get(context).logOut(context: context);
-                            debugPrint(appTranslation(context).yes);
-                            debugPrint('${MainCubit.get(context).userSigned}');
-                            debugPrint(token);
-                          } else {
-                            debugPrint('${MainCubit.get(context).userSigned}');
-                            showToast(
-                                message: 'Please login first',
-                                toastStates: ToastStates.WARNING);
-                          }
-                        },
-                      ).show();
+                      if (token != null) {
+                        MainCubit.get(context).logOut(context: context);
+                        debugPrint(appTranslation(context).yes);
+                        debugPrint('${MainCubit.get(context).userSigned}');
+                        debugPrint(token);
+                      } else {
+                        debugPrint('${MainCubit.get(context).userSigned}');
+                        showToast(
+                            message: 'Please login first',
+                            toastStates: ToastStates.WARNING);
+                      }
+                      // AwesomeDialog(
+                      //   dialogBorderRadius: BorderRadius.circular(10.0),
+                      //   buttonsBorderRadius: BorderRadius.circular(10.0),
+                      //   context: context,
+                      //   dialogBackgroundColor: MainCubit.get(context).isDark ? HexColor(secondaryColorD) : Colors.white,
+                      //   keyboardAware: false,
+                      //   headerAnimationLoop: false,
+                      //   dismissOnBackKeyPress: true,
+                      //   dialogType: DialogType.WARNING,
+                      //   animType: AnimType.BOTTOMSLIDE,
+                      //   btnCancelText: appTranslation(context).no,
+                      //   btnCancelColor: HexColor(mainColor),
+                      //   btnOkColor: HexColor(mainColor),
+                      //   btnOkText: appTranslation(context).yes,
+                      //   title: appTranslation(context).logOut,
+                      //   isDense: true,
+                      //   buttonsTextStyle:
+                      //       Theme.of(context).textTheme.button!.copyWith(),
+                      //   // padding: const EdgeInsets.all(5.0),
+                      //   desc: appTranslation(context).doYouWantToLogout,
+                      //   btnCancelOnPress: () {
+                      //     debugPrint(appTranslation(context).no);
+                      //   },
+                      //   btnOkOnPress: () {
+                      //     if (token != null) {
+                      //       MainCubit.get(context).logOut(context: context);
+                      //       debugPrint(appTranslation(context).yes);
+                      //       debugPrint('${MainCubit.get(context).userSigned}');
+                      //       debugPrint(token);
+                      //     } else {
+                      //       debugPrint('${MainCubit.get(context).userSigned}');
+                      //       showToast(
+                      //           message: 'Please login first',
+                      //           toastStates: ToastStates.WARNING);
+                      //     }
+                      //   },
+                      // ).show();
                     },
                     text: appTranslation(context).logOut,
                     imagePath: 'sign_out',
