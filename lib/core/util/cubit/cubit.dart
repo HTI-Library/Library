@@ -1051,8 +1051,9 @@ class MainCubit extends Cubit<MainState> {
       emit(SearchLoading());
       await _repository.searchRepo(word: word).then((value) {
         // success
-        debugPrint('getSearch------------success');
+
         searchModel = SearchModel.fromJson(value.data);
+        debugPrint('getSearch------------loading ');
         emit(SearchSuccess());
       }).catchError((error) {
         // error

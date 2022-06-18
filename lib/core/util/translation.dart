@@ -75,6 +75,7 @@ class TranslationModel {
   late String myBorrowedBooks;
   late String details;
   late String choose;
+  late String loginError;
 
   late String logIn;
 
@@ -158,6 +159,7 @@ class TranslationModel {
     myBorrowedBooks = json['myBorrowedBooks'];
     details = json['details'];
     choose = json['choose'];
+    loginError = json['loginError'];
 
 
 

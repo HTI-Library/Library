@@ -9,7 +9,7 @@ import '../../../../../core/util/cubit/cubit.dart';
 import '../../../../../core/util/widgets/asset_svg.dart';
 
 class BorrowBook extends StatelessWidget {
-  BorrowBook({Key? key ,  this.model , this.data}) : super(key: key);
+  BorrowBook({Key? key, this.model, this.data}) : super(key: key);
   Books? model;
   SearchData? data;
 
@@ -28,13 +28,15 @@ class BorrowBook extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Material(
-          color:MainCubit.get(context).isDark ? HexColor(secondaryColorD) : HexColor(greyWhite),
+        color: MainCubit.get(context).isDark
+            ? HexColor(secondaryColorD)
+            : HexColor(greyWhite),
         child: InkWell(
           onTap: () {
             if (model != null)
-            navigateTo(context, ViewBookPage(bookId: model!.book.id));
+              navigateTo(context, ViewBookPage(bookId: model!.book.id));
             if (data != null)
-            navigateTo(context, ViewBookPage(bookId: data!.id));
+              navigateTo(context, ViewBookPage(bookId: data!.id));
           },
           child: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -48,8 +50,9 @@ class BorrowBook extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Image(
-                    image: NetworkImage(
-                         model == null ? '${data!.bookImage}' : model!.book.bookImage),
+                    image: NetworkImage(model == null
+                        ? '${data!.bookImage}'
+                        : model!.book.bookImage),
                     height: MediaQuery.of(context).size.width / 4.9 * 1.6,
                     width: MediaQuery.of(context).size.width / 4.9,
                     fit: BoxFit.fill,
@@ -69,7 +72,7 @@ class BorrowBook extends StatelessWidget {
                       ),
                       space20Vertical,
                       Text(
-                        '${appTranslation(context).author} : ${model!.book.auther[0].name}',
+                        model != null ? '${appTranslation(context).author} : ${model!.book.auther[0].name}' : '${appTranslation(context).author} : ${data!.auther[0].authorName}' ,
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 1,
                       ),

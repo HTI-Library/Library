@@ -113,11 +113,17 @@ void main() async {
 
   debugPrint('dark mode ------------- $isDark');
 
-  runApp(MyApp(
-    isDark: isDark,
-    isRtl: isRtl,
-    translation: translation,
-  ));
+  BlocOverrides.runZoned(
+    () {
+      runApp(MyApp(
+        isDark: isDark,
+        isRtl: isRtl,
+        translation: translation,
+      ));
+    },
+    blocObserver: MyBlocObserver(),
+  );
+
   debugPrint(translation);
 }
 

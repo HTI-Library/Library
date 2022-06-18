@@ -53,7 +53,7 @@ dependencies:
   lottie: ^1.2.1
   image_picker: ^0.8.4+4
   smooth_page_indicator: ^1.0.0+2
-  awesome_dialog: ^2.1.2
+#  awesome_dialog: ^2.2.1
   syncfusion_flutter_calendar: ^20.1.59
   intl: ^0.17.0
 
@@ -61,9 +61,9 @@ dependencies:
   flutter_share: ^2.0.0
 
   local_auth: ^2.1.0
-  flutter_local_notifications: ^10.0.0-dev.1
 
-  cached_network_image: ^3.2.0
+  cached_network_image: ^3.2.1
+
   # Firebase
   firebase_core: ^1.16.0
   firebase_auth: ^3.3.17

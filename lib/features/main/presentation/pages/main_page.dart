@@ -100,10 +100,10 @@ class _MainPageState extends State<MainPage> {
                           child: PageView(
                             controller: _pageController,
                             physics: const NeverScrollableScrollPhysics(),
-                            children: [
-                              const HomePage(),
-                              const Categories(),
-                              const SavedPage(),
+                            children: const [
+                              HomePage(),
+                              Categories(),
+                              SavedPage(),
                               AccountPage(),
                             ],
                             // onPageChanged: (index) {
