@@ -64,8 +64,8 @@ class _PolicyBorrowingState extends State<PolicyBorrowing> {
                 ),
                 Spacer(),
                 Image.asset(
-                  'assets/images/constrain.png',
-                  width: 200,
+                  MainCubit.get(context).isDark ? 'assets/images/borrow_dark.png' : 'assets/images/constrain.png' ,
+                  width: 150,
                 ),
               ],
             ),

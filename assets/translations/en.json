@@ -27,7 +27,7 @@
   "htiMaterial": "HTI Material",
   "graduationProjects": "Graduation Projects",
   "available": "Available",
-  "unavailable": "Unavailable",
+  "unavailable": "locked",
   "borrow": "Borrow",
   "read": "Read",
   "overview": "Overview",
@@ -72,7 +72,6 @@
   "getHelpQ2": "How you can borrow a book?",
   "getHelpA2": "We implemented our system in a simple way that did not require any steps from you to borrow books. If you wish to borrow a book just click the ",
   "getHelpA3": "BORROW ",
-  "getHelpA4": "button.",
   "aboutUsL1": "The Library Management System is a project that aims to develop a computerized system to maintain all the daily business of the library.",
   "aboutUsL2": "This project contains many features that are not generally available in normal library management systems such as user login facilities and teacher login capability, it also has an administrative login feature through which the administrator can complete the book borrowing and retrieval process.",
   "aboutUsL3": "It also has a facility where the student after logging into their account can see the list of books issued, date of issue and date of return.",
@@ -83,6 +82,8 @@
   "choose": "Choose ",
   "loginError": "Enter a valid Email and Password ",
   "noSaved": "There is no saved Books",
+  "loginFirst": "Login First",
+  "borrowedBooksClear": "You don't have any borrowed books",
 
 
 

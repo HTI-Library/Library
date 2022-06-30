@@ -684,9 +684,9 @@ class MainCubit extends Cubit<MainState> {
     emit(CategoryLoading());
     await _repository
         .categoryDetailsRepo(
-            categoryName: categoryName,
-            library: 'hti matrial',
-            type: 'hti matrial')
+            categoryName: 'hti matrial',
+            library: library,
+            type: type)
         .then((value) {
       // success
       categoryDetailsModelHti = TopBorrowModel.fromJson(value.data);
@@ -930,7 +930,7 @@ class MainCubit extends Cubit<MainState> {
   void getAllReturned(
       {required bool isFirst, GetAllReturnedBooks? data}) async {
     if (isFirst) {
-      pageCounter = 1;
+      pageCounter = 3;
       paginationBooks = [];
       emit(AllReturnedLoading());
     } else {

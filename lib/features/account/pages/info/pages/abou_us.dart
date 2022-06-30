@@ -13,40 +13,42 @@ class AboutUs extends StatelessWidget {
     return BackScaffold(
       title: appTranslation(context).aboutUs,
       scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-            color: MainCubit.get(context).isDark ? HexColor(secondaryColorD) : HexColor(greyWhite),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text( appTranslation(context).aboutUsL1,
+              color: MainCubit.get(context).isDark ? HexColor(secondaryColorD) : HexColor(greyWhite),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text( appTranslation(context).aboutUsL1,
                     style: Theme.of(context).textTheme.headline6,
-                textAlign: TextAlign.center,),
-                space20Vertical,
-                Text( appTranslation(context).aboutUsL2,
-                    style: Theme.of(context).textTheme.headline6,
-                    textAlign: TextAlign.center),
-                space20Vertical,
+                    textAlign: TextAlign.center,),
+                  space20Vertical,
+                  Text( appTranslation(context).aboutUsL2,
+                      style: Theme.of(context).textTheme.headline6,
+                      textAlign: TextAlign.center),
+                  space20Vertical,
 
-                Text( appTranslation(context).aboutUsL3,
-                    style: Theme.of(context).textTheme.headline6,
-                    textAlign: TextAlign.center),
-                space20Vertical,
+                  Text( appTranslation(context).aboutUsL3,
+                      style: Theme.of(context).textTheme.headline6,
+                      textAlign: TextAlign.center),
+                  space20Vertical,
 
-                Text(
-                    appTranslation(context).aboutUsL4,
-                    style: Theme.of(context).textTheme.headline6,
-                    textAlign: TextAlign.center),
+                  Text(
+                      appTranslation(context).aboutUsL4,
+                      style: Theme.of(context).textTheme.headline6,
+                      textAlign: TextAlign.center),
 
-              ],
+                ],
+              ),
             ),
           ),
         ),
