@@ -25,7 +25,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late MainCubit cubit;
-  CarouselController  controlledSlider = CarouselController ();
+  CarouselController controlledSlider = CarouselController();
   PageController pageController = PageController();
   int num = 0;
 
@@ -70,27 +70,25 @@ class _HomePageState extends State<HomePage> {
                   items: list
                       .map(
                         (e) => ClipRRect(
-                      borderRadius: BorderRadius.circular(12.0),
-                      child: Image(
-                        image: AssetImage('${e}'),
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                      ),
-                    ),
-                  )
+                          borderRadius: BorderRadius.circular(12.0),
+                          child: Image(
+                            image: AssetImage('${e}'),
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                          ),
+                        ),
+                      )
                       .toList(),
                   options: CarouselOptions(
                     height: MediaQuery.of(context).size.height / 4.2,
                     initialPage: 1,
                     viewportFraction: .85,
                     enableInfiniteScroll: true,
-                    onPageChanged: (index,reason){
-                      setState((){
-                       num = index;
-                      }
-                      );
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        num = index;
+                      });
                     },
-
                     reverse: false,
                     autoPlay: true,
                     enlargeCenterPage: true,
@@ -101,8 +99,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 space10Vertical,
-                AnimatedSmoothIndicator(
-                    activeIndex: num, count: list.length),
+                AnimatedSmoothIndicator(activeIndex: num, count: list.length),
                 space15Vertical,
                 SeeMoreItem(
                   gestureTapCallback: () {
@@ -110,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                         context,
                         SeeMore(
                           title: "Top Borrow Books",
-                          model: MainCubit.get(context).  topBorrowModel!,
+                          model: MainCubit.get(context).topBorrowModel!,
                           loadMorePressed: () {
                             MainCubit.get(context).topBorrow(
                               isFirst: false,
@@ -120,6 +117,8 @@ class _HomePageState extends State<HomePage> {
                   },
                   text: appTranslation(context).topBorrowBooks,
                 ),
+
+                // if (MainCubit.get(context).allReturnedBook != null && MainCubit.get(context).allReturnedBook!.books.isNotEmpty)
                 Container(
                   padding: const EdgeInsetsDirectional.only(
                     top: 5.0,
@@ -144,6 +143,7 @@ class _HomePageState extends State<HomePage> {
                               .length)
                       : const LoadingWidget(),
                 ),
+                if (MainCubit.get(context).allReturnedBook != null && MainCubit.get(context).allReturnedBook!.books.isNotEmpty)
                 SeeMoreItem(
                   gestureTapCallback: () {
                     navigateTo(
@@ -160,30 +160,32 @@ class _HomePageState extends State<HomePage> {
                   },
                   text: appTranslation(context).recentlyReturned,
                 ),
-                Container(
-                  padding: const EdgeInsetsDirectional.only(
-                    top: 5.0,
-                    bottom: 5.0,
+                if (MainCubit.get(context).allReturnedBook != null &&
+                    MainCubit.get(context).allReturnedBook!.books.isNotEmpty)
+                  Container(
+                    padding: const EdgeInsetsDirectional.only(
+                      top: 5.0,
+                      bottom: 5.0,
+                    ),
+                    color: MainCubit.get(context).isDark
+                        ? HexColor(secondaryColorD)
+                        : HexColor(greyWhite),
+                    height: MediaQuery.of(context).size.width / 3.2 * 2.2,
+                    child: MainCubit.get(context).allReturnedBook != null
+                        ? ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) => BookItem(
+                                  returned: MainCubit.get(context)
+                                      .allReturnedBook!
+                                      .books[index],
+                                ),
+                            itemCount: MainCubit.get(context)
+                                .allReturnedBook!
+                                .books
+                                .length)
+                        : const LoadingWidget(),
                   ),
-                  color: MainCubit.get(context).isDark
-                      ? HexColor(secondaryColorD)
-                      : HexColor(greyWhite),
-                  height: MediaQuery.of(context).size.width / 3.2 * 2.2,
-                  child: MainCubit.get(context).allReturnedBook != null
-                      ? ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) => BookItem(
-                                returned: MainCubit.get(context)
-                                    .allReturnedBook!
-                                    .books[index],
-                              ),
-                          itemCount: MainCubit.get(context)
-                              .allReturnedBook!
-                              .books
-                              .length)
-                      : const LoadingWidget(),
-                ),
                 if (cubit.categoryDetailsModelHti != null &&
                     cubit.categoryDetailsModelHti!.books.isNotEmpty)
                   SeeMoreItem(

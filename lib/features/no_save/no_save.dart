@@ -19,7 +19,7 @@ class NoSavedPage extends StatelessWidget {
             children: [
               space60Vertical,
               space60Vertical,
-              Image.asset(MainCubit.get(context).isDark ? "assets/images/saved.png" : "assets/images/saved.png"),
+              Image.asset(MainCubit.get(context).isDark ? "assets/images/save_dark.png" : "assets/images/saved.png"),
               space30Vertical,
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

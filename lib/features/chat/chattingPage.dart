@@ -188,7 +188,7 @@ class _ChattingPageState extends State<ChattingPage> {
       child: Center(
         child: Column(
           children: [
-            Image.asset("assets/images/message.png",height: 300,width: 300,),
+            Image.asset("assets/images/message.png",height: 250,width: 250,),
             space20Vertical,
             Text(
               appTranslation(context).myMessageNo,

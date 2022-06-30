@@ -47,16 +47,12 @@ class GetHelpPage extends StatelessWidget {
                       style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.green,
-                          fontSize: 19)),
-                  TextSpan(
-                      text: '${appTranslation(context).getHelpA4}',
-                    style: Theme.of(context).textTheme.headline6!.copyWith(
-                        color: Colors.blueAccent),
+                          fontSize: 25)),
 
-                  ),
-                ],
+
+                  ],
               ),
-            ),
+              ),
             space30Vertical,
           ],
         ),

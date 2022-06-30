@@ -63,7 +63,9 @@ class _NotificationPageState extends State<NotificationPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset("assets/images/notification.png"),
+              Image.asset(MainCubit.get(context).isDark ? 'assets/images/notification_dark.png' : 'assets/images/notification_light.png'),
+
+
               space20Vertical,
               Text(
                 appTranslation(context).notificationNo,

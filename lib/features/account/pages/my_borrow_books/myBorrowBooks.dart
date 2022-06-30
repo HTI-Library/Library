@@ -28,8 +28,10 @@ class MyBorrowBook extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+
                 Image.asset('assets/images/onboarding_2.png'),
-                Text('You do not have any borrowing books' , style: Theme.of(context).textTheme.bodyText1,),
+                space10Vertical,
+                Text(appTranslation(context).borrowedBooksClear , style: Theme.of(context).textTheme.bodyText1,),
               ],
             ) : ListView.builder(
                 itemCount: MainCubit.get(context).myBorrowBooks!.books.length,
